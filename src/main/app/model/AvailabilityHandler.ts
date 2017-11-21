@@ -59,8 +59,8 @@ export default class AvailabilityHandler {
     }
 
     // TODO Use it?
-    public isDisabled(date: Date, time?: Time): boolean {
-        const checkInTimesOfDate: Time[] = this.getCheckInTimesOfDate(date);
+    public isDisabled(dateOfMonth: Date, time?: Time): boolean {
+        const checkInTimesOfDate: Time[] = this.getCheckInTimesOfDate(dateOfMonth);
         const dateDisabled: boolean = checkInTimesOfDate.length === 0;
         if (time) {
             return dateDisabled && checkInTimesOfDate.some((checkInTime) => checkInTime.equals(time));

@@ -1,4 +1,5 @@
 import * as Slider from 'swiper/dist/js/swiper.min.js';
+import AvailabilityHandler from '../../model/AvailabilityHandler';
 import MonthHandler from '../../model/MonthHandler';
 import DateOfMonthPicker from './DateOfMonthPicker';
 import DateTimePicker from './DateTimePicker';
@@ -16,6 +17,8 @@ export default class DatePicker implements Picker<Date> {
 
     private monthObservers: MonthObserver[] = [];
 
+    private availabilityHandler: AvailabilityHandler;
+
     private monthHandler: MonthHandler;
 
     private dateOfMonthPicker: DateOfMonthPicker;
@@ -30,7 +33,8 @@ export default class DatePicker implements Picker<Date> {
 
     private dateTimePicker: DateTimePicker;
 
-    public constructor(initialMonth: Date, dateTimePicker: DateTimePicker) {
+    public constructor(initialMonth: Date, dateTimePicker: DateTimePicker, availabilityHandler: AvailabilityHandler) {
+        this.availabilityHandler = availabilityHandler;
         this.dateTimePicker = dateTimePicker;
         this.monthHandler = new MonthHandler(initialMonth);
         this.monthSelect = this.getMonthSelect();
@@ -51,9 +55,9 @@ export default class DatePicker implements Picker<Date> {
         this.monthObservers.splice(index, 1);
     }
 
-    public disable(...dates: Date[]): void {
-        this.dateOfMonthPicker.disable(...dates);
-    }
+    // public disable(...dates: Date[]): void {
+    //     this.dateOfMonthPicker.disable(...dates);
+    // }
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement('div');
@@ -122,11 +126,11 @@ export default class DatePicker implements Picker<Date> {
     }
 
     private getPreviousSlide() {
-        return new DateOfMonthPicker(this.monthHandler.getPreviousMonth()).getLayout();
+        return new DateOfMonthPicker(this.monthHandler.getPreviousMonth(), this.availabilityHandler).getLayout();
     }
 
     private getNextSlide() {
-        return new DateOfMonthPicker(this.monthHandler.getNextMonth()).getLayout();
+        return new DateOfMonthPicker(this.monthHandler.getNextMonth(), this.availabilityHandler).getLayout();
     }
 
     private getMonthSelect(): HTMLSelectElement {
@@ -188,7 +192,7 @@ export default class DatePicker implements Picker<Date> {
 
     private updateMonth(month: Date): void {
         this.monthHandler = new MonthHandler(month);
-        this.dateOfMonthPicker = new DateOfMonthPicker(month);
+        this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
         this.dateOfMonthPicker.addDateOfMonthObserver(this.dateTimePicker);
 
         this.slider.removeAllSlides();

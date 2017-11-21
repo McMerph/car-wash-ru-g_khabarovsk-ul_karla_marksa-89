@@ -2,11 +2,14 @@ import * as Slider from 'swiper/dist/js/swiper.min.js';
 import Time from '../../model/Time';
 import DirectPicker from './DirectPicker';
 import SliderUtils from './utils/SliderUtils';
+import AvailabilityHandler from '../../model/AvailabilityHandler';
 
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
 
     private static readonly ID: string = 'time-picker';
+
+    private availabilityHandler: AvailabilityHandler;
 
     // tslint:disable-next-line:no-any
     private slider: any;
@@ -14,13 +17,22 @@ export default class TimePicker extends DirectPicker<Time> {
     private nextButton: HTMLButtonElement;
     private sliderContainer: HTMLElement;
 
-    public constructor(availableTimes: Time[]) {
+    public constructor(availableTimes: Time[], availabilityHandler: AvailabilityHandler) {
         super(availableTimes);
+
+        this.availabilityHandler = availabilityHandler;
 
         this.previousButton = this.getPreviousButton();
         this.nextButton = this.getNextButton();
         this.sliderContainer = SliderUtils.getContainer();
+
+        this.generatePickButtons();
         this.initializeSlider();
+    }
+
+    protected isDisabled(time: Time): boolean {
+        // TODO Fix
+        return this.availabilityHandler.isDisabled(new Date(), time);
     }
 
     public getLayout(): HTMLElement {

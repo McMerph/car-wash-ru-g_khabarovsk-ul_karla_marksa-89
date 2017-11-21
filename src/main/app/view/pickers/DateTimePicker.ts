@@ -22,34 +22,35 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
         this.availabilityHandler = availabilityHandler;
 
         const nearest: { date: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker = new DatePicker(nearest.date, this);
+        this.datePicker = new DatePicker(nearest.date, this, availabilityHandler);
         // TODO Move to constructor?
-        this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
-        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes())
+        // this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
+        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes(), availabilityHandler);
 
         this.datePicker.addMonthObserver(this);
     }
 
     public onMonthChange(): void {
-        this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
-        this.timePicker.clearDisabled();
+        // this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
+        // this.timePicker.clearDisabled();
     }
 
     public onDateOfMonthPick(): void {
-        const disabledTimeStamps: Map<number, Time[]> = this.availabilityHandler.getDisabledTimeStamps();
-        const disabledTimes: Time[] = disabledTimeStamps.get(this.datePicker.getPickedValue().valueOf()) || [];
-        this.timePicker.disable(...disabledTimes);
-        console.log('disabledTimes:', disabledTimes);
+        // const disabledTimeStamps: Map<number, Time[]> = this.availabilityHandler.getDisabledTimeStamps();
+        // const disabledTimes: Time[] = disabledTimeStamps.get(this.datePicker.getPickedValue().valueOf()) || [];
+        // this.timePicker.disable(...disabledTimes);
+        // console.log('disabledTimes:', disabledTimes);
     }
 
     public isPicked(): boolean {
         return this.datePicker.isPicked() && this.timePicker.isPicked();
     }
 
-    // TODO Delete?
-    public pick(dateOfMonth: Date, time: Time): void {
-        this.datePicker.pick(dateOfMonth);
-        this.timePicker.pick(time);
+    public getPickedValue(): Date {
+        const month: Date = this.datePicker.getPickedValue();
+        const time: Time = this.timePicker.getPickedValue();
+
+        return new Date(month.getFullYear(), month.getMonth(), month.getDate(), time.getHours(), time.getMinutes());
     }
 
     public getLayout(): HTMLElement {
@@ -61,11 +62,10 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
         return layout;
     }
 
-    public getPickedValue(): Date {
-        const month: Date = this.datePicker.getPickedValue();
-        const time: Time = this.timePicker.getPickedValue();
-
-        return new Date(month.getFullYear(), month.getMonth(), month.getDate(), time.getHours(), time.getMinutes());
+    // TODO Delete?
+    public pick(dateOfMonth: Date, time: Time): void {
+        this.datePicker.pick(dateOfMonth);
+        this.timePicker.pick(time);
     }
 
     public updateSliders(): void {

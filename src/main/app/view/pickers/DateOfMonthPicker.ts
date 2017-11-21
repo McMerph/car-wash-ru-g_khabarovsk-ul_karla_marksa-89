@@ -1,3 +1,4 @@
+import AvailabilityHandler from '../../model/AvailabilityHandler';
 import MonthHandler, { Week } from '../../model/MonthHandler';
 import DateUtils from '../../model/utils/DateUtils';
 import DateOfMonthObserver from './DateOfMonthObserver';
@@ -6,12 +7,18 @@ import DirectPicker from './DirectPicker';
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private month: Date;
+    private availabilityHandler: AvailabilityHandler;
 
     private dateOfMonthObservers: DateOfMonthObserver[] = [];
 
-    public constructor(month: Date) {
+    public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
         super(new MonthHandler(month).getDates());
+        this.availabilityHandler = availabilityHandler;
         this.month = month;
+    }
+
+    protected isDisabled(dateOfMonth: Date): boolean {
+        return this.availabilityHandler.isDisabled(dateOfMonth);
     }
 
     public addDateOfMonthObserver(observer: DateOfMonthObserver) {
@@ -30,6 +37,8 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     }
 
     public getLayout(): HTMLElement {
+        this.generatePickButtons();
+
         const layout: HTMLDivElement = document.createElement('div');
         layout.classList.add('month');
 

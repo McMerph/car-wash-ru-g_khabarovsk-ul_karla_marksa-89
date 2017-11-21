@@ -9,7 +9,7 @@ export default abstract class DirectPicker<T> implements Picker<T> {
     protected static readonly TO_NEXT_CLASS = 'next';
 
     protected readonly values: T[];
-    protected disabledValues: T[];
+    // protected disabledValues: T[];
     protected pickedValue: T;
     protected picked: boolean;
 
@@ -35,11 +35,21 @@ export default abstract class DirectPicker<T> implements Picker<T> {
 
     protected abstract getRepresentation(value: T): string;
 
+    protected abstract isDisabled(value: T): boolean;
+
+    protected generatePickButtons(): void {
+        this.pickButtons = this.values.map((value) => this.getPickButton(value));
+    }
+
+    // private isDisabled(value: T): boolean {
+    //     return this.disabledValues.indexOf(value) !== -1;
+    // }
+
     public constructor(values: T[]) {
         this.values = values;
-        this.disabledValues = [];
+        // this.disabledValues = [];
         this.picked = false;
-        this.pickButtons = this.values.map((value) => this.getPickButton(value));
+        // this.pickButtons = this.values.map((value) => this.getPickButton(value));
     }
 
     public pick(valueToPick: T): void {
@@ -57,23 +67,23 @@ export default abstract class DirectPicker<T> implements Picker<T> {
         this.pickButtons.forEach((pickButton) => pickButton.classList.remove(DirectPicker.PICKED_CLASS));
     }
 
-    public clearDisabled(): void {
-        this.disabledValues = [];
-        this.enableButtons(...this.pickButtons);
-    }
-
-    public disable(...values: T[]): void {
-        this.clearDisabled();
-        values.forEach((valueToDisable) => {
-            const index: number = this.indexOf(valueToDisable);
-            if (index !== -1) {
-                this.disableButtons(this.pickButtons[index]);
-            }
-        });
-        if (this.picked && this.isDisabled(this.pickedValue)) {
-            this.unPick();
-        }
-    }
+    // public clearDisabled(): void {
+    //     this.disabledValues = [];
+    //     this.enableButtons(...this.pickButtons);
+    // }
+    //
+    // public disable(...values: T[]): void {
+    //     this.clearDisabled();
+    //     values.forEach((valueToDisable) => {
+    //         const index: number = this.indexOf(valueToDisable);
+    //         if (index !== -1) {
+    //             this.disableButtons(this.pickButtons[index]);
+    //         }
+    //     });
+    //     if (this.picked && this.isDisabled(this.pickedValue)) {
+    //         this.unPick();
+    //     }
+    // }
 
     public isPicked(): boolean {
         return this.picked;
@@ -113,10 +123,6 @@ export default abstract class DirectPicker<T> implements Picker<T> {
 
     protected enableButtons(...buttons: HTMLButtonElement[]) {
         buttons.forEach((button) => button.classList.remove(DirectPicker.DISABLED_CLASS));
-    }
-
-    private isDisabled(value: T): boolean {
-        return this.disabledValues.indexOf(value) !== -1;
     }
 
     private getPickButton(value: T): HTMLButtonElement {
