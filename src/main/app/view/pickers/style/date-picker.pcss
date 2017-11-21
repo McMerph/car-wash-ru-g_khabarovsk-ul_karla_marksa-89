@@ -1,0 +1,44 @@
+@import 'date-time-picker.pcss';
+
+#date-picker {
+    & .month {
+        border-left: 1px solid var(--picker-border-color);
+        border-top: 1px solid var(--picker-border-color);
+        & .week, header {
+            margin: 0;
+            display: flex;
+            & > * {
+                flex: 1 1 14.28571428571428571429%;
+                text-align: center;
+                border-right: 1px solid var(--picker-border-color);
+                border-bottom: 1px solid var(--picker-border-color);
+            }
+        }
+        & header > * {
+            color: #303030;
+            font: normal 400 14px "Proxima Nova";
+        }
+        & .week {
+            & button.pick {
+                @apply --picker-button;
+                color: #303030;
+                font: normal 400 22px "Proxima Nova";
+                user-select: none;
+                &.picked {
+                    background-color: #ffd800;
+                }
+                &.today {
+                    color: #00aeef;
+                }
+                &.past {
+                    pointer-events: none;
+                    background-color: #dddddd;
+                }
+                &.disabled:not(.past) {
+                    pointer-events: none;
+                    background-color: var(--red-color);
+                }
+            }
+        }
+    }
+}

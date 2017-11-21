@@ -1,0 +1,60 @@
+footer {
+    background-color: #363636;
+    margin: 0 -5px;
+    & .footer-content {
+        font: normal 300 18px/2 "Open Sans";
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 43px 0;
+        & > * {
+            display: flex;
+            align-items: center;
+        }
+        & .company-info {
+            & .company-name {
+                color: #a8a8a8;
+                font: normal 300 18px/2 "Proxima Nova";
+            }
+            & img.logo {
+                flex: 0 0 52px;
+                margin-right: 8px;
+            }
+        }
+        & .bar {
+            height: 72px;
+            border-left: 1px solid #626262;
+        }
+        & nav a {
+            color: #adadad;
+            margin: 0 5px;
+            @apply --underline-decoration;
+            &:before {
+                bottom: 7px;
+            }
+            &:hover {
+                /*TODO Change color?*/
+                color: #0056b3;
+            }
+        }
+        & div.account {
+            & a {
+                @apply --underline-decoration;
+                color: #efeab1;
+                &:before {
+                    bottom: 6px;
+                    border-bottom: 1px dashed;
+                }
+                &:hover {
+                    /*TODO Change color?*/
+                    color: #0056b3;
+                }
+
+            }
+            & img.account-logo {
+                flex: 0 0 24px;
+                margin-right: 20px;
+            }
+        }
+    }
+}
