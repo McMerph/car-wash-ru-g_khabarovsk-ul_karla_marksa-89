@@ -23,23 +23,19 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
 
         const nearest: { date: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
         this.datePicker = new DatePicker(nearest.date, this, availabilityHandler);
-        // TODO Move to constructor?
-        // this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
-        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes(), availabilityHandler);
+        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes());
 
         this.datePicker.addMonthObserver(this);
     }
 
     public onMonthChange(): void {
-        // this.datePicker.disable(...this.availabilityHandler.getNoServiceDates());
-        // this.timePicker.clearDisabled();
+        this.timePicker.clearDisabled();
     }
 
     public onDateOfMonthPick(): void {
-        // const disabledTimeStamps: Map<number, Time[]> = this.availabilityHandler.getDisabledTimeStamps();
-        // const disabledTimes: Time[] = disabledTimeStamps.get(this.datePicker.getPickedValue().valueOf()) || [];
-        // this.timePicker.disable(...disabledTimes);
-        // console.log('disabledTimes:', disabledTimes);
+        const disabledTimeStamps: Map<number, Time[]> = this.availabilityHandler.getDisabledTimeStamps();
+        const disabledTimes: Time[] = disabledTimeStamps.get(this.datePicker.getPickedValue().valueOf()) || [];
+        this.timePicker.updateDisabled(...disabledTimes);
     }
 
     public isPicked(): boolean {
@@ -62,10 +58,10 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
         return layout;
     }
 
-    // TODO Delete?
-    public pick(dateOfMonth: Date, time: Time): void {
-        this.datePicker.pick(dateOfMonth);
-        this.timePicker.pick(time);
+    public pickNearest(): void {
+        const nearest: { date: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
+        this.datePicker.pick(nearest.date);
+        this.timePicker.pick(nearest.time);
     }
 
     public updateSliders(): void {

@@ -1,6 +1,7 @@
 import AvailabilityHandler from '../../model/AvailabilityHandler';
-import MonthHandler, { Week } from '../../model/MonthHandler';
+import MonthHandler from '../../model/MonthHandler';
 import DateUtils from '../../model/utils/DateUtils';
+import Week from '../../model/utils/Week';
 import DateOfMonthObserver from './DateOfMonthObserver';
 import DirectPicker from './DirectPicker';
 
@@ -57,15 +58,19 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         return DateUtils.equalsDateOfMonth(date1, date2);
     }
 
-    protected getClassesNames(date: Date): string[] {
-        const classesNames: string[] = super.getClassesNames(date);
+    protected getPickButton(date: Date): HTMLButtonElement {
+        const button: HTMLButtonElement = super.getPickButton(date);
+        if (this.isDisabled(date)) {
+            button.classList.add(DirectPicker.DISABLED_CLASS);
+        }
         if (DateUtils.isPast(date)) {
-            classesNames.push('past');
+            button.classList.add('past');
         }
         if (DateUtils.equalsDateOfMonth(date, new Date())) {
-            classesNames.push('today');
+            button.classList.add('today');
         }
-        return classesNames;
+
+        return button;
     }
 
     private getMonthHeader(): HTMLElement {

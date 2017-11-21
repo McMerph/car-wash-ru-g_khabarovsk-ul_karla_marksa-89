@@ -1,6 +1,7 @@
 import * as Slider from 'swiper/dist/js/swiper.min.js';
 import AvailabilityHandler from '../../model/AvailabilityHandler';
 import MonthHandler from '../../model/MonthHandler';
+import DateUtils from '../../model/utils/DateUtils';
 import DateOfMonthPicker from './DateOfMonthPicker';
 import DateTimePicker from './DateTimePicker';
 import MonthObserver from './MonthObserver';
@@ -26,7 +27,7 @@ export default class DatePicker implements Picker<Date> {
     private yearSelect: HTMLSelectElement;
     private sliderContainer: HTMLElement;
 
-    // tslint:disable-next-line:no-any
+    // tslint:updateDisabled-next-line:no-any
     private slider: any;
 
     private blockSlideChangeTransitionEnd: boolean = false;
@@ -55,8 +56,8 @@ export default class DatePicker implements Picker<Date> {
         this.monthObservers.splice(index, 1);
     }
 
-    // public disable(...dates: Date[]): void {
-    //     this.dateOfMonthPicker.disable(...dates);
+    // public updateDisabled(...dates: Date[]): void {
+    //     this.dateOfMonthPicker.updateDisabled(...dates);
     // }
 
     public getLayout(): HTMLElement {
@@ -70,6 +71,9 @@ export default class DatePicker implements Picker<Date> {
     }
 
     public pick(date: Date): void {
+        if (!DateUtils.equalsMonth(date, this.monthHandler.getMonth())) {
+            this.updateMonth(date, true);
+        }
         this.dateOfMonthPicker.pick(date);
     }
 
@@ -190,7 +194,7 @@ export default class DatePicker implements Picker<Date> {
         return option;
     }
 
-    private updateMonth(month: Date): void {
+    private updateMonth(month: Date, animated?: boolean): void {
         this.monthHandler = new MonthHandler(month);
         this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
         this.dateOfMonthPicker.addDateOfMonthObserver(this.dateTimePicker);
@@ -199,7 +203,7 @@ export default class DatePicker implements Picker<Date> {
         this.slider.appendSlide(SliderUtils.getSlide(this.getPreviousSlide()));
         this.slider.appendSlide(SliderUtils.getSlide(this.dateOfMonthPicker.getLayout()));
         this.slider.appendSlide(SliderUtils.getSlide(this.getNextSlide()));
-        this.slider.slideTo(1, 0);
+        this.slider.slideTo(1, animated ? undefined : 0);
         this.slider.update();
 
         this.monthObservers.forEach((observer) => observer.onMonthChange(month));

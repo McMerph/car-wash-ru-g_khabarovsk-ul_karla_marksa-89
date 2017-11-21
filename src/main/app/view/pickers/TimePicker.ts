@@ -2,40 +2,54 @@ import * as Slider from 'swiper/dist/js/swiper.min.js';
 import Time from '../../model/Time';
 import DirectPicker from './DirectPicker';
 import SliderUtils from './utils/SliderUtils';
-import AvailabilityHandler from '../../model/AvailabilityHandler';
 
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
 
     private static readonly ID: string = 'time-picker';
 
-    private availabilityHandler: AvailabilityHandler;
+    private disabledTimes: Time[] = [];
 
-    // tslint:disable-next-line:no-any
+    // tslint:updateDisabled-next-line:no-any
     private slider: any;
     private previousButton: HTMLButtonElement;
     private nextButton: HTMLButtonElement;
     private sliderContainer: HTMLElement;
 
-    public constructor(availableTimes: Time[], availabilityHandler: AvailabilityHandler) {
+    public constructor(availableTimes: Time[]) {
         super(availableTimes);
-
-        this.availabilityHandler = availabilityHandler;
 
         this.previousButton = this.getPreviousButton();
         this.nextButton = this.getNextButton();
         this.sliderContainer = SliderUtils.getContainer();
+    }
 
-        this.generatePickButtons();
-        this.initializeSlider();
+    public clearDisabled(): void {
+        this.enableButtons(...this.pickButtons);
+    }
+
+    public updateDisabled(...times: Time[]): void {
+        this.disabledTimes = times;
+        this.enableButtons(...this.pickButtons);
+        times.forEach((valueToDisable) => {
+            const index: number = this.indexOf(valueToDisable);
+            if (index !== -1) {
+                this.disableButtons(this.pickButtons[index]);
+            }
+        });
+        if (this.picked && this.isDisabled(this.pickedValue)) {
+            this.unPick();
+        }
     }
 
     protected isDisabled(time: Time): boolean {
-        // TODO Fix
-        return this.availabilityHandler.isDisabled(new Date(), time);
+        return this.disabledTimes.some((disabledTime) => disabledTime.equals(time));
     }
 
     public getLayout(): HTMLElement {
+        this.generatePickButtons();
+        this.initializeSlider();
+
         const layout: HTMLElement = document.createElement('div');
         layout.id = TimePicker.ID;
 
@@ -46,6 +60,7 @@ export default class TimePicker extends DirectPicker<Time> {
         return layout;
     }
 
+    // TODO Delete?
     public setSlidesPerView(amount: number): void {
         Object.assign(this.slider.params, {slidesPerView: amount});
     }
@@ -77,6 +92,7 @@ export default class TimePicker extends DirectPicker<Time> {
     private getNextButton(): HTMLButtonElement {
         const nextButton: HTMLButtonElement = DirectPicker.getNextButton();
         nextButton.onclick = () => this.slider.slideNext();
+
         return nextButton;
     }
 
