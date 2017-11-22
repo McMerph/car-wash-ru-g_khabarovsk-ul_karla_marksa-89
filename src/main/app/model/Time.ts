@@ -3,17 +3,21 @@ export default class Time {
     private hours: number;
     private minutes: number;
 
-    public constructor(parameter: { hours: number; minutes: number; } | string) {
+    public constructor(parameter: { hours: number; minutes: number; } | string | Date) {
         if (typeof parameter === 'string') {
             const timeData: string[] = parameter.split(':');
             this.hours = parseInt(timeData[0], 10);
             this.minutes = parseInt(timeData[1], 10);
+        } else if (parameter instanceof Date) {
+            this.hours = parameter.getHours();
+            this.minutes = parameter.getMinutes();
         } else {
             this.hours = parameter.hours;
             this.minutes = parameter.minutes;
         }
     }
 
+    // TODO Delete?
     public toMilliseconds(): number {
         return this.hours * 60 * 60 * 1000 + this.minutes * 60 * 1000;
     }
