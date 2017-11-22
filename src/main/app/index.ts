@@ -25,9 +25,8 @@ function start() {
     const availability: Availability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
-    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
-
     const dateTimePickerParent: HTMLElement = (document.querySelector('dialog') as HTMLElement);
+    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.firstChild);
 
     const openButton: HTMLButtonElement = (document.querySelector('button.check-in') as HTMLButtonElement);

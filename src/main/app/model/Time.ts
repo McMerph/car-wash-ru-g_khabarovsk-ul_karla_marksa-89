@@ -3,17 +3,6 @@ export default class Time {
     private hours: number;
     private minutes: number;
 
-    // TODO Introduce TimeUtils class?
-    public static equalsArrays(array1: Time[], array2: Time[]): boolean {
-        return array1.length === array2.length &&
-            array1.every((time1) => array2.some((time2) => time1.equals(time2)));
-    }
-
-    // TODO Introduce TimeUtils class? Delete?
-    public static contains(times: Time[], timeToCheck: Time): boolean {
-        return times.some((time) => time.equals(timeToCheck));
-    }
-
     public constructor(parameter: { hours: number; minutes: number; } | string) {
         if (typeof parameter === 'string') {
             const timeData: string[] = parameter.split(':');
@@ -23,6 +12,14 @@ export default class Time {
             this.hours = parameter.hours;
             this.minutes = parameter.minutes;
         }
+    }
+
+    public toMilliseconds(): number {
+        return this.hours * 60 * 60 * 1000 + this.minutes * 60 * 1000;
+    }
+
+    public getRepresentation(): string {
+        return `${this.hours}:${this.minutes.toFixed().padStart(2, '0')}`;
     }
 
     public compareTo(time: Time): number {
@@ -40,10 +37,6 @@ export default class Time {
 
     public equals(otherTime: Time): boolean {
         return otherTime && this.hours === otherTime.hours && this.minutes === otherTime.minutes;
-    }
-
-    public getRepresentation(): string {
-        return `${this.hours}:${this.minutes.toFixed().padStart(2, '0')}`;
     }
 
     public getHours(): number {

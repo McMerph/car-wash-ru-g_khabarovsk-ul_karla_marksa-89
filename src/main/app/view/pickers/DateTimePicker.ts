@@ -21,8 +21,8 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
     public constructor(availabilityHandler: AvailabilityHandler) {
         this.availabilityHandler = availabilityHandler;
 
-        const nearest: { date: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker = new DatePicker(nearest.date, this, availabilityHandler);
+        const nearest: { dateOfMonth: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
+        this.datePicker = new DatePicker(nearest.dateOfMonth, this, availabilityHandler);
         this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes());
 
         this.datePicker.addMonthObserver(this);
@@ -33,8 +33,8 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
     }
 
     public onDateOfMonthPick(): void {
-        const disabledTimeStamps: Map<number, Time[]> = this.availabilityHandler.getDisabledTimeStamps();
-        const disabledTimes: Time[] = disabledTimeStamps.get(this.datePicker.getPickedValue().valueOf()) || [];
+        const pickedDateOfMonth = this.datePicker.getPickedValue().valueOf();
+        const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
         this.timePicker.updateDisabled(...disabledTimes);
     }
 
@@ -59,8 +59,8 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
     }
 
     public pickNearest(): void {
-        const nearest: { date: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker.pick(nearest.date);
+        const nearest: { dateOfMonth: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
+        this.datePicker.pick(nearest.dateOfMonth);
         this.timePicker.pick(nearest.time);
     }
 

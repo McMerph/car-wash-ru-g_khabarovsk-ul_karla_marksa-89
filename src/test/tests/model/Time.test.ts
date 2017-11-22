@@ -9,34 +9,6 @@ test('constructors', () => {
     expect(timeFromString.equals(timeFromOptions)).toBeTruthy();
 });
 
-test('equalsArrays() static method', () => {
-    const array1 = [
-        new Time({hours, minutes}),
-        new Time({hours: hours + 1, minutes}),
-        new Time({hours, minutes: minutes + 1}),
-        new Time({hours: hours + 1, minutes: minutes + 1})
-    ];
-    const array2 = [
-        new Time({hours, minutes}),
-        new Time({hours: hours + 1, minutes}),
-        new Time({hours, minutes: minutes + 1}),
-        new Time({hours: hours + 1, minutes: minutes + 1})
-    ];
-    expect(Time.equalsArrays(array1, array2)).toBeTruthy();
-    array2.pop();
-    expect(Time.equalsArrays(array1, array2)).toBeFalsy();
-});
-
-test('contains() static method', () => {
-    const times = [
-        new Time({hours, minutes}),
-        new Time({hours: hours + 1, minutes}),
-        new Time({hours, minutes: minutes + 1}),
-        new Time({hours: hours + 1, minutes: minutes + 1})
-    ];
-    expect(Time.contains(times, new Time({hours, minutes})));
-});
-
 test('getRepresentation() method', () => {
     const time = new Time({hours, minutes});
     expect(time.getRepresentation()).toBe(`${hours}:${minutes}`);

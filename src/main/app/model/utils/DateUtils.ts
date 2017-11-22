@@ -1,5 +1,23 @@
 export default class DateUtils {
 
+    public static getPreviousMonth(month: Date): Date {
+        return new Date(month.getFullYear(), month.getMonth() - 1);
+    }
+
+    public static getNextMonth(month: Date): Date {
+        return new Date(month.getFullYear(), month.getMonth() + 1);
+    }
+
+    public static getDates(month: Date): Date[] {
+        const dates: Date[] = [];
+        for (let i = 0; i < DateUtils.getLastDateOfMonth(month).getDate(); i++) {
+            dates.push(new Date(month.getFullYear(), month.getMonth(), i + 1));
+        }
+
+        return dates;
+    }
+
+    // TODO Delete?
     public static getUniqueDatesOfMonth(dates: Date[]): Date[] {
         const uniqueDates: Date[] = [];
         dates.forEach((date) => {
@@ -11,11 +29,12 @@ export default class DateUtils {
         return uniqueDates;
     }
 
-    public static isPast(date: Date): boolean {
-        const current: Date = new Date();
-        const currentDate = new Date(current.getFullYear(), current.getMonth(), current.getDate());
+    public static getLastDateOfMonth(month: Date): Date {
+        return new Date(month.getFullYear(), month.getMonth() + 1, 0);
+    }
 
-        return date && date < currentDate;
+    public static isPast(date: Date): boolean {
+        return date && date.valueOf() < this.getTodayWithoutTime();
     }
 
     public static equalsDateOfMonth(date1: Date, date2: Date): boolean {
@@ -29,13 +48,19 @@ export default class DateUtils {
             date1.getMonth() === date2.getMonth();
     }
 
-    public static getCurrentDateOfMonth(): Date {
-        const currentDate = new Date();
-        const year = currentDate.getFullYear();
-        const month = currentDate.getMonth();
-        const date = currentDate.getDate();
+    public static getTodayWithoutTime(): number {
+        return DateUtils.getDateWithoutTime(new Date());
+    }
 
-        return new Date(year, month, date);
+    public static getTomorrowWithoutTime(): number {
+        const date = new Date();
+        date.setDate(date.getDate() + 1);
+
+        return this.getDateWithoutTime(date);
+    }
+
+    public static getDateWithoutTime(date: Date): number {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate()).valueOf();
     }
 
 }

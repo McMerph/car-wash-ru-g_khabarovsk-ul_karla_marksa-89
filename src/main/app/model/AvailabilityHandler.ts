@@ -5,9 +5,35 @@ import DateUtils from './utils/DateUtils';
 export default class AvailabilityHandler {
 
     private readonly checkInTimes: Time[];
+
+    // TODO Delete?
     private readonly disabledTimeStamps: Map<number, Time[]> = new Map<number, Time[]>();
 
+    private readonly disabledDates: Set<number> = new Set<number>();
+    private readonly disabledTimestamps: number[];
+
     public constructor(availability: Availability) {
+        this.checkInTimes = availability.checkInTimes.map((time) => new Time(time));
+
+        this.disabledTimestamps = availability.noService.map((timestamp) => {
+            const date: Date = new Date(timestamp.year, timestamp.month, timestamp.day);
+            const time: Time = new Time(timestamp.time);
+            return date.valueOf() + time.toMilliseconds();
+        });
+
+        this.disabledTimestamps.map((timestamp) => DateUtils.getDateWithoutTime(new Date(timestamp)))
+            .forEach((dateWithDisabledTime) => {
+                const dateToCheck: Date = new Date(dateWithDisabledTime);
+                const everyTime: boolean = this.checkInTimes.every((checkInTime) => {
+                    dateToCheck.setHours(checkInTime.getHours());
+                    dateToCheck.setMinutes(checkInTime.getMinutes());
+                    return this.disabledTimestamps.indexOf(dateToCheck.valueOf()) !== -1;
+                });
+                if (everyTime) {
+                    this.disabledDates.add(dateWithDisabledTime);
+                }
+            });
+
         availability.noService.forEach((timestamp) => {
             const dateWithNoServiceTime: Date = new Date(timestamp.year, timestamp.month, timestamp.day);
             if (this.disabledTimeStamps.has(dateWithNoServiceTime.valueOf())) {
@@ -16,81 +42,46 @@ export default class AvailabilityHandler {
                 this.disabledTimeStamps.set(dateWithNoServiceTime.valueOf(), [new Time(timestamp.time)]);
             }
         });
-
-        this.checkInTimes = availability.checkInTimes.map((time) => new Time(time));
     }
 
-    public getNearestAvailableTimestamp(): { date: Date, time: Time } {
-        const date: Date = DateUtils.getCurrentDateOfMonth();
+    public getNearestAvailableTimestamp(): { dateOfMonth: Date, time: Time } {
+        const date: Date = new Date(DateUtils.getTodayWithoutTime());
         while (true) {
-            const checkInTimes: Time[] = this.getCheckInTimesOfDate(date);
+            const checkInTimes: Time[] = this.getCheckInTimesOfDate(date.valueOf());
             if (checkInTimes.length > 0) {
-                return {date, time: checkInTimes[0]};
+                return {dateOfMonth: date, time: checkInTimes[0]};
             }
             date.setDate(date.getDate() + 1);
         }
     }
 
-    // TODO Delete? Return valueOf()?
-    // public getNearestAvailableTimestamp(): Date {
-    //     const date: Date = DateUtils.getCurrentDateOfMonth();
-    //     while (true) {
-    //         const serviceTimes: Time[] = this.getCheckInTimesOfDate(date);
-    //         if (serviceTimes.length > 0) {
-    //             date.setHours(serviceTimes[0].getHours());
-    //             date.setMinutes(serviceTimes[0].getMinutes());
-    //             return date;
-    //         }
-    //         date.setDate(date.getDate() + 1);
-    //     }
-    // }
-
-    // TODO Delete?
-    public getNoServiceDates(): Date[] {
-        const datesWithNoServiceTime: Date[] = Array.from(this.disabledTimeStamps.keys()).map((valueOf) => new Date(valueOf));
-        const uniqueDatesWithNoServiceTime: Date[] = DateUtils.getUniqueDatesOfMonth(datesWithNoServiceTime);
-
-        return uniqueDatesWithNoServiceTime
-            .filter((date) => {
-                const noServiceTimes: Time[] = this.getNoServiceTimes(date);
-                return noServiceTimes.length === this.checkInTimes.length &&
-                    noServiceTimes.every((time1) => this.checkInTimes.some((time2) => time1.equals(time2)));
-            });
+    public isDisabledDate(dateOfMonth: number): boolean {
+        return this.disabledDates.has(dateOfMonth);
     }
 
-    // TODO Use it?
-    public isDisabled(dateOfMonth: Date, time?: Time): boolean {
-        const checkInTimesOfDate: Time[] = this.getCheckInTimesOfDate(dateOfMonth);
-        const dateDisabled: boolean = checkInTimesOfDate.length === 0;
-        if (time) {
-            return dateDisabled && checkInTimesOfDate.some((checkInTime) => checkInTime.equals(time));
-        } else {
-            return dateDisabled;
-        }
+    public isDisabledTimestamp(timestamp: number): boolean {
+        return this.disabledTimestamps.indexOf(timestamp) !== -1;
+    }
+
+    public getDisabledTimes(dateOfMonth: number): Time[] {
+        return this.disabledTimeStamps.get(dateOfMonth) || [];
     }
 
     public getCheckInTimes(): Time[] {
         return this.checkInTimes;
     }
 
-    public getDisabledTimeStamps(): Map<number, Time[]> {
-        return this.disabledTimeStamps;
-    }
-
-    private getCheckInTimesOfDate(date: Date): Time[] {
-        let checkInTimes: Time[] = this.checkInTimes;
-        if (DateUtils.equalsDateOfMonth(date, new Date())) {
+    private getCheckInTimesOfDate(dateOfMonth: number): Time[] {
+        let checkInTimesOfDate: Time[] = this.checkInTimes;
+        if (DateUtils.equalsDateOfMonth(new Date(dateOfMonth), new Date())) {
             const currentDate: Date = new Date();
             const currentTime = new Time({hours: currentDate.getHours(), minutes: currentDate.getMinutes()});
-            checkInTimes = checkInTimes.filter((time) => time.compareTo(currentTime) > 0);
+            checkInTimesOfDate = checkInTimesOfDate.filter((time) => time.compareTo(currentTime) > 0);
         }
-        const noServiceTimes: Time[] = this.getNoServiceTimes(date);
+        const disabledTimes: Time[] = this.getDisabledTimes(dateOfMonth);
 
-        return checkInTimes.filter((time) => !Time.contains(noServiceTimes, time));
-    }
-
-    private getNoServiceTimes(date: Date): Time[] {
-        return this.disabledTimeStamps.get(date.valueOf()) || [];
+        return checkInTimesOfDate.filter((checkInTimeOfDate) =>
+            !disabledTimes.some((disabledTime) => disabledTime.equals(checkInTimeOfDate)));
     }
 
 }

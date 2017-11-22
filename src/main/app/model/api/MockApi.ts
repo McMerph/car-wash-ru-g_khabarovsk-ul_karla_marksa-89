@@ -1,3 +1,4 @@
+import DateUtils from '../utils/DateUtils';
 import Api from './Api';
 import Availability from './Availability';
 import CallRequest from './CallRequest';
@@ -11,18 +12,37 @@ class MockApi implements Api {
             '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
     }
 
-    public retrieveAvailability(): Availability {
-        const today = new Date();
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
+    private static getNoServiceTimestamp(timestamp: number): Timestamp {
+        const date: Date = new Date(timestamp);
+        return {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            time: `${date.getHours()}:${date.getMinutes()}`
+        };
+    }
 
+    private static getNoServiceDate(timestamp: number): Timestamp[] {
+        const date = new Date(timestamp);
+        return MockApi.getCheckInTimes().map((time) =>
+            ({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), time})
+        );
+    }
+
+    public retrieveAvailability(): Availability {
+        const todayWithoutTime: number = DateUtils.getTodayWithoutTime();
+        const tomorrowWithoutTime: number = DateUtils.getTomorrowWithoutTime();
+
+        const disabledTimestamp1: number = tomorrowWithoutTime + 9 * 60 * 60 * 1000;
+        const disabledTimestamp2: number = tomorrowWithoutTime + 10 * 60 * 60 * 1000;
+        const disabledTimestamp3: number = tomorrowWithoutTime + 18 * 60 * 60 * 1000;
         return {
             checkInTimes: MockApi.getCheckInTimes(),
             noService: [
-                ...this.getNoServiceDate(today),
-                {year: tomorrow.getFullYear(), month: tomorrow.getMonth(), day: tomorrow.getDate(), time: '9:00'},
-                {year: tomorrow.getFullYear(), month: tomorrow.getMonth(), day: tomorrow.getDate(), time: '10:00'},
-                {year: tomorrow.getFullYear(), month: tomorrow.getMonth(), day: tomorrow.getDate(), time: '18:00'}
+                ...MockApi.getNoServiceDate(todayWithoutTime),
+                MockApi.getNoServiceTimestamp(disabledTimestamp1),
+                MockApi.getNoServiceTimestamp(disabledTimestamp2),
+                MockApi.getNoServiceTimestamp(disabledTimestamp3)
             ]
         };
     }
@@ -35,22 +55,10 @@ class MockApi implements Api {
         console.log('callRequest:', callRequest);
     }
 
-    private getNoServiceDate(date: Date): Timestamp[] {
-        const noServiceDate: Timestamp[] = [];
-        MockApi.getCheckInTimes().forEach((time) => noServiceDate.push({
-            year: date.getFullYear(),
-            month: date.getMonth(),
-            day: date.getDate(),
-            time
-        }));
-
-        return noServiceDate;
-    }
-
     // TODO Delete?
-    // private getNoServiceDate(year: number, month: number, date: number): Timestamp[] {
+    // private getNoServiceDate(year: number, month: number, dateOfMonth: number): Timestamp[] {
     //     const noServiceDate: Timestamp[] = [];
-    //     this.getCheckInTimes().forEach((time) => noServiceDate.push({year, month, day: date, time}));
+    //     this.getCheckInTimes().forEach((time) => noServiceDate.push({year, month, day: dateOfMonth, time}));
     //
     //     return noServiceDate;
     // }

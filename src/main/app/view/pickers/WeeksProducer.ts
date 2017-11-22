@@ -1,17 +1,28 @@
+import DateUtils from '../../model/utils/DateUtils';
 import Week from './Week';
 
 export default class WeeksProducer {
 
+    private readonly month: Date;
+
+    private static normalizeDay(day: number): number {
+        return day === 0 ? 7 : day;
+    }
+
+    public constructor(month: Date) {
+        this.month = month;
+    }
+
     public getWeeks(): Week[] {
         const weeks: Week[] = [];
-        const lastDate: Date = this.getLastDate();
+        const lastDate: Date = DateUtils.getLastDateOfMonth(this.month);
         const weeksCount: number = this.getWeeksCount();
         const endDayOfFirstWeek: number = this.getEndDayOfFirstWeek();
         for (let i = 0; i < weeksCount; i++) {
             weeks.push({
                 startDate: i === 0 ? 1 : endDayOfFirstWeek + 1 + (i - 1) * 7,
                 startDay: i === 0 ? this.getFirstDay() : 1,
-                endDay: i === weeksCount - 1 ? this.normalizeDay(lastDate.getDay()) : 7
+                endDay: i === weeksCount - 1 ? WeeksProducer.normalizeDay(lastDate.getDay()) : 7
             });
         }
 
@@ -21,7 +32,7 @@ export default class WeeksProducer {
     private getWeeksCount(): number {
         const endDayOfFirstWeek = this.getEndDayOfFirstWeek();
 
-        const lastDate = this.getLastDate();
+        const lastDate: Date = DateUtils.getLastDateOfMonth(this.month);
         const daysCount = lastDate.getDate();
         return Math.ceil((daysCount - endDayOfFirstWeek) / 7) + 1;
     }
@@ -31,20 +42,11 @@ export default class WeeksProducer {
     }
 
     private getFirstDay(): number {
-        const firstDate = this.getFirstDate();
-        return firstDate.getDay() === 0 ? 7 : firstDate.getDay();
+        return WeeksProducer.normalizeDay(this.getFirstDate().getDay());
     }
 
     private getFirstDate() {
         return new Date(this.month.getFullYear(), this.month.getMonth(), 1);
-    }
-
-    private getLastDate() {
-        return new Date(this.month.getFullYear(), this.month.getMonth() + 1, 0);
-    }
-
-    private normalizeDay(day: number): number {
-        return day === 0 ? 7 : day;
     }
 
 }

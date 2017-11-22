@@ -1,6 +1,5 @@
 import * as Slider from 'swiper/dist/js/swiper.min.js';
 import AvailabilityHandler from '../../model/AvailabilityHandler';
-import MonthHandler from '../../model/MonthHandler';
 import DateUtils from '../../model/utils/DateUtils';
 import DateOfMonthPicker from './DateOfMonthPicker';
 import DateTimePicker from './DateTimePicker';
@@ -20,7 +19,7 @@ export default class DatePicker implements Picker<Date> {
 
     private availabilityHandler: AvailabilityHandler;
 
-    private monthHandler: MonthHandler;
+    private month: Date;
 
     private dateOfMonthPicker: DateOfMonthPicker;
     private monthSelect: HTMLSelectElement;
@@ -35,15 +34,16 @@ export default class DatePicker implements Picker<Date> {
     private dateTimePicker: DateTimePicker;
 
     public constructor(initialMonth: Date, dateTimePicker: DateTimePicker, availabilityHandler: AvailabilityHandler) {
+        this.month = initialMonth;
+
         this.availabilityHandler = availabilityHandler;
         this.dateTimePicker = dateTimePicker;
-        this.monthHandler = new MonthHandler(initialMonth);
         this.monthSelect = this.getMonthSelect();
         this.yearSelect = this.getYearSelect();
         this.sliderContainer = SliderUtils.getContainer();
 
         this.handleSlider();
-        this.updateMonth(this.monthHandler.getMonth());
+        this.updateMonth(this.month);
     }
 
     public addMonthObserver(observer: MonthObserver) {
@@ -71,7 +71,7 @@ export default class DatePicker implements Picker<Date> {
     }
 
     public pick(date: Date): void {
-        if (!DateUtils.equalsMonth(date, this.monthHandler.getMonth())) {
+        if (!DateUtils.equalsMonth(date, this.month)) {
             this.updateMonth(date, true);
         }
         this.dateOfMonthPicker.pick(date);
@@ -103,9 +103,9 @@ export default class DatePicker implements Picker<Date> {
             if (!this.blockSlideChangeTransitionEnd) {
                 this.blockSlideChangeTransitionEnd = true;
                 if (this.slider.activeIndex === 0) {
-                    this.updateMonth(this.monthHandler.getPreviousMonth());
+                    this.updateMonth(DateUtils.getPreviousMonth(this.month));
                 } else if (this.slider.activeIndex === 2) {
-                    this.updateMonth(this.monthHandler.getNextMonth());
+                    this.updateMonth(DateUtils.getNextMonth(this.month));
                 }
             }
         });
@@ -115,11 +115,11 @@ export default class DatePicker implements Picker<Date> {
         this.slider.on('slideChange', () => {
             this.blockSlideChangeTransitionEnd = false;
             if (this.slider.activeIndex === 0) {
-                this.updateSelects(this.monthHandler.getPreviousMonth());
+                this.updateSelects(DateUtils.getPreviousMonth(this.month));
             } else if (this.slider.activeIndex === 1) {
-                this.updateSelects(this.monthHandler.getMonth());
+                this.updateSelects(this.month);
             } else if (this.slider.activeIndex === 2) {
-                this.updateSelects(this.monthHandler.getNextMonth());
+                this.updateSelects(DateUtils.getNextMonth(this.month));
             }
         });
     }
@@ -130,11 +130,11 @@ export default class DatePicker implements Picker<Date> {
     }
 
     private getPreviousSlide() {
-        return new DateOfMonthPicker(this.monthHandler.getPreviousMonth(), this.availabilityHandler).getLayout();
+        return new DateOfMonthPicker(DateUtils.getPreviousMonth(this.month), this.availabilityHandler).getLayout();
     }
 
     private getNextSlide() {
-        return new DateOfMonthPicker(this.monthHandler.getNextMonth(), this.availabilityHandler).getLayout();
+        return new DateOfMonthPicker(DateUtils.getNextMonth(this.month), this.availabilityHandler).getLayout();
     }
 
     private getMonthSelect(): HTMLSelectElement {
@@ -143,7 +143,7 @@ export default class DatePicker implements Picker<Date> {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
         monthSelect.addEventListener('change', () => {
-            this.updateMonth(new Date(this.monthHandler.getMonth().getFullYear(), parseInt(monthSelect.value, 10)));
+            this.updateMonth(new Date(this.month.getFullYear(), parseInt(monthSelect.value, 10)));
         });
 
         return monthSelect;
@@ -153,7 +153,7 @@ export default class DatePicker implements Picker<Date> {
         const option: HTMLOptionElement = document.createElement('option');
         option.value = monthIndex.toString();
         option.text = monthName;
-        if (this.monthHandler.sameMonthIndex(monthIndex)) {
+        if (this.month.getMonth() === monthIndex) {
             option.selected = true;
         }
 
@@ -166,15 +166,15 @@ export default class DatePicker implements Picker<Date> {
             yearSelect.options.add(this.getYearOption(year));
         });
         yearSelect.addEventListener('change', () => {
-            this.updateMonth(new Date(parseInt(yearSelect.value, 10), this.monthHandler.getMonth().getMonth()));
+            this.updateMonth(new Date(parseInt(yearSelect.value, 10), this.month.getMonth()));
         });
 
         return yearSelect;
     }
 
     private getSelectableYears(): string[] {
-        const minYear: number = this.monthHandler.getMonth().getFullYear() - 10;
-        const maxYear: number = this.monthHandler.getMonth().getFullYear() + 10;
+        const minYear: number = this.month.getFullYear() - 10;
+        const maxYear: number = this.month.getFullYear() + 10;
         const years: string[] = [];
         for (let i = minYear; i <= maxYear; i++) {
             years.push(i.toString(10));
@@ -187,7 +187,7 @@ export default class DatePicker implements Picker<Date> {
         const option = document.createElement('option');
         option.value = year;
         option.text = year;
-        if (this.monthHandler.sameYearIndex(parseInt(year, 10))) {
+        if (this.month.getFullYear() === parseInt(year, 10)) {
             option.selected = true;
         }
 
@@ -195,7 +195,7 @@ export default class DatePicker implements Picker<Date> {
     }
 
     private updateMonth(month: Date, animated?: boolean): void {
-        this.monthHandler = new MonthHandler(month);
+        this.month = month;
         this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
         this.dateOfMonthPicker.addDateOfMonthObserver(this.dateTimePicker);
 
