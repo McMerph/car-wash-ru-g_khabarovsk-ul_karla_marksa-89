@@ -5,6 +5,21 @@ import AvailabilityHandler from '../../../main/app/model/AvailabilityHandler';
 import Time from '../../../main/app/model/Time';
 import DateUtils from '../../../main/app/model/utils/DateUtils';
 
+test('getNearestAvailableTimestamp() method', () => {
+    const api: Api = new MockApi();
+    const availability: Availability = api.retrieveAvailability();
+    const handler: AvailabilityHandler = new AvailabilityHandler(availability);
+    const nearest: { dateOfMonth: Date, time: Time } = handler.getNearestAvailableTimestamp();
+
+    const tomorrow: number = DateUtils.getTomorrowWithoutTime();
+    const expectedNearest: { dateOfMonth: Date, time: Time } = {
+        dateOfMonth: new Date(tomorrow),
+        time: new Time({hours: 11, minutes: 0})
+    };
+
+    expect(nearest).toEqual(expectedNearest);
+});
+
 test('getDisabledTimes() method', () => {
     const api: Api = new MockApi();
     const availability: Availability = api.retrieveAvailability();
@@ -21,28 +36,20 @@ test('getDisabledTimes() method', () => {
     ]);
 });
 
-test('isDisabled() method', () => {
+test('isDisabledDate() method', () => {
     const api: Api = new MockApi();
     const availability: Availability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     expect(handler.isDisabledDate(DateUtils.getTodayWithoutTime())).toBeTruthy();
     expect(handler.isDisabledDate(DateUtils.getTomorrowWithoutTime())).toBeFalsy();
-    expect(handler.isDisabledTimestamp(DateUtils.getTomorrowWithoutTime() + 9 * 60 * 60 * 1000)).toBeTruthy();
-    expect(handler.isDisabledTimestamp(DateUtils.getTomorrowWithoutTime() + 11 * 60 * 60 * 1000)).toBeFalsy();
 });
 
-test('getNearestAvailableTimestamp() method', () => {
+test('isDisabledTimestamp() method', () => {
     const api: Api = new MockApi();
     const availability: Availability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
-    const nearest: { dateOfMonth: Date, time: Time } = handler.getNearestAvailableTimestamp();
 
-    const tomorrow: number = DateUtils.getTomorrowWithoutTime();
-    const expectedNearest: { dateOfMonth: Date, time: Time } = {
-        dateOfMonth: new Date(tomorrow),
-        time: new Time({hours: 11, minutes: 0})
-    };
-
-    expect(nearest).toEqual(expectedNearest);
+    expect(handler.isDisabledTimestamp(DateUtils.getTomorrowWithoutTime() + 9 * 60 * 60 * 1000)).toBeTruthy();
+    expect(handler.isDisabledTimestamp(DateUtils.getTomorrowWithoutTime() + 11 * 60 * 60 * 1000)).toBeFalsy();
 });

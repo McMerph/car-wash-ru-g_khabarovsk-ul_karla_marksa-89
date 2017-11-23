@@ -8,25 +8,13 @@ export default class DateUtils {
         return new Date(month.getFullYear(), month.getMonth() + 1);
     }
 
-    public static getDates(month: Date): Date[] {
+    public static getDatesOfMonth(month: Date): Date[] {
         const dates: Date[] = [];
         for (let i = 0; i < DateUtils.getLastDateOfMonth(month).getDate(); i++) {
             dates.push(new Date(month.getFullYear(), month.getMonth(), i + 1));
         }
 
         return dates;
-    }
-
-    // TODO Delete?
-    public static getUniqueDatesOfMonth(dates: Date[]): Date[] {
-        const uniqueDates: Date[] = [];
-        dates.forEach((date) => {
-            if (uniqueDates.every((uniqueDate) => !DateUtils.equalsDateOfMonth(uniqueDate, date))) {
-                uniqueDates.push(date);
-            }
-        });
-
-        return uniqueDates;
     }
 
     public static getLastDateOfMonth(month: Date): Date {

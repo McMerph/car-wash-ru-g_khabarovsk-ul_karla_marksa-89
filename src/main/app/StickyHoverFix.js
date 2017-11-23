@@ -1,3 +1,4 @@
+// TODO Refactor
 (function () {
     let isTouch = false; //var to indicate current input type (is touch versus no touch)
     let isTouchTimer;

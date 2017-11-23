@@ -17,11 +17,6 @@ export default class Time {
         }
     }
 
-    // TODO Delete?
-    public toMilliseconds(): number {
-        return this.hours * 60 * 60 * 1000 + this.minutes * 60 * 1000;
-    }
-
     public getRepresentation(): string {
         return `${this.hours}:${this.minutes.toFixed().padStart(2, '0')}`;
     }

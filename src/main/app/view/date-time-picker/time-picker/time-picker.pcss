@@ -1,0 +1,54 @@
+@import '../../style/variables.pcss';
+@import '../../style/apply.pcss';
+
+#time-picker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*margin: -10px 0;*/
+    & button.previous, button.next {
+        @apply --reset-button;
+        padding: 20px 0;
+        width: 24px;
+        height: 24px;
+        background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
+        &.previous {
+            transform: rotate(270deg);
+        }
+        &.next {
+            transform: rotate(90deg);
+        }
+        &.disabled {
+            visibility: hidden;
+        }
+    }
+    & .swiper-container {
+        /*width: 100px;*/
+        width: auto;
+        height: 270px;
+        & .swiper-slide-prev button.pick {
+            border-bottom: none;
+        }
+        & .swiper-slide-active button.pick {
+            border-top: 1px solid var(--picker-border-color);
+        }
+        & button.pick {
+            @apply --picker-button;
+            border-left: 1px solid var(--picker-border-color);
+            border-right: 1px solid var(--picker-border-color);
+            border-bottom: 1px solid var(--picker-border-color);
+            color: #303030;
+            font: normal 400 20px "Proxima Nova";
+            /*TODO Delete?*/
+            /*height: 54px;*/
+            user-select: none;
+            &.picked {
+                background-color: #ffd800;
+            }
+            &.disabled {
+                pointer-events: none;
+                background-color: var(--red-color);
+            }
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { isNotDuplicate } from '../Utils';
+import { inArray, isNotDuplicate } from '../Utils';
 import Availability from './api/Availability';
 import Time from './Time';
 import DateUtils from './utils/DateUtils';
@@ -6,13 +6,13 @@ import DateUtils from './utils/DateUtils';
 export default class AvailabilityHandler {
 
     private readonly checkInTimes: Time[];
-    private disabledDates: number[];
-    private disabledTimestamps: number[];
+    private readonly disabledDates: number[];
+    private readonly disabledTimestamps: number[];
 
     public constructor(availability: Availability) {
         this.checkInTimes = availability.checkInTimes.map((time) => new Time(time));
-        this.getDisabledTimestamps(availability);
-        this.getDisabledDates();
+        this.disabledTimestamps = this.getDisabledTimestamps(availability);
+        this.disabledDates = this.getDisabledDates();
     }
 
     public getNearestAvailableTimestamp(): { dateOfMonth: Date, time: Time } {
@@ -37,27 +37,27 @@ export default class AvailabilityHandler {
     }
 
     public isDisabledDate(dateOfMonth: number): boolean {
-        return this.disabledDates.indexOf(dateOfMonth) !== -1;
+        return inArray(dateOfMonth, this.disabledDates);
     }
 
     public isDisabledTimestamp(timestamp: number): boolean {
-        return this.disabledTimestamps.indexOf(timestamp) !== -1;
+        return inArray(timestamp, this.disabledTimestamps);
     }
 
     public getCheckInTimes(): Time[] {
         return this.checkInTimes;
     }
 
-    private getDisabledTimestamps(availability: Availability) {
-        this.disabledTimestamps = availability.noService.map((timestamp) =>
+    private getDisabledTimestamps(availability: Availability): number[] {
+        return availability.noService.map((timestamp) =>
             this.generateTimestamp({
                 date: new Date(timestamp.year, timestamp.month, timestamp.day).valueOf(),
                 time: new Time(timestamp.time)
             }));
     }
 
-    private getDisabledDates() {
-        this.disabledDates = this.disabledTimestamps
+    private getDisabledDates(): number[] {
+        return this.disabledTimestamps
             .map((disabledTimestamp) => DateUtils.getDateWithoutTime(new Date(disabledTimestamp)))
             .filter(isNotDuplicate)
             .filter((dateWithDisabledTime) => this.checkInTimes.every((checkInTime) =>
