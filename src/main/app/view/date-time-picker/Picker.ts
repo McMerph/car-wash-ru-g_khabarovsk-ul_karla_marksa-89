@@ -6,4 +6,7 @@ export default interface Picker<T> {
 
     getPickedValue(): T;
 
+    // TODO Use it?
+    // pick(value: T): void;
+
 }
