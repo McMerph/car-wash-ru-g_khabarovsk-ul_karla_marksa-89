@@ -1,19 +1,23 @@
 import DirectPicker from './DirectPicker';
-import PickerStoreObserver from './PickerStoreObserver';
+import PickerStoreObserver from './PickerObserver';
 
 export default abstract class PickerLayout<T> implements PickerStoreObserver {
 
     protected static readonly PICK_BUTTON_CLASS = 'pick';
     protected static readonly PICKED_CLASS = 'picked';
 
+    protected picker: DirectPicker<T>;
+
     protected buttons: HTMLButtonElement[];
 
     public constructor(picker: DirectPicker<T>) {
-        picker.getValues().map((value) => this.produceButton(picker, value));
+        this.picker = picker;
     }
 
-    // TODO Not abstract?
-    public abstract getLayout(): HTMLElement;
+    public getLayout(): HTMLElement {
+        this.generateButtons();
+        return document.createElement('div');
+    }
 
     public onPick(index: number) {
         this.buttons.forEach((button) => button.classList.remove(PickerLayout.PICKED_CLASS));
@@ -22,6 +26,10 @@ export default abstract class PickerLayout<T> implements PickerStoreObserver {
 
     public onUnpick() {
         this.buttons.forEach((button) => button.classList.remove(PickerLayout.PICKED_CLASS));
+    }
+
+    public generateButtons() {
+        this.buttons = this.picker.getValues().map((value) => this.produceButton(this.picker, value));
     }
 
     protected produceButton(picker: DirectPicker<T>, value: T): HTMLButtonElement {

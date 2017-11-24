@@ -209,7 +209,8 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
     private updateMonth(month: Date, animated?: boolean): void {
         this.month = month;
         this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
-        this.dateOfMonthPicker.addDateOfMonthObserver(this);
+        // TODO Fix
+        // this.dateOfMonthPicker.addDateOfMonthObserver(this);
 
         this.slider.removeAllSlides();
         this.slider.appendSlide(SliderUtils.getSlide(this.getPreviousSlide()));

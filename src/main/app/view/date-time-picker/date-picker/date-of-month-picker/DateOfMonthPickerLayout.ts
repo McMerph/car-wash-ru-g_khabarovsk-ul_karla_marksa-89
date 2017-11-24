@@ -1,5 +1,4 @@
 import DateUtils from '../../../../model/utils/DateUtils';
-import DirectPicker from '../../DirectPicker';
 import PickerLayout from '../../PickerLayout';
 import ButtonsUtils from '../../utils/ButtonsUtils';
 import DateOfMonthPicker from './DateOfMonthPicker';
@@ -11,18 +10,16 @@ export default class DateOfMonthPickerLayout extends PickerLayout<Date> {
     private static readonly PAST_CLASS: string = 'past';
     private static readonly TODAY_CLASS: string = 'today';
 
-    private picker: DateOfMonthPicker;
-
     private month: Date;
 
     public constructor(picker: DateOfMonthPicker, month: Date) {
         super(picker);
-        this.picker = picker;
         this.month = month;
+        // TODO Add observable
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLDivElement = document.createElement('div');
+        const layout: HTMLElement = super.getLayout();
         layout.classList.add('month');
 
         layout.appendChild(this.getMonthHeader());
@@ -32,7 +29,7 @@ export default class DateOfMonthPickerLayout extends PickerLayout<Date> {
         return layout;
     }
 
-    protected produceButton(picker: DirectPicker<T>, date: Date): HTMLButtonElement {
+    protected produceButton(picker: DateOfMonthPicker, date: Date): HTMLButtonElement {
         const button: HTMLButtonElement = super.produceButton(picker, date);
         if (this.picker.isDisabled(date)) {
             ButtonsUtils.disableButtons(button);

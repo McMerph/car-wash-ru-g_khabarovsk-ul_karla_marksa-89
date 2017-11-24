@@ -1,83 +1,39 @@
 import AvailabilityHandler from '../../../../model/AvailabilityHandler';
+import DateUtils from '../../../../model/utils/DateUtils';
+import DirectPicker from '../../DirectPicker';
 import DateOfMonthObserver from '../../observers/DateOfMonthObserver';
-import Picker from '../../Picker';
-import DateOfMonthPickerValuesHandler from './DateOfMonthPickerValuesHandler ';
-import Week from './Week';
-import WeeksProducer from './WeeksProducer';
+import DateOfMonthPickerLayout from './DateOfMonthPickerLayout';
 
-export default class DateOfMonthPicker implements Picker<Date> {
+export default class DateOfMonthPicker extends DirectPicker<Date> {
 
-    private valuesHandler: DateOfMonthPickerValuesHandler;
-
-    private month: Date;
+    // TODO Move to parent class?
+    private dateOfMonthObservers: DateOfMonthObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
-        this.month = month;
-        this.valuesHandler = new DateOfMonthPickerValuesHandler(month, availabilityHandler);
-        this.valuesHandler.generateButtons();
+        super(DateUtils.getDatesOfMonth(month));
+        this.layout = new DateOfMonthPickerLayout(this, month);
     }
 
-    public isPicked(): boolean {
-        return this.valuesHandler.isPicked();
+    public getRepresentation(dateOfMonth: Date): string {
+        return dateOfMonth.getDate().toString();
     }
 
-    public getPickedValue(): Date {
-        return this.valuesHandler.getPickedValue();
-    }
-
-    public getLayout(): HTMLElement {
-        const layout: HTMLDivElement = document.createElement('div');
-        layout.classList.add('month');
-
-        layout.appendChild(this.getMonthHeader());
-        const weeks: Week[] = new WeeksProducer(this.month).getWeeks();
-        weeks.forEach((week) => layout.appendChild(this.getWeekLayout(week)));
-
-        return layout;
-    }
-
-    public pick(dateOfMonth: Date) {
-        this.valuesHandler.pick(dateOfMonth);
+    public pick(dateOfMonth: Date): void {
+        super.pick(dateOfMonth);
+        this.dateOfMonthObservers.forEach((observer) => observer.onDateOfMonthPick());
     }
 
     public addDateOfMonthObserver(observer: DateOfMonthObserver): void {
-        this.valuesHandler.addDateOfMonthObserver(observer);
+        this.dateOfMonthObservers.push(observer);
     }
 
     public removeDateOfMonthObserver(observer: DateOfMonthObserver): void {
-        this.valuesHandler.removeDateOfMonthObserver(observer);
+        const index: number = this.dateOfMonthObservers.indexOf(observer);
+        this.dateOfMonthObservers.splice(index, 1);
     }
 
-    private getMonthHeader(): HTMLElement {
-        const header: HTMLElement = document.createElement('header');
-        ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'].forEach((dayName) =>
-            header.appendChild(document.createElement('div'))
-                .appendChild(document.createTextNode(dayName))
-        );
-
-        return header;
-    }
-
-    private getWeekLayout(week: Week): HTMLElement {
-        const weekLayout: HTMLDivElement = document.createElement('div');
-        weekLayout.classList.add('week');
-        for (let i = 1; i <= 7; i++) {
-            weekLayout.appendChild(this.getDayLayout(week, i));
-        }
-
-        return weekLayout;
-    }
-
-    private getDayLayout(week: Week, day: number): HTMLDivElement {
-        const dayLayout: HTMLDivElement = document.createElement('div');
-        const isDayExists: boolean = (week.startDay <= day) && (week.endDay >= day);
-        if (isDayExists) {
-            dayLayout.appendChild(this.valuesHandler.getButtons()[week.startDate - week.startDay + day - 1]);
-        } else {
-            dayLayout.setAttribute('aria-label', 'Данный день не из выбранного месяца');
-        }
-
-        return dayLayout;
+    protected valuesEquals(dateOfMonth1: Date, dateOfMonth2: Date): boolean {
+        return DateUtils.equalsDateOfMonth(dateOfMonth1, dateOfMonth2);
     }
 
 }
