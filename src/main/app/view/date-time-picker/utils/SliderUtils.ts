@@ -9,7 +9,7 @@ export default class SliderUtils {
     private static readonly TO_PREVIOUS_CLASS = 'previous';
     private static readonly TO_NEXT_CLASS = 'next';
 
-    public static getContainer(): HTMLDivElement {
+    public static getContainer(): HTMLElement {
         const wrapper: HTMLDivElement = document.createElement('div');
         wrapper.classList.add(SliderUtils.WRAPPER_CLASS);
 
@@ -20,7 +20,7 @@ export default class SliderUtils {
         return container;
     }
 
-    public static getSlide(child: Node): HTMLDivElement {
+    public static getSlide(child: Node): HTMLElement {
         const slide = document.createElement('div');
         slide.classList.add(SliderUtils.SLIDE_CLASS);
         slide.appendChild(child);

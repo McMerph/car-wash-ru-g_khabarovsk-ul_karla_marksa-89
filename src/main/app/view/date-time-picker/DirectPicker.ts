@@ -1,19 +1,20 @@
+import ButtonsPickerLayout from './ButtonsPickerLayout';
 import Picker from './Picker';
-import PickerLayout from './PickerLayout';
 import PickerObserver from './PickerObserver';
 
 // TODO Delete? Use only PickerStore class?
+// TODO Rename to ButtonsPicker?
 export default abstract class DirectPicker<T> implements Picker<T> {
 
-    protected layout: PickerLayout<T>;
+    protected layout: ButtonsPickerLayout<T>;
 
     private readonly values: T[];
 
     private picked: boolean;
     private pickedValue: T;
-    private disabled: T[] = [];
+    private disabledValues: T[] = [];
 
-    private observers: PickerObserver[] = [];
+    private pickerObservers: PickerObserver[] = [];
 
     public abstract getRepresentation(value: T): string;
 
@@ -24,26 +25,21 @@ export default abstract class DirectPicker<T> implements Picker<T> {
         this.picked = false;
     }
 
-    public addObserver(observer: PickerObserver): void {
-        this.observers.push(observer);
+    public addPickerObserver(pickerObserver: PickerObserver): void {
+        this.pickerObservers.push(pickerObserver);
     }
 
-    public removeObserver(observer: PickerObserver): void {
-        const index: number = this.observers.indexOf(observer);
-        this.observers.splice(index, 1);
+    public removePickerObserver(pickerObserver: PickerObserver): void {
+        const index: number = this.pickerObservers.indexOf(pickerObserver);
+        this.pickerObservers.splice(index, 1);
     }
 
     public pick(valueToPick: T): void {
         const index: number = this.indexOf(valueToPick);
-
-        // TODO Delete?
-        console.log('valueToPick: ', valueToPick);
-
-        // TODO Move to controller?
         if (index !== -1 && !this.isDisabled(valueToPick)) {
             this.picked = true;
             this.pickedValue = valueToPick;
-            this.observers.forEach((observer) => observer.onPick(index));
+            this.pickerObservers.forEach((observer) => observer.onPick(index));
         }
     }
 
@@ -53,7 +49,18 @@ export default abstract class DirectPicker<T> implements Picker<T> {
 
     public unPick(): void {
         this.picked = false;
-        this.observers.forEach((observer) => observer.onUnpick());
+        this.pickerObservers.forEach((observer) => observer.onUnpick());
+    }
+
+    public disable(values: T[]) {
+        this.disabledValues = values;
+        if (this.isPicked() && this.isDisabled(this.getPickedValue())) {
+            this.unPick();
+        }
+        const disabledIndices = this.disabledValues
+            .map((valueToDisable) => this.indexOf(valueToDisable))
+            .filter((index) => index !== -1);
+        this.layout.disable(disabledIndices);
     }
 
     public getValues(): T[] {
@@ -68,8 +75,8 @@ export default abstract class DirectPicker<T> implements Picker<T> {
         return this.pickedValue;
     }
 
-    public setDisabled(disabled: T[]) {
-        this.disabled = disabled;
+    public getDisabledValues(): T[] {
+        return this.disabledValues;
     }
 
     public indexOf(value: T): number {
@@ -84,7 +91,7 @@ export default abstract class DirectPicker<T> implements Picker<T> {
     }
 
     public isDisabled(valueToCheck: T): boolean {
-        return this.disabled.some((value) => this.valuesEquals(value, valueToCheck));
+        return this.disabledValues.some((value) => this.valuesEquals(value, valueToCheck));
     }
 
     public getLayout(): HTMLElement {

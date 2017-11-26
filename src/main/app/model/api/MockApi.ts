@@ -33,16 +33,17 @@ class MockApi implements Api {
         const todayWithoutTime: number = DateUtils.getTodayWithoutTime();
         const tomorrowWithoutTime: number = DateUtils.getTomorrowWithoutTime();
 
-        const disabledTimestamp1: number = tomorrowWithoutTime + 9 * 60 * 60 * 1000;
-        const disabledTimestamp2: number = tomorrowWithoutTime + 10 * 60 * 60 * 1000;
-        const disabledTimestamp3: number = tomorrowWithoutTime + 18 * 60 * 60 * 1000;
         return {
             checkInTimes: MockApi.getCheckInTimes(),
             noService: [
                 ...MockApi.getNoServiceDate(todayWithoutTime),
-                MockApi.getNoServiceTimestamp(disabledTimestamp1),
-                MockApi.getNoServiceTimestamp(disabledTimestamp2),
-                MockApi.getNoServiceTimestamp(disabledTimestamp3)
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 9 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 10 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 11 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 12 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 13 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 14 * 60 * 60 * 1000),
+                MockApi.getNoServiceTimestamp(tomorrowWithoutTime + 18 * 60 * 60 * 1000)
             ]
         };
     }

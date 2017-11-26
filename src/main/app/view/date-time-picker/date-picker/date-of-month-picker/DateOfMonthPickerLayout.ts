@@ -1,11 +1,11 @@
 import DateUtils from '../../../../model/utils/DateUtils';
-import PickerLayout from '../../PickerLayout';
+import ButtonsPickerLayout from '../../ButtonsPickerLayout';
 import ButtonsUtils from '../../utils/ButtonsUtils';
 import DateOfMonthPicker from './DateOfMonthPicker';
 import Week from './Week';
 import WeeksProducer from './WeeksProducer';
 
-export default class DateOfMonthPickerLayout extends PickerLayout<Date> {
+export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
     private static readonly PAST_CLASS: string = 'past';
     private static readonly TODAY_CLASS: string = 'today';
@@ -15,11 +15,10 @@ export default class DateOfMonthPickerLayout extends PickerLayout<Date> {
     public constructor(picker: DateOfMonthPicker, month: Date) {
         super(picker);
         this.month = month;
-        // TODO Add observable
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLElement = super.getLayout();
+        const layout: HTMLDivElement = document.createElement('div');
         layout.classList.add('month');
 
         layout.appendChild(this.getMonthHeader());

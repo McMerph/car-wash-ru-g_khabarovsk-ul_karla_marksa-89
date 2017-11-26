@@ -10,8 +10,12 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     private dateOfMonthObservers: DateOfMonthObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
+        // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
         super(DateUtils.getDatesOfMonth(month));
         this.layout = new DateOfMonthPickerLayout(this, month);
+        this.layout.generateButtons();
+        this.disable(DateUtils.getDatesOfMonth(month)
+            .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
     }
 
     public getRepresentation(dateOfMonth: Date): string {

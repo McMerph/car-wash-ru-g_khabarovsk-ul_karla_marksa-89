@@ -30,15 +30,13 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
     }
 
     public onMonthChange(): void {
-        console.log('onMonthChange()');
-        this.timePicker.clearDisabled();
+        this.timePicker.disable([]);
     }
 
     public onDateOfMonthPick(): void {
-        console.log('onDateOfMonthPick()');
         const pickedDateOfMonth = this.datePicker.getPickedValue().valueOf();
         const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
-        this.timePicker.updateDisabled(...disabledTimes);
+        this.timePicker.disable(disabledTimes);
     }
 
     public isPicked(): boolean {
