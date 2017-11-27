@@ -1,7 +1,7 @@
 export default abstract class SliderPickerLayout {
 
     // tslint:disable-next-line:no-any
-    private slider: any;
+    protected slider: any;
 
     public abstract getLayout(): HTMLElement;
 

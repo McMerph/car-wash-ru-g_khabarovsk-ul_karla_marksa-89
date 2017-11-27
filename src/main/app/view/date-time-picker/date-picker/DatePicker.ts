@@ -100,7 +100,7 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
         this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
         this.dateOfMonthPicker.addDateOfMonthObserver(this);
 
-        this.layout.updateMonth(this.month);
+        this.layout.updateMonth(month, animated);
 
         this.monthObservers.forEach((observer) => observer.onMonthChange());
     }

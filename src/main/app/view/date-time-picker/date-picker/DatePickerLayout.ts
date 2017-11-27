@@ -1,11 +1,10 @@
 import * as Slider from 'swiper/dist/js/swiper.min.js';
 import DateUtils from '../../../model/utils/DateUtils';
-import SliderPickerLayout from '../SliderPickerLayout';
 import SliderUtils from '../utils/SliderUtils';
 import DatePicker from './DatePicker';
 
 // TODO Extends ButtonsPickerLayout?
-export default class DatePickerLayout extends SliderPickerLayout {
+export default class DatePickerLayout {
 
     private static readonly ID: string = 'date-picker';
     private static readonly YEAR_SELECT_CLASS = 'year';
@@ -25,7 +24,7 @@ export default class DatePickerLayout extends SliderPickerLayout {
     private sliderContainer: HTMLElement;
 
     public constructor(picker: DatePicker) {
-        super();
+        // super();
         this.picker = picker;
         this.monthSelect = this.getMonthSelect();
         this.yearSelect = this.getYearSelect();
