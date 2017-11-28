@@ -1,5 +1,3 @@
-import ButtonsUtils from './ButtonsUtils';
-
 export default class SliderUtils {
 
     private static readonly CONTAINER_CLASS = 'swiper-container';
@@ -32,7 +30,6 @@ export default class SliderUtils {
         const previousButton: HTMLButtonElement = document.createElement('button');
         previousButton.setAttribute('aria-label', 'Назад');
         previousButton.classList.add(SliderUtils.TO_PREVIOUS_CLASS);
-        ButtonsUtils.disableButtons(previousButton);
         previousButton.onclick = () => slider.slidePrev();
 
         return previousButton;

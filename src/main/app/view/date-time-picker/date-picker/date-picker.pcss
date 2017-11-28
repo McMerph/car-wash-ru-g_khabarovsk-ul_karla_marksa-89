@@ -3,13 +3,38 @@
 
 #date-picker {
     max-width: 430px;
-    text-align: center;
-    & select {
-        appearance: none;
-        border: none;
-        outline: 0;
-        color: #303030;
-        font: normal 400 22px "Proxima Nova";
+    & .controls {
+        display: flex;
+        justify-content: center;
+        & button.previous, button.next {
+            @apply --reset-button;
+            padding: 20px 0;
+            width: 24px;
+            height: 24px;
+            background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
+            &.previous {
+                transform: rotate(180deg);
+                margin-right: 10px;
+            }
+            &.next {
+                margin-left: 10px;
+            }
+        }
+        & select {
+            cursor: pointer;
+            appearance: none;
+            border: none;
+            outline: 0;
+            color: #303030;
+            font: normal 400 22px "Proxima Nova";
+            &::-ms-expand {
+                display: none;
+            }
+            &::-ms-value {
+                background: none;
+                color: #303030;
+            }
+        }
     }
     & div.month {
         border-left: 1px solid var(--picker-border-color);

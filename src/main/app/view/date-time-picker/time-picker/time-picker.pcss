@@ -5,7 +5,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*margin: -10px 0;*/
+    & .caption {
+        box-sizing: border-box;
+        text-align: center;
+        width: 100%;
+        border: 2px solid var(--picker-border-color);
+        border-bottom-width: 1px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        color: #303030;
+        font: normal 400 14px "Proxima Nova";
+    }
     & button.previous, button.next {
         @apply --reset-button;
         padding: 20px 0;
@@ -23,24 +33,19 @@
         }
     }
     & .swiper-container {
-        /*width: 100px;*/
-        width: auto;
         height: 270px;
-        & .swiper-slide-prev button.pick {
-            border-bottom: none;
-        }
-        & .swiper-slide-active button.pick {
-            border-top: 1px solid var(--picker-border-color);
+        border: 2px solid var(--picker-border-color);
+        border-top: none;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        & .swiper-slide.swiper-slide-active button.pick {
+            border-top: none;
         }
         & button.pick {
             @apply --picker-button;
-            border-left: 1px solid var(--picker-border-color);
-            border-right: 1px solid var(--picker-border-color);
-            border-bottom: 1px solid var(--picker-border-color);
+            border-top: 1px solid var(--picker-border-color);
             color: #303030;
             font: normal 400 20px "Proxima Nova";
-            /*TODO Delete?*/
-            /*height: 54px;*/
             user-select: none;
             &.picked {
                 background-color: #ffd800;

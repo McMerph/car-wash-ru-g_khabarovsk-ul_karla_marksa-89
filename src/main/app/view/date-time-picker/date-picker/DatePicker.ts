@@ -19,14 +19,17 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
     private month: Date;
 
     private layout: DatePickerLayout;
+
+    private dateOfPreviousMonthPicker: DateOfMonthPicker;
     private dateOfMonthPicker: DateOfMonthPicker;
+    private dateOfNextMonthPicker: DateOfMonthPicker;
 
     public constructor(initialMonth: Date, availabilityHandler: AvailabilityHandler) {
         this.month = initialMonth;
         this.availabilityHandler = availabilityHandler;
         this.layout = new DatePickerLayout(this);
 
-        this.updateMonth(this.month);
+        this.updateMonth(initialMonth);
     }
 
     public onDateOfMonthPick(): void {
@@ -68,7 +71,8 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
     }
 
     public getPreviousMonthLayout(): Node {
-        return new DateOfMonthPicker(DateUtils.getPreviousMonth(this.month), this.availabilityHandler).getLayout();
+        return this.dateOfPreviousMonthPicker.getLayout();
+        // return new DateOfMonthPicker(DateUtils.getPreviousMonth(this.month), this.availabilityHandler).getLayout();
     }
 
     public getCurrentMonthLayout(): Node {
@@ -76,7 +80,8 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
     }
 
     public getNextMonthLayout(): Node {
-        return new DateOfMonthPicker(DateUtils.getNextMonth(this.month), this.availabilityHandler).getLayout();
+        return this.dateOfNextMonthPicker.getLayout();
+        // return new DateOfMonthPicker(DateUtils.getNextMonth(this.month), this.availabilityHandler).getLayout();
     }
 
     public isPicked(): boolean {
@@ -91,18 +96,48 @@ export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
         return this.month;
     }
 
-    public setMonth(month: Date) {
-        this.month = month;
+    public getPreviousMonth(): Date {
+        return DateUtils.getPreviousMonth(this.month);
+    }
+
+    public getNextMonth(): Date {
+        return DateUtils.getNextMonth(this.month);
+    }
+
+    public toPreviousMonth(animated?: boolean): void {
+        this.updateMonth(DateUtils.getPreviousMonth(this.month));
+    }
+
+    public toNextMonth(animated?: boolean): void {
+        this.updateMonth(DateUtils.getNextMonth(this.month));
+    }
+
+    public changeMonthOfTheYear(monthIndex: number): void {
+        this.updateMonth(new Date(this.month.getFullYear(), monthIndex));
+    }
+
+    public changeYear(year: number): void {
+        this.updateMonth(new Date(year, this.month.getMonth()));
+    }
+
+    public sameMonthOfTheYear(monthIndex: number): boolean {
+        return this.month.getMonth() === monthIndex;
+    }
+
+    public sameYear(year: number): boolean {
+        return this.month.getFullYear() === year;
     }
 
     private updateMonth(month: Date, animated?: boolean): void {
         this.month = month;
+        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(this.getPreviousMonth(), this.availabilityHandler);
         this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
+        this.dateOfNextMonthPicker = new DateOfMonthPicker(this.getNextMonth(), this.availabilityHandler);
         this.dateOfMonthPicker.addDateOfMonthObserver(this);
 
-        this.layout.updateMonth(month, animated);
-
         this.monthObservers.forEach((observer) => observer.onMonthChange());
+
+        this.layout.update(animated);
     }
 
 }

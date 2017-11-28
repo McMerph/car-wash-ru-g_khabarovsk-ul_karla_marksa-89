@@ -49,10 +49,16 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         });
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
+        ButtonsUtils.disableButtons(this.previousButton);
         this.nextButton = SliderUtils.getNextButton(this.slider);
         this.handleNavigation();
 
+        const caption: HTMLDivElement = document.createElement('div');
+        caption.classList.add('caption');
+        caption.textContent = 'время';
+
         layout.appendChild(this.previousButton);
+        layout.appendChild(caption);
         layout.appendChild(this.sliderContainer);
         layout.appendChild(this.nextButton);
 
