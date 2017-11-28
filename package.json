@@ -69,6 +69,7 @@
     "@types/pikaday": "^1.6.3",
     "dialog-polyfill": "^0.4.9",
     "eligrey-classlist-js-polyfill": "^1.2.201711092",
+    "micromodal": "^0.2.0",
     "moment": "^2.19.1",
     "normalize.css": "^7.0.0",
     "pikaday": "^1.6.1",

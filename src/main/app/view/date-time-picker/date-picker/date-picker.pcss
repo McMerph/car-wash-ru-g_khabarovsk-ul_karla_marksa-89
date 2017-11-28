@@ -2,7 +2,7 @@
 @import '../../style/apply.pcss';
 
 #date-picker {
-    max-width: 430px;
+    max-width: 424px;
     & .controls {
         display: flex;
         justify-content: center;
@@ -37,31 +37,44 @@
         }
     }
     & div.month {
-        border-left: 1px solid var(--picker-border-color);
+        border: 2px solid var(--picker-border-color);
+        border-radius: 3px;
+        & .week:not(:last-of-type) {
+            border-bottom: 1px solid var(--picker-border-color);
+        }
         & .week, header {
             width: 100%;
             margin: 0;
             display: flex;
-            & > * {
+            & > div {
+                box-sizing: border-box;
                 flex: 1 1 14.28571428571428571429%;
                 text-align: center;
+            }
+            & > div:not(:last-of-type) {
                 border-right: 1px solid var(--picker-border-color);
-                border-bottom: 1px solid var(--picker-border-color);
             }
         }
         & header {
-            & > * {
-                border-top: 1px solid var(--picker-border-color);
+            box-sizing: border-box;
+            height: 20px;
+            border-bottom: 1px solid var(--picker-border-color);
+            & > div {
                 color: #303030;
                 font: normal 400 14px "Proxima Nova";
             }
         }
         & .week {
+            &:first-of-type {
+                height: 54px;
+            }
+            height: 53px;
             & button.pick {
                 @apply --picker-button;
                 color: #303030;
                 font: normal 400 22px "Proxima Nova";
                 user-select: none;
+                padding: 5px 0;
                 &.picked {
                     background-color: #ffd800;
                 }

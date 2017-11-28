@@ -9,6 +9,9 @@ import AvailabilityHandler from './model/AvailabilityHandler';
 import DateTimePicker from './view/date-time-picker/DateTimePicker';
 
 import './view/style/index.pcss';
+// import * as MicroModal from 'micromodal/dist/micromodal.min.js';
+// import './view/style/micromodal.css';
+import './view/style/modal.pcss';
 
 padStart.shim();
 
@@ -48,10 +51,26 @@ function start() {
     });
 
     // TODO Delete?
-    openButton.click();
-    toNearestButton.click();
+    // openButton.click();
+    // toNearestButton.click();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // MicroModal.init();
+    // MicroModal.show('modal-1');
     start();
+
+    function handleKeyDown(event: KeyboardEvent) {
+        const keyCode = event.keyCode || event.which;
+        if (keyCode === 49) { // '1'
+            // закрыть модальное окно
+            event.preventDefault();
+            console.log('Hi!');
+            const modal: Element = document.getElementsByClassName('modal')[0];
+            modal.classList.toggle('is-opened');
+            modal.classList.toggle('visually-hidden');
+        }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
 });

@@ -5,10 +5,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    & > * {
+        min-width: 60px;
+    }
     & .caption {
-        box-sizing: border-box;
+        height: 22px;
         text-align: center;
-        width: 100%;
         border: 2px solid var(--picker-border-color);
         border-bottom-width: 1px;
         border-top-left-radius: 3px;

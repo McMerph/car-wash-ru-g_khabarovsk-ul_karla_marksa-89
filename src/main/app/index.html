@@ -22,6 +22,48 @@
     You need to enable JavaScript to run this app.
 </noscript>
 
+<!--TODO Delete?-->
+<!--<div class="modal" aria-hidden="true" tabindex="-1" class="visually-hidden">-->
+<!--<p>Resistance is futile</p>-->
+<!--</div>-->
+
+<!--TODO Delete?-->
+<!--<div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalDesc">-->
+<!--<h2 id="modalTitle">Заголовок окна</h2>-->
+<!--<p id="modalDesc">Описание окна</p>-->
+<!--</div>-->
+
+<div class="modal overlay visually-hidden" tabindex="-1"
+     aria-hidden="true" aria-labelledby="modalTitle" aria-describedby="modalDesc">
+    <div class="modal-content">
+        <h2 id="modalTitle">Заголовок окна</h2>
+        <p id="modalDesc">Описание окна</p>
+    </div>
+</div>
+
+<!--TODO Delete?-->
+<!--<div class="modal micromodal-slide" id="modal-1" aria-hidden="true">-->
+<!--<div class="modal__overlay" tabindex="-1" data-micromodal-close>-->
+<!--<div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">-->
+<!--<header class="modal__header">-->
+<!--<h2 class="modal__title" id="modal-1-title">-->
+<!--Micromodal-->
+<!--</h2>-->
+<!--<button class="modal__close" aria-label="Close modal" data-micromodal-close></button>-->
+<!--</header>-->
+<!--<main class="modal__content" id="modal-1-content">-->
+<!--<p>-->
+<!--Try hitting the <code>tab</code> key and notice how the focus stays within the modal itself. Also, <code>esc</code> to close modal.-->
+<!--</p>-->
+<!--</main>-->
+<!--<footer class="modal__footer">-->
+<!--<button class="modal__btn modal__btn-primary">Continue</button>-->
+<!--<button class="modal__btn" data-micromodal-close aria-label="Close this dialog window">Close</button>-->
+<!--</footer>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
 <header>
     <div class="dimensioned">
         <div class="header-content">
@@ -168,7 +210,7 @@
 
 <dialog>
     <select class="service">
-        <option value="Выберите услугу">Выберите услугу</option>
+        <option value="Выберите услугу" disabled selected>Выберите услугу</option>
         <option value="Бесконтактная мойка кузова Стандарт">Бесконтактная мойка кузова Стандарт</option>
         <option value="Нано мойка">Нано мойка</option>
         <option value="Чистка ковриков">Чистка ковриков</option>
@@ -187,7 +229,6 @@
         <option value="Полировка фар">Полировка фар</option>
         <option value="Полировка кузова">Полировка кузова</option>
     </select>
-    </div>
     <footer>
         <button class="to-nearest">Ближайшее свободное</button>
         <button class="check-in">Записаться</button>
