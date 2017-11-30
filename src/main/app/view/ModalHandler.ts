@@ -11,7 +11,7 @@ export default class ModalHandler {
     private readonly modal: Element;
 
     public constructor() {
-        this.modal = (document.getElementById('modal') as Element);
+        this.modal = document.getElementsByClassName('modal')[0];
         this.handleModalCloseOnEsc();
         this.handleModalOpenOn1();
     }
@@ -22,7 +22,7 @@ export default class ModalHandler {
     }
 
     public close() {
-        this.modal.classList.remove(...ModalHandler.CLOSE_CLASSES);
+        this.modal.classList.add(...ModalHandler.CLOSE_CLASSES);
         this.modal.classList.remove(...ModalHandler.OPEN_CLASSES);
     }
 

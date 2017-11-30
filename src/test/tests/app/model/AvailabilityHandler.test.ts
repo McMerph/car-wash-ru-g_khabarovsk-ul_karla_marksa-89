@@ -1,9 +1,9 @@
-import Api from '../../../main/app/model/api/Api';
-import Availability from '../../../main/app/model/api/Availability';
-import MockApi from '../../../main/app/model/api/MockApi';
-import AvailabilityHandler from '../../../main/app/model/AvailabilityHandler';
-import Time from '../../../main/app/model/Time';
-import DateUtils from '../../../main/app/model/utils/DateUtils';
+import Api from '../../../../main/app/model/api/Api';
+import Availability from '../../../../main/app/model/api/Availability';
+import MockApi from '../../../../main/app/model/api/MockApi';
+import AvailabilityHandler from '../../../../main/app/model/AvailabilityHandler';
+import Time from '../../../../main/app/model/Time';
+import DateUtils from '../../../../main/app/model/utils/DateUtils';
 
 test('getNearestAvailableTimestamp() method', () => {
     const api: Api = new MockApi();

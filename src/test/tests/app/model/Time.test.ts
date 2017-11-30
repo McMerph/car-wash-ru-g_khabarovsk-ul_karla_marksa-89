@@ -1,4 +1,4 @@
-import Time from '../../../main/app/model/Time';
+import Time from '../../../../main/app/model/Time';
 
 export const hours: number = 11;
 export const minutes: number = 21;

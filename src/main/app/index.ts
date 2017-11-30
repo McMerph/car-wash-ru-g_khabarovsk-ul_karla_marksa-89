@@ -7,37 +7,31 @@ import Availability from './model/api/Availability';
 import MockApi from './model/api/MockApi';
 import AvailabilityHandler from './model/AvailabilityHandler';
 import DateTimePicker from './view/date-time-picker/DateTimePicker';
+import ModalHandler from './view/ModalHandler';
+
+import TouchTest from './view/TouchTest';
 
 import './view/style/index.pcss';
-import ModalHandler from './view/ModalHandler';
-// import * as MicroModal from 'micromodal/dist/micromodal.min.js';
-// import './view/style/micromodal.css';
 
 padStart.shim();
-
-// TODO Get rid of require? Use import?
-// tslint:disable-next-line:no-any no-var-requires
-(window as any).dialogPolyfill = require('dialog-polyfill/dialog-polyfill.js');
-
-const dialog: HTMLDialogElement = (document.querySelector('dialog') as HTMLDialogElement);
-// tslint:disable-next-line:no-any
-(window as any).dialogPolyfill.registerDialog(dialog);
 
 function start() {
     const mockApi: Api = new MockApi();
     const availability: Availability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
-    const dateTimePickerParent: HTMLElement = (document.querySelector('dialog') as HTMLElement);
+    const dateTimePickerParent: HTMLElement = (document.querySelector('.modal-content') as HTMLElement);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(2));
+    dateTimePicker.updateSliders();
+    // Fix for ie
+    dateTimePicker.updateSliders();
 
-    const openButton: HTMLButtonElement = (document.querySelector('button.check-in') as HTMLButtonElement);
+    const modalHandler: ModalHandler = new ModalHandler();
+
+    const openButton: HTMLButtonElement = (document.querySelector('.profile-actions button.check-in') as HTMLButtonElement);
     openButton.addEventListener('click', () => {
-        dialog.showModal();
-        dateTimePicker.updateSliders();
-        // Fix for ie
-        dateTimePicker.updateSliders();
+        modalHandler.open();
     });
 
     // const closeButton: HTMLButtonElement = (document.querySelector('dialog .close-button') as HTMLButtonElement);
@@ -56,10 +50,8 @@ function start() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // MicroModal.init();
-    // MicroModal.show('modal-1');
     start();
 
-    // const modalHandler: ModalHandler = new ModalHandler();
-    new ModalHandler();
+    // TODO Delete
+    new TouchTest();
 });
