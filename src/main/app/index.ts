@@ -9,7 +9,7 @@ import AvailabilityHandler from './model/AvailabilityHandler';
 import DateTimePicker from './view/date-time-picker/DateTimePicker';
 import ModalHandler from './view/ModalHandler';
 
-import TouchTest from './view/TouchTest';
+import Slider from './view/slider/Slider';
 
 import './view/style/index.pcss';
 
@@ -53,5 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     start();
 
     // TODO Delete
-    new TouchTest();
+    const element: HTMLElement = document.querySelector('.touch-test') as HTMLElement;
+    new Slider(element);
 });
