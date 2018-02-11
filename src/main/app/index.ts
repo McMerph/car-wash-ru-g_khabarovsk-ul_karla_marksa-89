@@ -11,6 +11,7 @@ import ModalHandler from './view/ModalHandler';
 
 import Slider from './view/slider/Slider';
 
+import 'normalize.css/normalize.css';
 import './view/style/index.pcss';
 
 padStart.shim();

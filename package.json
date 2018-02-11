@@ -1,8 +1,7 @@
 {
   "name": "car-wash-ru-g_khabarovsk-ul_karla_marksa-89",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "This is a web-based application of car wash service located at ul. Karla-Marksa, 89 (TTs \"Bolshaya Medveditsa\") g. Khabarovsk RUSSIAN FEDERATION",
   "jest": {
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
@@ -20,14 +19,27 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
-    "test": "jest"
+    "test": "jest",
+    "lint:css": "stylelint \"src/**/*.*css\""
   },
   "browserslist": [
-    "defaults",
-    "not ie < 11"
+    "last 2 Chrome versions",
+    "last 2 ChromeAndroid versions",
+    "last 2 Firefox versions",
+    "last 2 iOS versions",
+    "last 2 Opera versions",
+    "last 2 Safari versions",
+    "last 1 Edge versions",
+    "last 1 ie versions"
   ],
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "Node.js",
+    "TypeScript",
+    "Jest",
+    "WebPack",
+    "PostCSS"
+  ],
+  "author": "Alexandr Sidorenko",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^21.1.6",
@@ -42,6 +54,7 @@
     "clean-webpack-plugin": "^0.1.17",
     "css-loader": "^0.28.7",
     "cssnano": "^3.10.0",
+    "favicons-webpack-plugin": "0.0.7",
     "file-loader": "^1.1.5",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
@@ -51,11 +64,13 @@
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
     "postcss-nested": "^2.1.2",
+    "postcss-reporter": "^5.0.0",
     "postcss-scss": "^1.0.2",
     "reload-html-webpack-plugin": "^0.1.2",
     "style-loader": "^0.19.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0",
     "svg-fill-loader": "0.0.8",
-    "transfer-webpack-plugin": "^0.1.4",
     "ts-jest": "^21.2.3",
     "tslint": "^5.8.0",
     "typescript": "^2.5.3",

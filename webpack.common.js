@@ -1,7 +1,7 @@
 const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -10,7 +10,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({template: './src/main/app/index.html'}),
-        new TransferWebpackPlugin([{from: 'public'}])
+        new FaviconsWebpackPlugin('./src/main/resources/favicon.svg')
     ],
     module: {
         rules: [
@@ -21,7 +21,7 @@ module.exports = {
                     {loader: 'css-loader'}, // interprets @import and url() like import/require() and will resolve them
                     {loader: 'svg-fill-loader/encodeSharp'},
                     {loader: 'postcss-loader', options: {config: {path: 'postcss.config.js'}}}
-                ],
+                ]
             },
             {
                 test: /\.ts$/,
@@ -33,7 +33,7 @@ module.exports = {
                 use: [{
                     loader: 'url-loader',
                     options: {
-                        limit: 0,
+                        limit: 8192,
                         name: 'asset/[name]-[sha512:hash:base64:7].[ext]'
                     }
                 }]

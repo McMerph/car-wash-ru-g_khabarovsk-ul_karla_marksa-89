@@ -1,51 +1,61 @@
 header {
-    background-color: #fff;
-    margin: 0 -5px;
-    & .header-content {
-        padding: 25px 72px 23px 14px;
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        & .company-info {
-            color: #464646;
-            display: flex;
-            align-items: center;
-            & img.logo {
-                flex: 0 0 52px;
-                margin-right: 20px;
-            }
-            & .company-text {
-                & .company-name {
-                    font: normal 300 30px/1.2 "Proxima Nova";
-                }
-                & .company-address {
-                    font: normal 300 16px/1.125 "Proxima Nova";
-                }
-            }
+  background-color: #fff;
+  margin: 0 -5px;
+
+  & .header-content {
+    padding: 25px 72px 23px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    & .company-info {
+      color: #464646;
+      display: flex;
+      align-items: center;
+
+      & img.logo {
+        flex: 0 0 52px;
+        margin-right: 20px;
+      }
+
+      & .company-text {
+        & .company-name {
+          font: normal 300 30px/1.2 var(--proxima-nova-font-stack);
         }
-        & nav {
-            margin-left: auto;
-            padding-top: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #33adff;
-            font: normal 300 18px/1.125 "Open Sans";
-            & .nickname {
-                text-align: right;
-            }
-            & .bar {
-                border-left: 1px solid #33adff;
-                margin: 0 16px 0 14px;
-                height: 26px;
-            }
-            & a.exit {
-                @apply --underline-decoration;
-                &:before {
-                    bottom: -3px;
-                    border-bottom: 1px dashed;
-                }
-            }
+
+        & .company-address {
+          font: normal 300 16px/1.125 var(--proxima-nova-font-stack);
         }
+      }
     }
+
+    & nav {
+      margin-left: auto;
+      padding-top: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #33adff;
+      font: normal 300 18px/1.125 var(--open-sans-font-stack);
+
+      & .nickname {
+        text-align: right;
+      }
+
+      & .bar {
+        border-left: 1px solid #33adff;
+        margin: 0 16px 0 14px;
+        height: 26px;
+      }
+
+      & a.exit {
+        @apply --underline-decoration;
+
+        &::before {
+          bottom: -3px;
+          border-bottom: 1px dashed;
+        }
+      }
+    }
+  }
 }

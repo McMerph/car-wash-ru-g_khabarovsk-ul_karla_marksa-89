@@ -2,87 +2,97 @@
 @import './apply.pcss';
 
 .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-    box-sizing: border-box;
-    padding: 59px 38px 25px 32px;
-    border: 0;
-    background: white;
-    width: 600px;
-    color: #130f30;
-    &::backdrop {
-        background-color: rgba(0, 0, 0, 0.71);
-    }
-    /*for ie and edge*/
-    & + .backdrop {
-        background-color: rgba(0, 0, 0, 0.71);
-    }
-    & select.service {
-        margin-top: 50px;
-        color: #303030;
-        font: normal 400 22px "Proxima Nova";
-        appearance: none;
-        border: 1px solid #00aeef;
-        width: 100%;
-        height: 46px;
-        padding-left: 15px;
-        background: url("../../../resources/img/arrow-down.png") no-repeat right 15px top 10px;
-        &::-ms-expand {
-            display: none;
-        }
-        &::-ms-value {
-            background: none;
-            color: #303030;
-        }
-    }
-    & footer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: var(--red-color);
-        & button.to-nearest {
-            @apply(--reset);
-            display: block;
-            color: #ffffff;
-            font: normal 400 22px/1.667 "Proxima Nova";
-            @apply(--underline-decoration);
-            &:before {
-                bottom: 5px;
-            }
-        }
-        & button.check-in {
-            @apply(--check-in-button);
-        }
+  box-sizing: border-box;
+  padding: 59px 38px 25px 32px;
+  border: 0;
+  background: white;
+  width: 600px;
+  color: #130f30;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.71);
+  }
+
+  /* for ie and edge */
+  & + .backdrop {
+    background-color: rgba(0, 0, 0, 0.71);
+  }
+
+  & select.service {
+    margin-top: 50px;
+    color: #303030;
+    font: normal 400 22px var(--proxima-nova-font-stack);
+    appearance: none;
+    border: 1px solid #00aeef;
+    width: 100%;
+    height: 46px;
+    padding-left: 15px;
+    background: url("../../../resources/img/arrow-down.png") no-repeat right 15px top 10px;
+
+    &::-ms-expand {
+      display: none;
     }
 
-    transform: translateY(20%);
-    opacity: 0;
-    transition: all 0.3s ease-out;
+    &::-ms-value {
+      background: none;
+      color: #303030;
+    }
+  }
+
+  & footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--red-color);
+
+    & button.to-nearest {
+      @apply(--reset);
+      @apply(--underline-decoration);
+
+      display: block;
+      color: #fff;
+      font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
+
+      &::before {
+        bottom: 5px;
+      }
+    }
+
+    & button.check-in {
+      @apply(--check-in-button);
+    }
+  }
+
+  transform: translateY(20%);
+  opacity: 0;
+  transition: all 0.3s ease-out;
 }
 
 .modal.is-opened {
-    & .modal-content {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    &.overlay {
-        opacity: 1;
-    }
+  & .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  &.overlay {
+    opacity: 1;
+  }
 }
 
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.71);
-    z-index: 1;
-
-    opacity: 0;
-    transition: all 0.3s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.71);
+  z-index: 1;
+  opacity: 0;
+  transition: all 0.3s ease-out;
 }

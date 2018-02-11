@@ -1,96 +1,120 @@
-@import 'swiper/dist/css/swiper.min.css';
 @import '../../style/variables.pcss';
 @import '../../style/apply.pcss';
 
 #date-picker {
-    max-width: 424px;
-    & .controls {
-        display: flex;
-        justify-content: center;
-        & button.previous, button.next {
-            @apply --reset-button;
-            padding: 20px 0;
-            width: 24px;
-            height: 24px;
-            background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
-            &.previous {
-                transform: rotate(180deg);
-                margin-right: 10px;
-            }
-            &.next {
-                margin-left: 10px;
-            }
-        }
-        & select {
-            cursor: pointer;
-            appearance: none;
-            border: none;
-            outline: 0;
-            color: #303030;
-            font: normal 400 22px "Proxima Nova";
-            &::-ms-expand {
-                display: none;
-            }
-            &::-ms-value {
-                background: none;
-                color: #303030;
-            }
-        }
+  max-width: 424px;
+
+  & .controls {
+    display: flex;
+    justify-content: center;
+
+    & button.previous,
+    button.next {
+      @apply --reset-button;
+
+      padding: 20px 0;
+      width: 24px;
+      height: 24px;
+      background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
+
+      &.previous {
+        transform: rotate(180deg);
+        margin-right: 10px;
+      }
+
+      &.next {
+        margin-left: 10px;
+      }
     }
-    & div.month {
-        border: 2px solid var(--picker-border-color);
-        border-radius: 3px;
-        & .week:not(:last-of-type) {
-            border-bottom: 1px solid var(--picker-border-color);
-        }
-        & .week, header {
-            width: 100%;
-            margin: 0;
-            display: flex;
-            & > div {
-                box-sizing: border-box;
-                flex: 1 1 14.28571428571428571429%;
-                text-align: center;
-            }
-            & > div:not(:last-of-type) {
-                border-right: 1px solid var(--picker-border-color);
-            }
-        }
-        & header {
-            box-sizing: border-box;
-            height: 20px;
-            border-bottom: 1px solid var(--picker-border-color);
-            & > div {
-                color: #303030;
-                font: normal 400 14px "Proxima Nova";
-            }
-        }
-        & .week {
-            &:first-of-type {
-                height: 54px;
-            }
-            height: 53px;
-            & button.pick {
-                @apply --picker-button;
-                color: #303030;
-                font: normal 400 22px "Proxima Nova";
-                user-select: none;
-                padding: 5px 0;
-                &.picked {
-                    background-color: #ffd800;
-                }
-                &.today {
-                    color: #00aeef;
-                }
-                &.past {
-                    pointer-events: none;
-                    background-color: #dddddd;
-                }
-                &.disabled:not(.past) {
-                    pointer-events: none;
-                    background-color: var(--red-color);
-                }
-            }
-        }
+
+    & select {
+      cursor: pointer;
+      appearance: none;
+      border: none;
+      outline: 0;
+      color: #303030;
+      font: normal 400 22px var(--proxima-nova-font-stack);
+
+      &::-ms-expand {
+        display: none;
+      }
+
+      &::-ms-value {
+        background: none;
+        color: #303030;
+      }
     }
+  }
+
+  & div.month {
+    border: 2px solid var(--picker-border-color);
+    border-radius: 3px;
+
+    & header {
+      box-sizing: border-box;
+      height: 20px;
+      border-bottom: 1px solid var(--picker-border-color);
+
+      & > div {
+        color: #303030;
+        font: normal 400 14px var(--proxima-nova-font-stack);
+      }
+    }
+
+    & header,
+    .week {
+      width: 100%;
+      margin: 0;
+      display: flex;
+
+      & > div {
+        box-sizing: border-box;
+        flex: 1 1 14.28571428571428571429%;
+        text-align: center;
+      }
+
+      & > div:not(:last-of-type) {
+        border-right: 1px solid var(--picker-border-color);
+      }
+    }
+
+    & .week {
+      height: 53px;
+
+      &:first-of-type {
+        height: 54px;
+      }
+
+      & button.pick {
+        @apply --picker-button;
+
+        color: #303030;
+        font: normal 400 22px var(--proxima-nova-font-stack);
+        user-select: none;
+        padding: 5px 0;
+
+        &.picked {
+          background-color: #ffd800;
+        }
+
+        &.today {
+          color: #00aeef;
+        }
+
+        &.past {
+          pointer-events: none;
+          background-color: #ddd;
+        }
+
+        &.disabled:not(.past) {
+          pointer-events: none;
+          background-color: var(--red-color);
+        }
+      }
+    }
+
+    & .week:not(:last-of-type) {
+      border-bottom: 1px solid var(--picker-border-color);
+    }
+  }
 }

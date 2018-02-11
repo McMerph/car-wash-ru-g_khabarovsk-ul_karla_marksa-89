@@ -1,63 +1,76 @@
-@import 'swiper/dist/css/swiper.min.css';
 @import '../../style/variables.pcss';
 @import '../../style/apply.pcss';
 
 #time-picker {
-    margin-left: 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    & > * {
-        min-width: 60px;
+  margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & > * {
+    min-width: 60px;
+  }
+
+  & .caption {
+    height: 22px;
+    text-align: center;
+    border: 2px solid var(--picker-border-color);
+    border-bottom-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    color: #303030;
+    font: normal 400 14px var(--proxima-nova-font-stack);
+  }
+
+  & button.previous,
+  button.next {
+    @apply --reset-button;
+
+    padding: 20px 0;
+    width: 24px;
+    height: 24px;
+    background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
+
+    &.previous {
+      transform: rotate(270deg);
     }
-    & .caption {
-        height: 22px;
-        text-align: center;
-        border: 2px solid var(--picker-border-color);
-        border-bottom-width: 1px;
-        border-top-left-radius: 3px;
-        border-top-right-radius: 3px;
-        color: #303030;
-        font: normal 400 14px "Proxima Nova";
+
+    &.next {
+      transform: rotate(90deg);
     }
-    & button.previous, button.next {
-        @apply --reset-button;
-        padding: 20px 0;
-        width: 24px;
-        height: 24px;
-        background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
-        &.previous {
-            transform: rotate(270deg);
-        }
-        &.next {
-            transform: rotate(90deg);
-        }
-        &.disabled {
-            visibility: hidden;
-        }
+
+    &.disabled {
+      visibility: hidden;
     }
-    & .swiper-container {
-        height: 270px;
-        border: 2px solid var(--picker-border-color);
-        border-top: none;
-        border-bottom-left-radius: 3px;
-        border-bottom-right-radius: 3px;
-        & .swiper-slide.swiper-slide-active button.pick {
-            border-top: none;
-        }
-        & button.pick {
-            @apply --picker-button;
-            border-top: 1px solid var(--picker-border-color);
-            color: #303030;
-            font: normal 400 20px "Proxima Nova";
-            user-select: none;
-            &.picked {
-                background-color: #ffd800;
-            }
-            &.disabled {
-                pointer-events: none;
-                background-color: var(--red-color);
-            }
-        }
+  }
+
+  & .swiper-container {
+    height: 270px;
+    border: 2px solid var(--picker-border-color);
+    border-top: none;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+
+    & button.pick {
+      @apply --picker-button;
+
+      border-top: 1px solid var(--picker-border-color);
+      color: #303030;
+      font: normal 400 20px var(--proxima-nova-font-stack);
+      user-select: none;
+
+      &.picked {
+        background-color: #ffd800;
+      }
+
+      &.disabled {
+        pointer-events: none;
+        background-color: var(--red-color);
+      }
     }
+
+    & .swiper-slide.swiper-slide-active button.pick {
+      border-top: none;
+    }
+  }
 }
