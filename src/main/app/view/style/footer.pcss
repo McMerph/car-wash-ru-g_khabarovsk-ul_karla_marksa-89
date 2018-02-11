@@ -69,3 +69,36 @@ footer {
     }
   }
 }
+
+@media (max-width: 730px) {
+  footer .footer-content {
+    & nav {
+      flex-direction: column;
+    }
+  }
+}
+
+@media (max-width: 590px) {
+  footer .footer-content .company-info {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 530px) {
+  footer .footer-content {
+    flex-direction: column;
+
+    & .company-info {
+      flex-direction: row;
+    }
+
+    & nav {
+      flex-direction: row;
+      margin: 15px 0;
+    }
+
+    & .bar {
+      display: none;
+    }
+  }
+}
