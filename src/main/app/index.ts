@@ -13,6 +13,7 @@ import Slider from './view/slider/Slider';
 
 import 'normalize.css/normalize.css';
 import './view/style/index.pcss';
+import './view/header/index.pcss';
 
 padStart.shim();
 

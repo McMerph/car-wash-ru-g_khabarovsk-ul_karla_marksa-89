@@ -9,7 +9,12 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({template: './src/main/app/index.html'}),
+        new HtmlWebpackPlugin({
+                template: './src/main/app/index.html',
+                // header: require(path.join("src", "main", "app", "view", "header", "index.ejs"))
+                header: './src/main/app/view/header/index.html'
+            }
+        ),
         new FaviconsWebpackPlugin('./src/main/resources/favicon.svg')
     ],
     module: {
@@ -41,10 +46,6 @@ module.exports = {
             {
                 test: /\.svg$/,
                 use: ['url-loader', 'svg-fill-loader']
-            },
-            {
-                test: /\.html$/,
-                loader: 'html-loader'
             }
         ]
     },
