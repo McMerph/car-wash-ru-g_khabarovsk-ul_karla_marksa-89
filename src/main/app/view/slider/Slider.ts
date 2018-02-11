@@ -28,6 +28,11 @@ export default class Slider {
 
     public constructor(element: HTMLElement) {
         this.element = element;
+        this.isHorizontalSwipe = this.isHorizontalSwipe.bind(this);
+        this.handleTouchStart = this.handleTouchStart.bind(this);
+        this.handleTouchMove = this.handleTouchMove.bind(this);
+        this.handleTouchEnd = this.handleTouchEnd.bind(this);
+        this.handleTransitionEnd = this.handleTransitionEnd.bind(this);
         const children: HTMLCollection = this.element.children;
         if (children.length > 0) {
             this.centerSlide = (this.element.firstElementChild as HTMLElement);
@@ -37,11 +42,11 @@ export default class Slider {
             }
             this.initializeNavigation();
 
-            this.element.addEventListener('touchstart', (event: TouchEvent) => this.handleTouchStart(event));
-            this.element.addEventListener('touchmove', (event: TouchEvent) => this.handleTouchMove(event));
-            this.element.addEventListener('touchend', (event: TouchEvent) => this.handleTouchEnd(event));
-            this.element.addEventListener('touchcancel', (event: TouchEvent) => this.handleTouchEnd(event));
-            this.element.addEventListener('transitionend', (event: TouchEvent) => this.handleTransitionEnd(event));
+            this.element.addEventListener('touchstart', this.handleTouchStart);
+            this.element.addEventListener('touchmove', this.handleTouchMove);
+            this.element.addEventListener('touchend', this.handleTouchEnd);
+            this.element.addEventListener('touchcancel', this.handleTouchEnd);
+            this.element.addEventListener('transitionend', this.handleTransitionEnd);
         }
     }
 
@@ -64,7 +69,7 @@ export default class Slider {
         slide.style.transform = null;
     }
 
-    private handleTouchStart(event: TouchEvent) {
+    private handleTouchStart(event: TouchEvent): void {
         if (event.touches.length === 1 && !this.swipeStarted) {
             this.swipeDetecting = true;
             this.startTouch = event.changedTouches[0];
@@ -72,7 +77,7 @@ export default class Slider {
         this.startTime = performance.now();
     }
 
-    private handleTouchMove(event: TouchEvent) {
+    private handleTouchMove(event: TouchEvent): void {
         if (event.touches.length === 1) {
             event.preventDefault();
             if (this.swipeDetecting) {
@@ -87,7 +92,7 @@ export default class Slider {
         }
     }
 
-    private handleTouchEnd(event: TouchEvent) {
+    private handleTouchEnd(event: TouchEvent): void {
         if (this.swipeStarted) {
             event.preventDefault();
             this.slideTo(this.getDelta(event.changedTouches[0]));
@@ -95,7 +100,7 @@ export default class Slider {
         this.swipeStarted = false;
     }
 
-    private handleTransitionEnd(event: TouchEvent) {
+    private handleTransitionEnd(event: Event): void {
         this.getSlides().forEach((slide) => slide.classList.remove(Slider.ANIMATING_CLASS));
         if (this.slideToLeftAnimation) {
             this.centerSlide = (this.leftSlide as HTMLElement);
@@ -133,7 +138,7 @@ export default class Slider {
         return slides;
     }
 
-    private initializeLeftSlide() {
+    private initializeLeftSlide(): void {
         const left = this.centerSlide.previousElementSibling;
         if (left) {
             this.leftSlide = left as HTMLElement;
@@ -145,13 +150,13 @@ export default class Slider {
         }
     }
 
-    private initializeCenterSlide() {
+    private initializeCenterSlide(): void {
         this.centerSlide.classList.add(Slider.CURRENT_SLIDE_CLASS);
         this.centerSlide.classList.remove(Slider.HIDDEN_CLASS);
         this.centerSlide.style.transform = null;
     }
 
-    private initializeRightSlide() {
+    private initializeRightSlide(): void {
         const right = this.centerSlide.nextElementSibling;
         if (right) {
             this.rightSlide = right as HTMLElement;
@@ -182,7 +187,7 @@ export default class Slider {
         this.slideToRightAnimation = true;
     }
 
-    private slideToLeft() {
+    private slideToLeft(): void {
         (this.leftSlide as HTMLElement).style.transform = 'translate3d(0, 0, 0)';
         this.centerSlide.style.transform = 'translate3d(100%, 0, 0)';
         this.slideToLeftAnimation = true;
@@ -216,7 +221,7 @@ export default class Slider {
      * If horizontal offset greater than vertical then it is swipe
      * @param {Touch} touch - touch to check
      */
-    private isHorizontalSwipe(touch: Touch) {
+    private isHorizontalSwipe(touch: Touch): boolean {
         return Math.abs(this.startTouch.pageX - touch.pageX) >= Math.abs(this.startTouch.pageY - touch.pageY);
     }
 

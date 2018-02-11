@@ -13,6 +13,6 @@ module.exports = {
         'postcss-nested': {},
         'autoprefixer': {},
         'cssnano': {},
-        'postcss-reporter': {clearReportedMessages: true}
+        'postcss-reporter': {}
     }
 };

@@ -1,5 +1,4 @@
-@import './variables.pcss';
-@import './apply.pcss';
+@import './common.pcss';
 
 .modal {
   display: flex;
@@ -52,7 +51,7 @@
     background-color: var(--red-color);
 
     & button.to-nearest {
-      @apply(--reset);
+      @apply(--reset-button);
       @apply(--underline-decoration);
 
       display: block;
