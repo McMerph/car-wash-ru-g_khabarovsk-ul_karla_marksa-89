@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <!--TODO WTF with fonts?-->
-<!--TODO Use templates?-->
 <html lang="ru">
 <head>
     <meta charset="utf-8">
@@ -158,35 +157,7 @@
     </div>
 </main>
 
-<footer>
-    <div class="dimensioned">
-        <div class="footer-content">
-            <div class="company-info">
-                <img
-                        class="logo"
-                        src="<%= require('../resources/img/footer-logo.png') %>"
-                        alt="Автомойка SUZUKI"
-                >
-                <div class="company-name">Автомойка SUZUKI</div>
-            </div>
-            <div class="bar"></div>
-            <nav>
-                <a>О нас</a>
-                <a>Прайсы</a>
-                <a>Галерея</a>
-            </nav>
-            <div class="bar"></div>
-            <div class="account">
-                <img
-                        class="account-logo"
-                        src="<%= require('../resources/img/account-logo.png') %>"
-                        alt="Аккаунт"
-                >
-                <a>Личный кабинет</a>
-            </div>
-        </div>
-    </div>
-</footer>
+<%= require('html-loader!./view/footer/index.html') %>
 
 </body>
 </html>
