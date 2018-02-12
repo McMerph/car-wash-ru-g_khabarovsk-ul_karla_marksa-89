@@ -1,22 +1,22 @@
 @import '../../root.pcss';
 
-.notes-title {
+.info__notes-title {
   box-sizing: border-box;
   height: 50px;
   padding: 13px 0 0 37px;
-  background: #f7f7f7 url('../../../../resources/img/custom-border.svg?fill=var(--blue-color)') no-repeat top left;
+  background: url('../../../../resources/img/custom-border.svg?fill=var(--blue-color)') no-repeat top left;
   border-bottom: 12px solid var(--blue-color);
   font: normal 700 24px/1.2 var(--proxima-nova-font-stack);
   color: #fff;
   text-transform: uppercase;
-
-  &.red {
-    background-image: url('../../../../resources/img/custom-border.svg?fill=var(--red-color)');
-    border-color: var(--red-notes-title-color);
-  }
 }
 
-.notes {
+.info__notes-title_theme_red {
+  background-image: url('../../../../resources/img/custom-border.svg?fill=var(--red-notes-title-color)');
+  border-color: var(--red-notes-title-color);
+}
+
+.info__notes {
   @apply --shadow;
 
   border-radius: 0 0 3px 3px;
@@ -24,51 +24,38 @@
   column-gap: 42px;
   padding: 38px 39px 46px;
   margin-bottom: 33px;
-
-  &.rules {
-    background: #fff url('../../../../resources/img/rules.jpg') no-repeat bottom right;
-  }
-
-  &.actions {
-    background: #fff url('../../../../resources/img/actions.jpg') no-repeat bottom left;
-  }
-
-  & .note {
-    margin-bottom: 35px;
-
-    & .note-caption {
-      color: #ed145b;
-      font: normal 700 24px/1.2 var(--proxima-nova-font-stack);
-    }
-
-    & .note-text {
-      color: #707070;
-      font: normal 300 14px/1.75 var(--open-sans-font-stack);
-    }
-  }
 }
 
-@media (max-width: 1250px) {
-  main .dimensioned .flex-wrapper {
-    & .profile {
-      flex-basis: 310px;
-    }
+.info__notes_theme_rules {
+  background: #fff url('../../../../resources/img/rules.jpg') no-repeat bottom right;
+}
 
-    & .info {
-      flex-basis: 500px;
-    }
-  }
+.info__notes_theme_actions {
+  background: #fff url('../../../../resources/img/actions.jpg') no-repeat bottom left;
+}
+
+.info__note {
+  margin-bottom: 35px;
+}
+
+.info__note-caption {
+  color: #ed145b;
+  font: normal 700 24px/1.2 var(--proxima-nova-font-stack);
+}
+
+.info__note-text {
+  color: #707070;
+  font: normal 300 14px/1.75 var(--open-sans-font-stack);
 }
 
 @media (max-width: 640px) {
-  .notes {
+  .info__notes {
     column-count: 1;
   }
 }
 
 @media (max-width: 510px) {
-  .rules.notes,
-  .actions.notes {
+  .info__notes {
     background-size: contain;
   }
 }
