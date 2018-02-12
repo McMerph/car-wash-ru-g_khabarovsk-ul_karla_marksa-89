@@ -3,8 +3,8 @@ import * as padStart from 'string.prototype.padstart';
 import './StickyHoverFix.js';
 
 import 'normalize.css/normalize.css';
-import './view/style/fonts.css';
-import './view/style/index.pcss';
+import './view/fonts.css';
+import './view/common.pcss';
 import './view/components/header/index.pcss';
 import './view/components/footer/index.pcss';
 import './view/components/profile/index.pcss';

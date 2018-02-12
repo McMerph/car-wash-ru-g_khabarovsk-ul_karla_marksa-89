@@ -6,8 +6,8 @@
   src:
     local('Open Sans Light Italic'),
     local('OpenSans-LightItalic'),
-    url(../../../resources/fonts/OpenSansLightItalicCyrillic.woff2) format('woff2'),
-    url(../../../resources/fonts/OpenSansLightItalicCyrillic.woff) format('woff');
+    url(../../resources/fonts/OpenSansLightItalicCyrillic.woff2) format('woff2'),
+    url(../../resources/fonts/OpenSansLightItalicCyrillic.woff) format('woff');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -19,8 +19,8 @@
   src:
     local('Open Sans Light Italic'),
     local('OpenSans-LightItalic'),
-    url(../../../resources/fonts/OpenSansLightItalicLatin.woff2) format('woff2'),
-    url(../../../resources/fonts/OpenSansLightItalicLatin.woff) format('woff');
+    url(../../resources/fonts/OpenSansLightItalicLatin.woff2) format('woff2'),
+    url(../../resources/fonts/OpenSansLightItalicLatin.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
@@ -32,8 +32,8 @@
   src:
     local('Open Sans Light'),
     local('OpenSans-Light'),
-    url(../../../resources/fonts/OpenSansLightCyrillic.woff2) format('woff2'),
-    url(../../../resources/fonts/OpenSansLightCyrillic.woff) format('woff');
+    url(../../resources/fonts/OpenSansLightCyrillic.woff2) format('woff2'),
+    url(../../resources/fonts/OpenSansLightCyrillic.woff) format('woff');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -45,8 +45,8 @@
   src:
     local('Open Sans Light'),
     local('OpenSans-Light'),
-    url(../../../resources/fonts/OpenSansLightLatin.woff2) format('woff2'),
-    url(../../../resources/fonts/OpenSansLightLatin.woff) format('woff');
+    url(../../resources/fonts/OpenSansLightLatin.woff2) format('woff2'),
+    url(../../resources/fonts/OpenSansLightLatin.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
@@ -58,8 +58,8 @@
   src:
     local('Proxima Nova Regular'),
     local('ProximaNova-Regular'),
-    url(../../../resources/fonts/ProximaNovaRegularLatin.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaRegularLatin.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaRegularLatin.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaRegularLatin.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
@@ -71,8 +71,8 @@
   src:
     local('Proxima Nova Regular'),
     local('ProximaNova-Regular'),
-    url(../../../resources/fonts/ProximaNovaRegularCyrillic.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaRegularCyrillic.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaRegularCyrillic.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaRegularCyrillic.woff) format('woff');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -84,8 +84,8 @@
   src:
     local('Proxima Nova Bold'),
     local('ProximaNova-Bold'),
-    url(../../../resources/fonts/ProximaNovaBoldLatin.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaBoldLatin.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaBoldLatin.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaBoldLatin.woff) format('woff');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
 }
 
@@ -97,8 +97,8 @@
   src:
     local('Proxima Nova Bold'),
     local('ProximaNova-Bold'),
-    url(../../../resources/fonts/ProximaNovaBoldCyrillic.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaBoldCyrillic.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaBoldCyrillic.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaBoldCyrillic.woff) format('woff');
   unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 
@@ -109,8 +109,8 @@
   src:
     local('Proxima Nova Light'),
     local('ProximaNova-Light'),
-    url(../../../resources/fonts/ProximaNovaLight.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaLight.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaLight.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaLight.woff) format('woff');
 }
 
 @font-face {
@@ -120,6 +120,6 @@
   src:
     local('Proxima Nova Black'),
     local('ProximaNova-Black'),
-    url(../../../resources/fonts/ProximaNovaBlack.woff2) format('woff2'),
-    url(../../../resources/fonts/ProximaNovaBlack.woff) format('woff');
+    url(../../resources/fonts/ProximaNovaBlack.woff2) format('woff2'),
+    url(../../resources/fonts/ProximaNovaBlack.woff) format('woff');
 }
