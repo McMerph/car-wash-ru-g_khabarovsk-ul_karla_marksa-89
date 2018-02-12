@@ -5,14 +5,14 @@
   margin: 0 -5px;
 }
 
-.header-content {
+.header__content {
   padding: 25px 72px 23px 14px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.header-content_nav {
+.header__nav {
   margin-left: auto;
   padding-top: 10px;
   display: flex;
@@ -22,17 +22,17 @@
   font: normal 300 18px/1.125 var(--open-sans-font-stack);
 }
 
-.header-content_nav_nickname {
+.header__nickname {
   text-align: right;
 }
 
-.header-content_nav_bar {
+.header__bar {
   border-left: 1px solid #33adff;
   margin: 0 16px 0 14px;
   height: 26px;
 }
 
-.header-content_nav_exit {
+.header__exit {
   @apply --underline-decoration;
 
   &::before {
@@ -41,27 +41,27 @@
   }
 }
 
-.header-content_company {
+.header__company {
   color: #464646;
   display: flex;
   align-items: center;
 }
 
-.header-content_company_logo {
+.header__logo {
   flex: 0 0 52px;
   margin-right: 20px;
 }
 
-.header-content_company_name {
+.header__name {
   font: normal 300 30px/1.2 var(--proxima-nova-font-stack);
 }
 
-.header-content_company_address {
+.header__address {
   font: normal 300 16px/1.125 var(--proxima-nova-font-stack);
 }
 
 @media (max-width: 800px) {
-  .header-content {
+  .header__content {
     padding-right: 14px;
   }
 }
