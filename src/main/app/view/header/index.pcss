@@ -1,69 +1,67 @@
 @import '../style/root.pcss';
 
-header {
+.header {
   background-color: #fff;
   margin: 0 -5px;
+}
 
-  & .header-content {
-    padding: 25px 72px 23px 14px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+.header-content {
+  padding: 25px 72px 23px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-    & .company-info {
-      color: #464646;
-      display: flex;
-      align-items: center;
+.header-content_nav {
+  margin-left: auto;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #33adff;
+  font: normal 300 18px/1.125 var(--open-sans-font-stack);
+}
 
-      & img.logo {
-        flex: 0 0 52px;
-        margin-right: 20px;
-      }
+.header-content_nav_nickname {
+  text-align: right;
+}
 
-      & .company-text {
-        & .company-name {
-          font: normal 300 30px/1.2 var(--proxima-nova-font-stack);
-        }
+.header-content_nav_bar {
+  border-left: 1px solid #33adff;
+  margin: 0 16px 0 14px;
+  height: 26px;
+}
 
-        & .company-address {
-          font: normal 300 16px/1.125 var(--proxima-nova-font-stack);
-        }
-      }
-    }
+.header-content_nav_exit {
+  @apply --underline-decoration;
 
-    & nav {
-      margin-left: auto;
-      padding-top: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #33adff;
-      font: normal 300 18px/1.125 var(--open-sans-font-stack);
-
-      & .nickname {
-        text-align: right;
-      }
-
-      & .bar {
-        border-left: 1px solid #33adff;
-        margin: 0 16px 0 14px;
-        height: 26px;
-      }
-
-      & a.exit {
-        @apply --underline-decoration;
-
-        &::before {
-          bottom: -3px;
-          border-bottom: 1px dashed;
-        }
-      }
-    }
+  &::before {
+    bottom: -3px;
+    border-bottom: 1px dashed;
   }
 }
 
+.header-content_company {
+  color: #464646;
+  display: flex;
+  align-items: center;
+}
+
+.header-content_company_logo {
+  flex: 0 0 52px;
+  margin-right: 20px;
+}
+
+.header-content_company_name {
+  font: normal 300 30px/1.2 var(--proxima-nova-font-stack);
+}
+
+.header-content_company_address {
+  font: normal 300 16px/1.125 var(--proxima-nova-font-stack);
+}
+
 @media (max-width: 800px) {
-  header .header-content {
+  .header-content {
     padding-right: 14px;
   }
 }
