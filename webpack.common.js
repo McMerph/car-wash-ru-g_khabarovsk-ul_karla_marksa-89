@@ -18,7 +18,14 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(css|pcss)$/,
+                test: /\.css$/,
+                use: [
+                    {loader: 'style-loader'},// adds CSS to the DOM by injecting a <style> tag
+                    {loader: 'css-loader'} // interprets @import and url() like import/require() and will resolve them
+                ]
+            },
+            {
+                test: /\.pcss$/,
                 use: [
                     {loader: 'style-loader'},// adds CSS to the DOM by injecting a <style> tag
                     {loader: 'css-loader'}, // interprets @import and url() like import/require() and will resolve them

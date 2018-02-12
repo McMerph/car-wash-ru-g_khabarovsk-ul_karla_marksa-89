@@ -2,6 +2,14 @@ import 'eligrey-classlist-js-polyfill/classList.min.js';
 import * as padStart from 'string.prototype.padstart';
 import './StickyHoverFix.js';
 
+import 'normalize.css/normalize.css';
+import './view/style/fonts.css';
+import './view/style/index.pcss';
+import './view/components/header/index.pcss';
+import './view/components/footer/index.pcss';
+import './view/components/profile/index.pcss';
+import './view/components/info/index.pcss';
+
 import Api from './model/api/Api';
 import Availability from './model/api/Availability';
 import MockApi from './model/api/MockApi';
@@ -10,12 +18,6 @@ import DateTimePicker from './view/date-time-picker/DateTimePicker';
 import ModalHandler from './view/ModalHandler';
 
 import Slider from './view/slider/Slider';
-
-import 'normalize.css/normalize.css';
-import './view/style/index.pcss';
-import './view/components/header/index.pcss';
-import './view/components/footer/index.pcss';
-import './view/components/profile/index.pcss';
 
 padStart.shim();
 
