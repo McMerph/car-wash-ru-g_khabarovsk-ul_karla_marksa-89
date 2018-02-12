@@ -33,7 +33,7 @@ function start() {
 
     const modalHandler: ModalHandler = new ModalHandler();
 
-    const openButton: HTMLButtonElement = (document.querySelector('.profile_actions_check-in') as HTMLButtonElement);
+    const openButton: HTMLButtonElement = (document.querySelector('.profile__check-in') as HTMLButtonElement);
     openButton.addEventListener('click', () => {
         modalHandler.open();
     });
