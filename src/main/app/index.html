@@ -42,7 +42,7 @@
     </div>
 </div>
 
-<%= require('html-loader!./view/header/index.html') %>
+<%= require('html-loader!./view/components/header/index.html') %>
 
 <main>
     <div class="touch-test">
@@ -53,39 +53,7 @@
 
     <div class="dimensioned">
         <div class="flex-wrapper">
-            <div class="profile">
-                <div class="profile-summary">
-                    <img
-                            class="profile-photo"
-                            src="<%= require('../resources/img/profile/photo.png') %>"
-                            alt="Фото"
-                    >
-                    <div class="profile-property">
-                        <div class="property-name">Никнейм:</div>
-                        <div class="property-value">Петр</div>
-                    </div>
-                    <div class="profile-property">
-                        <div class="property-name">Скидка:</div>
-                        <div class="property-value">20%</div>
-                    </div>
-                    <div class="profile-property">
-                        <div class="property-name">Баланс бонусов:</div>
-                        <div class="property-value">???</div>
-                    </div>
-                    <div class="profile-property">
-                        <div class="property-name">Список авто:</div>
-                        <div class="property-value">
-                            <div>Тойота</div>
-                            <div>Ниссан Skyline</div>
-                        </div>
-                    </div>
-                    <a class="profile-edit">Редактировать профиль</a>
-                </div>
-                <div class="profile-actions">
-                    <button class="check-in" type="button">Запись онлайн</button>
-                    <button class="request-call">Заказать обратный звонок</button>
-                </div>
-            </div>
+            <%= require('html-loader!./view/components/profile/index.html') %>
 
             <div class="info">
                 <div class="notes-title">Правила</div>
@@ -157,7 +125,7 @@
     </div>
 </main>
 
-<%= require('html-loader!./view/footer/index.html') %>
+<%= require('html-loader!./view/components/footer/index.html') %>
 
 </body>
 </html>

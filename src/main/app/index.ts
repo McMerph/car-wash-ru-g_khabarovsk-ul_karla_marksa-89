@@ -13,8 +13,9 @@ import Slider from './view/slider/Slider';
 
 import 'normalize.css/normalize.css';
 import './view/style/index.pcss';
-import './view/header/index.pcss';
-import './view/footer/index.pcss';
+import './view/components/header/index.pcss';
+import './view/components/footer/index.pcss';
+import './view/components/profile/index.pcss';
 
 padStart.shim();
 
@@ -32,7 +33,7 @@ function start() {
 
     const modalHandler: ModalHandler = new ModalHandler();
 
-    const openButton: HTMLButtonElement = (document.querySelector('.profile-actions button.check-in') as HTMLButtonElement);
+    const openButton: HTMLButtonElement = (document.querySelector('.profile_actions_check-in') as HTMLButtonElement);
     openButton.addEventListener('click', () => {
         modalHandler.open();
     });
