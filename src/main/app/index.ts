@@ -60,5 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // TODO Delete
     const element: HTMLElement = document.querySelector('.touch-test') as HTMLElement;
-    new Slider(element);
+    // TODO Get rid of window global object
+    (window as any).slider = new Slider(element);
 });

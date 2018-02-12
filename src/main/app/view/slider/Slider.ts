@@ -50,6 +50,14 @@ export default class Slider {
         }
     }
 
+    public manualSlideToLeft(): void {
+        this.slideTo(100);
+    }
+
+    public manualSlideToRight(): void {
+        this.slideTo(-100);
+    }
+
     private initializeNavigation(): void {
         for (let i = 0; i < this.element.children.length; i++) {
             this.removeSlideFromNavigation((this.element.children[i]) as HTMLElement);
