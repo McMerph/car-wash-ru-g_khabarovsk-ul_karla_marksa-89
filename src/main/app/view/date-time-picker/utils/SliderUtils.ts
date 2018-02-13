@@ -2,7 +2,7 @@ export default class SliderUtils {
 
     private static readonly CONTAINER_CLASS = 'swiper-container';
     private static readonly WRAPPER_CLASS = 'swiper-wrapper';
-    private static readonly SLIDE_CLASS = 'swiper-slideTo';
+    private static readonly SLIDE_CLASS = 'swiper-slide';
 
     private static readonly TO_PREVIOUS_CLASS = 'previous';
     private static readonly TO_NEXT_CLASS = 'next';
