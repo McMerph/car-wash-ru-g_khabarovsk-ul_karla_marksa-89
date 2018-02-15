@@ -8,8 +8,6 @@ module.exports = merge(common, {
     entry: {
         app: './src/main/app/index.ts',
         vendor: [
-            'moment',
-            'dialog-polyfill',
             'normalize.css'
         ]
     },
