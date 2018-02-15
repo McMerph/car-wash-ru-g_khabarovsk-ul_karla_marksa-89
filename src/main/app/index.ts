@@ -4,21 +4,21 @@ import "./StickyHoverFix.js";
 
 import "normalize.css/normalize.css";
 import "swiper/dist/css/swiper.min.css";
-import "./view/common.pcss";
 import "./view/components/footer/index.pcss";
 import "./view/components/header/index.pcss";
 import "./view/components/info/index.pcss";
 import "./view/components/modal/index.pcss";
-import "./view/components/select-service/index.pcss";
 import "./view/components/profile/index.pcss";
+import "./view/components/select-service/index.pcss";
 import "./view/fonts.css";
+import "./view/index.pcss";
 
 import Api from "./model/api/Api";
 import Availability from "./model/api/Availability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
+import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import ModalHandler from "./view/components/modal/ModalHandler";
-import DateTimePicker from "./view/date-time-picker/DateTimePicker";
 
 padStart.shim();
 

@@ -1,4 +1,4 @@
-import DateUtils from "../../../../model/utils/DateUtils";
+import DateUtils from "../../../../../model/utils/DateUtils";
 import Week from "./Week";
 
 export default class WeeksProducer {

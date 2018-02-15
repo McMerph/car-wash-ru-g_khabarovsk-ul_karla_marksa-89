@@ -1,5 +1,5 @@
-import AvailabilityHandler from "../../../../model/AvailabilityHandler";
-import DateUtils from "../../../../model/utils/DateUtils";
+import AvailabilityHandler from "../../../../../model/AvailabilityHandler";
+import DateUtils from "../../../../../model/utils/DateUtils";
 import DirectPicker from "../../DirectPicker";
 import DateOfMonthObserver from "../../observers/DateOfMonthObserver";
 import DateOfMonthPickerLayout from "./DateOfMonthPickerLayout";

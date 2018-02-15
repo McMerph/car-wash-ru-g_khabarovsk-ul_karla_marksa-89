@@ -1,4 +1,4 @@
-import Time from "../../../model/Time";
+import Time from "../../../../model/Time";
 import DirectPicker from "../DirectPicker";
 import TimePickerLayout from "./TimePickerLayout";
 

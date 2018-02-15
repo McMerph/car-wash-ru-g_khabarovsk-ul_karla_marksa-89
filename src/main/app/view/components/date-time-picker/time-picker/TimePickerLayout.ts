@@ -1,5 +1,5 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
-import Time from "../../../model/Time";
+import Time from "../../../../model/Time";
 import ButtonsPickerLayout from "../ButtonsPickerLayout";
 import ButtonsUtils from "../utils/ButtonsUtils";
 import SliderUtils from "../utils/SliderUtils";

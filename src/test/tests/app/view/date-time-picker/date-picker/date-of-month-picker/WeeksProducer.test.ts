@@ -1,4 +1,4 @@
-import WeeksProducer from "../../../../../../../main/app/view/date-time-picker/date-picker/date-of-month-picker/WeeksProducer";
+import WeeksProducer from "../../../../../../../main/app/view/components/date-time-picker/date-picker/date-of-month-picker/WeeksProducer";
 
 test("getWeeks() method", () => {
     const february2027WeeksProducer: WeeksProducer = new WeeksProducer(new Date(2027, 1));

@@ -1,5 +1,5 @@
-import AvailabilityHandler from "../../model/AvailabilityHandler";
-import Time from "../../model/Time";
+import AvailabilityHandler from "../../../model/AvailabilityHandler";
+import Time from "../../../model/Time";
 import DatePicker from "./date-picker/DatePicker";
 import DateOfMonthObserver from "./observers/DateOfMonthObserver";
 import MonthObserver from "./observers/MonthObserver";
