@@ -1,21 +1,21 @@
-import 'eligrey-classlist-js-polyfill/classList.min.js';
-import * as padStart from 'string.prototype.padstart';
-import './StickyHoverFix.js';
+import "eligrey-classlist-js-polyfill/classList.min.js";
+import * as padStart from "string.prototype.padstart";
+import "./StickyHoverFix.js";
 
-import 'normalize.css/normalize.css';
-import './view/fonts.css';
-import './view/common.pcss';
-import './view/components/header/index.pcss';
-import './view/components/footer/index.pcss';
-import './view/components/profile/index.pcss';
-import './view/components/info/index.pcss';
+import "normalize.css/normalize.css";
+import "./view/common.pcss";
+import "./view/components/footer/index.pcss";
+import "./view/components/header/index.pcss";
+import "./view/components/info/index.pcss";
+import "./view/components/profile/index.pcss";
+import "./view/fonts.css";
 
-import Api from './model/api/Api';
-import Availability from './model/api/Availability';
-import MockApi from './model/api/MockApi';
-import AvailabilityHandler from './model/AvailabilityHandler';
-import DateTimePicker from './view/date-time-picker/DateTimePicker';
-import ModalHandler from './view/ModalHandler';
+import Api from "./model/api/Api";
+import Availability from "./model/api/Availability";
+import MockApi from "./model/api/MockApi";
+import AvailabilityHandler from "./model/AvailabilityHandler";
+import DateTimePicker from "./view/date-time-picker/DateTimePicker";
+import ModalHandler from "./view/ModalHandler";
 
 padStart.shim();
 
@@ -24,7 +24,7 @@ function start() {
     const availability: Availability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
-    const dateTimePickerParent: HTMLElement = (document.querySelector('.modal-content') as HTMLElement);
+    const dateTimePickerParent: HTMLElement = (document.querySelector(".modal-content") as HTMLElement);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(2));
     dateTimePicker.updateSliders();
@@ -33,8 +33,8 @@ function start() {
 
     const modalHandler: ModalHandler = new ModalHandler();
 
-    const openButton: HTMLButtonElement = (document.querySelector('.profile__check-in') as HTMLButtonElement);
-    openButton.addEventListener('click', () => {
+    const openButton: HTMLButtonElement = (document.querySelector(".profile__check-in") as HTMLButtonElement);
+    openButton.addEventListener("click", () => {
         modalHandler.open();
     });
 
@@ -43,8 +43,8 @@ function start() {
     //     dialog.close();
     // });
 
-    const toNearestButton: HTMLButtonElement = (document.querySelector('button.to-nearest') as HTMLButtonElement);
-    toNearestButton.addEventListener('click', () => {
+    const toNearestButton: HTMLButtonElement = (document.querySelector("button.to-nearest") as HTMLButtonElement);
+    toNearestButton.addEventListener("click", () => {
         dateTimePicker.pickNearest();
     });
 
@@ -53,6 +53,6 @@ function start() {
     // toNearestButton.click();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     start();
 });
