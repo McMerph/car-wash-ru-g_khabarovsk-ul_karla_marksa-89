@@ -9,8 +9,7 @@ import "./view/components/footer/index.pcss";
 import "./view/components/header/index.pcss";
 import "./view/components/info/index.pcss";
 import "./view/components/modal/index.pcss";
-import "./view/components/modal/modal-footer/index.pcss";
-import "./view/components/modal/select-service/index.pcss";
+import "./view/components/select-service/index.pcss";
 import "./view/components/profile/index.pcss";
 import "./view/fonts.css";
 
@@ -47,7 +46,7 @@ function start() {
     //     dialog.close();
     // });
 
-    const toNearestButton: HTMLButtonElement = (document.querySelector(".modal-footer__to-nearest") as HTMLButtonElement);
+    const toNearestButton: HTMLButtonElement = (document.querySelector(".modal__to-nearest") as HTMLButtonElement);
     toNearestButton.addEventListener("click", () => {
         dateTimePicker.pickNearest();
     });

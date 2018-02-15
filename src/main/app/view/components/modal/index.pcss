@@ -52,3 +52,27 @@
   z-index: 1;
   transition: all 0.3s ease-out;
 }
+
+.modal__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--red-color);
+}
+
+.modal__to-nearest {
+  @apply(--reset-button);
+  @apply(--underline-decoration);
+
+  display: block;
+  color: #fff;
+  font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
+
+  &::before {
+    bottom: 5px;
+  }
+}
+
+.modal__check-in {
+  @apply(--check-in-button);
+}

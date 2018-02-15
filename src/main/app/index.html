@@ -15,8 +15,11 @@
 
 <div class="modal overlay modal_closed" tabindex="-1" aria-hidden="true">
     <div class="modal__content">
-        <%= require('html-loader!./view/components/modal/select-service/index.html') %>
-        <%= require('html-loader!./view/components/modal/modal-footer/index.html') %>
+        <%= require('html-loader!./view/components/select-service/index.html') %>
+        <footer class="modal__footer">
+            <button class="modal__to-nearest">Ближайшее свободное</button>
+            <button class="modal__check-in">Записаться</button>
+        </footer>
     </div>
 </div>
 
