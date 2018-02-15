@@ -17,8 +17,6 @@ import AvailabilityHandler from './model/AvailabilityHandler';
 import DateTimePicker from './view/date-time-picker/DateTimePicker';
 import ModalHandler from './view/ModalHandler';
 
-import Slider from './view/slider/Slider';
-
 padStart.shim();
 
 function start() {
@@ -57,9 +55,4 @@ function start() {
 
 document.addEventListener('DOMContentLoaded', () => {
     start();
-
-    // TODO Delete
-    const element: HTMLElement = document.querySelector('.touch-test') as HTMLElement;
-    // TODO Get rid of window global object
-    (window as any).slider = new Slider(element);
 });
