@@ -1,13 +1,13 @@
-import * as Slider from 'swiper/dist/js/swiper.min.js';
-import Time from '../../../model/Time';
-import ButtonsPickerLayout from '../ButtonsPickerLayout';
-import ButtonsUtils from '../utils/ButtonsUtils';
-import SliderUtils from '../utils/SliderUtils';
-import TimePicker from './TimePicker';
+import * as Slider from "swiper/dist/js/swiper.min.js";
+import Time from "../../../model/Time";
+import ButtonsPickerLayout from "../ButtonsPickerLayout";
+import ButtonsUtils from "../utils/ButtonsUtils";
+import SliderUtils from "../utils/SliderUtils";
+import TimePicker from "./TimePicker";
 
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
-    private static readonly ID: string = 'time-picker';
+    private static readonly ID: string = "time-picker";
 
     private times: Time[];
 
@@ -37,15 +37,15 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLDivElement = document.createElement('div');
+        const layout: HTMLDivElement = document.createElement("div");
         layout.id = TimePickerLayout.ID;
 
         this.sliderContainer = SliderUtils.getContainer();
         this.slider = new Slider(this.sliderContainer, {
-            direction: 'vertical',
+            direction: "vertical",
+            grabCursor: true,
             mousewheel: true,
-            slidesPerView: 5,
-            grabCursor: true
+            slidesPerView: 5
         });
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
@@ -53,9 +53,9 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         this.nextButton = SliderUtils.getNextButton(this.slider);
         this.handleNavigation();
 
-        const caption: HTMLDivElement = document.createElement('div');
-        caption.classList.add('caption');
-        caption.textContent = 'время';
+        const caption: HTMLDivElement = document.createElement("div");
+        caption.classList.add("caption");
+        caption.textContent = "время";
 
         layout.appendChild(this.previousButton);
         layout.appendChild(caption);
@@ -66,7 +66,7 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
     }
 
     private handleNavigation(): void {
-        this.slider.on('slideChange', () => {
+        this.slider.on("slideChange", () => {
             if (this.slider.activeIndex <= 0) {
                 ButtonsUtils.enableButtons(this.nextButton);
                 ButtonsUtils.disableButtons(this.previousButton);

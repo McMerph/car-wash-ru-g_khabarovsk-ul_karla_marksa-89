@@ -1,6 +1,6 @@
-import WeeksProducer from '../../../../../../../main/app/view/date-time-picker/date-picker/date-of-month-picker/WeeksProducer';
+import WeeksProducer from "../../../../../../../main/app/view/date-time-picker/date-picker/date-of-month-picker/WeeksProducer";
 
-test('getWeeks() method', () => {
+test("getWeeks() method", () => {
     const february2027WeeksProducer: WeeksProducer = new WeeksProducer(new Date(2027, 1));
     const november2017WeeksProducer: WeeksProducer = new WeeksProducer(new Date(2017, 10));
     const april2018WeeksProducer: WeeksProducer = new WeeksProducer(new Date(2018, 3));

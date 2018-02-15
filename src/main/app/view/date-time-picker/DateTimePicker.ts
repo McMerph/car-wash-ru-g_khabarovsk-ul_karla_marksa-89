@@ -1,17 +1,17 @@
-import AvailabilityHandler from '../../model/AvailabilityHandler';
-import Time from '../../model/Time';
-import DatePicker from './date-picker/DatePicker';
-import DateOfMonthObserver from './observers/DateOfMonthObserver';
-import MonthObserver from './observers/MonthObserver';
-import Picker from './Picker';
-import TimePicker from './time-picker/TimePicker';
+import AvailabilityHandler from "../../model/AvailabilityHandler";
+import Time from "../../model/Time";
+import DatePicker from "./date-picker/DatePicker";
+import DateOfMonthObserver from "./observers/DateOfMonthObserver";
+import MonthObserver from "./observers/MonthObserver";
+import Picker from "./Picker";
+import TimePicker from "./time-picker/TimePicker";
 
-import './date-time-picker.pcss';
+import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
 export default class DateTimePicker implements Picker<Date>, MonthObserver, DateOfMonthObserver {
 
-    private static readonly ID: string = 'date-time-picker';
+    private static readonly ID: string = "date-time-picker";
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
@@ -51,7 +51,7 @@ export default class DateTimePicker implements Picker<Date>, MonthObserver, Date
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLElement = document.createElement('div');
+        const layout: HTMLElement = document.createElement("div");
         layout.id = DateTimePicker.ID;
         layout.appendChild(this.datePicker.getLayout());
         layout.appendChild(this.timePicker.getLayout());

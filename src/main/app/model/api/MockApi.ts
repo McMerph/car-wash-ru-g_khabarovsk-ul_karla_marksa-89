@@ -1,15 +1,15 @@
-import DateUtils from '../utils/DateUtils';
-import Api from './Api';
-import Availability from './Availability';
-import CallRequest from './CallRequest';
-import CheckIn from './CheckIn';
-import Timestamp from './Timestamp';
+import DateUtils from "../utils/DateUtils";
+import Api from "./Api";
+import Availability from "./Availability";
+import CallRequest from "./CallRequest";
+import CheckIn from "./CheckIn";
+import Timestamp from "./Timestamp";
 
 class MockApi implements Api {
 
     public static getCheckInTimes(): string[] {
-        return ['9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00',
-            '18:00', '19:00', '20:00', '21:00', '22:00', '23:00'];
+        return ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
+            "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
     }
 
     private static getNoServiceTimestamp(timestamp: number): Timestamp {
@@ -49,11 +49,11 @@ class MockApi implements Api {
     }
 
     public sendCheckIn(checkIn: CheckIn): void {
-        console.log('checkIn:', checkIn);
+        console.log("checkIn:", checkIn);
     }
 
     public sendCallRequest(callRequest: CallRequest): void {
-        console.log('callRequest:', callRequest);
+        console.log("callRequest:", callRequest);
     }
 
     // TODO Delete?

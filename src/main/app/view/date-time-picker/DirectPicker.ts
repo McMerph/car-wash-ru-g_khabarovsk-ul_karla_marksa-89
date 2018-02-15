@@ -1,6 +1,6 @@
-import ButtonsPickerLayout from './ButtonsPickerLayout';
-import Picker from './Picker';
-import PickerObserver from './PickerObserver';
+import ButtonsPickerLayout from "./ButtonsPickerLayout";
+import Picker from "./Picker";
+import PickerObserver from "./PickerObserver";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?

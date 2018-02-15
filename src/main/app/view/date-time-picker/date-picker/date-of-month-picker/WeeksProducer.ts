@@ -1,13 +1,13 @@
-import DateUtils from '../../../../model/utils/DateUtils';
-import Week from './Week';
+import DateUtils from "../../../../model/utils/DateUtils";
+import Week from "./Week";
 
 export default class WeeksProducer {
-
-    private readonly month: Date;
 
     private static normalizeDay(day: number): number {
         return day === 0 ? 7 : day;
     }
+
+    private readonly month: Date;
 
     public constructor(month: Date) {
         this.month = month;
@@ -20,9 +20,9 @@ export default class WeeksProducer {
         const endDayOfFirstWeek: number = this.getEndDayOfFirstWeek();
         for (let i = 0; i < weeksCount; i++) {
             weeks.push({
+                endDay: i === weeksCount - 1 ? WeeksProducer.normalizeDay(lastDate.getDay()) : 7,
                 startDate: i === 0 ? 1 : endDayOfFirstWeek + 1 + (i - 1) * 7,
-                startDay: i === 0 ? this.getFirstDay() : 1,
-                endDay: i === weeksCount - 1 ? WeeksProducer.normalizeDay(lastDate.getDay()) : 7
+                startDay: i === 0 ? this.getFirstDay() : 1
             });
         }
 

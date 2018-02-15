@@ -1,14 +1,14 @@
-import DateUtils from '../../../../model/utils/DateUtils';
-import ButtonsPickerLayout from '../../ButtonsPickerLayout';
-import ButtonsUtils from '../../utils/ButtonsUtils';
-import DateOfMonthPicker from './DateOfMonthPicker';
-import Week from './Week';
-import WeeksProducer from './WeeksProducer';
+import DateUtils from "../../../../model/utils/DateUtils";
+import ButtonsPickerLayout from "../../ButtonsPickerLayout";
+import ButtonsUtils from "../../utils/ButtonsUtils";
+import DateOfMonthPicker from "./DateOfMonthPicker";
+import Week from "./Week";
+import WeeksProducer from "./WeeksProducer";
 
 export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
-    private static readonly PAST_CLASS: string = 'past';
-    private static readonly TODAY_CLASS: string = 'today';
+    private static readonly PAST_CLASS: string = "past";
+    private static readonly TODAY_CLASS: string = "today";
 
     private month: Date;
 
@@ -18,8 +18,8 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLDivElement = document.createElement('div');
-        layout.classList.add('month');
+        const layout: HTMLDivElement = document.createElement("div");
+        layout.classList.add("month");
 
         layout.appendChild(this.getMonthHeader());
         const weeks: Week[] = new WeeksProducer(this.month).getWeeks();
@@ -44,9 +44,9 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
     }
 
     private getMonthHeader(): HTMLElement {
-        const header: HTMLElement = document.createElement('header');
-        ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'].forEach((dayName) =>
-            header.appendChild(document.createElement('div'))
+        const header: HTMLElement = document.createElement("header");
+        ["пн", "вт", "ср", "чт", "пт", "сб", "вс"].forEach((dayName) =>
+            header.appendChild(document.createElement("div"))
                 .appendChild(document.createTextNode(dayName))
         );
 
@@ -54,8 +54,8 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
     }
 
     private getWeekLayout(week: Week): HTMLElement {
-        const weekLayout: HTMLDivElement = document.createElement('div');
-        weekLayout.classList.add('week');
+        const weekLayout: HTMLDivElement = document.createElement("div");
+        weekLayout.classList.add("week");
         for (let i = 1; i <= 7; i++) {
             weekLayout.appendChild(this.getDayLayout(week, i));
         }
@@ -64,12 +64,12 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
     }
 
     private getDayLayout(week: Week, day: number): HTMLDivElement {
-        const dayLayout: HTMLDivElement = document.createElement('div');
+        const dayLayout: HTMLDivElement = document.createElement("div");
         const isDayExists: boolean = (week.startDay <= day) && (week.endDay >= day);
         if (isDayExists) {
             dayLayout.appendChild(this.buttons[week.startDate - week.startDay + day - 1]);
         } else {
-            dayLayout.setAttribute('aria-label', 'Данный день не из выбранного месяца');
+            dayLayout.setAttribute("aria-label", "Данный день не из выбранного месяца");
         }
 
         return dayLayout;

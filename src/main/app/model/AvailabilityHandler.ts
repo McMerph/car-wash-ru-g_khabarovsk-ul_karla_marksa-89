@@ -1,7 +1,7 @@
-import {inArray, isNotDuplicate} from '../Utils';
-import Availability from './api/Availability';
-import Time from './Time';
-import DateUtils from './utils/DateUtils';
+import {inArray, isNotDuplicate} from "../Utils";
+import Availability from "./api/Availability";
+import Time from "./Time";
+import DateUtils from "./utils/DateUtils";
 
 export default class AvailabilityHandler {
 

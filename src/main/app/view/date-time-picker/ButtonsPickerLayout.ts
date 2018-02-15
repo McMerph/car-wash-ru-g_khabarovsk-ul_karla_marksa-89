@@ -1,22 +1,22 @@
-import DirectPicker from './DirectPicker';
-import PickerStoreObserver from './PickerObserver';
-import ButtonsUtils from './utils/ButtonsUtils';
+import DirectPicker from "./DirectPicker";
+import PickerStoreObserver from "./PickerObserver";
+import ButtonsUtils from "./utils/ButtonsUtils";
 
 // TODO Rename to ButtonsPickerLayout?
 export default abstract class ButtonsPickerLayout<T> implements PickerStoreObserver {
 
-    protected static readonly PICK_BUTTON_CLASS = 'pick';
-    protected static readonly PICKED_CLASS = 'picked';
+    protected static readonly PICK_BUTTON_CLASS = "pick";
+    protected static readonly PICKED_CLASS = "picked";
 
     protected picker: DirectPicker<T>;
     protected buttons: HTMLButtonElement[];
-
-    public abstract getLayout(): HTMLElement;
 
     public constructor(picker: DirectPicker<T>) {
         this.picker = picker;
         picker.addPickerObserver(this);
     }
+
+    public abstract getLayout(): HTMLElement;
 
     public onPick(index: number) {
         this.buttons.forEach((button) => button.classList.remove(ButtonsPickerLayout.PICKED_CLASS));
@@ -37,7 +37,7 @@ export default abstract class ButtonsPickerLayout<T> implements PickerStoreObser
     }
 
     protected produceButton(picker: DirectPicker<T>, value: T): HTMLButtonElement {
-        const button: HTMLButtonElement = document.createElement('button');
+        const button: HTMLButtonElement = document.createElement("button");
         button.tabIndex = 0;
         button.textContent = picker.getRepresentation(value);
         button.onclick = () => picker.pick(value);

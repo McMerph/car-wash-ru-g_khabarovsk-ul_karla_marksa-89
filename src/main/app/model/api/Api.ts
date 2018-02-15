@@ -1,6 +1,6 @@
-import Availability from './Availability';
-import CallRequest from './CallRequest';
-import CheckIn from './CheckIn';
+import Availability from "./Availability";
+import CallRequest from "./CallRequest";
+import CheckIn from "./CheckIn";
 
 export default interface Api {
 

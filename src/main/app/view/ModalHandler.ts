@@ -1,9 +1,9 @@
-import './style/modal.pcss';
+import "./style/modal.pcss";
 
 export default class ModalHandler {
 
-    private static readonly OPEN_CLASSES: string[] = ['is-opened'];
-    private static readonly CLOSE_CLASSES: string[] = ['visually-hidden'];
+    private static readonly OPEN_CLASSES: string[] = ["is-opened"];
+    private static readonly CLOSE_CLASSES: string[] = ["visually-hidden"];
 
     private static readonly ESCAPE_KEY_CODE: number = 27;
     private static readonly NUMBER_ONE_KEY_CODE: number = 49;
@@ -11,7 +11,7 @@ export default class ModalHandler {
     private readonly modal: Element;
 
     public constructor() {
-        this.modal = document.getElementsByClassName('modal')[0];
+        this.modal = document.getElementsByClassName("modal")[0];
         this.handleModalCloseOnEsc();
         this.handleModalOpenOn1();
     }
@@ -27,7 +27,7 @@ export default class ModalHandler {
     }
 
     private handleModalCloseOnEsc() {
-        document.addEventListener('keydown', (event: KeyboardEvent) => {
+        document.addEventListener("keydown", (event: KeyboardEvent) => {
             const keyCode = event.keyCode || event.which;
             if (keyCode === ModalHandler.ESCAPE_KEY_CODE) {
                 event.preventDefault();
@@ -38,7 +38,7 @@ export default class ModalHandler {
 
     // TODO Delete?
     private handleModalOpenOn1() {
-        document.addEventListener('keydown', (event: KeyboardEvent) => {
+        document.addEventListener("keydown", (event: KeyboardEvent) => {
             const keyCode = event.keyCode || event.which;
             if (keyCode === ModalHandler.NUMBER_ONE_KEY_CODE) {
                 event.preventDefault();

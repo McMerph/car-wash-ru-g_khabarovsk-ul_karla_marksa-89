@@ -1,8 +1,8 @@
-import AvailabilityHandler from '../../../../model/AvailabilityHandler';
-import DateUtils from '../../../../model/utils/DateUtils';
-import DirectPicker from '../../DirectPicker';
-import DateOfMonthObserver from '../../observers/DateOfMonthObserver';
-import DateOfMonthPickerLayout from './DateOfMonthPickerLayout';
+import AvailabilityHandler from "../../../../model/AvailabilityHandler";
+import DateUtils from "../../../../model/utils/DateUtils";
+import DirectPicker from "../../DirectPicker";
+import DateOfMonthObserver from "../../observers/DateOfMonthObserver";
+import DateOfMonthPickerLayout from "./DateOfMonthPickerLayout";
 
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 

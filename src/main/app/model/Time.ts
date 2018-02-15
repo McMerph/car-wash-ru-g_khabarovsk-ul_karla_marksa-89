@@ -4,8 +4,8 @@ export default class Time {
     private minutes: number;
 
     public constructor(parameter: { hours: number; minutes: number; } | string | Date) {
-        if (typeof parameter === 'string') {
-            const timeData: string[] = parameter.split(':');
+        if (typeof parameter === "string") {
+            const timeData: string[] = parameter.split(":");
             this.hours = parseInt(timeData[0], 10);
             this.minutes = parseInt(timeData[1], 10);
         } else if (parameter instanceof Date) {
@@ -18,7 +18,7 @@ export default class Time {
     }
 
     public getRepresentation(): string {
-        return `${this.hours}:${this.minutes.toFixed().padStart(2, '0')}`;
+        return `${this.hours}:${this.minutes.toFixed().padStart(2, "0")}`;
     }
 
     public compareTo(time: Time): number {

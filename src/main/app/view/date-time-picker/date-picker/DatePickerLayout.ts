@@ -1,15 +1,15 @@
-import * as Slider from 'swiper/dist/js/swiper.min.js';
-import SliderUtils from '../utils/SliderUtils';
-import DatePicker from './DatePicker';
+import * as Slider from "swiper/dist/js/swiper.min.js";
+import SliderUtils from "../utils/SliderUtils";
+import DatePicker from "./DatePicker";
 
 // TODO Extends ButtonsPickerLayout?
 export default class DatePickerLayout {
 
-    private static readonly ID: string = 'date-picker';
-    private static readonly YEAR_SELECT_CLASS = 'year';
-    private static readonly MONTH_SELECT_CLASS = 'month';
-    private static readonly MONTHS_NAMES: string[] = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
-        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'];
+    private static readonly ID: string = "date-picker";
+    private static readonly YEAR_SELECT_CLASS = "year";
+    private static readonly MONTH_SELECT_CLASS = "month";
+    private static readonly MONTHS_NAMES: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
+        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     private static readonly SPACE_BETWEEN_SLIDES: number = 25;
     private static readonly YEARS_OFFSET: number = 5;
 
@@ -36,11 +36,11 @@ export default class DatePickerLayout {
     }
 
     public getLayout(): HTMLElement {
-        const layout: HTMLElement = document.createElement('div');
+        const layout: HTMLElement = document.createElement("div");
         layout.id = DatePickerLayout.ID;
 
-        const controls: HTMLDivElement = document.createElement('div');
-        controls.classList.add('controls');
+        const controls: HTMLDivElement = document.createElement("div");
+        controls.classList.add("controls");
         controls.appendChild(this.previousButton);
         controls.appendChild(this.monthSelect);
         controls.appendChild(this.yearSelect);
@@ -86,7 +86,7 @@ export default class DatePickerLayout {
     }
 
     private handleSlideChangeTransitionEnd() {
-        this.slider.on('slideChangeTransitionEnd', () => {
+        this.slider.on("slideChangeTransitionEnd", () => {
             if (!this.blockSlideChangeTransitionEnd) {
                 this.blockSlideChangeTransitionEnd = true;
                 if (this.slider.activeIndex === 0) {
@@ -99,7 +99,7 @@ export default class DatePickerLayout {
     }
 
     private handleSlideChange() {
-        this.slider.on('slideChange', () => {
+        this.slider.on("slideChange", () => {
             this.blockSlideChangeTransitionEnd = false;
             if (this.slider.activeIndex === 0) {
                 this.updateSelects(this.picker.getPreviousMonth());
@@ -117,12 +117,12 @@ export default class DatePickerLayout {
     }
 
     private getMonthSelect(): HTMLSelectElement {
-        const monthSelect: HTMLSelectElement = document.createElement('select');
+        const monthSelect: HTMLSelectElement = document.createElement("select");
         monthSelect.classList.add(DatePickerLayout.MONTH_SELECT_CLASS);
         DatePickerLayout.MONTHS_NAMES.forEach((monthName, monthIndex) => {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
-        monthSelect.addEventListener('change', () => {
+        monthSelect.addEventListener("change", () => {
             this.picker.changeMonthOfTheYear(parseInt(monthSelect.value, 10));
         });
 
@@ -130,7 +130,7 @@ export default class DatePickerLayout {
     }
 
     private getMonthOption(monthName: string, monthIndex: number): HTMLOptionElement {
-        const option: HTMLOptionElement = document.createElement('option');
+        const option: HTMLOptionElement = document.createElement("option");
         option.value = monthIndex.toString();
         option.text = monthName;
         if (this.picker.sameMonthOfTheYear(monthIndex)) {
@@ -141,12 +141,12 @@ export default class DatePickerLayout {
     }
 
     private getYearSelect(): HTMLSelectElement {
-        const yearSelect: HTMLSelectElement = document.createElement('select');
+        const yearSelect: HTMLSelectElement = document.createElement("select");
         yearSelect.classList.add(DatePickerLayout.YEAR_SELECT_CLASS);
         this.getSelectableYears().forEach((year) => {
             yearSelect.options.add(this.getYearOption(year));
         });
-        yearSelect.addEventListener('change', () => {
+        yearSelect.addEventListener("change", () => {
             this.picker.changeYear(parseInt(yearSelect.value, 10));
         });
 
@@ -165,7 +165,7 @@ export default class DatePickerLayout {
     }
 
     private getYearOption(year: string): HTMLOptionElement {
-        const option = document.createElement('option');
+        const option = document.createElement("option");
         option.value = year;
         option.text = year;
         if (this.picker.sameYear(parseInt(year, 10))) {

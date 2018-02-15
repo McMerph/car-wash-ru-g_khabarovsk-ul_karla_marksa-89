@@ -1,8 +1,8 @@
-import Time from '../../../model/Time';
-import DirectPicker from '../DirectPicker';
-import TimePickerLayout from './TimePickerLayout';
+import Time from "../../../model/Time";
+import DirectPicker from "../DirectPicker";
+import TimePickerLayout from "./TimePickerLayout";
 
-import './time-picker.pcss';
+import "./time-picker.pcss";
 
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {

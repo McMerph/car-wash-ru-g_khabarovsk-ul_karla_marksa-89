@@ -1,3 +1,3 @@
-import * as padStart from 'string.prototype.padstart';
+import * as padStart from "string.prototype.padstart";
 
 padStart.shim();
