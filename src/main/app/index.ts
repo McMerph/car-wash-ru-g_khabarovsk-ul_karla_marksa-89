@@ -8,6 +8,7 @@ import "./view/common.pcss";
 import "./view/components/footer/index.pcss";
 import "./view/components/header/index.pcss";
 import "./view/components/info/index.pcss";
+import "./view/components/modal/index.pcss";
 import "./view/components/modal/modal-footer/index.pcss";
 import "./view/components/modal/select-service/index.pcss";
 import "./view/components/profile/index.pcss";
@@ -17,8 +18,8 @@ import Api from "./model/api/Api";
 import Availability from "./model/api/Availability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
+import ModalHandler from "./view/components/modal/ModalHandler";
 import DateTimePicker from "./view/date-time-picker/DateTimePicker";
-import ModalHandler from "./view/ModalHandler";
 
 padStart.shim();
 
@@ -27,7 +28,7 @@ function start() {
     const availability: Availability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
-    const dateTimePickerParent: HTMLElement = (document.querySelector(".modal-content") as HTMLElement);
+    const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(2));
     dateTimePicker.updateSliders();
@@ -46,7 +47,7 @@ function start() {
     //     dialog.close();
     // });
 
-    const toNearestButton: HTMLButtonElement = (document.querySelector("button.to-nearest") as HTMLButtonElement);
+    const toNearestButton: HTMLButtonElement = (document.querySelector(".modal-footer__to-nearest") as HTMLButtonElement);
     toNearestButton.addEventListener("click", () => {
         dateTimePicker.pickNearest();
     });

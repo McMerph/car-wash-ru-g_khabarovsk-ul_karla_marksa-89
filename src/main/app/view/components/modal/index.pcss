@@ -1,12 +1,13 @@
-@import '../root.pcss';
+@import '../../root.pcss';
 
 .modal {
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
 }
 
-.modal-content {
+.modal__content {
   box-sizing: border-box;
   padding: 59px 38px 25px 32px;
   border: 0;
@@ -28,15 +29,17 @@
   transition: all 0.3s ease-out;
 }
 
-.modal.is-opened {
-  & .modal-content {
+.modal_opened {
+  opacity: 1;
+
+  & .modal__content {
     transform: translateY(0);
     opacity: 1;
   }
+}
 
-  &.overlay {
-    opacity: 1;
-  }
+.modal_closed {
+  @apply --visually-hidden;
 }
 
 .overlay {
@@ -47,6 +50,5 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.71);
   z-index: 1;
-  opacity: 0;
   transition: all 0.3s ease-out;
 }
