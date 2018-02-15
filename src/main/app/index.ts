@@ -8,6 +8,7 @@ import "./view/common.pcss";
 import "./view/components/footer/index.pcss";
 import "./view/components/header/index.pcss";
 import "./view/components/info/index.pcss";
+import "./view/components/modal/modal-footer/index.pcss";
 import "./view/components/modal/select-service/index.pcss";
 import "./view/components/profile/index.pcss";
 import "./view/fonts.css";
