@@ -1,15 +1,15 @@
 import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
-import DateOfMonthObserver from "../observers/DateOfMonthObserver";
-import MonthObserver from "../observers/MonthObserver";
-import Picker from "../Picker";
+import IPicker from "../IPicker";
+import DateOfMonthObserver from "../observers/IDateOfMonthObserver";
+import MonthObserver from "../observers/IMonthObserver";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DatePickerLayout from "./DatePickerLayout";
 
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
-export default class DatePicker implements Picker<Date>, DateOfMonthObserver {
+export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
 
     private monthObservers: MonthObserver[] = [];
     private dateOfMonthObservers: DateOfMonthObserver[] = [];

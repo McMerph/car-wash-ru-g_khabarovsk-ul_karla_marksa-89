@@ -1,10 +1,10 @@
 import ButtonsPickerLayout from "./ButtonsPickerLayout";
-import Picker from "./Picker";
-import PickerObserver from "./PickerObserver";
+import IPicker from "./IPicker";
+import PickerObserver from "./observers/IPickerObserver";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?
-export default abstract class DirectPicker<T> implements Picker<T> {
+export default abstract class DirectPicker<T> implements IPicker<T> {
 
     protected layout: ButtonsPickerLayout<T>;
 
@@ -16,13 +16,21 @@ export default abstract class DirectPicker<T> implements Picker<T> {
 
     private pickerObservers: PickerObserver[] = [];
 
-    public abstract getRepresentation(value: T): string;
-
-    protected abstract valuesEquals(value1: T, value2: T): boolean;
-
     public constructor(values: T[]) {
         this.values = values;
         this.picked = false;
+    }
+
+    public isPicked(): boolean {
+        return this.picked;
+    }
+
+    public getPickedValue(): T {
+        return this.pickedValue;
+    }
+
+    public getLayout(): HTMLElement {
+        return this.layout.getLayout();
     }
 
     public addPickerObserver(pickerObserver: PickerObserver): void {
@@ -67,14 +75,6 @@ export default abstract class DirectPicker<T> implements Picker<T> {
         return this.values;
     }
 
-    public isPicked(): boolean {
-        return this.picked;
-    }
-
-    public getPickedValue(): T {
-        return this.pickedValue;
-    }
-
     public getDisabledValues(): T[] {
         return this.disabledValues;
     }
@@ -94,8 +94,8 @@ export default abstract class DirectPicker<T> implements Picker<T> {
         return this.disabledValues.some((value) => this.valuesEquals(value, valueToCheck));
     }
 
-    public getLayout(): HTMLElement {
-        return this.layout.getLayout();
-    }
+    public abstract getRepresentation(value: T): string;
+
+    protected abstract valuesEquals(value1: T, value2: T): boolean;
 
 }

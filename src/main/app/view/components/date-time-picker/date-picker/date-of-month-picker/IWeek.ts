@@ -1,4 +1,4 @@
-export default interface Week {
+export default interface IWeek {
 
     startDate: number;
     startDay: number;

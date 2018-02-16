@@ -1,5 +1,5 @@
 import DateUtils from "../../../../../model/utils/DateUtils";
-import Week from "./Week";
+import IWeek from "./IWeek";
 
 export default class WeeksProducer {
 
@@ -13,8 +13,8 @@ export default class WeeksProducer {
         this.month = month;
     }
 
-    public getWeeks(): Week[] {
-        const weeks: Week[] = [];
+    public getWeeks(): IWeek[] {
+        const weeks: IWeek[] = [];
         const lastDate: Date = DateUtils.getLastDateOfMonth(this.month);
         const weeksCount: number = this.getWeeksCount();
         const endDayOfFirstWeek: number = this.getEndDayOfFirstWeek();

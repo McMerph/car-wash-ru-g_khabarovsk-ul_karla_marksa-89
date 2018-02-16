@@ -13,8 +13,8 @@ import "./view/components/select-service/index.pcss";
 import "./view/fonts.css";
 import "./view/index.pcss";
 
-import Api from "./model/api/Api";
-import Availability from "./model/api/Availability";
+import IApi from "./model/api/IApi";
+import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
@@ -23,8 +23,8 @@ import ModalHandler from "./view/components/modal/ModalHandler";
 padStart.shim();
 
 function start() {
-    const mockApi: Api = new MockApi();
-    const availability: Availability = mockApi.retrieveAvailability();
+    const mockApi: IApi = new MockApi();
+    const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);

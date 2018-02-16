@@ -1,35 +1,35 @@
 import DateUtils from "../utils/DateUtils";
-import Api from "./Api";
-import Availability from "./Availability";
-import CallRequest from "./CallRequest";
-import CheckIn from "./CheckIn";
-import Timestamp from "./Timestamp";
+import IApi from "./IApi";
+import IAvailability from "./IAvailability";
+import ICallRequest from "./ICallRequest";
+import ICheckIn from "./ICheckIn";
+import ITimestamp from "./ITimestamp";
 
-class MockApi implements Api {
+class MockApi implements IApi {
 
     public static getCheckInTimes(): string[] {
         return ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00",
             "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"];
     }
 
-    private static getNoServiceTimestamp(timestamp: number): Timestamp {
+    private static getNoServiceTimestamp(timestamp: number): ITimestamp {
         const date: Date = new Date(timestamp);
         return {
-            year: date.getFullYear(),
-            month: date.getMonth(),
             day: date.getDate(),
-            time: `${date.getHours()}:${date.getMinutes()}`
+            month: date.getMonth(),
+            time: `${date.getHours()}:${date.getMinutes()}`,
+            year: date.getFullYear(),
         };
     }
 
-    private static getNoServiceDate(timestamp: number): Timestamp[] {
+    private static getNoServiceDate(timestamp: number): ITimestamp[] {
         const date = new Date(timestamp);
         return MockApi.getCheckInTimes().map((time) =>
             ({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), time})
         );
     }
 
-    public retrieveAvailability(): Availability {
+    public retrieveAvailability(): IAvailability {
         const todayWithoutTime: number = DateUtils.getTodayWithoutTime();
         const tomorrowWithoutTime: number = DateUtils.getTomorrowWithoutTime();
 
@@ -48,11 +48,11 @@ class MockApi implements Api {
         };
     }
 
-    public sendCheckIn(checkIn: CheckIn): void {
+    public sendCheckIn(checkIn: ICheckIn): void {
         console.log("checkIn:", checkIn);
     }
 
-    public sendCallRequest(callRequest: CallRequest): void {
+    public sendCallRequest(callRequest: ICallRequest): void {
         console.log("callRequest:", callRequest);
     }
 

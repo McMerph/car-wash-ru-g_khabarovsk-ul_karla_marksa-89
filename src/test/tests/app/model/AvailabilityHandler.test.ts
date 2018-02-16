@@ -1,13 +1,13 @@
-import Api from "../../../../main/app/model/api/Api";
-import Availability from "../../../../main/app/model/api/Availability";
+import IApi from "../../../../main/app/model/api/IApi";
+import IAvailability from "../../../../main/app/model/api/IAvailability";
 import MockApi from "../../../../main/app/model/api/MockApi";
 import AvailabilityHandler from "../../../../main/app/model/AvailabilityHandler";
 import Time from "../../../../main/app/model/Time";
 import DateUtils from "../../../../main/app/model/utils/DateUtils";
 
 test("getNearestAvailableTimestamp() method", () => {
-    const api: Api = new MockApi();
-    const availability: Availability = api.retrieveAvailability();
+    const api: IApi = new MockApi();
+    const availability: IAvailability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
     const nearest: { dateOfMonth: Date, time: Time } = handler.getNearestAvailableTimestamp();
 
@@ -21,8 +21,8 @@ test("getNearestAvailableTimestamp() method", () => {
 });
 
 test("getDisabledTimes() method", () => {
-    const api: Api = new MockApi();
-    const availability: Availability = api.retrieveAvailability();
+    const api: IApi = new MockApi();
+    const availability: IAvailability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     const today: number = DateUtils.getTodayWithoutTime();
@@ -41,8 +41,8 @@ test("getDisabledTimes() method", () => {
 });
 
 test("isDisabledDate() method", () => {
-    const api: Api = new MockApi();
-    const availability: Availability = api.retrieveAvailability();
+    const api: IApi = new MockApi();
+    const availability: IAvailability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     expect(handler.isDisabledDate(DateUtils.getTodayWithoutTime())).toBeTruthy();
@@ -50,8 +50,8 @@ test("isDisabledDate() method", () => {
 });
 
 test("isDisabledTimestamp() method", () => {
-    const api: Api = new MockApi();
-    const availability: Availability = api.retrieveAvailability();
+    const api: IApi = new MockApi();
+    const availability: IAvailability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     expect(handler.isDisabledTimestamp(DateUtils.getTomorrowWithoutTime() + 9 * 60 * 60 * 1000)).toBeTruthy();

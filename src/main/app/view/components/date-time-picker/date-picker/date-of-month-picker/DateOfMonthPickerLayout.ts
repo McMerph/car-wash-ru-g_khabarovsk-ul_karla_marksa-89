@@ -2,7 +2,7 @@ import DateUtils from "../../../../../model/utils/DateUtils";
 import ButtonsPickerLayout from "../../ButtonsPickerLayout";
 import ButtonsUtils from "../../utils/ButtonsUtils";
 import DateOfMonthPicker from "./DateOfMonthPicker";
-import Week from "./Week";
+import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
 export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
@@ -22,7 +22,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
         layout.classList.add("month");
 
         layout.appendChild(this.getMonthHeader());
-        const weeks: Week[] = new WeeksProducer(this.month).getWeeks();
+        const weeks: IWeek[] = new WeeksProducer(this.month).getWeeks();
         weeks.forEach((week) => layout.appendChild(this.getWeekLayout(week)));
 
         return layout;
@@ -53,7 +53,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
         return header;
     }
 
-    private getWeekLayout(week: Week): HTMLElement {
+    private getWeekLayout(week: IWeek): HTMLElement {
         const weekLayout: HTMLDivElement = document.createElement("div");
         weekLayout.classList.add("week");
         for (let i = 1; i <= 7; i++) {
@@ -63,7 +63,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
         return weekLayout;
     }
 
-    private getDayLayout(week: Week, day: number): HTMLDivElement {
+    private getDayLayout(week: IWeek, day: number): HTMLDivElement {
         const dayLayout: HTMLDivElement = document.createElement("div");
         const isDayExists: boolean = (week.startDay <= day) && (week.endDay >= day);
         if (isDayExists) {

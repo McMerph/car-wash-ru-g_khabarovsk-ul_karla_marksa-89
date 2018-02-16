@@ -1,9 +1,8 @@
 import DirectPicker from "./DirectPicker";
-import PickerStoreObserver from "./PickerObserver";
+import IPickerObserver from "./observers/IPickerObserver";
 import ButtonsUtils from "./utils/ButtonsUtils";
 
-// TODO Rename to ButtonsPickerLayout?
-export default abstract class ButtonsPickerLayout<T> implements PickerStoreObserver {
+export default abstract class ButtonsPickerLayout<T> implements IPickerObserver {
 
     protected static readonly PICK_BUTTON_CLASS = "pick";
     protected static readonly PICKED_CLASS = "picked";

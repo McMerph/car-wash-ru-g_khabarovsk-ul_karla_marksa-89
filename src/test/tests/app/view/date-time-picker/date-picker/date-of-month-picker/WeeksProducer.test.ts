@@ -1,3 +1,4 @@
+// tslint:disable-next-line:max-line-length
 import WeeksProducer from "../../../../../../../main/app/view/components/date-time-picker/date-picker/date-of-month-picker/WeeksProducer";
 
 test("getWeeks() method", () => {

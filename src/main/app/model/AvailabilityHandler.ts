@@ -1,5 +1,5 @@
 import {inArray, isNotDuplicate} from "../Utils";
-import Availability from "./api/Availability";
+import IAvailability from "./api/IAvailability";
 import Time from "./Time";
 import DateUtils from "./utils/DateUtils";
 
@@ -9,7 +9,7 @@ export default class AvailabilityHandler {
     private readonly disabledDates: number[];
     private readonly disabledTimestamps: number[];
 
-    public constructor(availability: Availability) {
+    public constructor(availability: IAvailability) {
         this.checkInTimes = availability.checkInTimes.map((time) => new Time(time));
         this.disabledTimestamps = this.getDisabledTimestamps(availability);
         this.disabledDates = this.getDisabledDates();
@@ -48,7 +48,7 @@ export default class AvailabilityHandler {
         return this.checkInTimes;
     }
 
-    private getDisabledTimestamps(availability: Availability): number[] {
+    private getDisabledTimestamps(availability: IAvailability): number[] {
         return availability.noService.map((timestamp) =>
             this.generateTimestamp({
                 date: new Date(timestamp.year, timestamp.month, timestamp.day).valueOf(),

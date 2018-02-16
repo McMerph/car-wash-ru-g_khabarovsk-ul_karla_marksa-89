@@ -1,15 +1,15 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import DatePicker from "./date-picker/DatePicker";
-import DateOfMonthObserver from "./observers/DateOfMonthObserver";
-import MonthObserver from "./observers/MonthObserver";
-import Picker from "./Picker";
+import IPicker from "./IPicker";
+import DateOfMonthObserver from "./observers/IDateOfMonthObserver";
+import MonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
 
 import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
-export default class DateTimePicker implements Picker<Date>, MonthObserver, DateOfMonthObserver {
+export default class DateTimePicker implements IPicker<Date>, MonthObserver, DateOfMonthObserver {
 
     private static readonly ID: string = "date-time-picker";
 

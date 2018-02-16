@@ -1,4 +1,4 @@
-export default interface Timestamp {
+export default interface ITimestamp {
 
     year: number;
     month: number;
