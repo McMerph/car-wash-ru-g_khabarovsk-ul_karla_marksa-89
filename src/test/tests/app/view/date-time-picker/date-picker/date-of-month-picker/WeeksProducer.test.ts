@@ -10,7 +10,7 @@ test("getWeeks() method", () => {
         {startDate: 1, startDay: 1, endDay: 7},
         {startDate: 8, startDay: 1, endDay: 7},
         {startDate: 15, startDay: 1, endDay: 7},
-        {startDate: 22, startDay: 1, endDay: 7}
+        {startDate: 22, startDay: 1, endDay: 7},
     ]);
 
     expect(november2017WeeksProducer.getWeeks()).toEqual([
@@ -18,7 +18,7 @@ test("getWeeks() method", () => {
         {startDate: 6, startDay: 1, endDay: 7},
         {startDate: 13, startDay: 1, endDay: 7},
         {startDate: 20, startDay: 1, endDay: 7},
-        {startDate: 27, startDay: 1, endDay: 4}
+        {startDate: 27, startDay: 1, endDay: 4},
     ]);
 
     expect(april2018WeeksProducer.getWeeks()).toEqual([
@@ -27,6 +27,6 @@ test("getWeeks() method", () => {
         {startDate: 9, startDay: 1, endDay: 7},
         {startDate: 16, startDay: 1, endDay: 7},
         {startDate: 23, startDay: 1, endDay: 7},
-        {startDate: 30, startDay: 1, endDay: 1}
+        {startDate: 30, startDay: 1, endDay: 1},
     ]);
 });

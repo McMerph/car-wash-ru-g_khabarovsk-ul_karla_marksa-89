@@ -47,7 +47,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
         const header: HTMLElement = document.createElement("header");
         ["пн", "вт", "ср", "чт", "пт", "сб", "вс"].forEach((dayName) =>
             header.appendChild(document.createElement("div"))
-                .appendChild(document.createTextNode(dayName))
+                .appendChild(document.createTextNode(dayName)),
         );
 
         return header;

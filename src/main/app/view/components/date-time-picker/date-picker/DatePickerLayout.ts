@@ -79,7 +79,7 @@ export default class DatePickerLayout {
     private handleSlider(sliderContainer: HTMLElement) {
         this.slider = new Slider(sliderContainer, {
             grabCursor: true,
-            spaceBetween: DatePickerLayout.SPACE_BETWEEN_SLIDES
+            spaceBetween: DatePickerLayout.SPACE_BETWEEN_SLIDES,
         });
         this.handleSlideChange();
         this.handleSlideChangeTransitionEnd();

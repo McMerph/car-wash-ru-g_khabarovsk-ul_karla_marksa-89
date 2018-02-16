@@ -52,7 +52,7 @@ export default class AvailabilityHandler {
         return availability.noService.map((timestamp) =>
             this.generateTimestamp({
                 date: new Date(timestamp.year, timestamp.month, timestamp.day).valueOf(),
-                time: new Time(timestamp.time)
+                time: new Time(timestamp.time),
             }));
     }
 
@@ -63,8 +63,8 @@ export default class AvailabilityHandler {
             .filter((dateWithDisabledTime) => this.checkInTimes.every((checkInTime) =>
                 this.isDisabledTimestamp(this.generateTimestamp({
                     date: dateWithDisabledTime,
-                    time: checkInTime
-                }))
+                    time: checkInTime,
+                })),
             ));
     }
 

@@ -22,7 +22,7 @@ export default class WeeksProducer {
             weeks.push({
                 endDay: i === weeksCount - 1 ? WeeksProducer.normalizeDay(lastDate.getDay()) : 7,
                 startDate: i === 0 ? 1 : endDayOfFirstWeek + 1 + (i - 1) * 7,
-                startDay: i === 0 ? this.getFirstDay() : 1
+                startDay: i === 0 ? this.getFirstDay() : 1,
             });
         }
 
