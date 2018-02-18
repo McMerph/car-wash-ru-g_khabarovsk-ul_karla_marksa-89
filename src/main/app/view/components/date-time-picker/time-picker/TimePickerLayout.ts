@@ -74,6 +74,13 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         return layout;
     }
 
+    protected produceButton(picker: TimePicker, time: Time): HTMLButtonElement {
+        const button: HTMLButtonElement = super.produceButton(picker, time);
+        button.classList.add("pick-control_time");
+
+        return button;
+    }
+
     private handleNavigation(): void {
         this.slider.on("slideChange", () => {
             if (this.slider.activeIndex <= 0) {

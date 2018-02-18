@@ -31,6 +31,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
     protected produceButton(picker: DateOfMonthPicker, date: Date): HTMLButtonElement {
         const button: HTMLButtonElement = super.produceButton(picker, date);
+        button.classList.add("pick-control_date");
         if (this.picker.isDisabled(date)) {
             ButtonsUtils.disableButtons(button);
         }
