@@ -5,10 +5,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
 
-  & > * {
-    min-width: 60px;
-  }
+.time-picker__caption,
+.time-picker__navigation,
+.time-picker__controls {
+  min-width: 60px;
 }
 
 .time-picker__caption {
@@ -49,26 +51,26 @@
   border-top: none;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
+}
 
-  & .pick-control {
-    @apply --picker-button;
+.pick-control {
+  @apply --picker-button;
 
-    border-top: 1px solid var(--picker-border-color);
-    color: #303030;
-    font: normal 400 20px var(--proxima-nova-font-stack);
-    user-select: none;
+  border-top: 1px solid var(--picker-border-color);
+  color: #303030;
+  font: normal 400 20px var(--proxima-nova-font-stack);
+  user-select: none;
+}
 
-    &.pick-control_picked {
-      background-color: #ffd800;
-    }
+.pick-control_picked {
+  background-color: #ffd800;
+}
 
-    &.picker-button-disabled {
-      pointer-events: none;
-      background-color: var(--red-color);
-    }
-  }
+.pick-control_disabled {
+  pointer-events: none;
+  background-color: var(--red-color);
+}
 
-  & .swiper-slide.swiper-slide-active button.pick {
-    border-top: none;
-  }
+.swiper-slide-active .pick-control {
+  border-top: none;
 }

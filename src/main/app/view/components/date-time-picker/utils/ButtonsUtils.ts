@@ -9,6 +9,6 @@ export default class ButtonsUtils {
         buttons.forEach((button) => button.classList.remove(ButtonsUtils.DISABLED_CLASS));
     }
 
-    private static readonly DISABLED_CLASS = "picker-button-disabled";
+    private static readonly DISABLED_CLASS = "pick-control_disabled";
 
 }
