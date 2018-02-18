@@ -9,15 +9,18 @@
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   color: #303030;
   user-select: none;
-  font: normal 400 22px var(--proxima-nova-font-stack);
-  padding: 5px 0;
+}
+
+.pick-control_disabled {
+  pointer-events: none;
+  background: var(--red-color);
 }
 
 html:not(.can-touch) .pick-control:hover {
-  background-color: var(--blue-color);
+  background: var(--blue-color);
 
   &.pick-control_picked {
-    background-color: #ffd800;
+    background: #ffd800;
   }
 }
 
