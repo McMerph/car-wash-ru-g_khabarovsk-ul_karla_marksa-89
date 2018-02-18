@@ -7,8 +7,8 @@ import WeeksProducer from "./WeeksProducer";
 
 export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
-    private static readonly PAST_CLASS: string = "date-picker__past";
-    private static readonly TODAY_CLASS: string = "today";
+    private static readonly PAST_CLASS: string = "pick-control_past";
+    private static readonly TODAY_CLASS: string = "pick-control_today";
     private static readonly CELL_CLASS: string = "date-picker__cell";
 
     private month: Date;

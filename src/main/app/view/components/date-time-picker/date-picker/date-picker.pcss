@@ -73,32 +73,32 @@
     height: 54px;
   }
 
-  & .pick-control {
-    @apply --picker-button;
-
-    color: #303030;
-    font: normal 400 22px var(--proxima-nova-font-stack);
-    user-select: none;
-    padding: 5px 0;
-
-    &.pick-control_picked {
-      background-color: #ffd800;
-    }
-
-    &.today {
-      color: #00aeef;
-    }
-
-    &.date-picker__past {
-      pointer-events: none;
-      background-color: #ddd;
-    }
-
-    &.disabled:not(.date-picker__past) {
-      pointer-events: none;
-      background-color: var(--red-color);
-    }
+  .pick-control_picked {
+    background-color: #ffd800;
   }
+
+  .pick-control_today {
+    color: #00aeef;
+  }
+
+  .pick-control_past {
+    pointer-events: none;
+    background-color: #ddd;
+  }
+
+  .pick-control_disabled:not(.pick-control_past) {
+    pointer-events: none;
+    background-color: var(--red-color);
+  }
+}
+
+.pick-control {
+  @apply --picker-button;
+
+  color: #303030;
+  font: normal 400 22px var(--proxima-nova-font-stack);
+  user-select: none;
+  padding: 5px 0;
 }
 
 .date-picker__week:not(:last-of-type) {
