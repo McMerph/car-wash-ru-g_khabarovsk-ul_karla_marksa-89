@@ -1,7 +1,6 @@
 @import '../../root.pcss';
 
-html:not(.can-touch) .time-picker button.pick:hover,
-html:not(.can-touch) .date-picker button.pick:hover {
+html:not(.can-touch) .pick-control:hover {
   background-color: var(--blue-color);
 
   &.pick-control_picked {
@@ -11,4 +10,8 @@ html:not(.can-touch) .date-picker button.pick:hover {
 
 .date-time-picker {
   display: flex;
+}
+
+.pick-control_picked {
+  background-color: #ffd800;
 }

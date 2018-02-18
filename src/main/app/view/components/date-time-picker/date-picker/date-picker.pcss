@@ -68,31 +68,27 @@
 
 .date-picker__week {
   height: 53px;
-
-  &:first-of-type {
-    height: 54px;
-  }
-
-  .pick-control_picked {
-    background-color: #ffd800;
-  }
-
-  .pick-control_today {
-    color: #00aeef;
-  }
-
-  .pick-control_past {
-    pointer-events: none;
-    background-color: #ddd;
-  }
-
-  .pick-control_disabled:not(.pick-control_past) {
-    pointer-events: none;
-    background-color: var(--red-color);
-  }
 }
 
-.pick-control {
+.pick-control_disabled:not(.pick-control_past) {
+  pointer-events: none;
+  background-color: var(--red-color);
+}
+
+.pick-control_today.pick-control_today {
+  color: #00aeef;
+}
+
+.pick-control_past.pick-control_past {
+  pointer-events: none;
+  background-color: #ddd;
+}
+
+.date-picker__week:first-of-type {
+  height: 54px;
+}
+
+.pick-control_date {
   @apply --picker-button;
 
   color: #303030;
