@@ -2,6 +2,7 @@ const path = require('path');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -13,7 +14,14 @@ module.exports = {
                 template: './src/main/app/index.html'
             }
         ),
-        new FaviconsWebpackPlugin('./src/main/resources/favicon.svg')
+        new FaviconsWebpackPlugin('./src/main/resources/favicon.svg'),
+        new StyleLintPlugin({
+            configFile: './.stylelintrc.json',
+            context: 'src',
+            files: ['**/*.css', '**/*.pcss'],
+            failOnError: false,
+            quiet: false,
+        })
     ],
     module: {
         rules: [
