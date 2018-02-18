@@ -6,8 +6,7 @@ import DatePicker from "./DatePicker";
 export default class DatePickerLayout {
 
     private static readonly CLASS_NAME: string = "date-picker";
-    private static readonly YEAR_SELECT_CLASS = "date-picker__year-chooser";
-    private static readonly MONTH_SELECT_CLASS = "date-picker__month-chooser";
+    private static readonly SELECT_CLASS = "picker__chooser";
     private static readonly MONTHS_NAMES: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
         "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     private static readonly SPACE_BETWEEN_SLIDES: number = 25;
@@ -126,7 +125,7 @@ export default class DatePickerLayout {
 
     private getMonthSelect(): HTMLSelectElement {
         const monthSelect: HTMLSelectElement = document.createElement("select");
-        monthSelect.classList.add(DatePickerLayout.MONTH_SELECT_CLASS);
+        monthSelect.classList.add(DatePickerLayout.SELECT_CLASS);
         DatePickerLayout.MONTHS_NAMES.forEach((monthName, monthIndex) => {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
@@ -150,7 +149,7 @@ export default class DatePickerLayout {
 
     private getYearSelect(): HTMLSelectElement {
         const yearSelect: HTMLSelectElement = document.createElement("select");
-        yearSelect.classList.add(DatePickerLayout.YEAR_SELECT_CLASS);
+        yearSelect.classList.add(DatePickerLayout.SELECT_CLASS);
         this.getSelectableYears().forEach((year) => {
             yearSelect.options.add(this.getYearOption(year));
         });

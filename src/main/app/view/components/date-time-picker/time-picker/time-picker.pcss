@@ -1,5 +1,26 @@
 @import '../../../root.pcss';
 
+.picker__navigation_to-top {
+  transform: rotate(270deg);
+}
+
+.picker__navigation_to-bottom {
+  transform: rotate(90deg);
+}
+
+.picker__navigation_disabled {
+  visibility: hidden;
+}
+
+.pick-control_time.pick-control_time {
+  font: normal 400 20px var(--proxima-nova-font-stack);
+  border-top: 1px solid var(--picker-border-color);
+}
+
+.swiper-slide-active .pick-control {
+  border-top: none;
+}
+
 .time-picker {
   margin-left: 24px;
   display: flex;
@@ -24,31 +45,10 @@
   font: normal 400 14px var(--proxima-nova-font-stack);
 }
 
-.picker__navigation_to-top {
-  transform: rotate(270deg);
-}
-
-.picker__navigation_to-bottom {
-  transform: rotate(90deg);
-}
-
-.picker__navigation_disabled {
-  visibility: hidden;
-}
-
 .time-picker__controls {
   height: 270px;
   border: 2px solid var(--picker-border-color);
   border-top: none;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
-}
-
-.pick-control_time.pick-control_time {
-  font: normal 400 20px var(--proxima-nova-font-stack);
-  border-top: 1px solid var(--picker-border-color);
-}
-
-.swiper-slide-active .pick-control {
-  border-top: none;
 }
