@@ -7,8 +7,8 @@
     display: flex;
     justify-content: center;
 
-    & button.previous,
-    button.next {
+    & .date-picker__previous,
+    .date-picker__next {
       @apply --reset-button;
 
       padding: 20px 0;
@@ -16,12 +16,12 @@
       height: 24px;
       background: transparent url(../../../../../resources/img/arrow-right.png) no-repeat center center;
 
-      &.previous {
+      &.date-picker__previous {
         transform: rotate(180deg);
         margin-right: 10px;
       }
 
-      &.next {
+      &.date-picker__next {
         margin-left: 10px;
       }
     }
@@ -84,7 +84,7 @@
         height: 54px;
       }
 
-      & button.pick {
+      & button.pick-control {
         @apply --picker-button;
 
         color: #303030;
@@ -92,7 +92,7 @@
         user-select: none;
         padding: 5px 0;
 
-        &.picked {
+        &.pick-control_picked {
           background-color: #ffd800;
         }
 

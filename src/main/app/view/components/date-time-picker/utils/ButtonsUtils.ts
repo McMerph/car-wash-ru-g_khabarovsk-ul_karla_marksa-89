@@ -1,3 +1,4 @@
+// TODO Delete class
 export default class ButtonsUtils {
 
     public static disableButtons(...buttons: HTMLButtonElement[]) {
@@ -8,6 +9,6 @@ export default class ButtonsUtils {
         buttons.forEach((button) => button.classList.remove(ButtonsUtils.DISABLED_CLASS));
     }
 
-    private static readonly DISABLED_CLASS = "disabled";
+    private static readonly DISABLED_CLASS = "picker-button-disabled";
 
 }

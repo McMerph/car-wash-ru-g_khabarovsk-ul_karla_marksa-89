@@ -1,6 +1,6 @@
 @import '../../../root.pcss';
 
-#time-picker {
+.time-picker {
   margin-left: 24px;
   display: flex;
   flex-direction: column;
@@ -9,67 +9,66 @@
   & > * {
     min-width: 60px;
   }
+}
 
-  & .caption {
-    height: 22px;
-    text-align: center;
-    border: 2px solid var(--picker-border-color);
-    border-bottom-width: 1px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+.time-picker__caption {
+  height: 22px;
+  text-align: center;
+  border: 2px solid var(--picker-border-color);
+  border-bottom-width: 1px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #303030;
+  font: normal 400 14px var(--proxima-nova-font-stack);
+}
+
+.time-picker__navigation {
+  @apply --reset-button;
+
+  padding: 20px 0;
+  width: 24px;
+  height: 24px;
+  background: transparent url(../../../../../resources/img/arrow-right.png) no-repeat center center;
+}
+
+.time-picker__navigation_previous {
+  transform: rotate(270deg);
+}
+
+.time-picker__navigation_next {
+  transform: rotate(90deg);
+}
+
+.time-picker__navigation_disabled {
+  visibility: hidden;
+}
+
+.time-picker__controls {
+  height: 270px;
+  border: 2px solid var(--picker-border-color);
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+
+  & .pick-control {
+    @apply --picker-button;
+
+    border-top: 1px solid var(--picker-border-color);
     color: #303030;
-    font: normal 400 14px var(--proxima-nova-font-stack);
-  }
+    font: normal 400 20px var(--proxima-nova-font-stack);
+    user-select: none;
 
-  & button.previous,
-  button.next {
-    @apply --reset-button;
-
-    padding: 20px 0;
-    width: 24px;
-    height: 24px;
-    background: transparent url(../../../../../resources/img/arrow-right.png) no-repeat center center;
-
-    &.previous {
-      transform: rotate(270deg);
+    &.pick-control_picked {
+      background-color: #ffd800;
     }
 
-    &.next {
-      transform: rotate(90deg);
-    }
-
-    &.disabled {
-      visibility: hidden;
+    &.picker-button-disabled {
+      pointer-events: none;
+      background-color: var(--red-color);
     }
   }
 
-  & .swiper-container {
-    height: 270px;
-    border: 2px solid var(--picker-border-color);
+  & .swiper-slide.swiper-slide-active button.pick {
     border-top: none;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-
-    & button.pick {
-      @apply --picker-button;
-
-      border-top: 1px solid var(--picker-border-color);
-      color: #303030;
-      font: normal 400 20px var(--proxima-nova-font-stack);
-      user-select: none;
-
-      &.picked {
-        background-color: #ffd800;
-      }
-
-      &.disabled {
-        pointer-events: none;
-        background-color: var(--red-color);
-      }
-    }
-
-    & .swiper-slide.swiper-slide-active button.pick {
-      border-top: none;
-    }
   }
 }

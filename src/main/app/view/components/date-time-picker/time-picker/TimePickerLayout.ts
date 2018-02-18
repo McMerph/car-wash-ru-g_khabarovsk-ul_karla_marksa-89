@@ -1,13 +1,13 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
 import Time from "../../../../model/Time";
 import ButtonsPickerLayout from "../ButtonsPickerLayout";
-import ButtonsUtils from "../utils/ButtonsUtils";
 import SliderUtils from "../utils/SliderUtils";
 import TimePicker from "./TimePicker";
 
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
-    private static readonly ID: string = "time-picker";
+    private static readonly CLASS: string = "time-picker";
+    private static readonly DISABLED_NAVIGATION_CLASS: string = "time-picker__navigation_disabled";
 
     private times: Time[];
 
@@ -38,9 +38,10 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
-        layout.id = TimePickerLayout.ID;
+        layout.classList.add(TimePickerLayout.CLASS);
 
         this.sliderContainer = SliderUtils.getContainer();
+        this.sliderContainer.classList.add("time-picker__controls");
         this.slider = new Slider(this.sliderContainer, {
             direction: "vertical",
             grabCursor: true,
@@ -49,12 +50,20 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         });
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
-        ButtonsUtils.disableButtons(this.previousButton);
+        this.previousButton.classList.add(
+            "time-picker__navigation",
+            "time-picker__navigation_previous",
+            TimePickerLayout.DISABLED_NAVIGATION_CLASS,
+        );
         this.nextButton = SliderUtils.getNextButton(this.slider);
+        this.nextButton.classList.add(
+            "time-picker__navigation",
+            "time-picker__navigation_next",
+        );
         this.handleNavigation();
 
         const caption: HTMLDivElement = document.createElement("div");
-        caption.classList.add("caption");
+        caption.classList.add("time-picker__caption");
         caption.textContent = "время";
 
         layout.appendChild(this.previousButton);
@@ -68,13 +77,14 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
     private handleNavigation(): void {
         this.slider.on("slideChange", () => {
             if (this.slider.activeIndex <= 0) {
-                ButtonsUtils.enableButtons(this.nextButton);
-                ButtonsUtils.disableButtons(this.previousButton);
+                this.nextButton.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                this.previousButton.classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
             } else if (this.isSliderInTheEnd()) {
-                ButtonsUtils.enableButtons(this.previousButton);
-                ButtonsUtils.disableButtons(this.nextButton);
+                this.previousButton.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                this.nextButton.classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
             } else {
-                ButtonsUtils.enableButtons(this.previousButton, this.nextButton);
+                this.previousButton.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                this.nextButton.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
             }
         });
     }

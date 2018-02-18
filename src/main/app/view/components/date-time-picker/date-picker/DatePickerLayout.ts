@@ -32,7 +32,9 @@ export default class DatePickerLayout {
         this.sliderContainer = SliderUtils.getContainer();
         this.handleSlider(this.sliderContainer);
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
+        this.previousButton.classList.add("date-picker__previous");
         this.nextButton = SliderUtils.getNextButton(this.slider);
+        this.nextButton.classList.add("date-picker__next");
     }
 
     public getLayout(): HTMLElement {

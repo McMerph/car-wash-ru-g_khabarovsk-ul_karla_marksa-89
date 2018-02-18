@@ -4,8 +4,8 @@ import ButtonsUtils from "./utils/ButtonsUtils";
 
 export default abstract class ButtonsPickerLayout<T> implements IPickerObserver {
 
-    protected static readonly PICK_BUTTON_CLASS = "pick";
-    protected static readonly PICKED_CLASS = "picked";
+    protected static readonly PICK_BUTTON_CLASS = "pick-control";
+    protected static readonly PICKED_CLASS = "pick-control_picked";
 
     protected picker: DirectPicker<T>;
     protected buttons: HTMLButtonElement[];

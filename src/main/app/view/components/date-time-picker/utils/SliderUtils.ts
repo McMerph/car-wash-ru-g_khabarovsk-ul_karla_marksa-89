@@ -22,7 +22,6 @@ export default class SliderUtils {
     public static getPreviousButton(slider: any): HTMLButtonElement {
         const previousButton: HTMLButtonElement = document.createElement("button");
         previousButton.setAttribute("aria-label", "Назад");
-        previousButton.classList.add(SliderUtils.TO_PREVIOUS_CLASS);
         previousButton.onclick = () => slider.slidePrev();
 
         return previousButton;
@@ -32,7 +31,6 @@ export default class SliderUtils {
     public static getNextButton(slider: any): HTMLButtonElement {
         const nextButton: HTMLButtonElement = document.createElement("button");
         nextButton.setAttribute("aria-label", "Далее");
-        nextButton.classList.add(SliderUtils.TO_NEXT_CLASS);
         nextButton.onclick = () => slider.slideNext();
 
         return nextButton;
@@ -41,8 +39,5 @@ export default class SliderUtils {
     private static readonly CONTAINER_CLASS = "swiper-container";
     private static readonly WRAPPER_CLASS = "swiper-wrapper";
     private static readonly SLIDE_CLASS = "swiper-slide";
-
-    private static readonly TO_PREVIOUS_CLASS = "previous";
-    private static readonly TO_NEXT_CLASS = "next";
 
 }
