@@ -11,7 +11,7 @@ import "./date-time-picker.pcss";
 // TODO Rename to TimestampPicker?
 export default class DateTimePicker implements IPicker<Date>, MonthObserver, DateOfMonthObserver {
 
-    private static readonly ID: string = "date-time-picker";
+    private static readonly CLASS_NAME: string = "date-time-picker";
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
@@ -52,7 +52,7 @@ export default class DateTimePicker implements IPicker<Date>, MonthObserver, Dat
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.id = DateTimePicker.ID;
+        layout.classList.add(DateTimePicker.CLASS_NAME);
         layout.appendChild(this.datePicker.getLayout());
         layout.appendChild(this.timePicker.getLayout());
 

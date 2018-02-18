@@ -1,119 +1,116 @@
 @import '../../../root.pcss';
 
-#date-picker {
+.date-picker {
   max-width: 424px;
+}
 
-  & .controls {
-    display: flex;
-    justify-content: center;
+.date-picker__controls {
+  display: flex;
+  justify-content: center;
+}
 
-    & .date-picker__previous,
-    .date-picker__next {
-      @apply --reset-button;
+.date-picker__navigation {
+  @apply --reset-button;
 
-      padding: 20px 0;
-      width: 24px;
-      height: 24px;
-      background: transparent url(../../../../../resources/img/arrow-right.png) no-repeat center center;
+  padding: 20px 0;
+  width: 24px;
+  height: 24px;
+  background: transparent url(../../../../../resources/img/arrow-right.png) no-repeat center center;
+}
 
-      &.date-picker__previous {
-        transform: rotate(180deg);
-        margin-right: 10px;
-      }
+.date-picker__navigation_previous {
+  transform: rotate(180deg);
+  margin-right: 10px;
+}
 
-      &.date-picker__next {
-        margin-left: 10px;
-      }
-    }
+.date-picker__navigation_next {
+  margin-left: 10px;
+}
 
-    & select {
-      cursor: pointer;
-      appearance: none;
-      border: none;
-      outline: 0;
-      color: #303030;
-      font: normal 400 22px var(--proxima-nova-font-stack);
+.date-picker__month-chooser,
+.date-picker__year-chooser {
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  outline: 0;
+  color: #303030;
+  font: normal 400 22px var(--proxima-nova-font-stack);
 
-      &::-ms-expand {
-        display: none;
-      }
-
-      &::-ms-value {
-        background: none;
-        color: #303030;
-      }
-    }
+  &::-ms-expand {
+    display: none;
   }
 
-  & div.month {
-    border: 2px solid var(--picker-border-color);
-    border-radius: 3px;
+  &::-ms-value {
+    background: none;
+    color: #303030;
+  }
+}
 
-    & header {
-      box-sizing: border-box;
-      height: 20px;
-      border-bottom: 1px solid var(--picker-border-color);
+.date-picker__month {
+  border: 2px solid var(--picker-border-color);
+  border-radius: 3px;
+}
 
-      & > div {
-        color: #303030;
-        font: normal 400 14px var(--proxima-nova-font-stack);
-      }
+.date-picker__month-header,
+.date-picker__week {
+  width: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.date-picker__month-header {
+  box-sizing: border-box;
+  height: 20px;
+  border-bottom: 1px solid var(--picker-border-color);
+  color: #303030;
+  font: normal 400 14px var(--proxima-nova-font-stack);
+}
+
+.date-picker__week {
+  height: 53px;
+
+  &:first-of-type {
+    height: 54px;
+  }
+
+  & .pick-control {
+    @apply --picker-button;
+
+    color: #303030;
+    font: normal 400 22px var(--proxima-nova-font-stack);
+    user-select: none;
+    padding: 5px 0;
+
+    &.pick-control_picked {
+      background-color: #ffd800;
     }
 
-    & header,
-    .week {
-      width: 100%;
-      margin: 0;
-      display: flex;
-
-      & > div {
-        box-sizing: border-box;
-        flex: 1 1 14.28571428571428571429%;
-        text-align: center;
-      }
-
-      & > div:not(:last-of-type) {
-        border-right: 1px solid var(--picker-border-color);
-      }
+    &.today {
+      color: #00aeef;
     }
 
-    & .week {
-      height: 53px;
-
-      &:first-of-type {
-        height: 54px;
-      }
-
-      & button.pick-control {
-        @apply --picker-button;
-
-        color: #303030;
-        font: normal 400 22px var(--proxima-nova-font-stack);
-        user-select: none;
-        padding: 5px 0;
-
-        &.pick-control_picked {
-          background-color: #ffd800;
-        }
-
-        &.today {
-          color: #00aeef;
-        }
-
-        &.past {
-          pointer-events: none;
-          background-color: #ddd;
-        }
-
-        &.disabled:not(.past) {
-          pointer-events: none;
-          background-color: var(--red-color);
-        }
-      }
+    &.date-picker__past {
+      pointer-events: none;
+      background-color: #ddd;
     }
 
-    & .week:not(:last-of-type) {
-      border-bottom: 1px solid var(--picker-border-color);
+    &.disabled:not(.date-picker__past) {
+      pointer-events: none;
+      background-color: var(--red-color);
     }
   }
+}
+
+.date-picker__week:not(:last-of-type) {
+  border-bottom: 1px solid var(--picker-border-color);
+}
+
+.date-picker__cell {
+  box-sizing: border-box;
+  flex: 1 1 14.28571428571428571429%;
+  text-align: center;
+}
+
+.date-picker__cell:not(:last-of-type) {
+  border-right: 1px solid var(--picker-border-color);
 }

@@ -5,9 +5,9 @@ import DatePicker from "./DatePicker";
 // TODO Extends ButtonsPickerLayout?
 export default class DatePickerLayout {
 
-    private static readonly ID: string = "date-picker";
-    private static readonly YEAR_SELECT_CLASS = "year";
-    private static readonly MONTH_SELECT_CLASS = "month";
+    private static readonly CLASS_NAME: string = "date-picker";
+    private static readonly YEAR_SELECT_CLASS = "date-picker__year-chooser";
+    private static readonly MONTH_SELECT_CLASS = "date-picker__month-chooser";
     private static readonly MONTHS_NAMES: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
         "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     private static readonly SPACE_BETWEEN_SLIDES: number = 25;
@@ -32,17 +32,23 @@ export default class DatePickerLayout {
         this.sliderContainer = SliderUtils.getContainer();
         this.handleSlider(this.sliderContainer);
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
-        this.previousButton.classList.add("date-picker__previous");
+        this.previousButton.classList.add(
+            "date-picker__navigation",
+            "date-picker__navigation_previous",
+        );
         this.nextButton = SliderUtils.getNextButton(this.slider);
-        this.nextButton.classList.add("date-picker__next");
+        this.nextButton.classList.add(
+            "date-picker__navigation",
+            "date-picker__navigation_next",
+        );
     }
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.id = DatePickerLayout.ID;
+        layout.classList.add(DatePickerLayout.CLASS_NAME);
 
         const controls: HTMLDivElement = document.createElement("div");
-        controls.classList.add("controls");
+        controls.classList.add("date-picker__controls");
         controls.appendChild(this.previousButton);
         controls.appendChild(this.monthSelect);
         controls.appendChild(this.yearSelect);
