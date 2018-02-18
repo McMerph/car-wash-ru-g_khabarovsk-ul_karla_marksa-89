@@ -70,6 +70,11 @@
   height: 53px;
 }
 
+.pick-control_date.pick-control_date {
+  font: normal 400 22px var(--proxima-nova-font-stack);
+  padding: 5px 0;
+}
+
 .pick-control_disabled:not(.pick-control_past) {
   pointer-events: none;
   background-color: var(--red-color);
@@ -86,15 +91,6 @@
 
 .date-picker__week:first-of-type {
   height: 54px;
-}
-
-.pick-control_date {
-  @apply --picker-button;
-
-  color: #303030;
-  user-select: none;
-  font: normal 400 22px var(--proxima-nova-font-stack);
-  padding: 5px 0;
 }
 
 .date-picker__week:not(:last-of-type) {
