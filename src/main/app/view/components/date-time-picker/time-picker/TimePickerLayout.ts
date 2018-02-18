@@ -7,7 +7,7 @@ import TimePicker from "./TimePicker";
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     private static readonly CLASS: string = "time-picker";
-    private static readonly DISABLED_NAVIGATION_CLASS: string = "time-picker__navigation_disabled";
+    private static readonly DISABLED_NAVIGATION_CLASS: string = "picker__navigation_disabled";
 
     private times: Time[];
 
@@ -51,14 +51,14 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
         this.previousButton.classList.add(
-            "time-picker__navigation",
-            "time-picker__navigation_previous",
+            "picker__navigation",
+            "picker__navigation_to-top",
             TimePickerLayout.DISABLED_NAVIGATION_CLASS,
         );
         this.nextButton = SliderUtils.getNextButton(this.slider);
         this.nextButton.classList.add(
-            "time-picker__navigation",
-            "time-picker__navigation_next",
+            "picker__navigation",
+            "picker__navigation_to-bottom",
         );
         this.handleNavigation();
 

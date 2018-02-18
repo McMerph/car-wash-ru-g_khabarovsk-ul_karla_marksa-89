@@ -1,5 +1,9 @@
 @import '../../root.pcss';
 
+.date-time-picker {
+  display: flex;
+}
+
 .pick-control {
   @apply --reset-button;
 
@@ -24,10 +28,15 @@ html:not(.can-touch) .pick-control:hover {
   }
 }
 
-.date-time-picker {
-  display: flex;
-}
-
 .pick-control_picked {
   background-color: #ffd800;
+}
+
+.picker__navigation {
+  @apply --reset-button;
+
+  padding: 20px 0;
+  width: 24px;
+  height: 24px;
+  background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
 }

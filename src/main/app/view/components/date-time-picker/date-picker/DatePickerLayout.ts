@@ -33,13 +33,13 @@ export default class DatePickerLayout {
         this.handleSlider(this.sliderContainer);
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
         this.previousButton.classList.add(
-            "date-picker__navigation",
-            "date-picker__navigation_previous",
+            "picker__navigation",
+            "picker__navigation_to-left",
         );
         this.nextButton = SliderUtils.getNextButton(this.slider);
         this.nextButton.classList.add(
-            "date-picker__navigation",
-            "date-picker__navigation_next",
+            "picker__navigation",
+            "date-picker__navigation_to-right",
         );
     }
 
