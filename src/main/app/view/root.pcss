@@ -19,15 +19,22 @@
     white-space: nowrap;
   };
 
-  --check-in-button: {
+  --soft-reset-button: {
+    padding: 0;
     outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    user-select: none;
+  };
+
+  --check-in-button: {
+    @apply --soft-reset-button;
+
     color: #fff;
     font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
     text-transform: uppercase;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.42);
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.19), inset 0 1px 0 0 rgba(255, 255, 255, 0.004);
     background: #ffd800 linear-gradient(to bottom, #ffd700 0%, #c89e00 100%);
-    padding: 0;
     border-left: 0;
     border-bottom: 0;
     border-right: 0;
@@ -56,9 +63,9 @@
   };
 
   --reset-button: {
+    @apply --soft-reset-button;
+
     border: 0;
     background: none;
-    padding: 0;
-    outline: none;
   };
 }
