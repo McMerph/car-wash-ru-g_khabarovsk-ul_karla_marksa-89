@@ -14,11 +14,13 @@ export default class ModalHandler {
     }
 
     public open() {
+        document.body.style.overflow = "hidden";
         this.modal.classList.add(...ModalHandler.OPEN_CLASSES);
         this.modal.classList.remove(...ModalHandler.CLOSE_CLASSES);
     }
 
     public close() {
+        document.body.style.overflow = "auto";
         this.modal.classList.add(...ModalHandler.CLOSE_CLASSES);
         this.modal.classList.remove(...ModalHandler.OPEN_CLASSES);
     }
