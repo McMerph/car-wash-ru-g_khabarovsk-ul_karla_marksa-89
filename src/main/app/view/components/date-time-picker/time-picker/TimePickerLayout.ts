@@ -47,6 +47,7 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
             grabCursor: true,
             mousewheel: true,
             slidesPerView: 5,
+            spaceBetween: 1,
         });
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
