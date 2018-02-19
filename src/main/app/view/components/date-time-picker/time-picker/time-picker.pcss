@@ -14,7 +14,9 @@
 
 .pick-control_time.pick-control_time {
   font: normal 400 20px var(--proxima-nova-font-stack);
-  box-shadow: 0 1px var(--picker-border-color);
+  box-shadow:
+    0 1px var(--picker-border-color),
+    0 -1px var(--picker-border-color);
 }
 
 .time-picker {
@@ -25,11 +27,13 @@
 
 .time-picker__caption {
   width: 100%;
-  box-sizing: border-box;
-  padding-bottom: 5px;
+  padding-bottom: 4px;
   text-align: center;
-  border: 2px solid var(--picker-border-color);
-  border-bottom-width: 1px;
+  box-shadow:
+    0 1px var(--picker-border-color),
+    0 -2px var(--picker-border-color),
+    2px 0 var(--picker-border-color),
+    -2px 0 var(--picker-border-color);
   border-radius: 3px 3px 0 0;
   color: #303030;
   font: normal 400 14px var(--proxima-nova-font-stack);
@@ -37,8 +41,10 @@
 
 .time-picker__controls {
   width: 100%;
-  box-sizing: border-box;
-  border: 2px solid var(--picker-border-color);
-  border-top: none;
+  padding-bottom: 2px;
+  box-shadow:
+    0 2px var(--picker-border-color),
+    2px 0 var(--picker-border-color),
+    -2px 0 var(--picker-border-color);
   border-radius: 0 0 3px 3px;
 }
