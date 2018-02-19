@@ -10,6 +10,8 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
     private static readonly PAST_CLASS: string = "pick-control_past";
     private static readonly TODAY_CLASS: string = "pick-control_today";
     private static readonly CELL_CLASS: string = "date-picker__cell";
+    private static readonly DAY_CELL_CLASS: string = "date-picker__cell_day";
+    private static readonly DATE_CELL_CLASS: string = "date-picker__cell_date";
 
     private month: Date;
 
@@ -50,7 +52,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
         header.classList.add("date-picker__month-header");
         ["пн", "вт", "ср", "чт", "пт", "сб", "вс"].forEach((dayName) => {
             const cell: HTMLDivElement = document.createElement("div");
-            cell.classList.add(DateOfMonthPickerLayout.CELL_CLASS);
+            cell.classList.add(DateOfMonthPickerLayout.CELL_CLASS, DateOfMonthPickerLayout.DAY_CELL_CLASS);
             cell.appendChild(document.createTextNode(dayName));
             header.appendChild(cell);
         });
@@ -69,7 +71,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
     private getDayLayout(week: IWeek, day: number): HTMLDivElement {
         const dayLayout: HTMLDivElement = document.createElement("div");
-        dayLayout.classList.add(DateOfMonthPickerLayout.CELL_CLASS);
+        dayLayout.classList.add(DateOfMonthPickerLayout.CELL_CLASS, DateOfMonthPickerLayout.DATE_CELL_CLASS);
         const isDayExists: boolean = (week.startDay <= day) && (week.endDay >= day);
         if (isDayExists) {
             dayLayout.appendChild(this.buttons[week.startDate - week.startDay + day - 1]);

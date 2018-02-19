@@ -9,9 +9,9 @@
   margin-left: 10px;
 }
 
-.pick-control_date {
+.pick-control_date.pick-control_date {
   font: normal 400 22px var(--proxima-nova-font-stack);
-  padding: 5px 0;
+  padding: 12px 0;
 }
 
 .pick-control_today.pick-control_today {
@@ -60,18 +60,9 @@
 
 .date-picker__month-header {
   box-sizing: border-box;
-  height: 20px;
   border-bottom: 1px solid var(--picker-border-color);
   color: #303030;
   font: normal 400 14px var(--proxima-nova-font-stack);
-}
-
-.date-picker__week {
-  height: 53px;
-}
-
-.date-picker__week:first-of-type {
-  height: 54px;
 }
 
 .date-picker__week:not(:last-of-type) {
@@ -86,4 +77,8 @@
 
 .date-picker__cell:not(:last-of-type) {
   border-right: 1px solid var(--picker-border-color);
+}
+
+.date-picker__cell_day {
+  padding-bottom: 5px;
 }
