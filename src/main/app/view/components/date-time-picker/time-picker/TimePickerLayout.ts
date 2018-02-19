@@ -41,7 +41,7 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         layout.classList.add(TimePickerLayout.CLASS);
 
         this.sliderContainer = SliderUtils.getContainer();
-        this.sliderContainer.classList.add("time-picker__controls");
+        this.sliderContainer.classList.add("time-picker__main");
         this.slider = new Slider(this.sliderContainer, {
             direction: "vertical",
             grabCursor: true,

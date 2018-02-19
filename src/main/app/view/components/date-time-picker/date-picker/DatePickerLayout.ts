@@ -29,7 +29,7 @@ export default class DatePickerLayout {
         this.monthSelect = this.getMonthSelect();
         this.yearSelect = this.getYearSelect();
         this.sliderContainer = SliderUtils.getContainer();
-        this.sliderContainer.classList.add("date-picker__wrapper");
+        this.sliderContainer.classList.add("date-picker__main");
         this.handleSlider(this.sliderContainer);
         this.previousButton = SliderUtils.getPreviousButton(this.slider);
         this.previousButton.classList.add(
