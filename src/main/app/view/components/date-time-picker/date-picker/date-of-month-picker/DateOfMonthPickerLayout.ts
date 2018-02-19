@@ -9,6 +9,7 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
     private static readonly PAST_CLASS: string = "pick-control_past";
     private static readonly TODAY_CLASS: string = "pick-control_today";
+    private static readonly DATES_CLASS: string = "date-picker__dates";
     private static readonly CELL_CLASS: string = "date-picker__cell";
     private static readonly DAY_CELL_CLASS: string = "date-picker__cell_day";
     private static readonly DATE_CELL_CLASS: string = "date-picker__cell_date";
@@ -26,7 +27,10 @@ export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
         layout.appendChild(this.getMonthHeader());
         const weeks: IWeek[] = new WeeksProducer(this.month).getWeeks();
-        weeks.forEach((week) => layout.appendChild(this.getWeekLayout(week)));
+        const dates: HTMLDivElement = document.createElement("div");
+        dates.classList.add(DateOfMonthPickerLayout.DATES_CLASS);
+        weeks.forEach((week) => dates.appendChild(this.getWeekLayout(week)));
+        layout.appendChild(dates);
 
         return layout;
     }

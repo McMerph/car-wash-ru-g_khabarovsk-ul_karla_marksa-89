@@ -8,8 +8,12 @@
 }
 
 .modal__content {
+  /* display: flex;
+  flex-direction: column; */
+  max-height: 717px;
+  height: 98vh;
   box-sizing: border-box;
-  padding: 59px 38px 25px 32px;
+  padding: 0 38px 0 32px;
   border: 0;
   background: white;
   width: 98%;
@@ -54,7 +58,12 @@
   transition: all 0.3s ease-out;
 }
 
+.select-service {
+  margin-top: 110px;
+}
+
 .modal__footer {
+  margin-bottom: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,15 +87,21 @@
   @apply(--check-in-button);
 }
 
+.date-time-picker {
+  height: 50vh;
+  max-height: 320px;
+  width: 100%;
+}
+
 .date-picker {
-  flex: 0 1 424px;
-  max-width: 424px;
+  flex: 0 0 auto;
+  max-width: 430px;
 }
 
 .time-picker {
-  margin-left: 24px;
-  flex: 0 1 60px;
-  max-width: 60px;
+  flex: 0 0 auto;
+  margin-left: auto;
+  max-width: 76px;
 }
 
 @media (max-width: 320px) {
@@ -97,5 +112,13 @@
 
   .date-picker {
     max-width: 70%;
+  }
+
+  .select-service {
+    margin-top: 4px;
+  }
+
+  .modal__footer {
+    margin-bottom: 4px;
   }
 }
