@@ -45,7 +45,32 @@
   }
 }
 
+.date-picker__wrapper {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  & > .swiper-wrapper {
+    flex-grow: 1;
+
+    & > .swiper-slide {
+      height: unset;
+    }
+  }
+}
+
+.date-picker__dates {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .date-picker__month {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   border: 2px solid var(--picker-border-color);
   border-radius: 3px;
 }
@@ -62,6 +87,10 @@
   border-bottom: 1px solid var(--picker-border-color);
   color: #303030;
   font: normal 400 14px var(--proxima-nova-font-stack);
+}
+
+.date-picker__week {
+  flex-grow: 1;
 }
 
 .date-picker__week:not(:last-of-type) {
