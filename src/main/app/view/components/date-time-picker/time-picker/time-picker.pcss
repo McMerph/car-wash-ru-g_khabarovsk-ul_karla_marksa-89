@@ -22,33 +22,28 @@
 }
 
 .time-picker {
-  margin-left: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.time-picker__caption,
-.time-picker__navigation,
-.time-picker__controls {
-  min-width: 60px;
-}
-
 .time-picker__caption {
-  height: 22px;
+  width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 5px;
   text-align: center;
   border: 2px solid var(--picker-border-color);
   border-bottom-width: 1px;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-radius: 3px 3px 0 0;
   color: #303030;
   font: normal 400 14px var(--proxima-nova-font-stack);
 }
 
 .time-picker__controls {
+  width: 100%;
+  box-sizing: border-box;
   height: 270px;
   border: 2px solid var(--picker-border-color);
   border-top: none;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  border-radius: 0 0 3px 3px;
 }
