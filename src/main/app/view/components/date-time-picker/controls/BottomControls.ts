@@ -1,5 +1,5 @@
+import CLASS_NAMES from "../../../constants/class-names";
 import SliderUtils from "../utils/SliderUtils";
-import { CLASS_NAMES } from "../../../constants";
 
 // TODO Implement ILayout interface with getLayout() method?
 export default class BottomControls {

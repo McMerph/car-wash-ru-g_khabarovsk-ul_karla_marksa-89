@@ -1,4 +1,3 @@
-// TODO Split in 3 files?
 const CLASS_NAMES = Object.freeze({
     CHOOSER: "picker__chooser",
     CONTROLS: {
@@ -47,43 +46,4 @@ const CLASS_NAMES = Object.freeze({
     },
 });
 
-const SETTINGS = Object.freeze({
-    SPACE_BETWEEN_MONTHS_SLIDES: 25,
-    YEARS_OFFSET: 5,
-});
-
-const DICTIONARY = Object.freeze({
-    BACK: "Назад",
-    DATE_IS_NOT_IN_THIS_MONTH: "Данный день не из выбранного месяца",
-    DAYS_NAMES: [
-        "пн",
-        "вт",
-        "ср",
-        "чт",
-        "пт",
-        "сб",
-        "вс",
-    ],
-    MONTHS_NAMES: [
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь",
-    ],
-    NEXT: "Далее",
-    TIME: "время",
-});
-
-export {
-    CLASS_NAMES,
-    SETTINGS,
-    DICTIONARY,
-};
+export default CLASS_NAMES;

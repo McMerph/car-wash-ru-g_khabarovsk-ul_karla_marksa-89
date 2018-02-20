@@ -1,6 +1,7 @@
 import DateUtils from "../../../../../model/utils/DateUtils";
+import CLASS_NAMES from "../../../../constants/class-names";
+import DICTIONARY from "../../../../constants/dictionary";
 import ButtonsPickerLayout from "../../ButtonsPickerLayout";
-import { CLASS_NAMES, DICTIONARY } from "../../../../constants";
 import ButtonsUtils from "../../utils/ButtonsUtils";
 import DateOfMonthPicker from "./DateOfMonthPicker";
 import IWeek from "./IWeek";

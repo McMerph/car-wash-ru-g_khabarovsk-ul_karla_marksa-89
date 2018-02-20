@@ -1,6 +1,6 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
-import { CLASS_NAMES } from "../../constants";
+import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import IPicker from "./IPicker";
 import DateOfMonthObserver from "./observers/IDateOfMonthObserver";

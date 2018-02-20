@@ -1,7 +1,8 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
 import Time from "../../../../model/Time";
+import CLASS_NAMES from "../../../constants/class-names";
+import DICTIONARY from "../../../constants/dictionary";
 import ButtonsPickerLayout from "../ButtonsPickerLayout";
-import { CLASS_NAMES, DICTIONARY } from "../../../constants";
 import SliderUtils from "../utils/SliderUtils";
 import TimePicker from "./TimePicker";
 

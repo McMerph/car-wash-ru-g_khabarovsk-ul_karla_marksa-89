@@ -1,4 +1,4 @@
-import { CLASS_NAMES } from "../../constants";
+import CLASS_NAMES from "../../constants/class-names";
 import DirectPicker from "./DirectPicker";
 import IPickerObserver from "./observers/IPickerObserver";
 import ButtonsUtils from "./utils/ButtonsUtils";

@@ -1,4 +1,5 @@
-import { CLASS_NAMES, DICTIONARY } from "../../../constants";
+import CLASS_NAMES from "../../../constants/class-names";
+import DICTIONARY from "../../../constants/dictionary";
 
 export default class SliderUtils {
 

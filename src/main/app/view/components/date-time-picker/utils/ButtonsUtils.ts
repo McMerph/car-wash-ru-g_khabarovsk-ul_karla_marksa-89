@@ -1,5 +1,5 @@
 // TODO Delete class
-import { CLASS_NAMES } from "../../../constants";
+import CLASS_NAMES from "../../../constants/class-names";
 
 export default class ButtonsUtils {
 

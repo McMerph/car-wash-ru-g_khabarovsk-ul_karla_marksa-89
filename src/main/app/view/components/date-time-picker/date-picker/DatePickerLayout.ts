@@ -1,5 +1,6 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
-import { CLASS_NAMES, SETTINGS } from "../../../constants";
+import CLASS_NAMES from "../../../constants/class-names";
+import SETTINGS from "../../../constants/settings";
 import TopControls from "../controls/TopControls";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";

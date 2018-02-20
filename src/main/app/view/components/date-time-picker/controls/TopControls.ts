@@ -1,4 +1,6 @@
-import { CLASS_NAMES, DICTIONARY, SETTINGS } from "../../../constants";
+import CLASS_NAMES from "../../../constants/class-names";
+import DICTIONARY from "../../../constants/dictionary";
+import SETTINGS from "../../../constants/settings";
 import DatePicker from "../date-picker/DatePicker";
 import SliderUtils from "../utils/SliderUtils";
 
