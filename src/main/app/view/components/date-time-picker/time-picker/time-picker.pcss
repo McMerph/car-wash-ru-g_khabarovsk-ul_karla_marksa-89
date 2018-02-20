@@ -16,37 +16,27 @@
 
 .pick-control_time.pick-control_time {
   font: normal 400 20px var(--proxima-nova-font-stack);
-  box-shadow:
-    0 1px var(--picker-border-color),
-    0 -1px var(--picker-border-color);
+  box-shadow: 0 0 0 1px var(--picker-border-color);
 }
 
 .time-picker {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2px;
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 2px var(--picker-border-color);
 }
 
 .time-picker__caption {
   width: 100%;
-  padding-bottom: 4px;
+  padding: 1px 0 4px;
   text-align: center;
-  box-shadow:
-    0 1px var(--picker-border-color),
-    0 -2px var(--picker-border-color),
-    2px 0 var(--picker-border-color),
-    -2px 0 var(--picker-border-color);
-  border-radius: 3px 3px 0 0;
   color: #303030;
   font: normal 400 14px var(--proxima-nova-font-stack);
+  box-shadow: inset 0 -1px var(--picker-border-color);
 }
 
 .time-picker__main {
   width: 100%;
-  padding-bottom: 2px;
-  box-shadow:
-    0 2px var(--picker-border-color),
-    2px 0 var(--picker-border-color),
-    -2px 0 var(--picker-border-color);
-  border-radius: 0 0 3px 3px;
 }

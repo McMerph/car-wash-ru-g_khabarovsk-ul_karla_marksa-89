@@ -29,7 +29,6 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
             direction: "vertical",
             grabCursor: true,
             mousewheel: true,
-            slidesOffsetBefore: 1,
             slidesPerView: 5,
             spaceBetween: 1,
         });
