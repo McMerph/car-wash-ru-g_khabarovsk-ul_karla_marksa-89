@@ -3,14 +3,14 @@ import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import IPicker from "./IPicker";
-import DateOfMonthObserver from "./observers/IDateOfMonthObserver";
-import MonthObserver from "./observers/IMonthObserver";
+import IDateOfMonthObserver from "./observers/IDateOfMonthObserver";
+import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
 
 import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
-export default class DateTimePicker implements IPicker<Date>, MonthObserver, DateOfMonthObserver {
+export default class DateTimePicker implements IPicker<Date>, IMonthObserver, IDateOfMonthObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;

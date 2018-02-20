@@ -1,14 +1,14 @@
 import AvailabilityHandler from "../../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../../model/utils/DateUtils";
 import DirectPicker from "../../DirectPicker";
-import DateOfMonthObserver from "../../observers/IDateOfMonthObserver";
+import IDateOfMonthObserver from "../../observers/IDateOfMonthObserver";
 import DateOfMonthPickerLayout from "./DateOfMonthPickerLayout";
 
 // TODO Merge with DateOfMonthPickerLayout?
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     // TODO Move to parent class?
-    private dateOfMonthObservers: DateOfMonthObserver[] = [];
+    private dateOfMonthObservers: IDateOfMonthObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
@@ -28,11 +28,11 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         this.dateOfMonthObservers.forEach((observer) => observer.onDateOfMonthPick());
     }
 
-    public addDateOfMonthObserver(observer: DateOfMonthObserver): void {
+    public addDateOfMonthObserver(observer: IDateOfMonthObserver): void {
         this.dateOfMonthObservers.push(observer);
     }
 
-    public removeDateOfMonthObserver(observer: DateOfMonthObserver): void {
+    public removeDateOfMonthObserver(observer: IDateOfMonthObserver): void {
         const index: number = this.dateOfMonthObservers.indexOf(observer);
         this.dateOfMonthObservers.splice(index, 1);
     }

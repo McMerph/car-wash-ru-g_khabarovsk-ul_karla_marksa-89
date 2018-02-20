@@ -29,7 +29,7 @@ export default abstract class ButtonsPickerLayout<T> implements IPickerObserver 
         this.buttons = this.picker.getValues().map((value) => this.produceButton(this.picker, value));
     }
 
-    public disable(indices: number[]) {
+    public disableButtons(indices: number[]) {
         ButtonsUtils.enableButtons(...this.buttons);
         ButtonsUtils.disableButtons(...indices.map((index) => this.buttons[index]));
     }

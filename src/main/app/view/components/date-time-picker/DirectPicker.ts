@@ -1,6 +1,6 @@
 import ButtonsPickerLayout from "./ButtonsPickerLayout";
 import IPicker from "./IPicker";
-import PickerObserver from "./observers/IPickerObserver";
+import IPickerObserver from "./observers/IPickerObserver";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?
@@ -14,7 +14,7 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
     private pickedValue: T;
     private disabledValues: T[] = [];
 
-    private pickerObservers: PickerObserver[] = [];
+    private pickerObservers: IPickerObserver[] = [];
 
     public constructor(values: T[]) {
         this.values = values;
@@ -33,11 +33,11 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         return this.layout.getLayout();
     }
 
-    public addPickerObserver(pickerObserver: PickerObserver): void {
+    public addPickerObserver(pickerObserver: IPickerObserver): void {
         this.pickerObservers.push(pickerObserver);
     }
 
-    public removePickerObserver(pickerObserver: PickerObserver): void {
+    public removePickerObserver(pickerObserver: IPickerObserver): void {
         const index: number = this.pickerObservers.indexOf(pickerObserver);
         this.pickerObservers.splice(index, 1);
     }
@@ -68,7 +68,7 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         const disabledIndices = this.disabledValues
             .map((valueToDisable) => this.indexOf(valueToDisable))
             .filter((index) => index !== -1);
-        this.layout.disable(disabledIndices);
+        this.layout.disableButtons(disabledIndices);
     }
 
     public getValues(): T[] {

@@ -1,20 +1,20 @@
 import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
+import TopControls from "../controls/TopControls";
 import IPicker from "../IPicker";
-import DateOfMonthObserver from "../observers/IDateOfMonthObserver";
-import MonthObserver from "../observers/IMonthObserver";
+import IDateOfMonthObserver from "../observers/IDateOfMonthObserver";
+import IMonthObserver from "../observers/IMonthObserver";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DatePickerLayout from "./DatePickerLayout";
-import TopControls from "../controls/TopControls";
 
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
 // TODO Merge with DatePickerLayout?
-export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
+export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
 
-    private monthObservers: MonthObserver[] = [];
-    private dateOfMonthObservers: DateOfMonthObserver[] = [];
+    private monthObservers: IMonthObserver[] = [];
+    private dateOfMonthObservers: IDateOfMonthObserver[] = [];
 
     private availabilityHandler: AvailabilityHandler;
 
@@ -38,20 +38,20 @@ export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
         this.dateOfMonthObservers.forEach((observer) => observer.onDateOfMonthPick());
     }
 
-    public addDateOfMonthObserver(observer: DateOfMonthObserver) {
+    public addDateOfMonthObserver(observer: IDateOfMonthObserver) {
         this.dateOfMonthObservers.push(observer);
     }
 
-    public removeDateOfMonthObserver(observer: DateOfMonthObserver) {
+    public removeDateOfMonthObserver(observer: IDateOfMonthObserver) {
         const index: number = this.dateOfMonthObservers.indexOf(observer);
         this.dateOfMonthObservers.splice(index, 1);
     }
 
-    public addMonthObserver(observer: MonthObserver) {
+    public addMonthObserver(observer: IMonthObserver) {
         this.monthObservers.push(observer);
     }
 
-    public removeMonthObserver(observer: MonthObserver) {
+    public removeMonthObserver(observer: IMonthObserver) {
         const index: number = this.monthObservers.indexOf(observer);
         this.monthObservers.splice(index, 1);
     }
