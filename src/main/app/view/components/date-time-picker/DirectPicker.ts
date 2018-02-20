@@ -1,9 +1,9 @@
 import CLASS_NAMES from "../../constants/class-names";
-import IDirectPicker from "./IDirectPicker";
+import IPicker from "./IPicker";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?
-export default abstract class DirectPicker<T> implements IDirectPicker<T> {
+export default abstract class DirectPicker<T> implements IPicker<T> {
 
     protected buttons: HTMLButtonElement[];
 
