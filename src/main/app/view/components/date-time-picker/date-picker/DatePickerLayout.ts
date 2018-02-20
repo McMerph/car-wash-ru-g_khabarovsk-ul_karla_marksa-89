@@ -1,7 +1,7 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
-import DatePickerControlsLayout from "./DatePickerControlsLayout";
+import DatePickerControlsLayout from "../controls/DatePickerControlsLayout";
 
 export default class DatePickerLayout {
 
@@ -10,7 +10,7 @@ export default class DatePickerLayout {
 
     private readonly picker: DatePicker;
 
-    private controlsLayout: DatePickerControlsLayout;
+    private topControls: DatePickerControlsLayout;
 
     private slider: any;
     private blockSlideChangeTransitionEnd: boolean = false;
@@ -41,8 +41,8 @@ export default class DatePickerLayout {
         this.updateSlider();
 
         // TODO Remove if?
-        if (this.controlsLayout) {
-            this.controlsLayout.updateSelects(this.picker.getMonth());
+        if (this.topControls) {
+            this.topControls.updateSelects(this.picker.getMonth());
         }
     }
 
@@ -55,7 +55,7 @@ export default class DatePickerLayout {
     }
 
     public setControlsLayout(controlsLayout: DatePickerControlsLayout) {
-        this.controlsLayout = controlsLayout;
+        this.topControls = controlsLayout;
     }
 
     private handleSlider(sliderContainer: HTMLElement) {
@@ -85,18 +85,18 @@ export default class DatePickerLayout {
             this.blockSlideChangeTransitionEnd = false;
             if (this.slider.activeIndex === 0) {
                 // TODO Remove if?
-                if (this.controlsLayout) {
-                    this.controlsLayout.updateSelects(this.picker.getPreviousMonth());
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.picker.getPreviousMonth());
                 }
             } else if (this.slider.activeIndex === 1) {
                 // TODO Remove if?
-                if (this.controlsLayout) {
-                    this.controlsLayout.updateSelects(this.picker.getMonth());
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.picker.getMonth());
                 }
             } else if (this.slider.activeIndex === 2) {
                 // TODO Remove if?
-                if (this.controlsLayout) {
-                    this.controlsLayout.updateSelects(this.picker.getNextMonth());
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.picker.getNextMonth());
                 }
             }
         });

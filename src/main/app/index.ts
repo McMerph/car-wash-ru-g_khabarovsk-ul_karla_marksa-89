@@ -18,10 +18,9 @@ import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
 import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
-import DatePickerControlsLayout from "./view/components/date-time-picker/date-picker/DatePickerControlsLayout";
+import DatePickerControlsLayout from "./view/components/date-time-picker/controls/DatePickerControlsLayout";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
-import TimePickerPreviousControlLayout from "./view/components/date-time-picker/time-picker/TimePickerPreviousControlLayout";
 import ModalHandler from "./view/components/modal/ModalHandler";
 import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 
@@ -36,22 +35,17 @@ function start() {
 
     const datePicker: DatePicker = dateTimePicker.getDatePicker();
     const dateSlider: any = dateTimePicker.getDateSlider();
-    const datePickerControlsLayout: DatePickerControlsLayout = new DatePickerControlsLayout(datePicker, dateSlider);
-    datePicker.setControlsLayout(datePickerControlsLayout);
-
     const timePicker: TimePicker = dateTimePicker.getTimePicker();
     const timeSlider: any = dateTimePicker.getTimeSlider();
-    const timePickerPreviousControlLayout: TimePickerPreviousControlLayout = new TimePickerPreviousControlLayout(timeSlider);
-    timePicker.setPreviousControlLayout(timePickerPreviousControlLayout);
+    const datePickerControlsLayout: DatePickerControlsLayout = new DatePickerControlsLayout(datePicker, dateSlider, timeSlider);
+    datePicker.setControlsLayout(datePickerControlsLayout);
 
     const bottomControls = new BottomControls(timeSlider);
     timePicker.setNextTimeControl(bottomControls.getNextTimeControl());
-
-    const pickersTopControls: HTMLElement = (document.querySelector(".pickers-top-controls") as HTMLElement);
-    pickersTopControls.appendChild(datePickerControlsLayout.getLayout());
-    pickersTopControls.appendChild(timePickerPreviousControlLayout.getControl());
+    timePicker.setPreviousTimeControl(datePickerControlsLayout.getPreviousTimeControl());
 
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
+    dateTimePickerParent.insertBefore(datePickerControlsLayout.getLayout(), dateTimePickerParent.childNodes.item(3));
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 

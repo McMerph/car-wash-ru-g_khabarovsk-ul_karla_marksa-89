@@ -7,7 +7,7 @@ import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DatePickerLayout from "./DatePickerLayout";
 
 import "./date-picker.pcss";
-import DatePickerControlsLayout from "./DatePickerControlsLayout";
+import DatePickerControlsLayout from "../controls/DatePickerControlsLayout";
 
 // TODO Check current time. Re-render on change
 export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {

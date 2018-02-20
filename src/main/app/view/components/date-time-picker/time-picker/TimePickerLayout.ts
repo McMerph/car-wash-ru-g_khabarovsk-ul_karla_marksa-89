@@ -3,7 +3,6 @@ import Time from "../../../../model/Time";
 import ButtonsPickerLayout from "../ButtonsPickerLayout";
 import SliderUtils from "../utils/SliderUtils";
 import TimePicker from "./TimePicker";
-import TimePickerPreviousControlLayout from "./TimePickerPreviousControlLayout";
 
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
@@ -12,9 +11,8 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     private times: Time[];
 
+    private previousTimeControl: HTMLElement;
     private nextTimeControl: HTMLElement;
-
-    private previousControlLayout: TimePickerPreviousControlLayout;
 
     private slider: any;
     private sliderContainer: HTMLElement;
@@ -72,15 +70,14 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
                 if (this.nextTimeControl) {
                     this.nextTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
                 }
-
                 // TODO Remove if?
-                if (this.previousControlLayout) {
-                    this.previousControlLayout.getControl().classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                if (this.previousTimeControl) {
+                    this.previousTimeControl.classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
                 }
             } else if (this.isSliderInTheEnd()) {
                 // TODO Remove if?
-                if (this.previousControlLayout) {
-                    this.previousControlLayout.getControl().classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                if (this.previousTimeControl) {
+                    this.previousTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
                 }
                 // TODO Remove if?
                 if (this.nextTimeControl) {
@@ -88,12 +85,12 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
                 }
             } else {
                 // TODO Remove if?
-                if (this.previousControlLayout) {
-                    this.previousControlLayout.getControl().classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
-                }
-                // TODO Remove if?
                 if (this.nextTimeControl) {
                     this.nextTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                }
+                // TODO Remove if?
+                if (this.previousTimeControl) {
+                    this.previousTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
                 }
             }
         });
@@ -103,8 +100,8 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         return this.slider;
     }
 
-    public setPreviousControlLayout(previousControlLayout: TimePickerPreviousControlLayout) {
-        this.previousControlLayout = previousControlLayout;
+    public setPreviousTimeControl(previousTimeControl: HTMLElement) {
+        this.previousTimeControl = previousTimeControl;
     }
 
     public setNextTimeControl(nextTimeControl: HTMLElement) {
