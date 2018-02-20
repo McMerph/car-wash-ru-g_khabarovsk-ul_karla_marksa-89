@@ -21,8 +21,6 @@ export default class TimePicker extends DirectPicker<Time> {
 
     public constructor(times: Time[]) {
         super(times);
-        this.generateButtons();
-
         this.times = times;
 
         this.sliderContainer = SliderUtils.getContainer();
@@ -39,9 +37,12 @@ export default class TimePicker extends DirectPicker<Time> {
         return time.getRepresentation();
     }
 
-    public onPick(index: number): void {
-        super.onPick(index);
-        this.slider.slideTo(index);
+    public pick(time: Time): void {
+        super.pick(time);
+        const index: number = this.indexOf(time);
+        if (index !== -1 && !this.isDisabled(time)) {
+            this.slider.slideTo(index);
+        }
     }
 
     public updateSlider(): void {

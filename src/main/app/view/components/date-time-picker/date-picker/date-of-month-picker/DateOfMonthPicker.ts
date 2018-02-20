@@ -20,7 +20,6 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         super(DateUtils.getDatesOfMonth(month));
 
         this.month = month;
-        this.generateButtons();
         this.disable(DateUtils.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
     }
