@@ -1,4 +1,4 @@
-// TODO Delete class
+// TODO Delete class? Merge with DirectPicker class?
 import CLASS_NAMES from "../../../constants/class-names";
 
 export default class ButtonsUtils {
