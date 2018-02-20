@@ -17,13 +17,13 @@ import IApi from "./model/api/IApi";
 import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
-import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
-import ModalHandler from "./view/components/modal/ModalHandler";
 import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
 import DatePickerControlsLayout from "./view/components/date-time-picker/date-picker/DatePickerControlsLayout";
+import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
-import TimePickerPreviousControlLayout from "./view/components/date-time-picker/time-picker/TimePickerPreviousControlLayout";
 import TimePickerNextControlLayout from "./view/components/date-time-picker/time-picker/TimePickerNextControlLayout";
+import TimePickerPreviousControlLayout from "./view/components/date-time-picker/time-picker/TimePickerPreviousControlLayout";
+import ModalHandler from "./view/components/modal/ModalHandler";
 
 padStart.shim();
 

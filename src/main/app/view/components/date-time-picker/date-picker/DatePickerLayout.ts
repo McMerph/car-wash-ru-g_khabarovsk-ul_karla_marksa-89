@@ -3,7 +3,6 @@ import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
 import DatePickerControlsLayout from "./DatePickerControlsLayout";
 
-// TODO Extends ButtonsPickerLayout?
 export default class DatePickerLayout {
 
     private static readonly CLASS_NAME: string = "date-picker";
