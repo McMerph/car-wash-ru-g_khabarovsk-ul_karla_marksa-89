@@ -8,7 +8,6 @@ import SliderUtils from "../utils/SliderUtils";
 import "./time-picker.pcss";
 
 // TODO Check current time. Re-render on change
-// TODO Merge with TimePickerLayout?
 export default class TimePicker extends DirectPicker<Time> {
 
     private times: Time[];
@@ -16,7 +15,10 @@ export default class TimePicker extends DirectPicker<Time> {
     private previousTimeControl: HTMLElement;
     private nextTimeControl: HTMLElement;
 
+    // TODO Move to DirectPicker class?
     private slider: any;
+
+    // TODO Move to DirectPicker class?
     private sliderContainer: HTMLElement;
 
     public constructor(times: Time[]) {
@@ -31,27 +33,6 @@ export default class TimePicker extends DirectPicker<Time> {
             slidesPerView: 5,
             spaceBetween: 1,
         });
-    }
-
-    public getRepresentation(time: Time): string {
-        return time.getRepresentation();
-    }
-
-    public pick(time: Time): void {
-        super.pick(time);
-        const index: number = this.indexOf(time);
-        if (index !== -1 && !this.isDisabled(time)) {
-            this.slider.slideTo(index);
-        }
-    }
-
-    public updateSlider(): void {
-        this.slider.update();
-    }
-
-    // TODO Delete?
-    public setSlidesPerView(amount: number): void {
-        Object.assign(this.slider.params, {slidesPerView: amount});
     }
 
     public getLayout(): HTMLElement {
@@ -69,6 +50,18 @@ export default class TimePicker extends DirectPicker<Time> {
         layout.appendChild(this.sliderContainer);
 
         return layout;
+    }
+
+    public pick(time: Time): void {
+        super.pick(time);
+        const index: number = this.indexOf(time);
+        if (index !== -1 && !this.isDisabled(time)) {
+            this.slider.slideTo(index);
+        }
+    }
+
+    public updateSlider(): void {
+        this.slider.update();
     }
 
     public handleNavigation(): void {
@@ -114,6 +107,10 @@ export default class TimePicker extends DirectPicker<Time> {
 
     public setNextTimeControl(nextTimeControl: HTMLElement) {
         this.nextTimeControl = nextTimeControl;
+    }
+
+    protected getRepresentation(time: Time): string {
+        return time.getRepresentation();
     }
 
     protected produceButton(time: Time): HTMLButtonElement {

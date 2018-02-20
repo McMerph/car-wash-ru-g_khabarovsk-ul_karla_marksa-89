@@ -18,14 +18,24 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
         super(DateUtils.getDatesOfMonth(month));
-
         this.month = month;
+
         this.disable(DateUtils.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
     }
 
-    public getRepresentation(dateOfMonth: Date): string {
-        return dateOfMonth.getDate().toString();
+    public getLayout(): HTMLElement {
+        const layout: HTMLDivElement = document.createElement("div");
+        layout.classList.add(CLASS_NAMES.DATE_PICKER.MONTH);
+
+        layout.appendChild(this.getMonthHeader());
+        const weeks: IWeek[] = new WeeksProducer(this.month).getWeeks();
+        const dates: HTMLDivElement = document.createElement("div");
+        dates.classList.add(CLASS_NAMES.DATE_PICKER.DATES);
+        weeks.forEach((week) => dates.appendChild(this.getWeekLayout(week)));
+        layout.appendChild(dates);
+
+        return layout;
     }
 
     public pick(dateOfMonth: Date): void {
@@ -42,18 +52,8 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         this.dateOfMonthObservers.splice(index, 1);
     }
 
-    public getLayout(): HTMLElement {
-        const layout: HTMLDivElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.DATE_PICKER.MONTH);
-
-        layout.appendChild(this.getMonthHeader());
-        const weeks: IWeek[] = new WeeksProducer(this.month).getWeeks();
-        const dates: HTMLDivElement = document.createElement("div");
-        dates.classList.add(CLASS_NAMES.DATE_PICKER.DATES);
-        weeks.forEach((week) => dates.appendChild(this.getWeekLayout(week)));
-        layout.appendChild(dates);
-
-        return layout;
+    protected getRepresentation(dateOfMonth: Date): string {
+        return dateOfMonth.getDate().toString();
     }
 
     protected produceButton(date: Date): HTMLButtonElement {
