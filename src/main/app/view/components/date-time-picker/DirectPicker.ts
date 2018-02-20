@@ -1,10 +1,9 @@
 import CLASS_NAMES from "../../constants/class-names";
-import IPicker from "./IPicker";
-import IPickerObserver from "./observers/IPickerObserver";
+import IDirectPicker from "./IDirectPicker";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?
-export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObserver {
+export default abstract class DirectPicker<T> implements IDirectPicker<T> {
 
     protected buttons: HTMLButtonElement[];
 
@@ -12,13 +11,10 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
     private picked: boolean;
     private pickedValue: T;
     private disabledValues: T[] = [];
-    private pickerObservers: IPickerObserver[] = [];
 
     public constructor(values: T[]) {
         this.values = values;
         this.picked = false;
-
-        this.pickerObservers.push(this);
     }
 
     public abstract getRepresentation(value: T): string;
@@ -42,21 +38,12 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
         this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
     }
 
-    public addPickerObserver(pickerObserver: IPickerObserver): void {
-        this.pickerObservers.push(pickerObserver);
-    }
-
-    public removePickerObserver(pickerObserver: IPickerObserver): void {
-        const index: number = this.pickerObservers.indexOf(pickerObserver);
-        this.pickerObservers.splice(index, 1);
-    }
-
     public pick(valueToPick: T): void {
         const index: number = this.indexOf(valueToPick);
         if (index !== -1 && !this.isDisabled(valueToPick)) {
             this.picked = true;
             this.pickedValue = valueToPick;
-            this.pickerObservers.forEach((observer) => observer.onPick(index));
+            this.onPick(index);
         }
     }
 
@@ -66,7 +53,7 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
 
     public unPick(): void {
         this.picked = false;
-        this.pickerObservers.forEach((observer) => observer.onUnpick());
+        this.onUnpick();
     }
 
     public disable(values: T[]) {
