@@ -47,6 +47,10 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         this.disableButtons(disabledIndices);
     }
 
+    public getValues(): T[] {
+        return this.values;
+    }
+
     protected abstract getRepresentation(value: T): string;
 
     protected abstract valuesEquals(value1: T, value2: T): boolean;

@@ -10,20 +10,17 @@ import "./time-picker.pcss";
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
 
-    private times: Time[];
-
     private previousTimeControl: HTMLElement;
     private nextTimeControl: HTMLElement;
 
-    // TODO Move to DirectPicker class?
+    // TODO Move to own class?
     private slider: any;
 
-    // TODO Move to DirectPicker class?
+    // TODO Move to own class?
     private sliderContainer: HTMLElement;
 
     public constructor(times: Time[]) {
         super(times);
-        this.times = times;
 
         this.sliderContainer = SliderUtils.getContainer();
         this.slider = new Slider(this.sliderContainer, {
@@ -64,7 +61,34 @@ export default class TimePicker extends DirectPicker<Time> {
         this.slider.update();
     }
 
-    public handleNavigation(): void {
+    public getSlider(): any {
+        return this.slider;
+    }
+
+    public setPreviousTimeControl(previousTimeControl: HTMLElement) {
+        this.previousTimeControl = previousTimeControl;
+    }
+
+    public setNextTimeControl(nextTimeControl: HTMLElement) {
+        this.nextTimeControl = nextTimeControl;
+    }
+
+    protected getRepresentation(time: Time): string {
+        return time.getRepresentation();
+    }
+
+    protected produceButton(time: Time): HTMLButtonElement {
+        const button: HTMLButtonElement = super.produceButton(time);
+        button.classList.add(CLASS_NAMES.PICK_CONTROL.TIME);
+
+        return button;
+    }
+
+    protected valuesEquals(time1: Time, time2: Time): boolean {
+        return time1.equals(time2);
+    }
+
+    private handleNavigation(): void {
         this.slider.on("slideChange", () => {
             if (this.slider.activeIndex <= 0) {
                 // TODO Remove if?
@@ -97,35 +121,8 @@ export default class TimePicker extends DirectPicker<Time> {
         });
     }
 
-    public getSlider(): any {
-        return this.slider;
-    }
-
-    public setPreviousTimeControl(previousTimeControl: HTMLElement) {
-        this.previousTimeControl = previousTimeControl;
-    }
-
-    public setNextTimeControl(nextTimeControl: HTMLElement) {
-        this.nextTimeControl = nextTimeControl;
-    }
-
-    protected getRepresentation(time: Time): string {
-        return time.getRepresentation();
-    }
-
-    protected produceButton(time: Time): HTMLButtonElement {
-        const button: HTMLButtonElement = super.produceButton(time);
-        button.classList.add(CLASS_NAMES.PICK_CONTROL.TIME);
-
-        return button;
-    }
-
-    protected valuesEquals(time1: Time, time2: Time): boolean {
-        return time1.equals(time2);
-    }
-
     private isSliderInTheEnd(): boolean {
-        return this.slider.activeIndex >= this.times.length - this.slider.params.slidesPerView;
+        return this.slider.activeIndex >= super.getValues().length - this.slider.params.slidesPerView;
     }
 
 }
