@@ -1,16 +1,12 @@
 import DatePicker from "../date-picker/DatePicker";
 import SliderUtils from "../utils/SliderUtils";
-import { CONTROLS_TOP_CLASS, NAVIGATION_CLASS, NAVIGATION_CLASS_DISABLED, NAVIGATION_CLASS_TO_TOP } from "./index";
+import {
+    CONTROLS_TOP_CLASS, MONTHS_NAMES, NAVIGATION_CLASS, NAVIGATION_CLASS_DISABLED, NAVIGATION_CLASS_TO_LEFT,
+    NAVIGATION_CLASS_TO_RIGHT, NAVIGATION_CLASS_TO_TOP, SELECT_CLASS, YEARS_OFFSET
+} from "./constants";
 
 // TODO Implement ILayout interface with getLayout() method?
 export default class TopControls {
-    private static readonly MONTHS_NAMES: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-    private static readonly YEARS_OFFSET: number = 5;
-
-    private static readonly SELECT_CLASS = "picker__chooser";
-    private static readonly NAVIGATION_CLASS = "picker__navigation";
-
     private readonly datePicker: DatePicker;
     private readonly dateSlider: any;
 
@@ -38,13 +34,13 @@ export default class TopControls {
         this.yearSelect = this.getYearSelect();
         this.previousDateButton = SliderUtils.getPreviousButton(this.dateSlider);
         this.previousDateButton.classList.add(
-            "picker__navigation",
-            "picker__navigation_to-left",
+            NAVIGATION_CLASS,
+            NAVIGATION_CLASS_TO_LEFT,
         );
         this.nextDateButton = SliderUtils.getNextButton(this.dateSlider);
         this.nextDateButton.classList.add(
-            TopControls.NAVIGATION_CLASS,
-            "date-picker__navigation_to-right",
+            NAVIGATION_CLASS,
+            NAVIGATION_CLASS_TO_RIGHT,
         );
 
         this.layout = document.createElement("div");
@@ -86,8 +82,8 @@ export default class TopControls {
 
     private getMonthSelect(): HTMLSelectElement {
         const monthSelect: HTMLSelectElement = document.createElement("select");
-        monthSelect.classList.add(TopControls.SELECT_CLASS);
-        TopControls.MONTHS_NAMES.forEach((monthName, monthIndex) => {
+        monthSelect.classList.add(SELECT_CLASS);
+        MONTHS_NAMES.forEach((monthName, monthIndex) => {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
         monthSelect.addEventListener("change", () => {
@@ -110,7 +106,7 @@ export default class TopControls {
 
     private getYearSelect(): HTMLSelectElement {
         const yearSelect: HTMLSelectElement = document.createElement("select");
-        yearSelect.classList.add(TopControls.SELECT_CLASS);
+        yearSelect.classList.add(SELECT_CLASS);
         this.getSelectableYears().forEach((year) => {
             yearSelect.options.add(this.getYearOption(year));
         });
@@ -122,8 +118,8 @@ export default class TopControls {
     }
 
     private getSelectableYears(): string[] {
-        const minYear: number = this.datePicker.getMonth().getFullYear() - TopControls.YEARS_OFFSET;
-        const maxYear: number = this.datePicker.getMonth().getFullYear() + TopControls.YEARS_OFFSET;
+        const minYear: number = this.datePicker.getMonth().getFullYear() - YEARS_OFFSET;
+        const maxYear: number = this.datePicker.getMonth().getFullYear() + YEARS_OFFSET;
         const years: string[] = [];
         for (let i = minYear; i <= maxYear; i++) {
             years.push(i.toString(10));

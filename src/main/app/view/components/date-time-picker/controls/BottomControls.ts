@@ -1,5 +1,5 @@
 import SliderUtils from "../utils/SliderUtils";
-import { CONTROLS_BOTTOM_CLASS, NAVIGATION_CLASS, NAVIGATION_CLASS_TO_BOTTOM } from "./index";
+import { CONTROLS_BOTTOM_CLASS, NAVIGATION_CLASS, NAVIGATION_CLASS_TO_BOTTOM } from "./constants";
 
 // TODO Implement ILayout interface with getLayout() method?
 export default class BottomControls {
