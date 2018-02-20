@@ -46,11 +46,15 @@ function start() {
     timePicker.setPreviousControlLayout(timePickerPreviousControlLayout);
     timePicker.setNextControlLayout(timePickerNextControlLayout);
 
+    const pickersTopControls: HTMLElement = (document.querySelector(".pickers-top-controls") as HTMLElement);
+    pickersTopControls.appendChild(datePickerControlsLayout.getLayout());
+    pickersTopControls.appendChild(timePickerPreviousControlLayout.getControl());
+
+    const pickersBottomControls: HTMLElement = (document.querySelector(".pickers-bottom-controls") as HTMLElement);
+    pickersBottomControls.appendChild(timePickerNextControlLayout.getControl());
+
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
-    dateTimePickerParent.insertBefore(datePickerControlsLayout.getLayout(), dateTimePickerParent.childNodes.item(2));
-    dateTimePickerParent.insertBefore(timePickerPreviousControlLayout.getControl(), dateTimePickerParent.childNodes.item(3));
-    dateTimePickerParent.insertBefore(timePickerNextControlLayout.getControl(), dateTimePickerParent.childNodes.item(4));
-    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(5));
+    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
 
     dateTimePicker.updateSliders();
     // Fix for ie
