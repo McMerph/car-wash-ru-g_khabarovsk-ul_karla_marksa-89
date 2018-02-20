@@ -1,6 +1,7 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
+import DatePickerControlsLayout from "./DatePickerControlsLayout";
 
 // TODO Extends ButtonsPickerLayout?
 export default class DatePickerLayout {
@@ -14,7 +15,8 @@ export default class DatePickerLayout {
 
     private readonly picker: DatePicker;
 
-    // tslint:disable-next-line:no-any
+    private controlsLayout: DatePickerControlsLayout;
+
     private slider: any;
     private blockSlideChangeTransitionEnd: boolean = false;
 
@@ -55,11 +57,6 @@ export default class DatePickerLayout {
         controls.appendChild(this.nextButton);
 
         layout.appendChild(controls);
-        // TODO Delete?
-        // layout.appendChild(this.previousButton);
-        // layout.appendChild(this.monthSelect);
-        // layout.appendChild(this.yearSelect);
-        // layout.appendChild(this.nextButton);
         layout.appendChild(this.sliderContainer);
 
         return layout;
@@ -73,6 +70,11 @@ export default class DatePickerLayout {
         this.slider.slideTo(1, animated ? undefined : 0);
         this.updateSlider();
 
+        // TODO Remove if?
+        if (this.controlsLayout) {
+            this.controlsLayout.updateSelects(this.picker.getMonth());
+        }
+
         if (this.yearSelect.parentNode) {
             const yearSelect: HTMLSelectElement = this.getYearSelect();
             this.yearSelect.parentNode.replaceChild(yearSelect, this.yearSelect);
@@ -82,6 +84,14 @@ export default class DatePickerLayout {
 
     public updateSlider(): void {
         this.slider.update();
+    }
+
+    public getSlider(): any {
+        return this.slider;
+    }
+
+    public setControlsLayout(controlsLayout: DatePickerControlsLayout) {
+        this.controlsLayout = controlsLayout;
     }
 
     private handleSlider(sliderContainer: HTMLElement) {
@@ -111,10 +121,22 @@ export default class DatePickerLayout {
             this.blockSlideChangeTransitionEnd = false;
             if (this.slider.activeIndex === 0) {
                 this.updateSelects(this.picker.getPreviousMonth());
+                // TODO Remove if?
+                if (this.controlsLayout) {
+                    this.controlsLayout.updateSelects(this.picker.getPreviousMonth());
+                }
             } else if (this.slider.activeIndex === 1) {
                 this.updateSelects(this.picker.getMonth());
+                // TODO Remove if?
+                if (this.controlsLayout) {
+                    this.controlsLayout.updateSelects(this.picker.getMonth());
+                }
             } else if (this.slider.activeIndex === 2) {
                 this.updateSelects(this.picker.getNextMonth());
+                // TODO Remove if?
+                if (this.controlsLayout) {
+                    this.controlsLayout.updateSelects(this.picker.getNextMonth());
+                }
             }
         });
     }

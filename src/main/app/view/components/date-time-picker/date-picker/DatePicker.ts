@@ -7,6 +7,7 @@ import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DatePickerLayout from "./DatePickerLayout";
 
 import "./date-picker.pcss";
+import DatePickerControlsLayout from "./DatePickerControlsLayout";
 
 // TODO Check current time. Re-render on change
 export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
@@ -126,6 +127,14 @@ export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
 
     public sameYear(year: number): boolean {
         return this.month.getFullYear() === year;
+    }
+
+    public getSlider(): any {
+        return this.layout.getSlider();
+    }
+
+    public setControlsLayout(controlsLayout: DatePickerControlsLayout) {
+        this.layout.setControlsLayout(controlsLayout);
     }
 
     private updateMonth(month: Date, animated?: boolean): void {

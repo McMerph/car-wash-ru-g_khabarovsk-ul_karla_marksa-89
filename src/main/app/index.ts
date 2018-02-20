@@ -19,6 +19,8 @@ import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import ModalHandler from "./view/components/modal/ModalHandler";
+import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
+import DatePickerControlsLayout from "./view/components/date-time-picker/date-picker/DatePickerControlsLayout";
 
 padStart.shim();
 
@@ -27,9 +29,16 @@ function start() {
     const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
-    const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
-    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(2));
+    const datePicker: DatePicker = dateTimePicker.getDatePicker();
+    const dateSlider: any = dateTimePicker.getDateSlider();
+    const datePickerControlsLayout: DatePickerControlsLayout = new DatePickerControlsLayout(datePicker, dateSlider);
+    datePicker.setControlsLayout(datePickerControlsLayout);
+
+    const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
+    dateTimePickerParent.insertBefore(datePickerControlsLayout.getLayout(), dateTimePickerParent.childNodes.item(2));
+    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(3));
+
     dateTimePicker.updateSliders();
     // Fix for ie
     dateTimePicker.updateSliders();
@@ -50,10 +59,6 @@ function start() {
     toNearestButton.addEventListener("click", () => {
         dateTimePicker.pickNearest();
     });
-
-    // TODO Delete?
-    // openButton.click();
-    // toNearestButton.click();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
