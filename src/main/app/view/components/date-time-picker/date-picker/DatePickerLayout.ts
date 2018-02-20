@@ -1,12 +1,10 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
+import { CLASS_NAMES, SETTINGS } from "../../../constants";
 import TopControls from "../controls/TopControls";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
 
 export default class DatePickerLayout {
-
-    private static readonly CLASS_NAME: string = "date-picker";
-    private static readonly SPACE_BETWEEN_SLIDES: number = 25;
 
     private readonly picker: DatePicker;
 
@@ -20,13 +18,12 @@ export default class DatePickerLayout {
     public constructor(picker: DatePicker) {
         this.picker = picker;
         this.sliderContainer = SliderUtils.getContainer();
-        this.sliderContainer.classList.add("date-picker__main");
         this.handleSlider(this.sliderContainer);
     }
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.classList.add(DatePickerLayout.CLASS_NAME);
+        layout.classList.add(CLASS_NAMES.DATE_PICKER.MAIN);
         layout.appendChild(this.sliderContainer);
 
         return layout;
@@ -61,7 +58,7 @@ export default class DatePickerLayout {
     private handleSlider(sliderContainer: HTMLElement) {
         this.slider = new Slider(sliderContainer, {
             grabCursor: true,
-            spaceBetween: DatePickerLayout.SPACE_BETWEEN_SLIDES,
+            spaceBetween: SETTINGS.SPACE_BETWEEN_MONTHS_SLIDES,
         });
         this.handleSlideChange();
         this.handleSlideChangeTransitionEnd();

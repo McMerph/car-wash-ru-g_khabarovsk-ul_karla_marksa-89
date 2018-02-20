@@ -1,5 +1,6 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
+import { CLASS_NAMES } from "../../constants";
 import DatePicker from "./date-picker/DatePicker";
 import IPicker from "./IPicker";
 import DateOfMonthObserver from "./observers/IDateOfMonthObserver";
@@ -10,8 +11,6 @@ import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
 export default class DateTimePicker implements IPicker<Date>, MonthObserver, DateOfMonthObserver {
-
-    private static readonly CLASS_NAME: string = "date-time-picker";
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
@@ -52,7 +51,7 @@ export default class DateTimePicker implements IPicker<Date>, MonthObserver, Dat
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.classList.add(DateTimePicker.CLASS_NAME);
+        layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER);
         layout.appendChild(this.datePicker.getLayout());
         layout.appendChild(this.timePicker.getLayout());
 

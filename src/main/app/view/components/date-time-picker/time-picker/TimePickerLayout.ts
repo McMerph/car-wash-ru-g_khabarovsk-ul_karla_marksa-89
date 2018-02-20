@@ -1,13 +1,11 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
 import Time from "../../../../model/Time";
 import ButtonsPickerLayout from "../ButtonsPickerLayout";
+import { CLASS_NAMES, DICTIONARY } from "../../../constants";
 import SliderUtils from "../utils/SliderUtils";
 import TimePicker from "./TimePicker";
 
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
-
-    private static readonly CLASS: string = "time-picker";
-    private static readonly DISABLED_NAVIGATION_CLASS: string = "picker__navigation_disabled";
 
     private times: Time[];
 
@@ -22,7 +20,6 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
         this.times = times;
 
         this.sliderContainer = SliderUtils.getContainer();
-        this.sliderContainer.classList.add("time-picker__main");
         this.slider = new Slider(this.sliderContainer, {
             direction: "vertical",
             grabCursor: true,
@@ -48,14 +45,14 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
-        layout.classList.add(TimePickerLayout.CLASS);
+        layout.classList.add(CLASS_NAMES.TIME_PICKER.MAIN);
 
         this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
         this.handleNavigation();
 
         const caption: HTMLDivElement = document.createElement("div");
-        caption.classList.add("time-picker__caption");
-        caption.textContent = "время";
+        caption.classList.add(CLASS_NAMES.TIME_PICKER.CAPTION);
+        caption.textContent = DICTIONARY.TIME;
 
         layout.appendChild(caption);
         layout.appendChild(this.sliderContainer);
@@ -68,29 +65,29 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
             if (this.slider.activeIndex <= 0) {
                 // TODO Remove if?
                 if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.nextTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
                 // TODO Remove if?
                 if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.previousTimeControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
             } else if (this.isSliderInTheEnd()) {
                 // TODO Remove if?
                 if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.previousTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
                 // TODO Remove if?
                 if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.add(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.nextTimeControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
             } else {
                 // TODO Remove if?
                 if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.nextTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
                 // TODO Remove if?
                 if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.remove(TimePickerLayout.DISABLED_NAVIGATION_CLASS);
+                    this.previousTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
                 }
             }
         });
@@ -110,7 +107,7 @@ export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     protected produceButton(picker: TimePicker, time: Time): HTMLButtonElement {
         const button: HTMLButtonElement = super.produceButton(picker, time);
-        button.classList.add("pick-control_time");
+        button.classList.add(CLASS_NAMES.PICK_CONTROL.TIME);
 
         return button;
     }

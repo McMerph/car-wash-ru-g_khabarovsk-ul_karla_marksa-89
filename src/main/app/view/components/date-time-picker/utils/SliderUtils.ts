@@ -1,11 +1,13 @@
+import { CLASS_NAMES, DICTIONARY } from "../../../constants";
+
 export default class SliderUtils {
 
     public static getContainer(): HTMLElement {
         const wrapper: HTMLDivElement = document.createElement("div");
-        wrapper.classList.add(SliderUtils.WRAPPER_CLASS);
+        wrapper.classList.add(CLASS_NAMES.SWIPER.WRAPPER);
 
         const container: HTMLDivElement = document.createElement("div");
-        container.classList.add(SliderUtils.CONTAINER_CLASS);
+        container.classList.add(CLASS_NAMES.SWIPER.CONTAINER);
         container.appendChild(wrapper);
 
         return container;
@@ -13,31 +15,25 @@ export default class SliderUtils {
 
     public static getSlide(child: Node): HTMLElement {
         const slide = document.createElement("div");
-        slide.classList.add(SliderUtils.SLIDE_CLASS);
+        slide.classList.add(CLASS_NAMES.SWIPER.SLIDE);
         slide.appendChild(child);
         return slide;
     }
 
-    // tslint:disable-next-line:no-any
     public static getPreviousButton(slider: any): HTMLButtonElement {
         const previousButton: HTMLButtonElement = document.createElement("button");
-        previousButton.setAttribute("aria-label", "Назад");
+        previousButton.setAttribute("aria-label", DICTIONARY.BACK);
         previousButton.onclick = () => slider.slidePrev();
 
         return previousButton;
     }
 
-    // tslint:disable-next-line:no-any
     public static getNextButton(slider: any): HTMLButtonElement {
         const nextButton: HTMLButtonElement = document.createElement("button");
-        nextButton.setAttribute("aria-label", "Далее");
+        nextButton.setAttribute("aria-label", DICTIONARY.NEXT);
         nextButton.onclick = () => slider.slideNext();
 
         return nextButton;
     }
-
-    private static readonly CONTAINER_CLASS = "swiper-container";
-    private static readonly WRAPPER_CLASS = "swiper-wrapper";
-    private static readonly SLIDE_CLASS = "swiper-slide";
 
 }

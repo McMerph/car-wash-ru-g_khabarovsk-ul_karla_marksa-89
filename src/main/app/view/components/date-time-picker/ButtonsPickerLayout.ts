@@ -1,12 +1,10 @@
+import { CLASS_NAMES } from "../../constants";
 import DirectPicker from "./DirectPicker";
 import IPickerObserver from "./observers/IPickerObserver";
 import ButtonsUtils from "./utils/ButtonsUtils";
 
 // TODO Rename to PickerLayout?
 export default abstract class ButtonsPickerLayout<T> implements IPickerObserver {
-
-    protected static readonly PICK_BUTTON_CLASS = "pick-control";
-    protected static readonly PICKED_CLASS = "pick-control_picked";
 
     protected picker: DirectPicker<T>;
     protected buttons: HTMLButtonElement[];
@@ -19,12 +17,12 @@ export default abstract class ButtonsPickerLayout<T> implements IPickerObserver 
     public abstract getLayout(): HTMLElement;
 
     public onPick(index: number) {
-        this.buttons.forEach((button) => button.classList.remove(ButtonsPickerLayout.PICKED_CLASS));
-        this.buttons[index].classList.add(ButtonsPickerLayout.PICKED_CLASS);
+        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
+        this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.PICKED);
     }
 
     public onUnpick() {
-        this.buttons.forEach((button) => button.classList.remove(ButtonsPickerLayout.PICKED_CLASS));
+        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
     }
 
     public generateButtons() {
@@ -41,7 +39,7 @@ export default abstract class ButtonsPickerLayout<T> implements IPickerObserver 
         button.tabIndex = 0;
         button.textContent = picker.getRepresentation(value);
         button.onclick = () => picker.pick(value);
-        button.classList.add(ButtonsPickerLayout.PICK_BUTTON_CLASS);
+        button.classList.add(CLASS_NAMES.PICK_CONTROL.MAIN);
 
         return button;
     }

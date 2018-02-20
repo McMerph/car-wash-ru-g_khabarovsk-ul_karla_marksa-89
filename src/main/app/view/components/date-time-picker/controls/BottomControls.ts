@@ -1,5 +1,5 @@
 import SliderUtils from "../utils/SliderUtils";
-import { CONTROLS_BOTTOM_CLASS, NAVIGATION_CLASS, NAVIGATION_CLASS_TO_BOTTOM } from "./constants";
+import { CLASS_NAMES } from "../../../constants";
 
 // TODO Implement ILayout interface with getLayout() method?
 export default class BottomControls {
@@ -10,12 +10,12 @@ export default class BottomControls {
     public constructor(slider: any) {
         this.nextTimeControl = SliderUtils.getNextButton(slider);
         this.nextTimeControl.classList.add(
-            NAVIGATION_CLASS,
-            NAVIGATION_CLASS_TO_BOTTOM,
+            CLASS_NAMES.NAVIGATION.MAIN,
+            CLASS_NAMES.NAVIGATION.TO_BOTTOM,
         );
 
         this.layout = document.createElement("div");
-        this.layout.classList.add(CONTROLS_BOTTOM_CLASS);
+        this.layout.classList.add(CLASS_NAMES.CONTROLS.BOTTOM);
         this.layout.appendChild(this.nextTimeControl);
     }
 
