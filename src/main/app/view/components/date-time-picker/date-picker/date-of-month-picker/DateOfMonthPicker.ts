@@ -4,7 +4,6 @@ import CLASS_NAMES from "../../../../constants/class-names";
 import DICTIONARY from "../../../../constants/dictionary";
 import DirectPicker from "../../DirectPicker";
 import IDateOfMonthObserver from "../../observers/IDateOfMonthObserver";
-import ButtonsUtils from "../../utils/ButtonsUtils";
 import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
@@ -62,7 +61,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         const button: HTMLButtonElement = super.produceButton(picker, date);
         button.classList.add(CLASS_NAMES.PICK_CONTROL.DATE);
         if (this.isDisabled(date)) {
-            ButtonsUtils.disableButtons(button);
+            button.classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED);
         }
         if (DateUtils.isPast(date)) {
             button.classList.add(CLASS_NAMES.PICK_CONTROL.PAST);

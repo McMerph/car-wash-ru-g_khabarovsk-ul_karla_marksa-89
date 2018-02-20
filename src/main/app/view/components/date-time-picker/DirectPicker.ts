@@ -1,7 +1,6 @@
 import CLASS_NAMES from "../../constants/class-names";
 import IPicker from "./IPicker";
 import IPickerObserver from "./observers/IPickerObserver";
-import ButtonsUtils from "./utils/ButtonsUtils";
 
 // TODO Delete? Use only PickerStore class?
 // TODO Rename to ButtonsPicker?
@@ -10,11 +9,9 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
     protected buttons: HTMLButtonElement[];
 
     private readonly values: T[];
-
     private picked: boolean;
     private pickedValue: T;
     private disabledValues: T[] = [];
-
     private pickerObservers: IPickerObserver[] = [];
 
     public constructor(values: T[]) {
@@ -34,6 +31,15 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
 
     public getPickedValue(): T {
         return this.pickedValue;
+    }
+
+    public onPick(index: number) {
+        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
+        this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.PICKED);
+    }
+
+    public onUnpick() {
+        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
     }
 
     public addPickerObserver(pickerObserver: IPickerObserver): void {
@@ -74,14 +80,6 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
         this.disableButtons(disabledIndices);
     }
 
-    public getValues(): T[] {
-        return this.values;
-    }
-
-    public getDisabledValues(): T[] {
-        return this.disabledValues;
-    }
-
     public indexOf(value: T): number {
         let index: number = -1;
         for (let i = 0; i < this.values.length; i++) {
@@ -97,22 +95,13 @@ export default abstract class DirectPicker<T> implements IPicker<T>, IPickerObse
         return this.disabledValues.some((value) => this.valuesEquals(value, valueToCheck));
     }
 
-    public onPick(index: number) {
-        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
-        this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.PICKED);
-    }
-
-    public onUnpick() {
-        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
-    }
-
     public generateButtons() {
-        this.buttons = this.getValues().map((value) => this.produceButton(this, value));
+        this.buttons = this.values.map((value) => this.produceButton(this, value));
     }
 
     public disableButtons(indices: number[]) {
-        ButtonsUtils.enableButtons(...this.buttons);
-        ButtonsUtils.disableButtons(...indices.map((index) => this.buttons[index]));
+        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.DISABLED));
+        indices.forEach((index) => this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED));
     }
 
     protected produceButton(picker: DirectPicker<T>, value: T): HTMLButtonElement {
