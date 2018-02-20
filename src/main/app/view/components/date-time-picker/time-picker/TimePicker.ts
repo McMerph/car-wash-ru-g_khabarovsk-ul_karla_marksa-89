@@ -5,6 +5,7 @@ import TimePickerLayout from "./TimePickerLayout";
 import "./time-picker.pcss";
 
 // TODO Check current time. Re-render on change
+// TODO Merge with TimePickerLayout?
 export default class TimePicker extends DirectPicker<Time> {
 
     protected layout: TimePickerLayout;

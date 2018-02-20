@@ -17,12 +17,12 @@ import IApi from "./model/api/IApi";
 import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
-import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
+import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 import TopControls from "./view/components/date-time-picker/controls/TopControls";
+import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
 import ModalHandler from "./view/components/modal/ModalHandler";
-import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 
 padStart.shim();
 
@@ -30,7 +30,6 @@ function start() {
     const mockApi: IApi = new MockApi();
     const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
-
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
 
     const datePicker: DatePicker = dateTimePicker.getDatePicker();

@@ -7,6 +7,7 @@ import DateOfMonthPicker from "./DateOfMonthPicker";
 import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
+// TODO Merge with DateOfMonthPicker?
 export default class DateOfMonthPickerLayout extends ButtonsPickerLayout<Date> {
 
     private month: Date;

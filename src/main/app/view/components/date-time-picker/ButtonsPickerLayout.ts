@@ -3,7 +3,7 @@ import DirectPicker from "./DirectPicker";
 import IPickerObserver from "./observers/IPickerObserver";
 import ButtonsUtils from "./utils/ButtonsUtils";
 
-// TODO Rename to PickerLayout?
+// TODO Rename to PickerLayout? ButtonsPicker?
 export default abstract class ButtonsPickerLayout<T> implements IPickerObserver {
 
     protected picker: DirectPicker<T>;

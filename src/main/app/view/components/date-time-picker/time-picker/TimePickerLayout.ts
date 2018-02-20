@@ -6,6 +6,7 @@ import ButtonsPickerLayout from "../ButtonsPickerLayout";
 import SliderUtils from "../utils/SliderUtils";
 import TimePicker from "./TimePicker";
 
+// TODO Merge with TimePicker?
 export default class TimePickerLayout extends ButtonsPickerLayout<Time> {
 
     private times: Time[];

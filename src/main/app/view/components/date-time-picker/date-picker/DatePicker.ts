@@ -10,6 +10,7 @@ import TopControls from "../controls/TopControls";
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
+// TODO Merge with DatePickerLayout?
 export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
 
     private monthObservers: MonthObserver[] = [];

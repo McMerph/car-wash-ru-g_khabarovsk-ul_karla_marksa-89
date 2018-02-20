@@ -4,6 +4,7 @@ import DirectPicker from "../../DirectPicker";
 import DateOfMonthObserver from "../../observers/IDateOfMonthObserver";
 import DateOfMonthPickerLayout from "./DateOfMonthPickerLayout";
 
+// TODO Merge with DateOfMonthPickerLayout?
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     // TODO Move to parent class?

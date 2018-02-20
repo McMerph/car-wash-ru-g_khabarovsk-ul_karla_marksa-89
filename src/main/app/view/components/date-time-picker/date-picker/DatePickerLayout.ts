@@ -5,6 +5,7 @@ import TopControls from "../controls/TopControls";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
 
+// TODO Merge with DatePicker?
 export default class DatePickerLayout {
 
     private readonly picker: DatePicker;
