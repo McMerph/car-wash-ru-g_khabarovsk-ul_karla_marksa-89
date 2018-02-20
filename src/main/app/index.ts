@@ -18,7 +18,7 @@ import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
 import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
-import DatePickerControlsLayout from "./view/components/date-time-picker/controls/DatePickerControlsLayout";
+import TopControls from "./view/components/date-time-picker/controls/TopControls";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
 import ModalHandler from "./view/components/modal/ModalHandler";
@@ -37,15 +37,15 @@ function start() {
     const dateSlider: any = dateTimePicker.getDateSlider();
     const timePicker: TimePicker = dateTimePicker.getTimePicker();
     const timeSlider: any = dateTimePicker.getTimeSlider();
-    const datePickerControlsLayout: DatePickerControlsLayout = new DatePickerControlsLayout(datePicker, dateSlider, timeSlider);
-    datePicker.setControlsLayout(datePickerControlsLayout);
+    const topControls: TopControls = new TopControls(datePicker, dateSlider, timeSlider);
+    datePicker.setTopControls(topControls);
 
     const bottomControls = new BottomControls(timeSlider);
     timePicker.setNextTimeControl(bottomControls.getNextTimeControl());
-    timePicker.setPreviousTimeControl(datePickerControlsLayout.getPreviousTimeControl());
+    timePicker.setPreviousTimeControl(topControls.getPreviousTimeControl());
 
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
-    dateTimePickerParent.insertBefore(datePickerControlsLayout.getLayout(), dateTimePickerParent.childNodes.item(3));
+    dateTimePickerParent.insertBefore(topControls.getLayout(), dateTimePickerParent.childNodes.item(3));
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 

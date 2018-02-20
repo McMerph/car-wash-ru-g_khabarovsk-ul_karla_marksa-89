@@ -1,4 +1,4 @@
-import {inArray, isNotDuplicate} from "../Utils";
+import { inArray, isNotDuplicate } from "../Utils";
 import IAvailability from "./api/IAvailability";
 import Time from "./Time";
 import DateUtils from "./utils/DateUtils";

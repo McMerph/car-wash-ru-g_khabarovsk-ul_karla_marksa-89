@@ -5,9 +5,9 @@ import DateOfMonthObserver from "../observers/IDateOfMonthObserver";
 import MonthObserver from "../observers/IMonthObserver";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DatePickerLayout from "./DatePickerLayout";
+import TopControls from "../controls/TopControls";
 
 import "./date-picker.pcss";
-import DatePickerControlsLayout from "../controls/DatePickerControlsLayout";
 
 // TODO Check current time. Re-render on change
 export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
@@ -133,8 +133,8 @@ export default class DatePicker implements IPicker<Date>, DateOfMonthObserver {
         return this.layout.getSlider();
     }
 
-    public setControlsLayout(controlsLayout: DatePickerControlsLayout) {
-        this.layout.setControlsLayout(controlsLayout);
+    public setTopControls(topControls: TopControls) {
+        this.layout.setTopControls(topControls);
     }
 
     private updateMonth(month: Date, animated?: boolean): void {

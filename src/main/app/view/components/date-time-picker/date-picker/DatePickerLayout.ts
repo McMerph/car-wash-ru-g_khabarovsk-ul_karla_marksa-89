@@ -1,7 +1,7 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
+import TopControls from "../controls/TopControls";
 import SliderUtils from "../utils/SliderUtils";
 import DatePicker from "./DatePicker";
-import DatePickerControlsLayout from "../controls/DatePickerControlsLayout";
 
 export default class DatePickerLayout {
 
@@ -10,7 +10,7 @@ export default class DatePickerLayout {
 
     private readonly picker: DatePicker;
 
-    private topControls: DatePickerControlsLayout;
+    private topControls: TopControls;
 
     private slider: any;
     private blockSlideChangeTransitionEnd: boolean = false;
@@ -54,8 +54,8 @@ export default class DatePickerLayout {
         return this.slider;
     }
 
-    public setControlsLayout(controlsLayout: DatePickerControlsLayout) {
-        this.topControls = controlsLayout;
+    public setTopControls(topControls: TopControls) {
+        this.topControls = topControls;
     }
 
     private handleSlider(sliderContainer: HTMLElement) {
