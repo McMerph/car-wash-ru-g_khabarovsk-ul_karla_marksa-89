@@ -4,27 +4,27 @@ import { CONTROLS_BOTTOM_CLASS, NAVIGATION_CLASS, NAVIGATION_CLASS_TO_BOTTOM } f
 // TODO Implement ILayout interface with getLayout() method?
 export default class BottomControls {
 
-    private nextTimeButton: HTMLButtonElement;
+    private nextTimeControl: HTMLButtonElement;
     private layout: HTMLElement;
 
     public constructor(slider: any) {
-        this.nextTimeButton = SliderUtils.getNextButton(slider);
-        this.nextTimeButton.classList.add(
+        this.nextTimeControl = SliderUtils.getNextButton(slider);
+        this.nextTimeControl.classList.add(
             NAVIGATION_CLASS,
             NAVIGATION_CLASS_TO_BOTTOM,
         );
 
         this.layout = document.createElement("div");
         this.layout.classList.add(CONTROLS_BOTTOM_CLASS);
-        this.layout.appendChild(this.nextTimeButton);
+        this.layout.appendChild(this.nextTimeControl);
     }
 
     public getLayout(): HTMLElement {
         return this.layout;
     }
 
-    public getNextTimeButton(): HTMLElement {
-        return this.nextTimeButton;
+    public getNextTimeControl(): HTMLElement {
+        return this.nextTimeControl;
     }
 
 }

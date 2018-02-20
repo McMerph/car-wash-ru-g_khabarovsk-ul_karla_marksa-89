@@ -21,9 +21,9 @@ import DatePicker from "./view/components/date-time-picker/date-picker/DatePicke
 import DatePickerControlsLayout from "./view/components/date-time-picker/date-picker/DatePickerControlsLayout";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
-import TimePickerNextControlLayout from "./view/components/date-time-picker/time-picker/TimePickerNextControlLayout";
 import TimePickerPreviousControlLayout from "./view/components/date-time-picker/time-picker/TimePickerPreviousControlLayout";
 import ModalHandler from "./view/components/modal/ModalHandler";
+import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 
 padStart.shim();
 
@@ -42,19 +42,18 @@ function start() {
     const timePicker: TimePicker = dateTimePicker.getTimePicker();
     const timeSlider: any = dateTimePicker.getTimeSlider();
     const timePickerPreviousControlLayout: TimePickerPreviousControlLayout = new TimePickerPreviousControlLayout(timeSlider);
-    const timePickerNextControlLayout: TimePickerNextControlLayout = new TimePickerNextControlLayout(timeSlider);
     timePicker.setPreviousControlLayout(timePickerPreviousControlLayout);
-    timePicker.setNextControlLayout(timePickerNextControlLayout);
+
+    const bottomControls = new BottomControls(timeSlider);
+    timePicker.setNextTimeControl(bottomControls.getNextTimeControl());
 
     const pickersTopControls: HTMLElement = (document.querySelector(".pickers-top-controls") as HTMLElement);
     pickersTopControls.appendChild(datePickerControlsLayout.getLayout());
     pickersTopControls.appendChild(timePickerPreviousControlLayout.getControl());
 
-    const pickersBottomControls: HTMLElement = (document.querySelector(".pickers-bottom-controls") as HTMLElement);
-    pickersBottomControls.appendChild(timePickerNextControlLayout.getControl());
-
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
+    dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 
     dateTimePicker.updateSliders();
     // Fix for ie
