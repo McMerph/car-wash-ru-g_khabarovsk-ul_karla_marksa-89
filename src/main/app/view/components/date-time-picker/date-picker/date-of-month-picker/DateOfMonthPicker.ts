@@ -56,8 +56,8 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         return layout;
     }
 
-    protected produceButton(picker: DateOfMonthPicker, date: Date): HTMLButtonElement {
-        const button: HTMLButtonElement = super.produceButton(picker, date);
+    protected produceButton(date: Date): HTMLButtonElement {
+        const button: HTMLButtonElement = super.produceButton(date);
         button.classList.add(CLASS_NAMES.PICK_CONTROL.DATE);
         if (this.isDisabled(date)) {
             button.classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED);

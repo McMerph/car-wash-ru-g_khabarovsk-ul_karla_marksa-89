@@ -12,10 +12,8 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
 
     public constructor(values: T[]) {
         this.values = values;
-        this.buttons = this.values.map((value) => this.produceButton(this, value));
+        this.buttons = this.values.map((value) => this.produceButton(value));
     }
-
-    public abstract getRepresentation(value: T): string;
 
     public abstract getLayout(): HTMLElement;
 
@@ -49,8 +47,12 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         this.disableButtons(disabledIndices);
     }
 
-    protected isDisabled(valueToCheck: T): boolean {
-        return this.disabledValues.some((value) => this.valuesEquals(value, valueToCheck));
+    protected abstract getRepresentation(value: T): string;
+
+    protected abstract valuesEquals(value1: T, value2: T): boolean;
+
+    protected isDisabled(value: T): boolean {
+        return this.disabledValues.some((v) => this.valuesEquals(value, v));
     }
 
     protected indexOf(value: T): number {
@@ -64,17 +66,15 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         return index;
     }
 
-    protected produceButton(picker: DirectPicker<T>, value: T): HTMLButtonElement {
+    protected produceButton(value: T): HTMLButtonElement {
         const button: HTMLButtonElement = document.createElement("button");
         button.tabIndex = 0;
-        button.textContent = picker.getRepresentation(value);
-        button.onclick = () => picker.pick(value);
+        button.textContent = this.getRepresentation(value);
+        button.onclick = () => this.pick(value);
         button.classList.add(CLASS_NAMES.PICK_CONTROL.MAIN);
 
         return button;
     }
-
-    protected abstract valuesEquals(value1: T, value2: T): boolean;
 
     private disableButtons(indices: number[]): void {
         this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.DISABLED));

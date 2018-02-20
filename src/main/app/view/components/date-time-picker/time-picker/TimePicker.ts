@@ -116,8 +116,8 @@ export default class TimePicker extends DirectPicker<Time> {
         this.nextTimeControl = nextTimeControl;
     }
 
-    protected produceButton(picker: TimePicker, time: Time): HTMLButtonElement {
-        const button: HTMLButtonElement = super.produceButton(picker, time);
+    protected produceButton(time: Time): HTMLButtonElement {
+        const button: HTMLButtonElement = super.produceButton(time);
         button.classList.add(CLASS_NAMES.PICK_CONTROL.TIME);
 
         return button;
