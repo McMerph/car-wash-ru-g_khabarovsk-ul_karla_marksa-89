@@ -7,11 +7,7 @@ import DatePickerControlsLayout from "./DatePickerControlsLayout";
 export default class DatePickerLayout {
 
     private static readonly CLASS_NAME: string = "date-picker";
-    private static readonly SELECT_CLASS = "picker__chooser";
-    private static readonly MONTHS_NAMES: string[] = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-        "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
     private static readonly SPACE_BETWEEN_SLIDES: number = 25;
-    private static readonly YEARS_OFFSET: number = 5;
 
     private readonly picker: DatePicker;
 
@@ -20,43 +16,18 @@ export default class DatePickerLayout {
     private slider: any;
     private blockSlideChangeTransitionEnd: boolean = false;
 
-    private monthSelect: HTMLSelectElement;
-    private yearSelect: HTMLSelectElement;
     private sliderContainer: HTMLElement;
-    private previousButton: HTMLButtonElement;
-    private nextButton: HTMLButtonElement;
 
     public constructor(picker: DatePicker) {
         this.picker = picker;
-        this.monthSelect = this.getMonthSelect();
-        this.yearSelect = this.getYearSelect();
         this.sliderContainer = SliderUtils.getContainer();
         this.sliderContainer.classList.add("date-picker__main");
         this.handleSlider(this.sliderContainer);
-        this.previousButton = SliderUtils.getPreviousButton(this.slider);
-        this.previousButton.classList.add(
-            "picker__navigation",
-            "picker__navigation_to-left",
-        );
-        this.nextButton = SliderUtils.getNextButton(this.slider);
-        this.nextButton.classList.add(
-            "picker__navigation",
-            "date-picker__navigation_to-right",
-        );
     }
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
         layout.classList.add(DatePickerLayout.CLASS_NAME);
-
-        const controls: HTMLDivElement = document.createElement("div");
-        controls.classList.add("date-picker__controls");
-        controls.appendChild(this.previousButton);
-        controls.appendChild(this.monthSelect);
-        controls.appendChild(this.yearSelect);
-        controls.appendChild(this.nextButton);
-
-        layout.appendChild(controls);
         layout.appendChild(this.sliderContainer);
 
         return layout;
@@ -73,12 +44,6 @@ export default class DatePickerLayout {
         // TODO Remove if?
         if (this.controlsLayout) {
             this.controlsLayout.updateSelects(this.picker.getMonth());
-        }
-
-        if (this.yearSelect.parentNode) {
-            const yearSelect: HTMLSelectElement = this.getYearSelect();
-            this.yearSelect.parentNode.replaceChild(yearSelect, this.yearSelect);
-            this.yearSelect = yearSelect;
         }
     }
 
@@ -120,89 +85,22 @@ export default class DatePickerLayout {
         this.slider.on("slideChange", () => {
             this.blockSlideChangeTransitionEnd = false;
             if (this.slider.activeIndex === 0) {
-                this.updateSelects(this.picker.getPreviousMonth());
                 // TODO Remove if?
                 if (this.controlsLayout) {
                     this.controlsLayout.updateSelects(this.picker.getPreviousMonth());
                 }
             } else if (this.slider.activeIndex === 1) {
-                this.updateSelects(this.picker.getMonth());
                 // TODO Remove if?
                 if (this.controlsLayout) {
                     this.controlsLayout.updateSelects(this.picker.getMonth());
                 }
             } else if (this.slider.activeIndex === 2) {
-                this.updateSelects(this.picker.getNextMonth());
                 // TODO Remove if?
                 if (this.controlsLayout) {
                     this.controlsLayout.updateSelects(this.picker.getNextMonth());
                 }
             }
         });
-    }
-
-    private updateSelects(month: Date) {
-        this.monthSelect.value = month.getMonth().toString(10);
-        this.yearSelect.value = month.getFullYear().toString(10);
-    }
-
-    private getMonthSelect(): HTMLSelectElement {
-        const monthSelect: HTMLSelectElement = document.createElement("select");
-        monthSelect.classList.add(DatePickerLayout.SELECT_CLASS);
-        DatePickerLayout.MONTHS_NAMES.forEach((monthName, monthIndex) => {
-            monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
-        });
-        monthSelect.addEventListener("change", () => {
-            this.picker.changeMonthOfTheYear(parseInt(monthSelect.value, 10));
-        });
-
-        return monthSelect;
-    }
-
-    private getMonthOption(monthName: string, monthIndex: number): HTMLOptionElement {
-        const option: HTMLOptionElement = document.createElement("option");
-        option.value = monthIndex.toString();
-        option.text = monthName;
-        if (this.picker.sameMonthOfTheYear(monthIndex)) {
-            option.selected = true;
-        }
-
-        return option;
-    }
-
-    private getYearSelect(): HTMLSelectElement {
-        const yearSelect: HTMLSelectElement = document.createElement("select");
-        yearSelect.classList.add(DatePickerLayout.SELECT_CLASS);
-        this.getSelectableYears().forEach((year) => {
-            yearSelect.options.add(this.getYearOption(year));
-        });
-        yearSelect.addEventListener("change", () => {
-            this.picker.changeYear(parseInt(yearSelect.value, 10));
-        });
-
-        return yearSelect;
-    }
-
-    private getSelectableYears(): string[] {
-        const minYear: number = this.picker.getMonth().getFullYear() - DatePickerLayout.YEARS_OFFSET;
-        const maxYear: number = this.picker.getMonth().getFullYear() + DatePickerLayout.YEARS_OFFSET;
-        const years: string[] = [];
-        for (let i = minYear; i <= maxYear; i++) {
-            years.push(i.toString(10));
-        }
-
-        return years;
-    }
-
-    private getYearOption(year: string): HTMLOptionElement {
-        const option = document.createElement("option");
-        option.value = year;
-        option.text = year;
-        if (this.picker.sameYear(parseInt(year, 10))) {
-            option.selected = true;
-        }
-
-        return option;
     }
 
 }
