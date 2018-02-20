@@ -21,6 +21,9 @@ import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
 import ModalHandler from "./view/components/modal/ModalHandler";
 import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
 import DatePickerControlsLayout from "./view/components/date-time-picker/date-picker/DatePickerControlsLayout";
+import TimePicker from "./view/components/date-time-picker/time-picker/TimePicker";
+import TimePickerPreviousControlLayout from "./view/components/date-time-picker/time-picker/TimePickerPreviousControlLayout";
+import TimePickerNextControlLayout from "./view/components/date-time-picker/time-picker/TimePickerNextControlLayout";
 
 padStart.shim();
 
@@ -30,14 +33,24 @@ function start() {
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
 
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler);
+
     const datePicker: DatePicker = dateTimePicker.getDatePicker();
     const dateSlider: any = dateTimePicker.getDateSlider();
     const datePickerControlsLayout: DatePickerControlsLayout = new DatePickerControlsLayout(datePicker, dateSlider);
     datePicker.setControlsLayout(datePickerControlsLayout);
 
+    const timePicker: TimePicker = dateTimePicker.getTimePicker();
+    const timeSlider: any = dateTimePicker.getTimeSlider();
+    const timePickerPreviousControlLayout: TimePickerPreviousControlLayout = new TimePickerPreviousControlLayout(timeSlider);
+    const timePickerNextControlLayout: TimePickerNextControlLayout = new TimePickerNextControlLayout(timeSlider);
+    timePicker.setPreviousControlLayout(timePickerPreviousControlLayout);
+    timePicker.setNextControlLayout(timePickerNextControlLayout);
+
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
     dateTimePickerParent.insertBefore(datePickerControlsLayout.getLayout(), dateTimePickerParent.childNodes.item(2));
-    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(3));
+    dateTimePickerParent.insertBefore(timePickerPreviousControlLayout.getControl(), dateTimePickerParent.childNodes.item(3));
+    dateTimePickerParent.insertBefore(timePickerNextControlLayout.getControl(), dateTimePickerParent.childNodes.item(4));
+    dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(5));
 
     dateTimePicker.updateSliders();
     // Fix for ie

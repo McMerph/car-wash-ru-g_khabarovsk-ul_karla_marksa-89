@@ -78,4 +78,12 @@ export default class DateTimePicker implements IPicker<Date>, MonthObserver, Dat
         return this.datePicker.getSlider();
     }
 
+    public getTimePicker(): TimePicker {
+        return this.timePicker;
+    }
+
+    public getTimeSlider(): any {
+        return this.timePicker.getSlider();
+    }
+
 }

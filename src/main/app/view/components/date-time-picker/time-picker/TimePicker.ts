@@ -3,6 +3,8 @@ import DirectPicker from "../DirectPicker";
 import TimePickerLayout from "./TimePickerLayout";
 
 import "./time-picker.pcss";
+import TimePickerNextControlLayout from "./TimePickerNextControlLayout";
+import TimePickerPreviousControlLayout from "./TimePickerPreviousControlLayout";
 
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
@@ -21,6 +23,18 @@ export default class TimePicker extends DirectPicker<Time> {
 
     public updateSlider(): void {
         this.layout.updateSlider();
+    }
+
+    public getSlider(): any {
+        return this.layout.getSlider();
+    }
+
+    public setPreviousControlLayout(previousControlLayout: TimePickerPreviousControlLayout) {
+        this.layout.setPreviousControlLayout(previousControlLayout);
+    }
+
+    public setNextControlLayout(nextControlLayout: TimePickerNextControlLayout) {
+        this.layout.setNextControlLayout(nextControlLayout);
     }
 
     protected valuesEquals(time1: Time, time2: Time): boolean {
