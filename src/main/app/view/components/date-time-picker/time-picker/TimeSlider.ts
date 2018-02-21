@@ -1,6 +1,6 @@
 import CLASS_NAMES from "../../../constants/class-names";
-import Slider from "../Slider";
 import SETTINGS from "../../../constants/settings";
+import Slider from "../Slider";
 
 export default class TimeSlider extends Slider {
 

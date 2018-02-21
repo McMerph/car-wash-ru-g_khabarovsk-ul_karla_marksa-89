@@ -92,9 +92,6 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
     }
 
     private updateSlider(animated?: boolean): void {
-        // TODO Delete?
-        this.slider.setBlock();
-
         // TODO Declare removeAllSlides() method to DateSlider class?
         this.slider.getSlider().removeAllSlides();
 
@@ -103,9 +100,6 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.slider.appendSlide(this.dateOfNextMonthPicker.getLayout());
 
         this.slider.getSlider().update();
-
-        // TODO Delete?
-        this.slider.unSetBlock();
 
         // TODO Declare slideTo() method to DateSlider class?
         this.slider.getSlider().slideTo(1, animated ? undefined : 0);

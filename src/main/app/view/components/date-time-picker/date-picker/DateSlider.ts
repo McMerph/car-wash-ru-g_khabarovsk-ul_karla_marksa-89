@@ -1,45 +1,30 @@
-import * as Slider from "swiper/dist/js/swiper.min.js";
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import SETTINGS from "../../../constants/settings";
 import MonthHandler from "../MonthHandler";
 import IMonthObserver from "../observers/IMonthObserver";
-import SliderUtils from "../utils/SliderUtils";
+import Slider from "../Slider";
 
 // TODO Extend SliderUtils class?
-export default class DateSlider implements IMonthObserver {
+export default class DateSlider extends Slider implements IMonthObserver {
 
-    private readonly slider: any;
-    private readonly sliderContainer: HTMLElement;
     private readonly monthHandler: MonthHandler;
 
     private monthChooser: HTMLSelectElement;
     private yearChooser: HTMLSelectElement;
-    private previousControl: HTMLElement;
-    private nextControl: HTMLElement;
-
-    // private blockSlideChangeTransitionEnd: boolean = false;
 
     // TODO Use it?
-    private block: boolean = false;
-
-    public setBlock(): void {
-        this.block = true;
-    }
-
-    public unSetBlock(): void {
-        this.block = false;
-    }
+    // private blockSlideChangeTransitionEnd: boolean = false;
 
     public constructor(monthHandler: MonthHandler) {
+        super({
+            grabCursor: true,
+            spaceBetween: SETTINGS.SPACE_BETWEEN_MONTHS_SLIDES,
+        });
         this.monthHandler = monthHandler;
         monthHandler.addMonthObserver(this);
-        this.sliderContainer = SliderUtils.getContainer();
-        this.slider = this.generateSlider();
         this.monthChooser = this.generateMonthChooser();
         this.yearChooser = this.generateYearChooser();
-        this.previousControl = this.generatePreviousControl();
-        this.nextControl = this.generateNextControl();
 
         // this.handleSlideChange();
         this.handleSlideChangeTransitionEnd();
@@ -47,6 +32,34 @@ export default class DateSlider implements IMonthObserver {
 
     public onMonthChange(): void {
         this.updateSelects();
+    }
+
+    public getMonthChooser(): HTMLElement {
+        return this.monthChooser;
+    }
+
+    public getYearChooser(): HTMLSelectElement {
+        return this.yearChooser;
+    }
+
+    protected generatePreviousControl(): HTMLElement {
+        const previousControl = super.generatePreviousControl();
+        previousControl.classList.add(
+            CLASS_NAMES.NAVIGATION.MAIN,
+            CLASS_NAMES.NAVIGATION.TO_LEFT,
+        );
+
+        return previousControl;
+    }
+
+    protected generateNextControl(): HTMLElement {
+        const nextControl = super.generateNextControl();
+        nextControl.classList.add(
+            CLASS_NAMES.NAVIGATION.MAIN,
+            CLASS_NAMES.NAVIGATION.TO_RIGHT,
+        );
+
+        return nextControl;
     }
 
     private updateSelects() {
@@ -59,34 +72,6 @@ export default class DateSlider implements IMonthObserver {
 
         this.monthChooser.value = this.monthHandler.getMonth().getMonth().toString(10);
         this.yearChooser.value = this.monthHandler.getMonth().getFullYear().toString(10);
-    }
-
-    public appendSlide(node: Node): void {
-        this.slider.appendSlide(SliderUtils.getSlide(node));
-    }
-
-    public getSlider(): any {
-        return this.slider;
-    }
-
-    public getSliderContainer(): HTMLElement {
-        return this.sliderContainer;
-    }
-
-    public getMonthChooser(): HTMLElement {
-        return this.monthChooser;
-    }
-
-    public getYearChooser(): HTMLSelectElement {
-        return this.yearChooser;
-    }
-
-    public getPreviousControl(): HTMLElement {
-        return this.previousControl;
-    }
-
-    public getNextControl(): HTMLElement {
-        return this.nextControl;
     }
 
     private sameYear(year: number): boolean {
@@ -103,13 +88,6 @@ export default class DateSlider implements IMonthObserver {
 
     private changeYear(year: number): void {
         this.monthHandler.setMonth(new Date(year, this.monthHandler.getMonth().getMonth()));
-    }
-
-    private generateSlider(): any {
-        return new Slider(this.sliderContainer, {
-            grabCursor: true,
-            spaceBetween: SETTINGS.SPACE_BETWEEN_MONTHS_SLIDES,
-        });
     }
 
     private generateMonthChooser(): HTMLSelectElement {
@@ -171,26 +149,7 @@ export default class DateSlider implements IMonthObserver {
         return option;
     }
 
-    private generatePreviousControl(): HTMLElement {
-        const previousControl = SliderUtils.getPreviousControl(this.slider);
-        previousControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.TO_LEFT,
-        );
-
-        return previousControl;
-    }
-
-    private generateNextControl(): HTMLElement {
-        const nextControl = SliderUtils.getNextControl(this.slider);
-        nextControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.TO_RIGHT,
-        );
-
-        return nextControl;
-    }
-
+    // TODO Use it?
     // private handleSlideChange() {
     //     this.slider.on("slideChange", () => {
     //         if (!this.block) {
@@ -208,18 +167,16 @@ export default class DateSlider implements IMonthObserver {
     // }
 
     private handleSlideChangeTransitionEnd() {
-        this.slider.on("slideChangeTransitionEnd", () => {
-            if (!this.block) {
-                console.log("slideChangeTransitionEnd()");
-                console.log(this.monthHandler.getMonth());
+        this.getSlider().on("slideChangeTransitionEnd", () => {
+            console.log("slideChangeTransitionEnd()");
+            console.log(this.monthHandler.getMonth());
 
-                // if (!this.blockSlideChangeTransitionEnd) {
-                // this.blockSlideChangeTransitionEnd = true;
-                if (this.slider.activeIndex === 0) {
-                    this.monthHandler.previous();
-                } else if (this.slider.activeIndex === 2) {
-                    this.monthHandler.next();
-                }
+            // if (!this.blockSlideChangeTransitionEnd) {
+            // this.blockSlideChangeTransitionEnd = true;
+            if (this.getSlider().activeIndex === 0) {
+                this.monthHandler.previous();
+            } else if (this.getSlider().activeIndex === 2) {
+                this.monthHandler.next();
             }
             // }
         });
