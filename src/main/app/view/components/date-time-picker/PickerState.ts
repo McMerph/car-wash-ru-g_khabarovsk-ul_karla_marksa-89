@@ -1,9 +1,12 @@
+import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 
 export default class PickerState {
 
     private month: Date;
+    private date: Date;
     private monthObservers: IMonthObserver[] = [];
+    private dateObservers: IDateObserver[] = [];
 
     public constructor(month: Date) {
         this.month = month;
@@ -18,6 +21,15 @@ export default class PickerState {
         this.monthObservers.splice(index, 1);
     }
 
+    public addDateObserver(observer: IDateObserver) {
+        this.dateObservers.push(observer);
+    }
+
+    public removeDateObserver(observer: IDateObserver) {
+        const index: number = this.dateObservers.indexOf(observer);
+        this.dateObservers.splice(index, 1);
+    }
+
     public getPreviousMonth(): Date {
         return new Date(this.month.getFullYear(), this.month.getMonth() - 1);
     }
@@ -26,11 +38,11 @@ export default class PickerState {
         return new Date(this.month.getFullYear(), this.month.getMonth() + 1);
     }
 
-    public previous(): void {
+    public previousMonth(): void {
         this.setMonth(this.getPreviousMonth());
     }
 
-    public next(): void {
+    public nextMonth(): void {
         this.setMonth(this.getNextMonth());
     }
 
@@ -38,9 +50,18 @@ export default class PickerState {
         return this.month;
     }
 
+    public getDate(): Date {
+        return this.date;
+    }
+
     public setMonth(month: Date) {
         this.month = month;
         this.monthObservers.forEach((observer) => observer.onMonthChange());
+    }
+
+    public setDate(date: Date) {
+        this.date = date;
+        this.dateObservers.forEach((observer) => observer.onDatePick());
     }
 
 }

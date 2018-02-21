@@ -23,11 +23,10 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, pickerState: PickerState) {
         this.availabilityHandler = availabilityHandler;
         pickerState.addMonthObserver(this);
+        pickerState.addDateObserver(this);
 
         this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
         this.datePicker = new DatePicker(pickerState, availabilityHandler, dateSlider);
-
-        this.datePicker.addDateObserver(this);
     }
 
     public isPicked(): boolean {

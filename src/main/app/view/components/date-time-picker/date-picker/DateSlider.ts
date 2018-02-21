@@ -148,9 +148,9 @@ export default class DateSlider extends Slider implements IMonthObserver {
     private handleSlideChangeTransitionEnd() {
         this.getSlider().on("slideChangeTransitionEnd", () => {
             if (this.getSlider().activeIndex === 0) {
-                this.pickerState.previous();
+                this.pickerState.previousMonth();
             } else if (this.getSlider().activeIndex === 2) {
-                this.pickerState.next();
+                this.pickerState.nextMonth();
             }
         });
     }

@@ -2,7 +2,6 @@ import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
 import IPicker from "../IPicker";
-import IDateObserver from "../observers/IDateObserver";
 import IMonthObserver from "../observers/IMonthObserver";
 import PickerState from "../PickerState";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
@@ -11,9 +10,7 @@ import DateSlider from "./DateSlider";
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
-export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthObserver {
-
-    private dateObservers: IDateObserver[] = [];
+export default class DatePicker implements IPicker<Date>, IMonthObserver {
 
     private readonly availabilityHandler: AvailabilityHandler;
 
@@ -35,27 +32,6 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.onMonthChange();
     }
 
-    public onMonthChange(): void {
-        // TODO Not working. Why?
-        // this.dateOfMonthPicker.removeDateObserver(this);
-        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getPreviousMonth(),
-            this.availabilityHandler,
-        );
-        this.dateOfMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getMonth(),
-            this.availabilityHandler,
-        );
-        this.dateOfNextMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getNextMonth(),
-            this.availabilityHandler,
-        );
-        this.dateOfMonthPicker.addDateObserver(this);
-
-        // TODO Update always animated?
-        this.renderSlider(false);
-    }
-
     public isPicked(): boolean {
         return this.dateOfMonthPicker.isPicked();
     }
@@ -72,17 +48,27 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         return layout;
     }
 
-    public onDatePick(): void {
-        this.dateObservers.forEach((observer) => observer.onDatePick());
-    }
+    public onMonthChange(): void {
+        // TODO Not working. Why?
+        // this.dateOfMonthPicker.removeDateObserver(this);
+        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
+            this.pickerState.getPreviousMonth(),
+            this.availabilityHandler,
+            this.pickerState,
+        );
+        this.dateOfMonthPicker = new DateOfMonthPicker(
+            this.pickerState.getMonth(),
+            this.availabilityHandler,
+            this.pickerState,
+        );
+        this.dateOfNextMonthPicker = new DateOfMonthPicker(
+            this.pickerState.getNextMonth(),
+            this.availabilityHandler,
+            this.pickerState,
+        );
 
-    public addDateObserver(observer: IDateObserver) {
-        this.dateObservers.push(observer);
-    }
-
-    public removeDateObserver(observer: IDateObserver) {
-        const index: number = this.dateObservers.indexOf(observer);
-        this.dateObservers.splice(index, 1);
+        // TODO Update always animated?
+        this.renderSlider(false);
     }
 
     public pick(date: Date): void {

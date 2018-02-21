@@ -3,21 +3,20 @@ import DateUtils from "../../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../../constants/class-names";
 import DICTIONARY from "../../../../constants/dictionary";
 import DirectPicker from "../../DirectPicker";
-import IDateObserver from "../../observers/IDateObserver";
+import PickerState from "../../PickerState";
 import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private month: Date;
+    private pickerState: PickerState;
 
-    // TODO Move to parent class? Introduce DateHandler class?
-    private dateObservers: IDateObserver[] = [];
-
-    public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
+    public constructor(month: Date, availabilityHandler: AvailabilityHandler, pickerState: PickerState) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
         super(DateUtils.getDatesOfMonth(month));
         this.month = month;
+        this.pickerState = pickerState;
 
         this.disable(DateUtils.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
@@ -39,16 +38,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     public pick(dateOfMonth: Date): void {
         super.pick(dateOfMonth);
-        this.dateObservers.forEach((observer) => observer.onDatePick());
-    }
-
-    public addDateObserver(observer: IDateObserver): void {
-        this.dateObservers.push(observer);
-    }
-
-    public removeDateObserver(observer: IDateObserver): void {
-        const index: number = this.dateObservers.indexOf(observer);
-        this.dateObservers.splice(index, 1);
+        this.pickerState.setDate(dateOfMonth);
     }
 
     protected getRepresentation(dateOfMonth: Date): string {
