@@ -25,6 +25,7 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         return this.pickedValue;
     }
 
+    // TODO Return index?
     public pick(value: T): void {
         const index: number = this.indexOf(value);
         if (index !== -1 && !this.isDisabled(value)) {
