@@ -3,10 +3,10 @@ import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import DateSlider from "./date-picker/DateSlider";
+import DateTimePickerState from "./DateTimePickerState";
 import IPicker from "./IPicker";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
-import PickerState from "./PickerState";
 import TimePicker from "./time-picker/TimePicker";
 import TimeSlider from "./time-picker/TimeSlider";
 
@@ -20,13 +20,13 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, pickerState: PickerState) {
+    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, dateTimePickerState: DateTimePickerState) {
         this.availabilityHandler = availabilityHandler;
-        pickerState.addMonthObserver(this);
-        pickerState.addDateObserver(this);
+        dateTimePickerState.addMonthObserver(this);
+        dateTimePickerState.addDateObserver(this);
 
         this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
-        this.datePicker = new DatePicker(pickerState, availabilityHandler, dateSlider);
+        this.datePicker = new DatePicker(dateTimePickerState, availabilityHandler, dateSlider);
     }
 
     public isPicked(): boolean {

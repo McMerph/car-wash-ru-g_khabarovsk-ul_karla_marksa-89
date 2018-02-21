@@ -2,8 +2,8 @@ import AvailabilityHandler from "../../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../../constants/class-names";
 import DICTIONARY from "../../../../constants/dictionary";
+import DateTimePickerState from "../../DateTimePickerState";
 import DirectPicker from "../../DirectPicker";
-import PickerState from "../../PickerState";
 import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
@@ -19,13 +19,13 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     }
 
     private month: Date;
-    private pickerState: PickerState;
+    private dateTimePickerState: DateTimePickerState;
 
-    public constructor(month: Date, availabilityHandler: AvailabilityHandler, pickerState: PickerState) {
+    public constructor(month: Date, availabilityHandler: AvailabilityHandler, dateTimePickerState: DateTimePickerState) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
         super(DateOfMonthPicker.getDatesOfMonth(month));
         this.month = month;
-        this.pickerState = pickerState;
+        this.dateTimePickerState = dateTimePickerState;
 
         this.disable(DateOfMonthPicker.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
@@ -47,7 +47,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     public pick(dateOfMonth: Date): void {
         super.pick(dateOfMonth);
-        this.pickerState.setDate(dateOfMonth);
+        this.dateTimePickerState.setDate(dateOfMonth);
     }
 
     protected getRepresentation(dateOfMonth: Date): string {

@@ -1,9 +1,9 @@
 import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
+import DateTimePickerState from "../DateTimePickerState";
 import IPicker from "../IPicker";
 import IMonthObserver from "../observers/IMonthObserver";
-import PickerState from "../PickerState";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DateSlider from "./DateSlider";
 
@@ -14,7 +14,7 @@ export default class DatePicker implements IPicker<Date>, IMonthObserver {
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    private pickerState: PickerState;
+    private dateTimePickerState: DateTimePickerState;
 
     private dateOfPreviousMonthPicker: DateOfMonthPicker;
     private dateOfMonthPicker: DateOfMonthPicker;
@@ -22,9 +22,9 @@ export default class DatePicker implements IPicker<Date>, IMonthObserver {
 
     private readonly slider: DateSlider;
 
-    public constructor(pickerState: PickerState, availabilityHandler: AvailabilityHandler, slider: DateSlider) {
-        this.pickerState = pickerState;
-        this.pickerState.addMonthObserver(this);
+    public constructor(dateTimePickerState: DateTimePickerState, availabilityHandler: AvailabilityHandler, slider: DateSlider) {
+        this.dateTimePickerState = dateTimePickerState;
+        this.dateTimePickerState.addMonthObserver(this);
 
         this.availabilityHandler = availabilityHandler;
         this.slider = slider;
@@ -52,19 +52,19 @@ export default class DatePicker implements IPicker<Date>, IMonthObserver {
         // TODO Not working. Why?
         // this.dateOfMonthPicker.removeDateObserver(this);
         this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getPreviousMonth(),
+            this.dateTimePickerState.getPreviousMonth(),
             this.availabilityHandler,
-            this.pickerState,
+            this.dateTimePickerState,
         );
         this.dateOfMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getMonth(),
+            this.dateTimePickerState.getMonth(),
             this.availabilityHandler,
-            this.pickerState,
+            this.dateTimePickerState,
         );
         this.dateOfNextMonthPicker = new DateOfMonthPicker(
-            this.pickerState.getNextMonth(),
+            this.dateTimePickerState.getNextMonth(),
             this.availabilityHandler,
-            this.pickerState,
+            this.dateTimePickerState,
         );
 
         // TODO Update always animated?
@@ -72,8 +72,8 @@ export default class DatePicker implements IPicker<Date>, IMonthObserver {
     }
 
     public pick(date: Date): void {
-        if (!DateUtils.equalsMonth(date, this.pickerState.getMonth())) {
-            this.pickerState.setMonth(date);
+        if (!DateUtils.equalsMonth(date, this.dateTimePickerState.getMonth())) {
+            this.dateTimePickerState.setMonth(date);
         }
         this.dateOfMonthPicker.pick(date);
     }

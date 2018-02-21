@@ -1,7 +1,7 @@
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 
-export default class PickerState {
+export default class DateTimePickerState {
 
     private month: Date;
     private date: Date;
