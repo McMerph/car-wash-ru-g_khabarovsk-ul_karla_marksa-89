@@ -1,20 +1,7 @@
 export default class DateUtils {
 
-    public static getDatesOfMonth(month: Date): Date[] {
-        const dates: Date[] = [];
-        for (let i = 0; i < DateUtils.getLastDateOfMonth(month).getDate(); i++) {
-            dates.push(new Date(month.getFullYear(), month.getMonth(), i + 1));
-        }
-
-        return dates;
-    }
-
     public static getLastDateOfMonth(month: Date): Date {
         return new Date(month.getFullYear(), month.getMonth() + 1, 0);
-    }
-
-    public static isPast(date: Date): boolean {
-        return date && date.valueOf() < this.getTodayWithoutTime();
     }
 
     public static equalsDateOfMonth(date1: Date, date2: Date): boolean {

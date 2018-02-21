@@ -9,16 +9,25 @@ import WeeksProducer from "./WeeksProducer";
 
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
+    private static getDatesOfMonth(month: Date): Date[] {
+        const dates: Date[] = [];
+        for (let i = 0; i < DateUtils.getLastDateOfMonth(month).getDate(); i++) {
+            dates.push(new Date(month.getFullYear(), month.getMonth(), i + 1));
+        }
+
+        return dates;
+    }
+
     private month: Date;
     private pickerState: PickerState;
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler, pickerState: PickerState) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
-        super(DateUtils.getDatesOfMonth(month));
+        super(DateOfMonthPicker.getDatesOfMonth(month));
         this.month = month;
         this.pickerState = pickerState;
 
-        this.disable(DateUtils.getDatesOfMonth(month)
+        this.disable(DateOfMonthPicker.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
     }
 
@@ -51,7 +60,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         if (this.isDisabled(date)) {
             button.classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED);
         }
-        if (DateUtils.isPast(date)) {
+        if (date && date.valueOf() < DateUtils.getTodayWithoutTime()) {
             button.classList.add(CLASS_NAMES.PICK_CONTROL.PAST);
         }
         if (DateUtils.equalsDateOfMonth(date, new Date())) {
