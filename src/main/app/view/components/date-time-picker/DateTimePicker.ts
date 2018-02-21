@@ -8,6 +8,7 @@ import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
 
 import "./date-time-picker.pcss";
+import TimeSlider from "./time-picker/TimeSlider";
 
 // TODO Rename to TimestampPicker?
 export default class DateTimePicker implements IPicker<Date>, IMonthObserver, IDateOfMonthObserver {
@@ -17,12 +18,12 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    public constructor(availabilityHandler: AvailabilityHandler) {
+    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider) {
         this.availabilityHandler = availabilityHandler;
 
         const nearest: { dateOfMonth: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
         this.datePicker = new DatePicker(nearest.dateOfMonth, availabilityHandler);
-        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes());
+        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes(), timeSlider);
 
         this.datePicker.addMonthObserver(this);
         this.datePicker.addDateOfMonthObserver(this);
@@ -79,10 +80,6 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     public getTimePicker(): TimePicker {
         return this.timePicker;
-    }
-
-    public getTimeSlider(): any {
-        return this.timePicker.getSlider();
     }
 
 }

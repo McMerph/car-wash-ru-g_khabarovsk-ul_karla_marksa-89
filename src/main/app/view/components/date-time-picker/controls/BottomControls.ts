@@ -1,30 +1,21 @@
 import CLASS_NAMES from "../../../constants/class-names";
-import SliderUtils from "../utils/SliderUtils";
+import TimeSlider from "../time-picker/TimeSlider";
 
 // TODO Implement ILayout interface with getLayout() method?
 export default class BottomControls {
 
-    private nextTimeControl: HTMLButtonElement;
     private layout: HTMLElement;
 
-    public constructor(slider: any) {
-        this.nextTimeControl = SliderUtils.getNextButton(slider);
-        this.nextTimeControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.TO_BOTTOM,
-        );
+    public constructor(timeSlider: TimeSlider) {
+        const nextTimeControl: HTMLElement = timeSlider.getNextControl();
 
         this.layout = document.createElement("div");
         this.layout.classList.add(CLASS_NAMES.CONTROLS.BOTTOM);
-        this.layout.appendChild(this.nextTimeControl);
+        this.layout.appendChild(nextTimeControl);
     }
 
     public getLayout(): HTMLElement {
         return this.layout;
-    }
-
-    public getNextTimeControl(): HTMLElement {
-        return this.nextTimeControl;
     }
 
 }

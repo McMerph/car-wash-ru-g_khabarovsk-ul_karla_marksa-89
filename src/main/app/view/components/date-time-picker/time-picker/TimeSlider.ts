@@ -15,19 +15,39 @@ export default class TimeSlider {
     public constructor(itemsCount: number) {
         this.itemsCount = itemsCount;
         this.sliderContainer = SliderUtils.getContainer();
-        this.slider = new Slider(this.sliderContainer, {
+        this.slider = this.generateSlider();
+        this.previousControl = this.generatePreviousControl();
+        this.nextControl = this.generateNextControl();
+        this.handleNavigation();
+    }
+
+    public getSlider(): any {
+        return this.slider;
+    }
+
+    public getSliderContainer(): HTMLElement {
+        return this.sliderContainer;
+    }
+
+    public getPreviousControl(): HTMLElement {
+        return this.previousControl;
+    }
+
+    public getNextControl(): HTMLElement {
+        return this.nextControl;
+    }
+
+    private generateSlider(): any {
+        return new Slider(this.sliderContainer, {
             direction: "vertical",
             grabCursor: true,
             mousewheel: true,
             slidesPerView: 5,
             spaceBetween: 1,
         });
-        this.previousControl = this.generatePreviousControl();
-        this.nextControl = this.generateNextControl();
-        this.handleNavigation();
     }
 
-    public generatePreviousControl(): HTMLElement {
+    private generatePreviousControl(): HTMLElement {
         const previousControl = SliderUtils.getPreviousButton(this.slider);
         previousControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
@@ -38,7 +58,7 @@ export default class TimeSlider {
         return previousControl;
     }
 
-    public generateNextControl(): HTMLElement {
+    private generateNextControl(): HTMLElement {
         const nextControl = SliderUtils.getNextButton(this.slider);
         nextControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
@@ -46,14 +66,6 @@ export default class TimeSlider {
         );
 
         return nextControl;
-    }
-
-    public getSlider(): any {
-        return this.slider;
-    }
-
-    public getSliderContainer(): HTMLElement {
-        return this.sliderContainer;
     }
 
     private handleNavigation(): void {

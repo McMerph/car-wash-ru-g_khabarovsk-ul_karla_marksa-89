@@ -1,50 +1,35 @@
-import * as Slider from "swiper/dist/js/swiper.min.js";
 import Time from "../../../../model/Time";
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import DirectPicker from "../DirectPicker";
 import SliderUtils from "../utils/SliderUtils";
+import TimeSlider from "./TimeSlider";
 
 import "./time-picker.pcss";
 
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
 
-    private previousTimeControl: HTMLElement;
-    private nextTimeControl: HTMLElement;
+    private readonly slider: TimeSlider;
 
-    // TODO Move to own class?
-    private slider: any;
-
-    // TODO Move to own class?
-    private sliderContainer: HTMLElement;
-
-    public constructor(times: Time[]) {
+    public constructor(times: Time[], slider: TimeSlider) {
         super(times);
-
-        this.sliderContainer = SliderUtils.getContainer();
-        this.slider = new Slider(this.sliderContainer, {
-            direction: "vertical",
-            grabCursor: true,
-            mousewheel: true,
-            slidesPerView: 5,
-            spaceBetween: 1,
-        });
+        this.slider = slider;
     }
 
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
         layout.classList.add(CLASS_NAMES.TIME_PICKER.MAIN);
 
-        this.buttons.forEach((button) => this.slider.appendSlide(SliderUtils.getSlide(button)));
-        this.handleNavigation();
+        // TODO Declare appendSlide() method to TimeSlider class?
+        this.buttons.forEach((button) => this.slider.getSlider().appendSlide(SliderUtils.getSlide(button)));
 
         const caption: HTMLDivElement = document.createElement("div");
         caption.classList.add(CLASS_NAMES.TIME_PICKER.CAPTION);
         caption.textContent = DICTIONARY.TIME;
 
         layout.appendChild(caption);
-        layout.appendChild(this.sliderContainer);
+        layout.appendChild(this.slider.getSliderContainer());
 
         return layout;
     }
@@ -53,24 +38,14 @@ export default class TimePicker extends DirectPicker<Time> {
         super.pick(time);
         const index: number = this.indexOf(time);
         if (index !== -1 && !this.isDisabled(time)) {
-            this.slider.slideTo(index);
+            // TODO Declare slideTo() method to TimeSlider class?
+            this.slider.getSlider().slideTo(index);
         }
     }
 
     public updateSlider(): void {
-        this.slider.update();
-    }
-
-    public getSlider(): any {
-        return this.slider;
-    }
-
-    public setPreviousTimeControl(previousTimeControl: HTMLElement) {
-        this.previousTimeControl = previousTimeControl;
-    }
-
-    public setNextTimeControl(nextTimeControl: HTMLElement) {
-        this.nextTimeControl = nextTimeControl;
+        // TODO Declare update() method to TimeSlider class?
+        this.slider.getSlider().update();
     }
 
     protected getRepresentation(time: Time): string {
@@ -86,43 +61,6 @@ export default class TimePicker extends DirectPicker<Time> {
 
     protected valuesEquals(time1: Time, time2: Time): boolean {
         return time1.equals(time2);
-    }
-
-    private handleNavigation(): void {
-        this.slider.on("slideChange", () => {
-            if (this.slider.activeIndex <= 0) {
-                // TODO Remove if?
-                if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-                // TODO Remove if?
-                if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-            } else if (this.isSliderInTheEnd()) {
-                // TODO Remove if?
-                if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-                // TODO Remove if?
-                if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-            } else {
-                // TODO Remove if?
-                if (this.nextTimeControl) {
-                    this.nextTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-                // TODO Remove if?
-                if (this.previousTimeControl) {
-                    this.previousTimeControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                }
-            }
-        });
-    }
-
-    private isSliderInTheEnd(): boolean {
-        return this.slider.activeIndex >= super.getValues().length - this.slider.params.slidesPerView;
     }
 
 }

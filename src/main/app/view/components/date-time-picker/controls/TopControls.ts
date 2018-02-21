@@ -22,12 +22,7 @@ export default class TopControls {
         this.datePicker = datePicker;
         this.dateSlider = dateSlider;
 
-        this.previousTimeControl = SliderUtils.getPreviousButton(timeSlider);
-        this.previousTimeControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.DISABLED,
-            CLASS_NAMES.NAVIGATION.TO_TOP,
-        );
+        this.previousTimeControl = timeSlider.getPreviousControl();
 
         this.monthSelect = this.getMonthSelect();
         this.yearSelect = this.getYearSelect();
