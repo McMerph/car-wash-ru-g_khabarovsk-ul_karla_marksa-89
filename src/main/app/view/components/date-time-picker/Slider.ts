@@ -35,8 +35,28 @@ export default abstract class Slider {
         this.nextControl = this.generateNextControl();
     }
 
+    public removeAllSlides(): void {
+        this.slider.removeAllSlides();
+    }
+
     public appendSlide(node: Node): void {
         this.slider.appendSlide(Slider.getSlide(node));
+    }
+
+    public update(): void {
+        this.slider.update();
+    }
+
+    /**
+     * Run transition to the slide with index number equal to 'index' parameter
+     * for the duration equal to 'speed' parameter.
+     * @param {number} index index number of slide
+     * @param {number} speed transition duration (in ms). Optional
+     * @param {boolean} runCallbacks Set it to false (by default it is true) and
+     * transition will not produce transition events. Optional
+     */
+    public slideTo(index: number, speed?: number, runCallbacks?: boolean): void {
+        this.slider.slideTo(index, speed, runCallbacks);
     }
 
     public getSlider(): any {

@@ -35,8 +35,7 @@ export default class TimePicker extends DirectPicker<Time> {
         super.pick(time);
         const index: number = this.indexOf(time);
         if (index !== -1 && !this.isDisabled(time)) {
-            // TODO Declare slideTo() method to TimeSlider class?
-            this.slider.getSlider().slideTo(index);
+            this.slider.slideTo(index);
         }
     }
 

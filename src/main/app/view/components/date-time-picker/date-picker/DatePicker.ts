@@ -52,7 +52,7 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.dateOfMonthPicker.addDateObserver(this);
 
         // TODO Update always animated?
-        this.updateSlider(true);
+        this.renderSlider(false);
     }
 
     public isPicked(): boolean {
@@ -91,18 +91,16 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.dateOfMonthPicker.pick(date);
     }
 
-    private updateSlider(animated?: boolean): void {
-        // TODO Declare removeAllSlides() method to DateSlider class?
-        this.slider.getSlider().removeAllSlides();
+    private renderSlider(animated?: boolean): void {
+        this.slider.removeAllSlides();
 
         this.slider.appendSlide(this.dateOfPreviousMonthPicker.getLayout());
         this.slider.appendSlide(this.dateOfMonthPicker.getLayout());
         this.slider.appendSlide(this.dateOfNextMonthPicker.getLayout());
 
-        this.slider.getSlider().update();
+        this.slider.update();
 
-        // TODO Declare slideTo() method to DateSlider class?
-        this.slider.getSlider().slideTo(1, animated ? undefined : 0);
+        this.slider.slideTo(1, animated ? undefined : 0, false);
     }
 
 }

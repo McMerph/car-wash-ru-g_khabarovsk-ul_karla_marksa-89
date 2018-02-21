@@ -47,8 +47,8 @@ function start() {
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 
-    timeSlider.getSlider().update();
-    dateSlider.getSlider().update();
+    timeSlider.update();
+    dateSlider.update();
 
     const modalHandler: ModalHandler = new ModalHandler();
 
