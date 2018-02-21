@@ -1,5 +1,6 @@
 import CLASS_NAMES from "../../../constants/class-names";
 import Slider from "../Slider";
+import SETTINGS from "../../../constants/settings";
 
 export default class TimeSlider extends Slider {
 
@@ -10,7 +11,7 @@ export default class TimeSlider extends Slider {
             direction: "vertical",
             grabCursor: true,
             mousewheel: true,
-            slidesPerView: 5,
+            slidesPerView: SETTINGS.TIME_SLIDES_PER_VIEW,
             spaceBetween: 1,
         });
         this.itemsCount = itemsCount;
@@ -54,7 +55,7 @@ export default class TimeSlider extends Slider {
     }
 
     private isSliderInTheEnd(): boolean {
-        return this.getSlider().activeIndex >= this.itemsCount - this.getSlider().params.slidesPerView;
+        return this.getSlider().activeIndex >= this.itemsCount - SETTINGS.TIME_SLIDES_PER_VIEW;
     }
 
 }
