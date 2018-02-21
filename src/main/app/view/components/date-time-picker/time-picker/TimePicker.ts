@@ -2,7 +2,6 @@ import Time from "../../../../model/Time";
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import DirectPicker from "../DirectPicker";
-import SliderUtils from "../utils/SliderUtils";
 import TimeSlider from "./TimeSlider";
 
 import "./time-picker.pcss";
@@ -20,9 +19,7 @@ export default class TimePicker extends DirectPicker<Time> {
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
         layout.classList.add(CLASS_NAMES.TIME_PICKER.MAIN);
-
-        // TODO Declare appendSlide() method to TimeSlider class?
-        this.buttons.forEach((button) => this.slider.getSlider().appendSlide(SliderUtils.getSlide(button)));
+        this.buttons.forEach((button) => this.slider.appendSlide(button));
 
         const caption: HTMLDivElement = document.createElement("div");
         caption.classList.add(CLASS_NAMES.TIME_PICKER.CAPTION);

@@ -5,7 +5,6 @@ import IPicker from "../IPicker";
 import MonthHandler from "../MonthHandler";
 import IDateObserver from "../observers/IDateObserver";
 import IMonthObserver from "../observers/IMonthObserver";
-import SliderUtils from "../utils/SliderUtils";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DateSlider from "./DateSlider";
 
@@ -99,14 +98,9 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         // TODO Declare removeAllSlides() method to DateSlider class?
         this.slider.getSlider().removeAllSlides();
 
-        // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfPreviousMonthPicker.getLayout()));
-
-        // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfMonthPicker.getLayout()));
-
-        // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfNextMonthPicker.getLayout()));
+        this.slider.appendSlide(this.dateOfPreviousMonthPicker.getLayout());
+        this.slider.appendSlide(this.dateOfMonthPicker.getLayout());
+        this.slider.appendSlide(this.dateOfNextMonthPicker.getLayout());
 
         this.slider.getSlider().update();
 

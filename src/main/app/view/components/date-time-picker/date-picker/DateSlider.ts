@@ -61,6 +61,10 @@ export default class DateSlider implements IMonthObserver {
         this.yearChooser.value = this.monthHandler.getMonth().getFullYear().toString(10);
     }
 
+    public appendSlide(node: Node): void {
+        this.slider.appendSlide(SliderUtils.getSlide(node));
+    }
+
     public getSlider(): any {
         return this.slider;
     }
@@ -168,7 +172,7 @@ export default class DateSlider implements IMonthObserver {
     }
 
     private generatePreviousControl(): HTMLElement {
-        const previousControl = SliderUtils.getPreviousButton(this.slider);
+        const previousControl = SliderUtils.getPreviousControl(this.slider);
         previousControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.TO_LEFT,
@@ -178,7 +182,7 @@ export default class DateSlider implements IMonthObserver {
     }
 
     private generateNextControl(): HTMLElement {
-        const nextControl = SliderUtils.getNextButton(this.slider);
+        const nextControl = SliderUtils.getNextControl(this.slider);
         nextControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.TO_RIGHT,

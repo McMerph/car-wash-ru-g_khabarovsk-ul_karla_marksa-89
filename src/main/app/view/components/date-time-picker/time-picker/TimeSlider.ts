@@ -1,54 +1,24 @@
-import * as Slider from "swiper/dist/js/swiper.min.js";
 import CLASS_NAMES from "../../../constants/class-names";
-import SliderUtils from "../utils/SliderUtils";
+import Slider from "../Slider";
 
-// TODO Extend SliderUtils class?
-export default class TimeSlider {
+export default class TimeSlider extends Slider {
 
     private readonly itemsCount: number;
 
-    private readonly slider: any;
-    private readonly sliderContainer: HTMLElement;
-    private readonly previousControl: HTMLElement;
-    private readonly nextControl: HTMLElement;
-
     public constructor(itemsCount: number) {
-        this.itemsCount = itemsCount;
-        this.sliderContainer = SliderUtils.getContainer();
-        this.slider = this.generateSlider();
-        this.previousControl = this.generatePreviousControl();
-        this.nextControl = this.generateNextControl();
-        this.handleNavigation();
-    }
-
-    public getSlider(): any {
-        return this.slider;
-    }
-
-    public getSliderContainer(): HTMLElement {
-        return this.sliderContainer;
-    }
-
-    public getPreviousControl(): HTMLElement {
-        return this.previousControl;
-    }
-
-    public getNextControl(): HTMLElement {
-        return this.nextControl;
-    }
-
-    private generateSlider(): any {
-        return new Slider(this.sliderContainer, {
+        super({
             direction: "vertical",
             grabCursor: true,
             mousewheel: true,
             slidesPerView: 5,
             spaceBetween: 1,
         });
+        this.itemsCount = itemsCount;
+        this.handleNavigation();
     }
 
-    private generatePreviousControl(): HTMLElement {
-        const previousControl = SliderUtils.getPreviousButton(this.slider);
+    protected generatePreviousControl(): HTMLElement {
+        const previousControl = super.generatePreviousControl();
         previousControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.DISABLED,
@@ -58,8 +28,8 @@ export default class TimeSlider {
         return previousControl;
     }
 
-    private generateNextControl(): HTMLElement {
-        const nextControl = SliderUtils.getNextButton(this.slider);
+    protected generateNextControl(): HTMLElement {
+        const nextControl = super.generateNextControl();
         nextControl.classList.add(
             CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.TO_BOTTOM,
@@ -69,22 +39,22 @@ export default class TimeSlider {
     }
 
     private handleNavigation(): void {
-        this.slider.on("slideChange", () => {
-            if (this.slider.activeIndex <= 0) {
-                this.nextControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.previousControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
+        this.getSlider().on("slideChange", () => {
+            if (this.getSlider().activeIndex <= 0) {
+                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getPreviousControl().classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
             } else if (this.isSliderInTheEnd()) {
-                this.previousControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.nextControl.classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getNextControl().classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
             } else {
-                this.nextControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.previousControl.classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
             }
         });
     }
 
     private isSliderInTheEnd(): boolean {
-        return this.slider.activeIndex >= this.itemsCount - this.slider.params.slidesPerView;
+        return this.getSlider().activeIndex >= this.itemsCount - this.getSlider().params.slidesPerView;
     }
 
 }

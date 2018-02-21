@@ -1,6 +1,7 @@
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 
+// TODO Delete class?
 export default class SliderUtils {
 
     public static getContainer(): HTMLElement {
@@ -21,7 +22,7 @@ export default class SliderUtils {
         return slide;
     }
 
-    public static getPreviousButton(slider: any): HTMLButtonElement {
+    public static getPreviousControl(slider: any): HTMLElement {
         const previousButton: HTMLButtonElement = document.createElement("button");
         previousButton.setAttribute("aria-label", DICTIONARY.BACK);
         previousButton.onclick = () => slider.slidePrev();
@@ -29,7 +30,7 @@ export default class SliderUtils {
         return previousButton;
     }
 
-    public static getNextButton(slider: any): HTMLButtonElement {
+    public static getNextControl(slider: any): HTMLElement {
         const nextButton: HTMLButtonElement = document.createElement("button");
         nextButton.setAttribute("aria-label", DICTIONARY.NEXT);
         nextButton.onclick = () => slider.slideNext();
