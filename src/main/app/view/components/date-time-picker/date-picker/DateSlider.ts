@@ -1,4 +1,5 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
+import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import SETTINGS from "../../../constants/settings";
@@ -10,49 +11,24 @@ export default class DateSlider {
     private readonly slider: any;
     private readonly sliderContainer: HTMLElement;
 
-    // TODO HTMLSelectElement vs HTMLElement
-    private monthSelect: HTMLSelectElement;
-
-    // TODO HTMLSelectElement vs HTMLElement
-    private yearSelect: HTMLSelectElement;
-
+    private monthChooser: HTMLSelectElement;
+    private yearChooser: HTMLSelectElement;
     private previousControl: HTMLElement;
     private nextControl: HTMLElement;
-
-    // TODO Get rid of it? Observer pattern?
-    private toPreviousMonth: (animated?: boolean) => void;
-
-    // TODO Get rid of it? Observer pattern?
-    private toNextMonth: (animated?: boolean) => void;
-
-    // TODO Get rid of it? Observer pattern?
-    private changeMonthOfTheYear: (monthIndex: number) => void;
-
-    // TODO Get rid of it? Observer pattern?
-    private sameMonthOfTheYear: (monthIndex: number) => boolean;
-
-    // TODO Get rid of it? Observer pattern?
-    private changeYear: (year: number) => void;
-
-    // TODO Get rid of it? Observer pattern?
-    private getPreviousMonth: () => Date;
 
     // TODO Get rid of it? Observer pattern?
     private getMonth: () => Date;
 
     // TODO Get rid of it? Observer pattern?
-    private getNextMonth: () => Date;
-
-    // TODO Get rid of it? Observer pattern?
-    private sameYear: (year: number) => boolean;
+    private updateMonth: (month: Date, animated?: boolean) => void;
 
     private blockSlideChangeTransitionEnd: boolean = false;
 
     public constructor() {
         this.sliderContainer = SliderUtils.getContainer();
         this.slider = this.generateSlider();
-        this.monthSelect = this.generateMonthSelect();
-        this.yearSelect = this.generateYearSelect();
+        this.monthChooser = this.generateMonthChooser();
+        this.yearChooser = this.generateYearChooser();
         this.previousControl = this.generatePreviousControl();
         this.nextControl = this.generateNextControl();
 
@@ -68,12 +44,12 @@ export default class DateSlider {
         return this.sliderContainer;
     }
 
-    public getMonthSelect(): HTMLSelectElement {
-        return this.monthSelect;
+    public getMonthChooser(): HTMLElement {
+        return this.monthChooser;
     }
 
-    public getYearSelect(): HTMLSelectElement {
-        return this.yearSelect;
+    public getYearChooser(): HTMLSelectElement {
+        return this.yearChooser;
     }
 
     public getPreviousControl(): HTMLElement {
@@ -84,40 +60,44 @@ export default class DateSlider {
         return this.nextControl;
     }
 
-    public setToPreviousMonth(toPreviousMonth: (animated?: boolean) => void): void {
-        this.toPreviousMonth = toPreviousMonth;
-    }
-
-    public setToNextMonth(toNextMonth: (animated?: boolean) => void): void {
-        this.toNextMonth = toNextMonth;
-    }
-
-    public setChangeMonthOfTheYear(changeMonthOfTheYear: (monthIndex: number) => void): void {
-        this.changeMonthOfTheYear = changeMonthOfTheYear;
-    }
-
-    public setSameMonthOfTheYear(sameMonthOfTheYear: (monthIndex: number) => boolean): void {
-        this.sameMonthOfTheYear = sameMonthOfTheYear;
-    }
-
-    public setChangeYear(changeYear: (year: number) => void): void {
-        this.changeYear = changeYear;
-    }
-
-    public setGetPreviousMonth(getPreviousMonth: () => Date): void {
-        this.getPreviousMonth = getPreviousMonth;
-    }
-
     public setGetMonth(getMonth: () => Date): void {
         this.getMonth = getMonth;
     }
 
-    public setGetNextMonth(getNextMonth: () => Date): void {
-        this.getNextMonth = getNextMonth;
+    public setUpdateMonth(updateMonth: (month: Date, animated?: boolean) => void): void {
+        this.updateMonth = updateMonth;
     }
 
-    public setSameYear(sameYear: (year: number) => boolean): void {
-        this.sameYear = sameYear;
+    private getPreviousMonth(): Date {
+        return DateUtils.getPreviousMonth(this.getMonth());
+    }
+
+    private getNextMonth(): Date {
+        return DateUtils.getNextMonth(this.getMonth());
+    }
+
+    private sameYear(year: number): boolean {
+        return this.getMonth().getFullYear() === year;
+    }
+
+    private sameMonthOfTheYear(monthIndex: number): boolean {
+        return this.getMonth().getMonth() === monthIndex;
+    }
+
+    private toPreviousMonth(animated?: boolean): void {
+        this.updateMonth(DateUtils.getPreviousMonth(this.getMonth()));
+    }
+
+    private toNextMonth(animated?: boolean): void {
+        this.updateMonth(DateUtils.getNextMonth(this.getMonth()));
+    }
+
+    private changeMonthOfTheYear(monthIndex: number): void {
+        this.updateMonth(new Date(this.getMonth().getFullYear(), monthIndex));
+    }
+
+    private changeYear(year: number): void {
+        this.updateMonth(new Date(year, this.getMonth().getMonth()));
     }
 
     private generateSlider(): any {
@@ -127,7 +107,7 @@ export default class DateSlider {
         });
     }
 
-    private generateMonthSelect(): HTMLSelectElement {
+    private generateMonthChooser(): HTMLSelectElement {
         const monthSelect: HTMLSelectElement = document.createElement("select");
         monthSelect.classList.add(CLASS_NAMES.CHOOSER);
         DICTIONARY.MONTHS_NAMES.forEach((monthName, monthIndex) => {
@@ -151,7 +131,7 @@ export default class DateSlider {
         return option;
     }
 
-    private generateYearSelect(): HTMLSelectElement {
+    private generateYearChooser(): HTMLSelectElement {
         const yearSelect: HTMLSelectElement = document.createElement("select");
         yearSelect.classList.add(CLASS_NAMES.CHOOSER);
         this.getSelectableYears().forEach((year) => {
@@ -235,14 +215,14 @@ export default class DateSlider {
 
     private updateSelects(month: Date) {
         // TODO Remove if?
-        if (this.yearSelect.parentNode) {
-            const yearSelect: HTMLSelectElement = this.generateYearSelect();
-            this.yearSelect.parentNode.replaceChild(yearSelect, this.yearSelect);
-            this.yearSelect = yearSelect;
+        if (this.yearChooser.parentNode) {
+            const yearChooser: HTMLSelectElement = this.generateYearChooser();
+            this.yearChooser.parentNode.replaceChild(yearChooser, this.yearChooser);
+            this.yearChooser = yearChooser;
         }
 
-        this.monthSelect.value = month.getMonth().toString(10);
-        this.yearSelect.value = month.getFullYear().toString(10);
+        this.monthChooser.value = month.getMonth().toString(10);
+        this.yearChooser.value = month.getFullYear().toString(10);
     }
 
 }
