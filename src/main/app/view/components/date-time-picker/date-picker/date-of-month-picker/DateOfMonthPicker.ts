@@ -3,17 +3,16 @@ import DateUtils from "../../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../../constants/class-names";
 import DICTIONARY from "../../../../constants/dictionary";
 import DirectPicker from "../../DirectPicker";
-import IDateOfMonthObserver from "../../observers/IDateOfMonthObserver";
+import IDateObserver from "../../observers/IDateObserver";
 import IWeek from "./IWeek";
 import WeeksProducer from "./WeeksProducer";
 
-// TODO Merge with DateOfMonthPickerLayout?
 export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private month: Date;
 
     // TODO Move to parent class?
-    private dateOfMonthObservers: IDateOfMonthObserver[] = [];
+    private dateOfMonthObservers: IDateObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
@@ -40,14 +39,14 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     public pick(dateOfMonth: Date): void {
         super.pick(dateOfMonth);
-        this.dateOfMonthObservers.forEach((observer) => observer.onDateOfMonthPick());
+        this.dateOfMonthObservers.forEach((observer) => observer.onDatePick());
     }
 
-    public addDateOfMonthObserver(observer: IDateOfMonthObserver): void {
+    public addDateObserver(observer: IDateObserver): void {
         this.dateOfMonthObservers.push(observer);
     }
 
-    public removeDateOfMonthObserver(observer: IDateOfMonthObserver): void {
+    public removeDateObserver(observer: IDateObserver): void {
         const index: number = this.dateOfMonthObservers.indexOf(observer);
         this.dateOfMonthObservers.splice(index, 1);
     }

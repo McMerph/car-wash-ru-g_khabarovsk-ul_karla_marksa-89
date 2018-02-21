@@ -3,15 +3,15 @@ import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import IPicker from "./IPicker";
-import IDateOfMonthObserver from "./observers/IDateOfMonthObserver";
+import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
-
-import "./date-time-picker.pcss";
 import TimeSlider from "./time-picker/TimeSlider";
 
+import "./date-time-picker.pcss";
+
 // TODO Rename to TimestampPicker?
-export default class DateTimePicker implements IPicker<Date>, IMonthObserver, IDateOfMonthObserver {
+export default class DateTimePicker implements IPicker<Date>, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
@@ -26,17 +26,7 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
         this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes(), timeSlider);
 
         this.datePicker.addMonthObserver(this);
-        this.datePicker.addDateOfMonthObserver(this);
-    }
-
-    public onMonthChange(): void {
-        this.timePicker.disable([]);
-    }
-
-    public onDateOfMonthPick(): void {
-        const pickedDateOfMonth = this.datePicker.getPickedValue().valueOf();
-        const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
-        this.timePicker.disable(disabledTimes);
+        this.datePicker.addDateObserver(this);
     }
 
     public isPicked(): boolean {
@@ -57,6 +47,16 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
         layout.appendChild(this.timePicker.getLayout());
 
         return layout;
+    }
+
+    public onMonthChange(): void {
+        this.timePicker.disable([]);
+    }
+
+    public onDatePick(): void {
+        const pickedDateOfMonth = this.datePicker.getPickedValue().valueOf();
+        const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
+        this.timePicker.disable(disabledTimes);
     }
 
     public pickNearest(): void {
