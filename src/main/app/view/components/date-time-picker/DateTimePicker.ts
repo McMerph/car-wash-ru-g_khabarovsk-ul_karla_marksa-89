@@ -4,9 +4,9 @@ import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import DateSlider from "./date-picker/DateSlider";
 import IPicker from "./IPicker";
-import MonthHandler from "./MonthHandler";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
+import PickerState from "./PickerState";
 import TimePicker from "./time-picker/TimePicker";
 import TimeSlider from "./time-picker/TimeSlider";
 
@@ -20,12 +20,12 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, monthHandler: MonthHandler) {
+    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, pickerState: PickerState) {
         this.availabilityHandler = availabilityHandler;
-        monthHandler.addMonthObserver(this);
+        pickerState.addMonthObserver(this);
 
         this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
-        this.datePicker = new DatePicker(monthHandler, availabilityHandler, dateSlider);
+        this.datePicker = new DatePicker(pickerState, availabilityHandler, dateSlider);
 
         this.datePicker.addDateObserver(this);
     }
@@ -51,9 +51,6 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     }
 
     public onMonthChange(): void {
-        // TODO Delete
-        // console.log("DateTimePicker.onMonthChange()");
-
         this.timePicker.disable([]);
     }
 

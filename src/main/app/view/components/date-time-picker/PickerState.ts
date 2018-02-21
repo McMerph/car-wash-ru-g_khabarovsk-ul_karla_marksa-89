@@ -1,7 +1,6 @@
 import IMonthObserver from "./observers/IMonthObserver";
 
-// TODO Rename to PickerState?
-export default class MonthHandler {
+export default class PickerState {
 
     private month: Date;
     private monthObservers: IMonthObserver[] = [];

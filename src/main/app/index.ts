@@ -21,7 +21,7 @@ import BottomControls from "./view/components/date-time-picker/controls/BottomCo
 import TopControls from "./view/components/date-time-picker/controls/TopControls";
 import DateSlider from "./view/components/date-time-picker/date-picker/DateSlider";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
-import MonthHandler from "./view/components/date-time-picker/MonthHandler";
+import PickerState from "./view/components/date-time-picker/PickerState";
 import TimeSlider from "./view/components/date-time-picker/time-picker/TimeSlider";
 import ModalHandler from "./view/components/modal/ModalHandler";
 
@@ -33,11 +33,11 @@ function start() {
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
     const timeSliderItemsCount: number = availabilityHandler.getCheckInTimes().length;
     const month: Date = availabilityHandler.getNearestAvailableTimestamp().dateOfMonth;
-    const monthHandler: MonthHandler = new MonthHandler(month);
+    const pickerState: PickerState = new PickerState(month);
 
     const timeSlider: TimeSlider = new TimeSlider(timeSliderItemsCount);
-    const dateSlider: DateSlider = new DateSlider(monthHandler);
-    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, monthHandler);
+    const dateSlider: DateSlider = new DateSlider(pickerState);
+    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, pickerState);
 
     const topControls: TopControls = new TopControls(dateSlider, timeSlider);
     const bottomControls = new BottomControls(timeSlider);

@@ -1,33 +1,29 @@
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import SETTINGS from "../../../constants/settings";
-import MonthHandler from "../MonthHandler";
 import IMonthObserver from "../observers/IMonthObserver";
+import PickerState from "../PickerState";
 import Slider from "../Slider";
 
 // TODO Extend SliderUtils class?
 export default class DateSlider extends Slider implements IMonthObserver {
 
-    private readonly monthHandler: MonthHandler;
+    private readonly pickerState: PickerState;
 
     private monthChooser: HTMLSelectElement;
     private yearChooser: HTMLSelectElement;
 
-    // TODO Use it?
-    // private blockSlideChangeTransitionEnd: boolean = false;
-
-    public constructor(monthHandler: MonthHandler) {
+    public constructor(pickerState: PickerState) {
         super({
             grabCursor: true,
             spaceBetween: SETTINGS.SPACE_BETWEEN_MONTHS_SLIDES,
         });
-        this.monthHandler = monthHandler;
-        monthHandler.addMonthObserver(this);
+        this.pickerState = pickerState;
+
         this.monthChooser = this.generateMonthChooser();
         this.yearChooser = this.generateYearChooser();
-
-        // this.handleSlideChange();
         this.handleSlideChangeTransitionEnd();
+        this.pickerState.addMonthObserver(this);
     }
 
     public onMonthChange(): void {
@@ -70,24 +66,24 @@ export default class DateSlider extends Slider implements IMonthObserver {
             this.yearChooser = yearChooser;
         }
 
-        this.monthChooser.value = this.monthHandler.getMonth().getMonth().toString(10);
-        this.yearChooser.value = this.monthHandler.getMonth().getFullYear().toString(10);
+        this.monthChooser.value = this.pickerState.getMonth().getMonth().toString(10);
+        this.yearChooser.value = this.pickerState.getMonth().getFullYear().toString(10);
     }
 
     private sameYear(year: number): boolean {
-        return this.monthHandler.getMonth().getFullYear() === year;
+        return this.pickerState.getMonth().getFullYear() === year;
     }
 
     private sameMonthOfTheYear(monthIndex: number): boolean {
-        return this.monthHandler.getMonth().getMonth() === monthIndex;
+        return this.pickerState.getMonth().getMonth() === monthIndex;
     }
 
     private changeMonthOfTheYear(monthIndex: number): void {
-        this.monthHandler.setMonth(new Date(this.monthHandler.getMonth().getFullYear(), monthIndex));
+        this.pickerState.setMonth(new Date(this.pickerState.getMonth().getFullYear(), monthIndex));
     }
 
     private changeYear(year: number): void {
-        this.monthHandler.setMonth(new Date(year, this.monthHandler.getMonth().getMonth()));
+        this.pickerState.setMonth(new Date(year, this.pickerState.getMonth().getMonth()));
     }
 
     private generateMonthChooser(): HTMLSelectElement {
@@ -128,8 +124,8 @@ export default class DateSlider extends Slider implements IMonthObserver {
     }
 
     private getSelectableYears(): string[] {
-        const minYear: number = this.monthHandler.getMonth().getFullYear() - SETTINGS.YEARS_OFFSET;
-        const maxYear: number = this.monthHandler.getMonth().getFullYear() + SETTINGS.YEARS_OFFSET;
+        const minYear: number = this.pickerState.getMonth().getFullYear() - SETTINGS.YEARS_OFFSET;
+        const maxYear: number = this.pickerState.getMonth().getFullYear() + SETTINGS.YEARS_OFFSET;
         const years: string[] = [];
         for (let i = minYear; i <= maxYear; i++) {
             years.push(i.toString(10));
@@ -149,36 +145,13 @@ export default class DateSlider extends Slider implements IMonthObserver {
         return option;
     }
 
-    // TODO Use it?
-    // private handleSlideChange() {
-    //     this.slider.on("slideChange", () => {
-    //         if (!this.block) {
-    //             console.log("slideChange()");
-    //             this.blockSlideChangeTransitionEnd = false;
-    //             if (this.slider.activeIndex === 0) {
-    //                 this.updateSelects(this.monthHandler.getPreviousMonth());
-    //             } else if (this.slider.activeIndex === 1) {
-    //                 this.updateSelects(this.monthHandler.getMonth());
-    //             } else if (this.slider.activeIndex === 2) {
-    //                 this.updateSelects(this.monthHandler.getNextMonth());
-    //             }
-    //         }
-    //     });
-    // }
-
     private handleSlideChangeTransitionEnd() {
         this.getSlider().on("slideChangeTransitionEnd", () => {
-            console.log("slideChangeTransitionEnd()");
-            console.log(this.monthHandler.getMonth());
-
-            // if (!this.blockSlideChangeTransitionEnd) {
-            // this.blockSlideChangeTransitionEnd = true;
             if (this.getSlider().activeIndex === 0) {
-                this.monthHandler.previous();
+                this.pickerState.previous();
             } else if (this.getSlider().activeIndex === 2) {
-                this.monthHandler.next();
+                this.pickerState.next();
             }
-            // }
         });
     }
 
