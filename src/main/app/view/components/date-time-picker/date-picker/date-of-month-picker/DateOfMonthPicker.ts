@@ -12,7 +12,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     private month: Date;
 
     // TODO Move to parent class?
-    private dateOfMonthObservers: IDateObserver[] = [];
+    private dateObservers: IDateObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
@@ -39,16 +39,16 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     public pick(dateOfMonth: Date): void {
         super.pick(dateOfMonth);
-        this.dateOfMonthObservers.forEach((observer) => observer.onDatePick());
+        this.dateObservers.forEach((observer) => observer.onDatePick());
     }
 
     public addDateObserver(observer: IDateObserver): void {
-        this.dateOfMonthObservers.push(observer);
+        this.dateObservers.push(observer);
     }
 
     public removeDateObserver(observer: IDateObserver): void {
-        const index: number = this.dateOfMonthObservers.indexOf(observer);
-        this.dateOfMonthObservers.splice(index, 1);
+        const index: number = this.dateObservers.indexOf(observer);
+        this.dateObservers.splice(index, 1);
     }
 
     protected getRepresentation(dateOfMonth: Date): string {

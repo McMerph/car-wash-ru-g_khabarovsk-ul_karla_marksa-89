@@ -2,7 +2,9 @@ import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
+import DateSlider from "./date-picker/DateSlider";
 import IPicker from "./IPicker";
+import MonthHandler from "./MonthHandler";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
@@ -18,12 +20,11 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider) {
+    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, monthHandler: MonthHandler) {
         this.availabilityHandler = availabilityHandler;
 
-        const nearest: { dateOfMonth: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker = new DatePicker(nearest.dateOfMonth, availabilityHandler);
-        this.timePicker = new TimePicker(this.availabilityHandler.getCheckInTimes(), timeSlider);
+        this.datePicker = new DatePicker(monthHandler, availabilityHandler, dateSlider);
+        this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
 
         this.datePicker.addMonthObserver(this);
         this.datePicker.addDateObserver(this);
@@ -68,18 +69,6 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     public updateSliders(): void {
         this.timePicker.updateSlider();
         this.datePicker.updateSlider();
-    }
-
-    public getDatePicker(): DatePicker {
-        return this.datePicker;
-    }
-
-    public getDateSlider(): any {
-        return this.datePicker.getSlider();
-    }
-
-    public getTimePicker(): TimePicker {
-        return this.timePicker;
     }
 
 }

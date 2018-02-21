@@ -17,10 +17,12 @@ import IApi from "./model/api/IApi";
 import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
+import Time from "./model/Time";
 import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 import TopControls from "./view/components/date-time-picker/controls/TopControls";
-import DatePicker from "./view/components/date-time-picker/date-picker/DatePicker";
+import DateSlider from "./view/components/date-time-picker/date-picker/DateSlider";
 import DateTimePicker from "./view/components/date-time-picker/DateTimePicker";
+import MonthHandler from "./view/components/date-time-picker/MonthHandler";
 import TimeSlider from "./view/components/date-time-picker/time-picker/TimeSlider";
 import ModalHandler from "./view/components/modal/ModalHandler";
 
@@ -30,16 +32,15 @@ function start() {
     const mockApi: IApi = new MockApi();
     const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
+    const checkInTimes: Time[] = availabilityHandler.getCheckInTimes();
+    const month: Date = availabilityHandler.getNearestAvailableTimestamp().dateOfMonth;
+    const monthHandler: MonthHandler = new MonthHandler(month);
 
-    const timeSlider: TimeSlider = new TimeSlider(availabilityHandler.getCheckInTimes().length);
+    const timeSlider: TimeSlider = new TimeSlider(checkInTimes.length);
+    const dateSlider: DateSlider = new DateSlider(monthHandler);
+    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, monthHandler);
 
-    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider);
-
-    const datePicker: DatePicker = dateTimePicker.getDatePicker();
-    const dateSlider: any = dateTimePicker.getDateSlider();
-    const topControls: TopControls = new TopControls(datePicker, dateSlider, timeSlider);
-    datePicker.setTopControls(topControls);
-
+    const topControls: TopControls = new TopControls(dateSlider, timeSlider);
     const bottomControls = new BottomControls(timeSlider);
 
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
