@@ -1,17 +1,26 @@
+import * as Slider from "swiper/dist/js/swiper.min.js";
 import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
+import CLASS_NAMES from "../../../constants/class-names";
+import SETTINGS from "../../../constants/settings";
 import TopControls from "../controls/TopControls";
 import IPicker from "../IPicker";
 import IDateOfMonthObserver from "../observers/IDateOfMonthObserver";
 import IMonthObserver from "../observers/IMonthObserver";
+import SliderUtils from "../utils/SliderUtils";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
-import DatePickerLayout from "./DatePickerLayout";
 
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
-// TODO Merge with DatePickerLayout?
 export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
+
+    private topControls: TopControls;
+
+    private slider: any;
+    private blockSlideChangeTransitionEnd: boolean = false;
+
+    private sliderContainer: HTMLElement;
 
     private monthObservers: IMonthObserver[] = [];
     private dateOfMonthObservers: IDateOfMonthObserver[] = [];
@@ -20,8 +29,6 @@ export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
 
     private month: Date;
 
-    private layout: DatePickerLayout;
-
     private dateOfPreviousMonthPicker: DateOfMonthPicker;
     private dateOfMonthPicker: DateOfMonthPicker;
     private dateOfNextMonthPicker: DateOfMonthPicker;
@@ -29,9 +36,41 @@ export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
     public constructor(initialMonth: Date, availabilityHandler: AvailabilityHandler) {
         this.month = initialMonth;
         this.availabilityHandler = availabilityHandler;
-        this.layout = new DatePickerLayout(this);
+
+        this.sliderContainer = SliderUtils.getContainer();
+        this.handleSlider(this.sliderContainer);
 
         this.updateMonth(initialMonth);
+    }
+
+    public getLayout(): HTMLElement {
+        const layout: HTMLElement = document.createElement("div");
+        layout.classList.add(CLASS_NAMES.DATE_PICKER.MAIN);
+        layout.appendChild(this.sliderContainer);
+
+        return layout;
+    }
+
+    public update(animated?: boolean): void {
+        this.slider.removeAllSlides();
+        this.slider.appendSlide(SliderUtils.getSlide(this.getPreviousMonthLayout()));
+        this.slider.appendSlide(SliderUtils.getSlide(this.getCurrentMonthLayout()));
+        this.slider.appendSlide(SliderUtils.getSlide(this.getNextMonthLayout()));
+        this.slider.slideTo(1, animated ? undefined : 0);
+        this.updateSlider();
+
+        // TODO Remove if?
+        if (this.topControls) {
+            this.topControls.updateSelects(this.getMonth());
+        }
+    }
+
+    public updateSlider(): void {
+        this.slider.update();
+    }
+
+    public setTopControls(topControls: TopControls) {
+        this.topControls = topControls;
     }
 
     public onDateOfMonthPick(): void {
@@ -56,20 +95,11 @@ export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
         this.monthObservers.splice(index, 1);
     }
 
-    // TODO Use ButtonsPickerLayout?
-    public getLayout(): HTMLElement {
-        return this.layout.getLayout();
-    }
-
     public pick(date: Date): void {
         if (!DateUtils.equalsMonth(date, this.month)) {
             this.updateMonth(date, true);
         }
         this.dateOfMonthPicker.pick(date);
-    }
-
-    public updateSlider(): void {
-        this.layout.updateSlider();
     }
 
     public getPreviousMonthLayout(): Node {
@@ -131,11 +161,51 @@ export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
     }
 
     public getSlider(): any {
-        return this.layout.getSlider();
+        return this.slider;
     }
 
-    public setTopControls(topControls: TopControls) {
-        this.layout.setTopControls(topControls);
+    private handleSlider(sliderContainer: HTMLElement) {
+        this.slider = new Slider(sliderContainer, {
+            grabCursor: true,
+            spaceBetween: SETTINGS.SPACE_BETWEEN_MONTHS_SLIDES,
+        });
+        this.handleSlideChange();
+        this.handleSlideChangeTransitionEnd();
+    }
+
+    private handleSlideChangeTransitionEnd() {
+        this.slider.on("slideChangeTransitionEnd", () => {
+            if (!this.blockSlideChangeTransitionEnd) {
+                this.blockSlideChangeTransitionEnd = true;
+                if (this.slider.activeIndex === 0) {
+                    this.toPreviousMonth();
+                } else if (this.slider.activeIndex === 2) {
+                    this.toNextMonth();
+                }
+            }
+        });
+    }
+
+    private handleSlideChange() {
+        this.slider.on("slideChange", () => {
+            this.blockSlideChangeTransitionEnd = false;
+            if (this.slider.activeIndex === 0) {
+                // TODO Remove if?
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.getPreviousMonth());
+                }
+            } else if (this.slider.activeIndex === 1) {
+                // TODO Remove if?
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.getMonth());
+                }
+            } else if (this.slider.activeIndex === 2) {
+                // TODO Remove if?
+                if (this.topControls) {
+                    this.topControls.updateSelects(this.getNextMonth());
+                }
+            }
+        });
     }
 
     private updateMonth(month: Date, animated?: boolean): void {
@@ -147,7 +217,7 @@ export default class DatePicker implements IPicker<Date>, IDateOfMonthObserver {
 
         this.monthObservers.forEach((observer) => observer.onMonthChange());
 
-        this.layout.update(animated);
+        this.update(animated);
     }
 
 }

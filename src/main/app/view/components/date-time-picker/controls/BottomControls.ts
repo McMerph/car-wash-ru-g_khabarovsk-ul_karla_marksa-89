@@ -7,11 +7,9 @@ export default class BottomControls {
     private layout: HTMLElement;
 
     public constructor(timeSlider: TimeSlider) {
-        const nextTimeControl: HTMLElement = timeSlider.getNextControl();
-
         this.layout = document.createElement("div");
         this.layout.classList.add(CLASS_NAMES.CONTROLS.BOTTOM);
-        this.layout.appendChild(nextTimeControl);
+        this.layout.appendChild(timeSlider.getNextControl());
     }
 
     public getLayout(): HTMLElement {
