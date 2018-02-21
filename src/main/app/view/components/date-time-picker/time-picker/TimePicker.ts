@@ -43,7 +43,7 @@ export default class TimePicker extends DirectPicker<Time> {
         }
     }
 
-    public updateSlider(): void {
+    public updateSwiper(): void {
         // TODO Declare update() method to TimeSlider class?
         this.slider.getSlider().update();
     }

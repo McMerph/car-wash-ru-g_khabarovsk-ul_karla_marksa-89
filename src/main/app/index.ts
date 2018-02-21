@@ -17,7 +17,6 @@ import IApi from "./model/api/IApi";
 import IAvailability from "./model/api/IAvailability";
 import MockApi from "./model/api/MockApi";
 import AvailabilityHandler from "./model/AvailabilityHandler";
-import Time from "./model/Time";
 import BottomControls from "./view/components/date-time-picker/controls/BottomControls";
 import TopControls from "./view/components/date-time-picker/controls/TopControls";
 import DateSlider from "./view/components/date-time-picker/date-picker/DateSlider";
@@ -32,11 +31,11 @@ function start() {
     const mockApi: IApi = new MockApi();
     const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
-    const checkInTimes: Time[] = availabilityHandler.getCheckInTimes();
+    const timeSliderItemsCount: number = availabilityHandler.getCheckInTimes().length;
     const month: Date = availabilityHandler.getNearestAvailableTimestamp().dateOfMonth;
     const monthHandler: MonthHandler = new MonthHandler(month);
 
-    const timeSlider: TimeSlider = new TimeSlider(checkInTimes.length);
+    const timeSlider: TimeSlider = new TimeSlider(timeSliderItemsCount);
     const dateSlider: DateSlider = new DateSlider(monthHandler);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, monthHandler);
 
@@ -48,9 +47,9 @@ function start() {
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 
-    dateTimePicker.updateSliders();
+    dateTimePicker.updateSwipers();
     // Fix for ie
-    dateTimePicker.updateSliders();
+    dateTimePicker.updateSwipers();
 
     const modalHandler: ModalHandler = new ModalHandler();
 

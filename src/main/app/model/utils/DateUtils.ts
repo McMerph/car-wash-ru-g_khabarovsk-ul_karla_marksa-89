@@ -1,13 +1,5 @@
 export default class DateUtils {
 
-    public static getPreviousMonth(month: Date): Date {
-        return new Date(month.getFullYear(), month.getMonth() - 1);
-    }
-
-    public static getNextMonth(month: Date): Date {
-        return new Date(month.getFullYear(), month.getMonth() + 1);
-    }
-
     public static getDatesOfMonth(month: Date): Date[] {
         const dates: Date[] = [];
         for (let i = 0; i < DateUtils.getLastDateOfMonth(month).getDate(); i++) {

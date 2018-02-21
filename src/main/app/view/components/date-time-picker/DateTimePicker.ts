@@ -22,11 +22,11 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
 
     public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, monthHandler: MonthHandler) {
         this.availabilityHandler = availabilityHandler;
+        monthHandler.addMonthObserver(this);
 
-        this.datePicker = new DatePicker(monthHandler, availabilityHandler, dateSlider);
         this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
+        this.datePicker = new DatePicker(monthHandler, availabilityHandler, dateSlider);
 
-        this.datePicker.addMonthObserver(this);
         this.datePicker.addDateObserver(this);
     }
 
@@ -51,6 +51,9 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     }
 
     public onMonthChange(): void {
+        // TODO Delete
+        // console.log("DateTimePicker.onMonthChange()");
+
         this.timePicker.disable([]);
     }
 
@@ -61,14 +64,14 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     }
 
     public pickNearest(): void {
-        const nearest: { dateOfMonth: Date; time: Time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker.pick(nearest.dateOfMonth);
-        this.timePicker.pick(nearest.time);
+        const { dateOfMonth, time } = this.availabilityHandler.getNearestAvailableTimestamp();
+        this.datePicker.pick(dateOfMonth);
+        this.timePicker.pick(time);
     }
 
-    public updateSliders(): void {
-        this.timePicker.updateSlider();
-        this.datePicker.updateSlider();
+    public updateSwipers(): void {
+        this.timePicker.updateSwiper();
+        this.datePicker.updateSwiper();
     }
 
 }

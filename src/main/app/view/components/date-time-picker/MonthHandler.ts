@@ -1,5 +1,6 @@
 import IMonthObserver from "./observers/IMonthObserver";
 
+// TODO Rename to PickerState?
 export default class MonthHandler {
 
     private month: Date;
@@ -16,6 +17,22 @@ export default class MonthHandler {
     public removeMonthObserver(observer: IMonthObserver) {
         const index: number = this.monthObservers.indexOf(observer);
         this.monthObservers.splice(index, 1);
+    }
+
+    public getPreviousMonth(): Date {
+        return new Date(this.month.getFullYear(), this.month.getMonth() - 1);
+    }
+
+    public getNextMonth(): Date {
+        return new Date(this.month.getFullYear(), this.month.getMonth() + 1);
+    }
+
+    public previous(): void {
+        this.setMonth(this.getPreviousMonth());
+    }
+
+    public next(): void {
+        this.setMonth(this.getNextMonth());
     }
 
     public getMonth(): Date {

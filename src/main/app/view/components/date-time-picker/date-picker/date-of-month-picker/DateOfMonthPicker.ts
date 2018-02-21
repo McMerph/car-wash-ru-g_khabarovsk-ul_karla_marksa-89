@@ -11,7 +11,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private month: Date;
 
-    // TODO Move to parent class?
+    // TODO Move to parent class? Introduce DateHandler class?
     private dateObservers: IDateObserver[] = [];
 
     public constructor(month: Date, availabilityHandler: AvailabilityHandler) {

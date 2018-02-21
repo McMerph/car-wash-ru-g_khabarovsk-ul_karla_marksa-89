@@ -1,13 +1,13 @@
 import * as Slider from "swiper/dist/js/swiper.min.js";
-import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
 import DICTIONARY from "../../../constants/dictionary";
 import SETTINGS from "../../../constants/settings";
 import MonthHandler from "../MonthHandler";
+import IMonthObserver from "../observers/IMonthObserver";
 import SliderUtils from "../utils/SliderUtils";
 
 // TODO Extend SliderUtils class?
-export default class DateSlider {
+export default class DateSlider implements IMonthObserver {
 
     private readonly slider: any;
     private readonly sliderContainer: HTMLElement;
@@ -18,10 +18,22 @@ export default class DateSlider {
     private previousControl: HTMLElement;
     private nextControl: HTMLElement;
 
-    private blockSlideChangeTransitionEnd: boolean = false;
+    // private blockSlideChangeTransitionEnd: boolean = false;
+
+    // TODO Use it?
+    private block: boolean = false;
+
+    public setBlock(): void {
+        this.block = true;
+    }
+
+    public unSetBlock(): void {
+        this.block = false;
+    }
 
     public constructor(monthHandler: MonthHandler) {
         this.monthHandler = monthHandler;
+        monthHandler.addMonthObserver(this);
         this.sliderContainer = SliderUtils.getContainer();
         this.slider = this.generateSlider();
         this.monthChooser = this.generateMonthChooser();
@@ -29,11 +41,18 @@ export default class DateSlider {
         this.previousControl = this.generatePreviousControl();
         this.nextControl = this.generateNextControl();
 
-        this.handleSlideChange();
+        // this.handleSlideChange();
         this.handleSlideChangeTransitionEnd();
     }
 
-    public updateSelects(month: Date) {
+    public onMonthChange(): void {
+        this.updateSelects(this.monthHandler.getMonth());
+    }
+
+    private updateSelects(month: Date) {
+        // TODO Delete
+        // console.log(`DateSlider.updateSelects() ${month}`);
+
         // TODO Remove if?
         if (this.yearChooser.parentNode) {
             const yearChooser: HTMLSelectElement = this.generateYearChooser();
@@ -69,28 +88,12 @@ export default class DateSlider {
         return this.nextControl;
     }
 
-    private getPreviousMonth(): Date {
-        return DateUtils.getPreviousMonth(this.monthHandler.getMonth());
-    }
-
-    private getNextMonth(): Date {
-        return DateUtils.getNextMonth(this.monthHandler.getMonth());
-    }
-
     private sameYear(year: number): boolean {
         return this.monthHandler.getMonth().getFullYear() === year;
     }
 
     private sameMonthOfTheYear(monthIndex: number): boolean {
         return this.monthHandler.getMonth().getMonth() === monthIndex;
-    }
-
-    private toPreviousMonth(animated?: boolean): void {
-        this.monthHandler.setMonth(DateUtils.getPreviousMonth(this.monthHandler.getMonth()));
-    }
-
-    private toNextMonth(animated?: boolean): void {
-        this.monthHandler.setMonth(DateUtils.getNextMonth(this.monthHandler.getMonth()));
     }
 
     private changeMonthOfTheYear(monthIndex: number): void {
@@ -187,30 +190,37 @@ export default class DateSlider {
         return nextControl;
     }
 
+    // private handleSlideChange() {
+    //     this.slider.on("slideChange", () => {
+    //         if (!this.block) {
+    //             console.log("slideChange()");
+    //             this.blockSlideChangeTransitionEnd = false;
+    //             if (this.slider.activeIndex === 0) {
+    //                 this.updateSelects(this.monthHandler.getPreviousMonth());
+    //             } else if (this.slider.activeIndex === 1) {
+    //                 this.updateSelects(this.monthHandler.getMonth());
+    //             } else if (this.slider.activeIndex === 2) {
+    //                 this.updateSelects(this.monthHandler.getNextMonth());
+    //             }
+    //         }
+    //     });
+    // }
+
     private handleSlideChangeTransitionEnd() {
         this.slider.on("slideChangeTransitionEnd", () => {
-            if (!this.blockSlideChangeTransitionEnd) {
-                this.blockSlideChangeTransitionEnd = true;
+            if (!this.block) {
+                console.log("slideChangeTransitionEnd()");
+                console.log(this.monthHandler.getMonth());
+
+                // if (!this.blockSlideChangeTransitionEnd) {
+                // this.blockSlideChangeTransitionEnd = true;
                 if (this.slider.activeIndex === 0) {
-                    this.toPreviousMonth();
+                    this.monthHandler.previous();
                 } else if (this.slider.activeIndex === 2) {
-                    this.toNextMonth();
+                    this.monthHandler.next();
                 }
             }
-        });
-    }
-
-    private handleSlideChange() {
-        this.slider.on("slideChange", () => {
-            this.blockSlideChangeTransitionEnd = false;
-            if (this.slider.activeIndex === 0) {
-                this.updateSelects(this.getPreviousMonth());
-            } else if (this.slider.activeIndex === 1) {
-                this.updateSelects(this.monthHandler.getMonth());
-
-            } else if (this.slider.activeIndex === 2) {
-                this.updateSelects(this.getNextMonth());
-            }
+            // }
         });
     }
 
