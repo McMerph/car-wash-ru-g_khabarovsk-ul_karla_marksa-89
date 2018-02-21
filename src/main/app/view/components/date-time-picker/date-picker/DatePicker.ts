@@ -33,14 +33,27 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.availabilityHandler = availabilityHandler;
         this.slider = slider;
 
-        this.updateMonth(monthHandler.getMonth());
+        this.onMonthChange();
     }
 
     public onMonthChange(): void {
-        // TODO Delete
-        // console.log("DatePicker.onMonthChange()");
+        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
+            this.monthHandler.getPreviousMonth(),
+            this.availabilityHandler,
+        );
+        this.dateOfMonthPicker = new DateOfMonthPicker(
+            this.monthHandler.getMonth(),
+            this.availabilityHandler,
+        );
+        this.dateOfNextMonthPicker = new DateOfMonthPicker(
+            this.monthHandler.getNextMonth(),
+            this.availabilityHandler,
+        );
+        // TODO Remove old observer?
+        this.dateOfMonthPicker.addDateObserver(this);
 
-        this.updateMonth(this.monthHandler.getMonth());
+        // TODO Update always animated?
+        this.updateSlider(true);
     }
 
     public isPicked(): boolean {
@@ -72,33 +85,11 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.dateObservers.splice(index, 1);
     }
 
-    public updateSwiper(): void {
-        // TODO Declare update() method to DateSlider class?
-        this.slider.getSlider().update();
-    }
-
     public pick(date: Date): void {
         if (!DateUtils.equalsMonth(date, this.monthHandler.getMonth())) {
             this.monthHandler.setMonth(date);
         }
         this.dateOfMonthPicker.pick(date);
-    }
-
-    private updateMonth(month: Date, animated?: boolean): void {
-        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
-            this.monthHandler.getPreviousMonth(),
-            this.availabilityHandler,
-        );
-        this.dateOfMonthPicker = new DateOfMonthPicker(month, this.availabilityHandler);
-        this.dateOfNextMonthPicker = new DateOfMonthPicker(
-            this.monthHandler.getNextMonth(),
-            this.availabilityHandler,
-        );
-        // TODO Remove old observer?
-        this.dateOfMonthPicker.addDateObserver(this);
-
-        // TODO Update always animated?
-        this.updateSlider(true);
     }
 
     private updateSlider(animated?: boolean): void {
@@ -109,37 +100,21 @@ export default class DatePicker implements IPicker<Date>, IDateObserver, IMonthO
         this.slider.getSlider().removeAllSlides();
 
         // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.getPreviousMonthLayout()));
+        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfPreviousMonthPicker.getLayout()));
 
         // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.getCurrentMonthLayout()));
+        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfMonthPicker.getLayout()));
 
         // TODO Declare appendSlide() method to DateSlider class?
-        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.getNextMonthLayout()));
+        this.slider.getSlider().appendSlide(SliderUtils.getSlide(this.dateOfNextMonthPicker.getLayout()));
 
-        this.updateSwiper();
+        this.slider.getSlider().update();
 
         // TODO Delete?
         this.slider.unSetBlock();
 
         // TODO Declare slideTo() method to DateSlider class?
         this.slider.getSlider().slideTo(1, animated ? undefined : 0);
-
-        // TODO Declare updateSelects() method to DateSlider class?
-        // TODO Uncomment?
-        // this.slider.updateSelects(this.monthHandler.getMonth());
-    }
-
-    private getPreviousMonthLayout(): Node {
-        return this.dateOfPreviousMonthPicker.getLayout();
-    }
-
-    private getCurrentMonthLayout(): Node {
-        return this.dateOfMonthPicker.getLayout();
-    }
-
-    private getNextMonthLayout(): Node {
-        return this.dateOfNextMonthPicker.getLayout();
     }
 
 }

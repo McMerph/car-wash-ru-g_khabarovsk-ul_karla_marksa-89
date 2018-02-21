@@ -46,13 +46,10 @@ export default class DateSlider implements IMonthObserver {
     }
 
     public onMonthChange(): void {
-        this.updateSelects(this.monthHandler.getMonth());
+        this.updateSelects();
     }
 
-    private updateSelects(month: Date) {
-        // TODO Delete
-        // console.log(`DateSlider.updateSelects() ${month}`);
-
+    private updateSelects() {
         // TODO Remove if?
         if (this.yearChooser.parentNode) {
             const yearChooser: HTMLSelectElement = this.generateYearChooser();
@@ -60,8 +57,8 @@ export default class DateSlider implements IMonthObserver {
             this.yearChooser = yearChooser;
         }
 
-        this.monthChooser.value = month.getMonth().toString(10);
-        this.yearChooser.value = month.getFullYear().toString(10);
+        this.monthChooser.value = this.monthHandler.getMonth().getMonth().toString(10);
+        this.yearChooser.value = this.monthHandler.getMonth().getFullYear().toString(10);
     }
 
     public getSlider(): any {

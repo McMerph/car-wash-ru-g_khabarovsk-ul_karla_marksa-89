@@ -47,9 +47,8 @@ function start() {
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));
 
-    dateTimePicker.updateSwipers();
-    // Fix for ie
-    dateTimePicker.updateSwipers();
+    timeSlider.getSlider().update();
+    dateSlider.getSlider().update();
 
     const modalHandler: ModalHandler = new ModalHandler();
 

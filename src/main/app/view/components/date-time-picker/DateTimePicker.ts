@@ -69,9 +69,4 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
         this.timePicker.pick(time);
     }
 
-    public updateSwipers(): void {
-        this.timePicker.updateSwiper();
-        this.datePicker.updateSwiper();
-    }
-
 }
