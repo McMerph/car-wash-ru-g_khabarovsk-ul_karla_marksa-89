@@ -20,7 +20,7 @@ export default class AvailabilityHandler {
         while (true) {
             const checkInTimes: Time[] = this.getCheckInTimesOfDate(date.valueOf());
             if (checkInTimes.length > 0) {
-                return {dateOfMonth: date, time: checkInTimes[0]};
+                return { dateOfMonth: date, time: checkInTimes[0] };
             }
             date.setDate(date.getDate() + 1);
         }
@@ -69,7 +69,7 @@ export default class AvailabilityHandler {
     }
 
     private generateTimestamp(parameters: { date: number, time: Time }): number {
-        const {date, time} = parameters;
+        const { date, time } = parameters;
         const timestamp: Date = new Date(date);
         timestamp.setHours(time.getHours());
         timestamp.setMinutes(time.getMinutes());
@@ -81,7 +81,7 @@ export default class AvailabilityHandler {
         let checkInTimesOfDate: Time[] = this.checkInTimes;
         const currentDate: Date = new Date();
         if (DateUtils.equalsDateOfMonth(new Date(dateOfMonth), currentDate)) {
-            const currentTime = new Time({hours: currentDate.getHours(), minutes: currentDate.getMinutes()});
+            const currentTime = new Time({ hours: currentDate.getHours(), minutes: currentDate.getMinutes() });
             checkInTimesOfDate = checkInTimesOfDate.filter((time) => time.compareTo(currentTime) > 0);
         }
         const disabledTimes: Time[] = this.getDisabledTimes(dateOfMonth);

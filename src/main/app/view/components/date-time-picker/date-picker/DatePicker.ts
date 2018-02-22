@@ -2,7 +2,7 @@ import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
 import DateTimePickerState from "../DateTimePickerState";
-import IPicker from "../IPicker";
+import ILayout from "../ILayout";
 import IMonthObserver from "../observers/IMonthObserver";
 import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
 import DateSlider from "./DateSlider";
@@ -10,7 +10,7 @@ import DateSlider from "./DateSlider";
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
-export default class DatePicker implements IPicker, IMonthObserver {
+export default class DatePicker implements ILayout, IMonthObserver {
 
     private readonly availabilityHandler: AvailabilityHandler;
 

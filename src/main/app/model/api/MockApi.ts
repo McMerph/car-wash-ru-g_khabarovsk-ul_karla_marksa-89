@@ -25,7 +25,7 @@ class MockApi implements IApi {
     private static getNoServiceDate(timestamp: number): ITimestamp[] {
         const date = new Date(timestamp);
         return MockApi.getCheckInTimes().map((time) =>
-            ({year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), time}),
+            ({ year: date.getFullYear(), month: date.getMonth(), day: date.getDate(), time }),
         );
     }
 

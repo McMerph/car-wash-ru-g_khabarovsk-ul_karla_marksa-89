@@ -4,7 +4,7 @@ import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import DateSlider from "./date-picker/DateSlider";
 import DateTimePickerState from "./DateTimePickerState";
-import IPicker from "./IPicker";
+import ILayout from "./ILayout";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
@@ -13,7 +13,7 @@ import TimeSlider from "./time-picker/TimeSlider";
 import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
-export default class DateTimePicker implements IPicker, IMonthObserver, IDateObserver {
+export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;

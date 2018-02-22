@@ -1,7 +1,7 @@
 import CLASS_NAMES from "../../constants/class-names";
-import IPicker from "./IPicker";
+import ILayout from "./ILayout";
 
-export default abstract class DirectPicker<T> implements IPicker {
+export default abstract class DirectPicker<T> implements ILayout {
 
     protected buttons: HTMLButtonElement[];
 

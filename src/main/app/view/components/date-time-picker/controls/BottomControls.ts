@@ -1,8 +1,8 @@
 import CLASS_NAMES from "../../../constants/class-names";
+import ILayout from "../ILayout";
 import TimeSlider from "../time-picker/TimeSlider";
 
-// TODO Implement ILayout interface with getLayout() method?
-export default class BottomControls {
+export default class BottomControls implements ILayout {
 
     private layout: HTMLElement;
 
