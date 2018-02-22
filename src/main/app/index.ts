@@ -32,7 +32,7 @@ function start() {
     const availability: IAvailability = mockApi.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
     const timeSliderItemsCount: number = availabilityHandler.getCheckInTimes().length;
-    const month: Date = availabilityHandler.getNearestAvailableTimestamp().dateOfMonth;
+    const month: Date = availabilityHandler.getNearest().dateOfMonth;
     const dateTimePickerState: DateTimePickerState = new DateTimePickerState(month);
 
     const timeSlider: TimeSlider = new TimeSlider(timeSliderItemsCount);

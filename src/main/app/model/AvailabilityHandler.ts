@@ -5,6 +5,15 @@ import DateUtils from "./utils/DateUtils";
 
 export default class AvailabilityHandler {
 
+    private static generateTimestamp(parameters: { date: number, time: Time }): number {
+        const { date, time } = parameters;
+        const timestamp: Date = new Date(date);
+        timestamp.setHours(time.getHours());
+        timestamp.setMinutes(time.getMinutes());
+
+        return timestamp.valueOf();
+    }
+
     private readonly checkInTimes: Time[];
     private readonly disabledDates: number[];
     private readonly disabledTimestamps: number[];
@@ -15,7 +24,7 @@ export default class AvailabilityHandler {
         this.disabledDates = this.getDisabledDates();
     }
 
-    public getNearestAvailableTimestamp(): { dateOfMonth: Date, time: Time } {
+    public getNearest(): { dateOfMonth: Date, time: Time } {
         const date: Date = new Date(DateUtils.getTodayWithoutTime());
         while (true) {
             const checkInTimes: Time[] = this.getCheckInTimesOfDate(date.valueOf());
@@ -50,7 +59,7 @@ export default class AvailabilityHandler {
 
     private getDisabledTimestamps(availability: IAvailability): number[] {
         return availability.noService.map((timestamp) =>
-            this.generateTimestamp({
+            AvailabilityHandler.generateTimestamp({
                 date: new Date(timestamp.year, timestamp.month, timestamp.day).valueOf(),
                 time: new Time(timestamp.time),
             }));
@@ -61,20 +70,11 @@ export default class AvailabilityHandler {
             .map((disabledTimestamp) => DateUtils.getDateWithoutTime(new Date(disabledTimestamp)))
             .filter(isNotDuplicate)
             .filter((dateWithDisabledTime) => this.checkInTimes.every((checkInTime) =>
-                this.isDisabledTimestamp(this.generateTimestamp({
+                this.isDisabledTimestamp(AvailabilityHandler.generateTimestamp({
                     date: dateWithDisabledTime,
                     time: checkInTime,
                 })),
             ));
-    }
-
-    private generateTimestamp(parameters: { date: number, time: Time }): number {
-        const { date, time } = parameters;
-        const timestamp: Date = new Date(date);
-        timestamp.setHours(time.getHours());
-        timestamp.setMinutes(time.getMinutes());
-
-        return timestamp.valueOf();
     }
 
     private getCheckInTimesOfDate(dateOfMonth: number): Time[] {

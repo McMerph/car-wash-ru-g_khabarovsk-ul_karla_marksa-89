@@ -9,7 +9,7 @@ test("getNearestAvailableTimestamp() method", () => {
     const api: IApi = new MockApi();
     const availability: IAvailability = api.retrieveAvailability();
     const handler: AvailabilityHandler = new AvailabilityHandler(availability);
-    const nearest: { dateOfMonth: Date, time: Time } = handler.getNearestAvailableTimestamp();
+    const nearest: { dateOfMonth: Date, time: Time } = handler.getNearest();
 
     const tomorrow: number = DateUtils.getTomorrowWithoutTime();
     const expectedNearest: { dateOfMonth: Date, time: Time } = {

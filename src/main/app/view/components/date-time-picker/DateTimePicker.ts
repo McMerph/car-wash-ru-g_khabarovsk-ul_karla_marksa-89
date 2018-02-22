@@ -12,7 +12,6 @@ import TimeSlider from "./time-picker/TimeSlider";
 
 import "./date-time-picker.pcss";
 
-// TODO Rename to TimestampPicker?
 export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
@@ -51,7 +50,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     }
 
     public pickNearest(): void {
-        const { dateOfMonth, time } = this.availabilityHandler.getNearestAvailableTimestamp();
+        const { dateOfMonth, time } = this.availabilityHandler.getNearest();
         this.timePicker.pick(time);
         this.datePicker.pick(dateOfMonth);
     }
