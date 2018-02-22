@@ -36,7 +36,7 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         }
     }
 
-    public disable(values: T[]) {
+    public disable(values: T[]): boolean {
         this.disabledValues = values;
         if (this.isPicked() && this.isDisabled(this.getPickedValue())) {
             this.picked = false;
@@ -46,6 +46,8 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
             .map((valueToDisable) => this.indexOf(valueToDisable))
             .filter((index) => index !== -1);
         this.disableButtons(disabledIndices);
+
+        return this.picked;
     }
 
     public getValues(): T[] {

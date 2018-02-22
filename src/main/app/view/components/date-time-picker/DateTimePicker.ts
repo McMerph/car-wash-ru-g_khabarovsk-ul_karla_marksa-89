@@ -25,7 +25,7 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
         dateTimePickerState.addMonthObserver(this);
         dateTimePickerState.addDateObserver(this);
 
-        this.timePicker = new TimePicker(availabilityHandler.getCheckInTimes(), timeSlider);
+        this.timePicker = new TimePicker(dateTimePickerState, availabilityHandler.getCheckInTimes(), timeSlider);
         this.datePicker = new DatePicker(dateTimePickerState, availabilityHandler, dateSlider);
     }
 
