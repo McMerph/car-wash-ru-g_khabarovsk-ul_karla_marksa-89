@@ -1,4 +1,3 @@
-import AvailabilityHandler from "../../../../model/AvailabilityHandler";
 import DateUtils from "../../../../model/utils/DateUtils";
 import CLASS_NAMES from "../../../constants/class-names";
 import DateTimePickerState from "../DateTimePickerState";
@@ -12,8 +11,6 @@ import "./date-picker.pcss";
 // TODO Check current time. Re-render on change
 export default class DatePicker implements ILayout, IMonthObserver {
 
-    private readonly availabilityHandler: AvailabilityHandler;
-
     private dateTimePickerState: DateTimePickerState;
 
     private dateOfPreviousMonthPicker: DateOfMonthPicker;
@@ -22,13 +19,10 @@ export default class DatePicker implements ILayout, IMonthObserver {
 
     private readonly slider: DateSlider;
 
-    public constructor(dateTimePickerState: DateTimePickerState, availabilityHandler: AvailabilityHandler, slider: DateSlider) {
+    public constructor(dateTimePickerState: DateTimePickerState, slider: DateSlider) {
         this.dateTimePickerState = dateTimePickerState;
         this.dateTimePickerState.addMonthObserver(this);
-
-        this.availabilityHandler = availabilityHandler;
         this.slider = slider;
-
         this.onMonthChange();
     }
 
@@ -45,17 +39,14 @@ export default class DatePicker implements ILayout, IMonthObserver {
         // this.dateOfMonthPicker.removeDateObserver(this);
         this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
             this.dateTimePickerState.getPreviousMonth(),
-            this.availabilityHandler,
             this.dateTimePickerState,
         );
         this.dateOfMonthPicker = new DateOfMonthPicker(
             this.dateTimePickerState.getMonth(),
-            this.availabilityHandler,
             this.dateTimePickerState,
         );
         this.dateOfNextMonthPicker = new DateOfMonthPicker(
             this.dateTimePickerState.getNextMonth(),
-            this.availabilityHandler,
             this.dateTimePickerState,
         );
 

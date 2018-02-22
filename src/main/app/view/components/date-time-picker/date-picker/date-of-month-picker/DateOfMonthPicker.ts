@@ -21,12 +21,13 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     private month: Date;
     private dateTimePickerState: DateTimePickerState;
 
-    public constructor(month: Date, availabilityHandler: AvailabilityHandler, dateTimePickerState: DateTimePickerState) {
+    public constructor(month: Date, dateTimePickerState: DateTimePickerState) {
         // TODO Move DateUtils.getDatesOfMonth(month) to new instance creation method?
         super(DateOfMonthPicker.getDatesOfMonth(month));
         this.month = month;
         this.dateTimePickerState = dateTimePickerState;
 
+        const availabilityHandler: AvailabilityHandler = dateTimePickerState.getAvailabilityHandler();
         this.disable(DateOfMonthPicker.getDatesOfMonth(month)
             .filter((dateOfMonth) => availabilityHandler.isDisabledDate(dateOfMonth.valueOf())));
     }

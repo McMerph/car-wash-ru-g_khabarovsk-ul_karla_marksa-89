@@ -1,12 +1,13 @@
 import CLASS_NAMES from "../../../constants/class-names";
 import SETTINGS from "../../../constants/settings";
+import DateTimePickerState from "../DateTimePickerState";
 import Slider from "../Slider";
 
 export default class TimeSlider extends Slider {
 
     private readonly itemsCount: number;
 
-    public constructor(itemsCount: number) {
+    public constructor(dateTimePickerState: DateTimePickerState) {
         super({
             direction: "vertical",
             grabCursor: true,
@@ -14,7 +15,7 @@ export default class TimeSlider extends Slider {
             slidesPerView: SETTINGS.TIME_SLIDES_PER_VIEW,
             spaceBetween: 1,
         });
-        this.itemsCount = itemsCount;
+        this.itemsCount = dateTimePickerState.getCheckInTimesCount();
         this.handleNavigation();
     }
 

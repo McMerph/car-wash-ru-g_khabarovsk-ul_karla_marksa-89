@@ -18,16 +18,13 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     private readonly datePicker: DatePicker;
     private readonly dateTimePickerState: DateTimePickerState;
 
-    private readonly availabilityHandler: AvailabilityHandler;
-
-    public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, dateTimePickerState: DateTimePickerState) {
+    public constructor(timeSlider: TimeSlider, dateSlider: DateSlider, dateTimePickerState: DateTimePickerState) {
         this.dateTimePickerState = dateTimePickerState;
-        this.availabilityHandler = availabilityHandler;
         dateTimePickerState.addMonthObserver(this);
         dateTimePickerState.addDateObserver(this);
 
-        this.timePicker = new TimePicker(dateTimePickerState, availabilityHandler.getCheckInTimes(), timeSlider);
-        this.datePicker = new DatePicker(dateTimePickerState, availabilityHandler, dateSlider);
+        this.timePicker = new TimePicker(dateTimePickerState, timeSlider);
+        this.datePicker = new DatePicker(dateTimePickerState, dateSlider);
     }
 
     public getLayout(): HTMLElement {
@@ -44,13 +41,15 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     }
 
     public onDatePick(): void {
+        const availabilityHandler: AvailabilityHandler = this.dateTimePickerState.getAvailabilityHandler();
         const pickedDateOfMonth = this.dateTimePickerState.getDate().valueOf();
-        const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
+        const disabledTimes: Time[] = availabilityHandler.getDisabledTimes(pickedDateOfMonth);
         this.timePicker.disable(disabledTimes);
     }
 
     public pickNearest(): void {
-        const { dateOfMonth, time } = this.availabilityHandler.getNearest();
+        const availabilityHandler: AvailabilityHandler = this.dateTimePickerState.getAvailabilityHandler();
+        const { dateOfMonth, time } = availabilityHandler.getNearest();
         this.timePicker.pick(time);
         this.datePicker.pick(dateOfMonth);
     }

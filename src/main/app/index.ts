@@ -28,24 +28,24 @@ import ModalHandler from "./view/components/modal/ModalHandler";
 padStart.shim();
 
 function start() {
-    const mockApi: IApi = new MockApi();
-    const availability: IAvailability = mockApi.retrieveAvailability();
+    // TODO Change to real API
+    const api: IApi = new MockApi();
+    const availability: IAvailability = api.retrieveAvailability();
     const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
-    const timeSliderItemsCount: number = availabilityHandler.getCheckInTimes().length;
-    const month: Date = availabilityHandler.getNearest().dateOfMonth;
-    const dateTimePickerState: DateTimePickerState = new DateTimePickerState(month);
+    const dateTimePickerState: DateTimePickerState = new DateTimePickerState(availabilityHandler);
 
-    const timeSlider: TimeSlider = new TimeSlider(timeSliderItemsCount);
+    const timeSlider: TimeSlider = new TimeSlider(dateTimePickerState);
     const dateSlider: DateSlider = new DateSlider(dateTimePickerState);
-    const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, dateTimePickerState);
+    const dateTimePicker: DateTimePicker = new DateTimePicker(timeSlider, dateSlider, dateTimePickerState);
 
     // TODO Delete after test
     (window as any).dateTimePicker = dateTimePicker;
 
     const topControls: TopControls = new TopControls(dateSlider, timeSlider);
-    const bottomControls = new BottomControls(timeSlider);
+    const bottomControls: BottomControls = new BottomControls(timeSlider);
 
     const dateTimePickerParent: HTMLElement = (document.querySelector(".modal__content") as HTMLElement);
+    // TODO appendChild vs insertBefore
     dateTimePickerParent.insertBefore(topControls.getLayout(), dateTimePickerParent.childNodes.item(3));
     dateTimePickerParent.insertBefore(dateTimePicker.getLayout(), dateTimePickerParent.childNodes.item(4));
     dateTimePickerParent.insertBefore(bottomControls.getLayout(), dateTimePickerParent.childNodes.item(5));

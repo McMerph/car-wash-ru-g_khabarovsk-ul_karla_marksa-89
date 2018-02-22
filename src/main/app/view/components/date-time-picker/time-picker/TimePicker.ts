@@ -13,8 +13,8 @@ export default class TimePicker extends DirectPicker<Time> {
     private readonly dateTimePickerState: DateTimePickerState;
     private readonly slider: TimeSlider;
 
-    public constructor(dateTimePickerState: DateTimePickerState, times: Time[], slider: TimeSlider) {
-        super(times);
+    public constructor(dateTimePickerState: DateTimePickerState, slider: TimeSlider) {
+        super(dateTimePickerState.getCheckInTimes());
         this.dateTimePickerState = dateTimePickerState;
         this.slider = slider;
     }

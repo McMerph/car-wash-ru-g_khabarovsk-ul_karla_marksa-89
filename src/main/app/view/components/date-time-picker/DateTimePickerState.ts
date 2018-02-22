@@ -1,8 +1,11 @@
+import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 
 export default class DateTimePickerState {
+
+    private readonly availabilityHandler: AvailabilityHandler;
 
     private month: Date;
     private datePicked: boolean = false;
@@ -13,8 +16,9 @@ export default class DateTimePickerState {
     private monthObservers: IMonthObserver[] = [];
     private dateObservers: IDateObserver[] = [];
 
-    public constructor(month: Date) {
-        this.month = month;
+    public constructor(availabilityHandler: AvailabilityHandler) {
+        this.availabilityHandler = availabilityHandler;
+        this.month = availabilityHandler.getNearest().dateOfMonth;
     }
 
     public addMonthObserver(observer: IMonthObserver) {
@@ -51,6 +55,14 @@ export default class DateTimePickerState {
         this.setMonth(this.getNextMonth());
     }
 
+    public getCheckInTimes(): Time[] {
+        return this.availabilityHandler.getCheckInTimes();
+    }
+
+    public getCheckInTimesCount(): number {
+        return this.availabilityHandler.getCheckInTimes().length;
+    }
+
     public isPicked(): boolean {
         return this.datePicked && this.timePicked;
     }
@@ -64,6 +76,10 @@ export default class DateTimePickerState {
 
     public unSetTime(): void {
         this.timePicked = false;
+    }
+
+    public getAvailabilityHandler(): AvailabilityHandler {
+        return this.availabilityHandler;
     }
 
     public getMonth(): Date {
