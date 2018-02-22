@@ -45,7 +45,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     }
 
     public onDatePick(): void {
-        const pickedDateOfMonth = this.dateTimePickerState.getPicked().valueOf();
+        const pickedDateOfMonth = this.dateTimePickerState.getDate().valueOf();
         const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
         this.timePicker.disable(disabledTimes);
     }
