@@ -39,6 +39,9 @@ function start() {
     const dateSlider: DateSlider = new DateSlider(dateTimePickerState);
     const dateTimePicker: DateTimePicker = new DateTimePicker(availabilityHandler, timeSlider, dateSlider, dateTimePickerState);
 
+    // TODO Delete after test
+    (window as any).dateTimePicker = dateTimePicker;
+
     const topControls: TopControls = new TopControls(dateSlider, timeSlider);
     const bottomControls = new BottomControls(timeSlider);
 

@@ -10,7 +10,7 @@ import DateSlider from "./DateSlider";
 import "./date-picker.pcss";
 
 // TODO Check current time. Re-render on change
-export default class DatePicker implements IPicker<Date>, IMonthObserver {
+export default class DatePicker implements IPicker, IMonthObserver {
 
     private readonly availabilityHandler: AvailabilityHandler;
 
@@ -30,14 +30,6 @@ export default class DatePicker implements IPicker<Date>, IMonthObserver {
         this.slider = slider;
 
         this.onMonthChange();
-    }
-
-    public isPicked(): boolean {
-        return this.dateOfMonthPicker.isPicked();
-    }
-
-    public getPickedValue(): Date {
-        return this.dateOfMonthPicker.getPickedValue();
     }
 
     public getLayout(): HTMLElement {

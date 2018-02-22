@@ -1,7 +1,5 @@
-export default interface IPicker<T> {
+export default interface IPicker {
 
-    isPicked(): boolean;
-    getPickedValue(): T;
     getLayout(): HTMLElement;
 
 }

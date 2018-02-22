@@ -1,7 +1,7 @@
 import CLASS_NAMES from "../../constants/class-names";
 import IPicker from "./IPicker";
 
-export default abstract class DirectPicker<T> implements IPicker<T> {
+export default abstract class DirectPicker<T> implements IPicker {
 
     protected buttons: HTMLButtonElement[];
 
@@ -17,14 +17,6 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
 
     public abstract getLayout(): HTMLElement;
 
-    public isPicked(): boolean {
-        return this.picked;
-    }
-
-    public getPickedValue(): T {
-        return this.pickedValue;
-    }
-
     // TODO Return index?
     public pick(value: T): void {
         const index: number = this.indexOf(value);
@@ -38,7 +30,7 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
 
     public disable(values: T[]): boolean {
         this.disabledValues = values;
-        if (this.isPicked() && this.isDisabled(this.getPickedValue())) {
+        if (this.picked && this.isDisabled(this.pickedValue)) {
             this.picked = false;
             this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
         }
@@ -48,10 +40,6 @@ export default abstract class DirectPicker<T> implements IPicker<T> {
         this.disableButtons(disabledIndices);
 
         return this.picked;
-    }
-
-    public getValues(): T[] {
-        return this.values;
     }
 
     protected abstract getRepresentation(value: T): string;

@@ -55,6 +55,13 @@ export default class DateTimePickerState {
         return this.datePicked && this.timePicked;
     }
 
+    public getPicked(): Date {
+        return new Date(
+            this.date.getFullYear(), this.date.getMonth(), this.date.getDate(),
+            this.time.getHours(), this.time.getMinutes(),
+        );
+    }
+
     public unSetTime(): void {
         this.timePicked = false;
     }

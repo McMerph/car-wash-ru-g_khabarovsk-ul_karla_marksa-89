@@ -13,31 +13,22 @@ import TimeSlider from "./time-picker/TimeSlider";
 import "./date-time-picker.pcss";
 
 // TODO Rename to TimestampPicker?
-export default class DateTimePicker implements IPicker<Date>, IMonthObserver, IDateObserver {
+export default class DateTimePicker implements IPicker, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
+    private readonly dateTimePickerState: DateTimePickerState;
 
     private readonly availabilityHandler: AvailabilityHandler;
 
     public constructor(availabilityHandler: AvailabilityHandler, timeSlider: TimeSlider, dateSlider: DateSlider, dateTimePickerState: DateTimePickerState) {
+        this.dateTimePickerState = dateTimePickerState;
         this.availabilityHandler = availabilityHandler;
         dateTimePickerState.addMonthObserver(this);
         dateTimePickerState.addDateObserver(this);
 
         this.timePicker = new TimePicker(dateTimePickerState, availabilityHandler.getCheckInTimes(), timeSlider);
         this.datePicker = new DatePicker(dateTimePickerState, availabilityHandler, dateSlider);
-    }
-
-    public isPicked(): boolean {
-        return this.datePicker.isPicked() && this.timePicker.isPicked();
-    }
-
-    public getPickedValue(): Date {
-        const month: Date = this.datePicker.getPickedValue();
-        const time: Time = this.timePicker.getPickedValue();
-
-        return new Date(month.getFullYear(), month.getMonth(), month.getDate(), time.getHours(), time.getMinutes());
     }
 
     public getLayout(): HTMLElement {
@@ -54,15 +45,23 @@ export default class DateTimePicker implements IPicker<Date>, IMonthObserver, ID
     }
 
     public onDatePick(): void {
-        const pickedDateOfMonth = this.datePicker.getPickedValue().valueOf();
+        const pickedDateOfMonth = this.dateTimePickerState.getPicked().valueOf();
         const disabledTimes: Time[] = this.availabilityHandler.getDisabledTimes(pickedDateOfMonth);
         this.timePicker.disable(disabledTimes);
     }
 
     public pickNearest(): void {
         const { dateOfMonth, time } = this.availabilityHandler.getNearestAvailableTimestamp();
-        this.datePicker.pick(dateOfMonth);
         this.timePicker.pick(time);
+        this.datePicker.pick(dateOfMonth);
+    }
+
+    public isPicked(): boolean {
+        return this.dateTimePickerState.isPicked();
+    }
+
+    public getPickedDateTime(): Date {
+        return this.dateTimePickerState.getPicked();
     }
 
 }
