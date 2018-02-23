@@ -1,10 +1,10 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/class-names";
+import ILayout from "../ILayout";
 import DatePicker from "./date-picker/DatePicker";
 import DateSlider from "./date-picker/DateSlider";
 import DateTimePickerState from "./DateTimePickerState";
-import ILayout from "../ILayout";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";
@@ -12,13 +12,22 @@ import TimeSlider from "./time-picker/TimeSlider";
 
 import "./date-time-picker.pcss";
 
+interface IDateTimePickerParameters {
+
+    timeSlider: TimeSlider;
+    dateSlider: DateSlider;
+    dateTimePickerState: DateTimePickerState;
+
+}
+
 export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
     private readonly dateTimePickerState: DateTimePickerState;
 
-    public constructor(timeSlider: TimeSlider, dateSlider: DateSlider, dateTimePickerState: DateTimePickerState) {
+    public constructor(parameters: IDateTimePickerParameters) {
+        const { timeSlider, dateSlider, dateTimePickerState } = parameters;
         this.dateTimePickerState = dateTimePickerState;
         dateTimePickerState.addMonthObserver(this);
         dateTimePickerState.addDateObserver(this);

@@ -10,11 +10,11 @@ import DateSlider from "../date-time-picker/date-picker/DateSlider";
 import DateTimePicker from "../date-time-picker/DateTimePicker";
 import DateTimePickerState from "../date-time-picker/DateTimePickerState";
 import TimeSlider from "../date-time-picker/time-picker/TimeSlider";
+import ILayout from "../ILayout";
 
 import "./index.pcss";
 
-// TODO Implement ILayout interface?
-export default class Modal {
+export default class Modal implements ILayout {
 
     private static readonly ESCAPE_KEY_CODE: number = 27;
 
@@ -23,22 +23,6 @@ export default class Modal {
     private dateSlider: DateSlider;
 
     public constructor() {
-        // TODO Change to real API
-        const api: IApi = new MockApi();
-        const availability: IAvailability = api.retrieveAvailability();
-        const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
-        const dateTimePickerState: DateTimePickerState = new DateTimePickerState(availabilityHandler);
-
-        this.timeSlider = new TimeSlider(dateTimePickerState);
-        this.dateSlider = new DateSlider(dateTimePickerState);
-        const dateTimePicker: DateTimePicker = new DateTimePicker(this.timeSlider, this.dateSlider, dateTimePickerState);
-
-        // TODO Delete after test
-        (window as any).dateTimePicker = dateTimePicker;
-
-        const topControls: TopControls = new TopControls(this.dateSlider, this.timeSlider);
-        const bottomControls: BottomControls = new BottomControls(this.timeSlider);
-
         this.modal = document.createElement("div");
         this.modal.classList.add(
             CLASS_NAMES.MODAL.MAIN,
@@ -48,9 +32,61 @@ export default class Modal {
         this.modal.tabIndex = -1;
         this.modal.setAttribute("aria-hidden", "true");
 
-        const modalContent = document.createElement("div");
+        this.modal.appendChild(this.generateModalContent());
+        this.handleModalCloseOnEsc();
+    }
+
+    public getLayout(): HTMLElement {
+        return this.modal;
+    }
+
+    public open() {
+        this.timeSlider.update();
+        this.dateSlider.update();
+        document.body.style.overflow = "hidden";
+        this.modal.classList.add(CLASS_NAMES.MODAL.OPENED);
+        this.modal.classList.remove(CLASS_NAMES.MODAL.CLOSED);
+    }
+
+    public close() {
+        document.body.style.overflow = "auto";
+        this.modal.classList.add(CLASS_NAMES.MODAL.CLOSED);
+        this.modal.classList.remove(CLASS_NAMES.MODAL.OPENED);
+    }
+
+    private generateModalContent(): HTMLElement {
+        const modalContent: HTMLElement = document.createElement("div");
         modalContent.classList.add(CLASS_NAMES.MODAL.CONTENT);
 
+        const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
+
+        modalContent.appendChild(this.generateSelectService());
+        modalContent.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
+        modalContent.appendChild(dateTimePicker.getLayout());
+        modalContent.appendChild(new BottomControls(this.timeSlider).getLayout());
+        modalContent.appendChild(this.generateFooter(dateTimePicker));
+
+        return modalContent;
+    }
+
+    private generateDateTimePicker(): DateTimePicker {
+        // TODO Change to real API
+        const api: IApi = new MockApi();
+        const availability: IAvailability = api.retrieveAvailability();
+        const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
+        const dateTimePickerState: DateTimePickerState = new DateTimePickerState(availabilityHandler);
+
+        this.timeSlider = new TimeSlider(dateTimePickerState);
+        this.dateSlider = new DateSlider(dateTimePickerState);
+
+        return new DateTimePicker({
+            dateSlider: this.dateSlider,
+            dateTimePickerState,
+            timeSlider: this.timeSlider,
+        });
+    }
+
+    private generateSelectService(): HTMLSelectElement {
         // TODO Make multiple?
         const selectService: HTMLSelectElement = document.createElement("select");
         selectService.classList.add(CLASS_NAMES.SELECT_SERVICE);
@@ -69,6 +105,10 @@ export default class Modal {
             selectService.options.add(option);
         });
 
+        return selectService;
+    }
+
+    private generateFooter(dateTimePicker: DateTimePicker): HTMLElement {
         const footer: HTMLElement = document.createElement("footer");
         footer.classList.add(CLASS_NAMES.MODAL.FOOTER);
         const toNearestButton: HTMLButtonElement = document.createElement("button");
@@ -83,31 +123,7 @@ export default class Modal {
         footer.appendChild(toNearestButton);
         footer.appendChild(checkInButton);
 
-        modalContent.appendChild(selectService);
-        modalContent.appendChild(topControls.getLayout());
-        modalContent.appendChild(dateTimePicker.getLayout());
-        modalContent.appendChild(bottomControls.getLayout());
-        modalContent.appendChild(footer);
-
-        this.modal.appendChild(modalContent);
-
-        document.body.appendChild(this.modal);
-
-        this.handleModalCloseOnEsc();
-    }
-
-    public open() {
-        this.timeSlider.update();
-        this.dateSlider.update();
-        document.body.style.overflow = "hidden";
-        this.modal.classList.add(CLASS_NAMES.MODAL.OPENED);
-        this.modal.classList.remove(CLASS_NAMES.MODAL.CLOSED);
-    }
-
-    public close() {
-        document.body.style.overflow = "auto";
-        this.modal.classList.add(CLASS_NAMES.MODAL.CLOSED);
-        this.modal.classList.remove(CLASS_NAMES.MODAL.OPENED);
+        return footer;
     }
 
     private handleModalCloseOnEsc() {
