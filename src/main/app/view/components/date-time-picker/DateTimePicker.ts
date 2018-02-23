@@ -4,7 +4,7 @@ import CLASS_NAMES from "../../constants/class-names";
 import DatePicker from "./date-picker/DatePicker";
 import DateSlider from "./date-picker/DateSlider";
 import DateTimePickerState from "./DateTimePickerState";
-import ILayout from "./ILayout";
+import ILayout from "../ILayout";
 import IDateObserver from "./observers/IDateObserver";
 import IMonthObserver from "./observers/IMonthObserver";
 import TimePicker from "./time-picker/TimePicker";

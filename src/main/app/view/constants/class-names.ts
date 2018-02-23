@@ -18,6 +18,15 @@ const CLASS_NAMES = Object.freeze({
         WEEK: "date-picker__week",
     },
     DATE_TIME_PICKER: "date-time-picker",
+    MODAL: {
+        CHECK_IN: "modal__check-in",
+        CLOSED: "modal_closed",
+        CONTENT: "modal__content",
+        FOOTER: "modal__footer",
+        MAIN: "modal",
+        OPENED: "modal_opened",
+        TO_NEAREST: "modal__to-nearest",
+    },
     NAVIGATION: {
         DISABLED: "picker__navigation_disabled",
         MAIN: "picker__navigation",
@@ -26,6 +35,7 @@ const CLASS_NAMES = Object.freeze({
         TO_RIGHT: "picker__navigation_to-right",
         TO_TOP: "picker__navigation_to-top",
     },
+    OVERLAY: "overlay",
     PICK_CONTROL: {
         DATE: "pick-control_date",
         DISABLED: "pick-control_disabled",
@@ -35,6 +45,7 @@ const CLASS_NAMES = Object.freeze({
         TIME: "pick-control_time",
         TODAY: "pick-control_today",
     },
+    SELECT_SERVICE: "select-service",
     SWIPER: {
         CONTAINER: "swiper-container",
         SLIDE: "swiper-slide",

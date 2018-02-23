@@ -1,5 +1,5 @@
 import CLASS_NAMES from "../../constants/class-names";
-import ILayout from "./ILayout";
+import ILayout from "../ILayout";
 
 export default abstract class DirectPicker<T> implements ILayout {
 

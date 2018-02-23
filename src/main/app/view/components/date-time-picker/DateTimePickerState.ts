@@ -7,9 +7,9 @@ export default class DateTimePickerState {
 
     private readonly availabilityHandler: AvailabilityHandler;
 
-    private month: Date;
     private datePicked: boolean = false;
     private timePicked: boolean = false;
+    private month: Date;
     private date: Date;
     private time: Time;
 

@@ -1,6 +1,6 @@
 import CLASS_NAMES from "../../../constants/class-names";
 import DateSlider from "../date-picker/DateSlider";
-import ILayout from "../ILayout";
+import ILayout from "../../ILayout";
 import TimeSlider from "../time-picker/TimeSlider";
 
 export default class TopControls implements ILayout {
