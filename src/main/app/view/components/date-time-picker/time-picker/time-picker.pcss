@@ -2,12 +2,18 @@
 
 .picker__navigation_to-top {
   margin-left: auto;
-  transform: rotate(270deg);
+
+  &::after {
+    content: "\e904";
+  }
 }
 
 .picker__navigation_to-bottom {
   margin-left: auto;
-  transform: rotate(90deg);
+
+  &::after {
+    content: "\e903";
+  }
 }
 
 .picker__navigation_disabled {

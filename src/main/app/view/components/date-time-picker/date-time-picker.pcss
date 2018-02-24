@@ -3,10 +3,20 @@
 .picker__navigation {
   @apply --reset-button;
 
-  padding: 20px 0;
-  width: 24px;
-  height: 24px;
-  background: transparent url(../../../../resources/img/arrow-right.png) no-repeat center center;
+  &::after {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 42px;
+    color: #00aeef;
+  }
 }
 
 .date-time-picker {
