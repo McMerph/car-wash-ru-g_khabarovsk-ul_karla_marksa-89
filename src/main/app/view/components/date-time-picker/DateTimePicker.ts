@@ -11,6 +11,7 @@ import TimePicker from "./time-picker/TimePicker";
 import TimeSlider from "./time-picker/TimeSlider";
 
 import "./date-time-picker.pcss";
+import DICTIONARY from "../../constants/dictionary";
 
 interface IDateTimePickerParameters {
 
@@ -39,6 +40,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
         layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER);
+        layout.dataset.after = DICTIONARY.DATE_TIME_PICKER_LEGEND;
         layout.appendChild(this.datePicker.getLayout());
         layout.appendChild(this.timePicker.getLayout());
 
