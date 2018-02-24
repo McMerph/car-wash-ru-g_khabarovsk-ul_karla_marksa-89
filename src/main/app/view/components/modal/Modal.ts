@@ -60,7 +60,7 @@ export default class Modal implements ILayout {
 
         const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
 
-        modalContent.appendChild(this.generateSelectService());
+        modalContent.appendChild(this.generateServiceChooser());
         modalContent.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
         modalContent.appendChild(dateTimePicker.getLayout());
         modalContent.appendChild(new BottomControls(this.timeSlider).getLayout());
@@ -86,10 +86,10 @@ export default class Modal implements ILayout {
         });
     }
 
-    private generateSelectService(): HTMLSelectElement {
+    private generateServiceChooser(): HTMLElement {
         // TODO Make multiple?
         const selectService: HTMLSelectElement = document.createElement("select");
-        selectService.classList.add(CLASS_NAMES.SELECT_SERVICE);
+        selectService.classList.add(CLASS_NAMES.SERVICE_CHOOSER.SELECT);
         const placeholderOption: HTMLOptionElement = document.createElement("option");
         placeholderOption.value = DICTIONARY.SERVICES.PLACEHOLDER;
         placeholderOption.text = DICTIONARY.SERVICES.PLACEHOLDER;
@@ -105,7 +105,14 @@ export default class Modal implements ILayout {
             selectService.options.add(option);
         });
 
-        return selectService;
+        const wrapper: HTMLElement = document.createElement("div");
+        wrapper.classList.add(
+            CLASS_NAMES.SERVICE_CHOOSER.MAIN,
+            CLASS_NAMES.ICON,
+        );
+        wrapper.appendChild(selectService);
+
+        return wrapper;
     }
 
     private generateFooter(dateTimePicker: DateTimePicker): HTMLElement {

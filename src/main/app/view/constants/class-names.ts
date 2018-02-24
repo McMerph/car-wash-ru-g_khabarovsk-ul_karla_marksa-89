@@ -46,7 +46,10 @@ const CLASS_NAMES = Object.freeze({
         TIME: "pick-control_time",
         TODAY: "pick-control_today",
     },
-    SELECT_SERVICE: "select-service",
+    SERVICE_CHOOSER: {
+        MAIN: "service-chooser",
+        SELECT: "service-chooser__select",
+    },
     SWIPER: {
         CONTAINER: "swiper-container",
         SLIDE: "swiper-slide",
