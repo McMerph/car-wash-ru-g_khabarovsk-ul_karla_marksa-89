@@ -40,20 +40,14 @@ export default class DateSlider extends Slider implements IMonthObserver {
 
     protected generatePreviousControl(): HTMLElement {
         const previousControl = super.generatePreviousControl();
-        previousControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.TO_LEFT,
-        );
+        previousControl.classList.add(CLASS_NAMES.NAVIGATION.TO_LEFT);
 
         return previousControl;
     }
 
     protected generateNextControl(): HTMLElement {
         const nextControl = super.generateNextControl();
-        nextControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.NAVIGATION.TO_RIGHT,
-        );
+        nextControl.classList.add(CLASS_NAMES.NAVIGATION.TO_RIGHT);
 
         return nextControl;
     }

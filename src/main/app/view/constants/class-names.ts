@@ -18,6 +18,7 @@ const CLASS_NAMES = Object.freeze({
         WEEK: "date-picker__week",
     },
     DATE_TIME_PICKER: "date-time-picker",
+    ICON: "icon",
     MODAL: {
         CHECK_IN: "modal__check-in",
         CLOSED: "modal_closed",

@@ -53,6 +53,21 @@ button {
   flex: 2 1 741px;
 }
 
+.icon {
+  &::after {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
 @media (max-width: 510px) {
   .dimensioned {
     padding: 0;

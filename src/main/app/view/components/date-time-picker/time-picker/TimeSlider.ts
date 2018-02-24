@@ -22,7 +22,6 @@ export default class TimeSlider extends Slider {
     protected generatePreviousControl(): HTMLElement {
         const previousControl = super.generatePreviousControl();
         previousControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.DISABLED,
             CLASS_NAMES.NAVIGATION.TO_TOP,
         );
@@ -33,7 +32,6 @@ export default class TimeSlider extends Slider {
     protected generateNextControl(): HTMLElement {
         const nextControl = super.generateNextControl();
         nextControl.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
             CLASS_NAMES.NAVIGATION.TO_BOTTOM,
         );
 

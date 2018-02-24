@@ -78,6 +78,10 @@ export default abstract class Slider {
     protected generatePreviousControl(): HTMLElement {
         const previousButton: HTMLButtonElement = document.createElement("button");
         previousButton.setAttribute("aria-label", DICTIONARY.BACK);
+        previousButton.classList.add(
+            CLASS_NAMES.NAVIGATION.MAIN,
+            CLASS_NAMES.ICON,
+        );
         previousButton.onclick = () => this.slider.slidePrev();
 
         return previousButton;
@@ -86,6 +90,10 @@ export default abstract class Slider {
     protected generateNextControl(): HTMLElement {
         const nextButton: HTMLButtonElement = document.createElement("button");
         nextButton.setAttribute("aria-label", DICTIONARY.NEXT);
+        nextButton.classList.add(
+            CLASS_NAMES.NAVIGATION.MAIN,
+            CLASS_NAMES.ICON,
+        );
         nextButton.onclick = () => this.slider.slideNext();
 
         return nextButton;
