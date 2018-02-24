@@ -25,9 +25,9 @@ export default class Modal implements ILayout {
     public constructor() {
         this.modal = document.createElement("div");
         this.modal.classList.add(
-            CLASS_NAMES.MODAL.MAIN,
-            CLASS_NAMES.MODAL.CLOSED,
-            CLASS_NAMES.OVERLAY,
+            CLASS_NAMES.MODAL_BLOCK.NAME,
+            CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED,
+            CLASS_NAMES.OVERLAY_BLOCK,
         );
         this.modal.tabIndex = -1;
         this.modal.setAttribute("aria-hidden", "true");
@@ -44,19 +44,19 @@ export default class Modal implements ILayout {
         this.timeSlider.update();
         this.dateSlider.update();
         document.body.style.overflow = "hidden";
-        this.modal.classList.add(CLASS_NAMES.MODAL.OPENED);
-        this.modal.classList.remove(CLASS_NAMES.MODAL.CLOSED);
+        this.modal.classList.add(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.OPENED);
+        this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED);
     }
 
     public close() {
         document.body.style.overflow = "auto";
-        this.modal.classList.add(CLASS_NAMES.MODAL.CLOSED);
-        this.modal.classList.remove(CLASS_NAMES.MODAL.OPENED);
+        this.modal.classList.add(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED);
+        this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.OPENED);
     }
 
     private generateModalContent(): HTMLElement {
         const modalContent: HTMLElement = document.createElement("div");
-        modalContent.classList.add(CLASS_NAMES.MODAL.CONTENT);
+        modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT);
 
         const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
 
@@ -89,7 +89,7 @@ export default class Modal implements ILayout {
     private generateServiceChooser(): HTMLElement {
         // TODO Make multiple?
         const selectService: HTMLSelectElement = document.createElement("select");
-        selectService.classList.add(CLASS_NAMES.SERVICE_CHOOSER.SELECT);
+        selectService.classList.add(CLASS_NAMES.SERVICE_CHOOSER_BLOCK.ELEMENTS.SELECT);
         const placeholderOption: HTMLOptionElement = document.createElement("option");
         placeholderOption.value = DICTIONARY.SERVICES.PLACEHOLDER;
         placeholderOption.text = DICTIONARY.SERVICES.PLACEHOLDER;
@@ -107,8 +107,8 @@ export default class Modal implements ILayout {
 
         const wrapper: HTMLElement = document.createElement("div");
         wrapper.classList.add(
-            CLASS_NAMES.SERVICE_CHOOSER.MAIN,
-            CLASS_NAMES.ICON,
+            CLASS_NAMES.SERVICE_CHOOSER_BLOCK.NAME,
+            CLASS_NAMES.ICON_BLOCK,
         );
         wrapper.appendChild(selectService);
 
@@ -117,15 +117,15 @@ export default class Modal implements ILayout {
 
     private generateFooter(dateTimePicker: DateTimePicker): HTMLElement {
         const footer: HTMLElement = document.createElement("footer");
-        footer.classList.add(CLASS_NAMES.MODAL.FOOTER);
+        footer.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.FOOTER);
         const toNearestButton: HTMLButtonElement = document.createElement("button");
-        toNearestButton.classList.add(CLASS_NAMES.MODAL.TO_NEAREST);
+        toNearestButton.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TO_NEAREST);
         toNearestButton.appendChild(document.createTextNode(DICTIONARY.NEAREST_AVAILABLE));
         toNearestButton.addEventListener("click", () => {
             dateTimePicker.pickNearest();
         });
         const checkInButton: HTMLButtonElement = document.createElement("button");
-        checkInButton.classList.add(CLASS_NAMES.MODAL.CHECK_IN);
+        checkInButton.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CHECK_IN);
         checkInButton.appendChild(document.createTextNode(DICTIONARY.CHECK_IN));
         footer.appendChild(toNearestButton);
         footer.appendChild(checkInButton);

@@ -22,8 +22,8 @@ export default class TimeSlider extends Slider {
     protected generatePreviousControl(): HTMLElement {
         const previousControl = super.generatePreviousControl();
         previousControl.classList.add(
-            CLASS_NAMES.NAVIGATION.DISABLED,
-            CLASS_NAMES.NAVIGATION.TO_TOP,
+            CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED,
+            CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.TO_TOP,
         );
 
         return previousControl;
@@ -31,9 +31,7 @@ export default class TimeSlider extends Slider {
 
     protected generateNextControl(): HTMLElement {
         const nextControl = super.generateNextControl();
-        nextControl.classList.add(
-            CLASS_NAMES.NAVIGATION.TO_BOTTOM,
-        );
+        nextControl.classList.add(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.TO_BOTTOM);
 
         return nextControl;
     }
@@ -41,14 +39,14 @@ export default class TimeSlider extends Slider {
     private handleNavigation(): void {
         this.getSlider().on("slideChange", () => {
             if (this.getSlider().activeIndex <= 0) {
-                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.getPreviousControl().classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
+                this.getPreviousControl().classList.add(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
             } else if (this.isSliderInTheEnd()) {
-                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.getNextControl().classList.add(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
+                this.getNextControl().classList.add(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
             } else {
-                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
-                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION.DISABLED);
+                this.getNextControl().classList.remove(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
+                this.getPreviousControl().classList.remove(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.DISABLED);
             }
         });
     }

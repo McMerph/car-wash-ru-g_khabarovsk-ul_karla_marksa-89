@@ -33,12 +33,12 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.DATE_PICKER.MONTH);
+        layout.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.MONTH);
 
         layout.appendChild(this.getMonthHeader());
         const weeks: IWeek[] = new WeeksProducer(this.month).getWeeks();
         const dates: HTMLDivElement = document.createElement("div");
-        dates.classList.add(CLASS_NAMES.DATE_PICKER.DATES);
+        dates.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.DATES);
         weeks.forEach((week) => dates.appendChild(this.getWeekLayout(week)));
         layout.appendChild(dates);
 
@@ -56,15 +56,15 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     protected produceButton(date: Date): HTMLButtonElement {
         const button: HTMLButtonElement = super.produceButton(date);
-        button.classList.add(CLASS_NAMES.PICK_CONTROL.DATE);
+        button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.DATE);
         if (this.isDisabled(date)) {
-            button.classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED);
+            button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.DISABLED);
         }
         if (date && date.valueOf() < DateUtils.getTodayWithoutTime()) {
-            button.classList.add(CLASS_NAMES.PICK_CONTROL.PAST);
+            button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PAST);
         }
         if (DateUtils.equalsDateOfMonth(date, new Date())) {
-            button.classList.add(CLASS_NAMES.PICK_CONTROL.TODAY);
+            button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.TODAY);
         }
 
         return button;
@@ -76,12 +76,12 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private getMonthHeader(): HTMLElement {
         const header: HTMLElement = document.createElement("header");
-        header.classList.add(CLASS_NAMES.DATE_PICKER.MONTH_HEADER);
+        header.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.MONTH_HEADER);
         DICTIONARY.DAYS_NAMES.forEach((dayName) => {
             const cell: HTMLDivElement = document.createElement("div");
             cell.classList.add(
-                CLASS_NAMES.DATE_PICKER.CELL.MAIN,
-                CLASS_NAMES.DATE_PICKER.CELL.DAY,
+                CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.CELL.NAME,
+                CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.CELL.MODIFIERS.DAY,
             );
             cell.appendChild(document.createTextNode(dayName));
             header.appendChild(cell);
@@ -91,7 +91,7 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
 
     private getWeekLayout(week: IWeek): HTMLElement {
         const weekLayout: HTMLDivElement = document.createElement("div");
-        weekLayout.classList.add(CLASS_NAMES.DATE_PICKER.WEEK);
+        weekLayout.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.WEEK);
         for (let i = 1; i <= 7; i++) {
             weekLayout.appendChild(this.getDayLayout(week, i));
         }
@@ -102,8 +102,8 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
     private getDayLayout(week: IWeek, day: number): HTMLDivElement {
         const dayLayout: HTMLDivElement = document.createElement("div");
         dayLayout.classList.add(
-            CLASS_NAMES.DATE_PICKER.CELL.MAIN,
-            CLASS_NAMES.DATE_PICKER.CELL.DATE,
+            CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.CELL.NAME,
+            CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.CELL.MODIFIERS.DATE,
         );
         const isDayExists: boolean = (week.startDay <= day) && (week.endDay >= day);
         if (isDayExists) {

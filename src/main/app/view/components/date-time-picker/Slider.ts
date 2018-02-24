@@ -79,8 +79,8 @@ export default abstract class Slider {
         const previousButton: HTMLButtonElement = document.createElement("button");
         previousButton.setAttribute("aria-label", DICTIONARY.BACK);
         previousButton.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.ICON,
+            CLASS_NAMES.NAVIGATION_BLOCK.NAME,
+            CLASS_NAMES.ICON_BLOCK,
         );
         previousButton.onclick = () => this.slider.slidePrev();
 
@@ -91,8 +91,8 @@ export default abstract class Slider {
         const nextButton: HTMLButtonElement = document.createElement("button");
         nextButton.setAttribute("aria-label", DICTIONARY.NEXT);
         nextButton.classList.add(
-            CLASS_NAMES.NAVIGATION.MAIN,
-            CLASS_NAMES.ICON,
+            CLASS_NAMES.NAVIGATION_BLOCK.NAME,
+            CLASS_NAMES.ICON_BLOCK,
         );
         nextButton.onclick = () => this.slider.slideNext();
 

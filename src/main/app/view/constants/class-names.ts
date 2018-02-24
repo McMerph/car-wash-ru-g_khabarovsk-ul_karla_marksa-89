@@ -1,63 +1,79 @@
 const CLASS_NAMES = Object.freeze({
-    CHOOSER: "picker__chooser",
+    CHOOSER_BLOCK: "picker-chooser",
     CONTROLS: {
-        BOTTOM: "pickers-bottom-controls",
-        TOP: "pickers-top-controls",
+        BOTTOM_BLOCK: "pickers-bottom-controls",
+        TOP_BLOCK: "pickers-top-controls",
     },
-    DATE_PICKER: {
-        CELL: {
-            DATE: "date-picker__cell_date",
-            DAY: "date-picker__cell_day",
-            MAIN: "date-picker__cell",
+    DATE_PICKER_BLOCK: {
+        ELEMENTS: {
+            CELL: {
+                MODIFIERS: {
+                    DATE: "date-picker__cell_date",
+                    DAY: "date-picker__cell_day",
+                },
+                NAME: "date-picker__cell",
+            },
+            CONTROLS: "date-picker__controls",
+            DATES: "date-picker__dates",
+            MONTH: "date-picker__month",
+            MONTH_HEADER: "date-picker__month-header",
+            WEEK: "date-picker__week",
         },
-        CONTROLS: "date-picker__controls",
-        DATES: "date-picker__dates",
-        MAIN: "date-picker",
-        MONTH: "date-picker__month",
-        MONTH_HEADER: "date-picker__month-header",
-        WEEK: "date-picker__week",
+        NAME: "date-picker",
     },
-    DATE_TIME_PICKER: "date-time-picker",
-    ICON: "icon",
-    MODAL: {
-        CHECK_IN: "modal__check-in",
-        CLOSED: "modal_closed",
-        CONTENT: "modal__content",
-        FOOTER: "modal__footer",
-        MAIN: "modal",
-        OPENED: "modal_opened",
-        TO_NEAREST: "modal__to-nearest",
+    DATE_TIME_PICKER_BLOCK: "date-time-picker",
+    ICON_BLOCK: "icon",
+    MODAL_BLOCK: {
+        ELEMENTS: {
+            CHECK_IN: "modal__check-in",
+            CONTENT: "modal__content",
+            FOOTER: "modal__footer",
+            TO_NEAREST: "modal__to-nearest",
+        },
+        MODIFIERS: {
+            CLOSED: "modal_closed",
+            OPENED: "modal_opened",
+        },
+        NAME: "modal",
     },
-    NAVIGATION: {
-        DISABLED: "picker__navigation_disabled",
-        MAIN: "picker__navigation",
-        TO_BOTTOM: "picker__navigation_to-bottom",
-        TO_LEFT: "picker__navigation_to-left",
-        TO_RIGHT: "picker__navigation_to-right",
-        TO_TOP: "picker__navigation_to-top",
+    NAVIGATION_BLOCK: {
+        MODIFIERS: {
+            DISABLED: "picker__navigation_disabled",
+            TO_BOTTOM: "picker__navigation_to-bottom",
+            TO_LEFT: "picker__navigation_to-left",
+            TO_RIGHT: "picker__navigation_to-right",
+            TO_TOP: "picker__navigation_to-top",
+        },
+        NAME: "picker__navigation",
     },
-    OVERLAY: "overlay",
-    PICK_CONTROL: {
-        DATE: "pick-control_date",
-        DISABLED: "pick-control_disabled",
-        MAIN: "pick-control",
-        PAST: "pick-control_past",
-        PICKED: "pick-control_picked",
-        TIME: "pick-control_time",
-        TODAY: "pick-control_today",
+    OVERLAY_BLOCK: "overlay",
+    PICK_CONTROL_BLOCK: {
+        MODIFIERS: {
+            DATE: "pick-control_date",
+            DISABLED: "pick-control_disabled",
+            PAST: "pick-control_past",
+            PICKED: "pick-control_picked",
+            TIME: "pick-control_time",
+            TODAY: "pick-control_today",
+        },
+        NAME: "pick-control",
     },
-    SERVICE_CHOOSER: {
-        MAIN: "service-chooser",
-        SELECT: "service-chooser__select",
+    SERVICE_CHOOSER_BLOCK: {
+        ELEMENTS: {
+            SELECT: "service-chooser__select",
+        },
+        NAME: "service-chooser",
     },
     SWIPER: {
         CONTAINER: "swiper-container",
         SLIDE: "swiper-slide",
         WRAPPER: "swiper-wrapper",
     },
-    TIME_PICKER: {
-        CAPTION: "time-picker__caption",
-        MAIN: "time-picker",
+    TIME_PICKER_BLOCK: {
+        ELEMENTS: {
+            CAPTION: "time-picker__caption",
+        },
+        NAME: "time-picker",
     },
 });
 

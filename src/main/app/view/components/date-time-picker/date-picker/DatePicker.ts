@@ -28,7 +28,7 @@ export default class DatePicker implements ILayout, IMonthObserver {
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.DATE_PICKER.MAIN);
+        layout.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.NAME);
         layout.appendChild(this.slider.getSliderContainer());
 
         return layout;

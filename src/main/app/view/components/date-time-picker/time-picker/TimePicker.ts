@@ -21,11 +21,11 @@ export default class TimePicker extends DirectPicker<Time> {
 
     public getLayout(): HTMLElement {
         const layout: HTMLDivElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.TIME_PICKER.MAIN);
+        layout.classList.add(CLASS_NAMES.TIME_PICKER_BLOCK.NAME);
         this.buttons.forEach((button) => this.slider.appendSlide(button));
 
         const caption: HTMLDivElement = document.createElement("div");
-        caption.classList.add(CLASS_NAMES.TIME_PICKER.CAPTION);
+        caption.classList.add(CLASS_NAMES.TIME_PICKER_BLOCK.ELEMENTS.CAPTION);
         caption.textContent = DICTIONARY.TIME;
 
         layout.appendChild(caption);
@@ -58,7 +58,7 @@ export default class TimePicker extends DirectPicker<Time> {
 
     protected produceButton(time: Time): HTMLButtonElement {
         const button: HTMLButtonElement = super.produceButton(time);
-        button.classList.add(CLASS_NAMES.PICK_CONTROL.TIME);
+        button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.TIME);
 
         return button;
     }

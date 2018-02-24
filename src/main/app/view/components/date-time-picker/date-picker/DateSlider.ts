@@ -40,14 +40,14 @@ export default class DateSlider extends Slider implements IMonthObserver {
 
     protected generatePreviousControl(): HTMLElement {
         const previousControl = super.generatePreviousControl();
-        previousControl.classList.add(CLASS_NAMES.NAVIGATION.TO_LEFT);
+        previousControl.classList.add(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.TO_LEFT);
 
         return previousControl;
     }
 
     protected generateNextControl(): HTMLElement {
         const nextControl = super.generateNextControl();
-        nextControl.classList.add(CLASS_NAMES.NAVIGATION.TO_RIGHT);
+        nextControl.classList.add(CLASS_NAMES.NAVIGATION_BLOCK.MODIFIERS.TO_RIGHT);
 
         return nextControl;
     }
@@ -82,7 +82,7 @@ export default class DateSlider extends Slider implements IMonthObserver {
 
     private generateMonthChooser(): HTMLSelectElement {
         const monthSelect: HTMLSelectElement = document.createElement("select");
-        monthSelect.classList.add(CLASS_NAMES.CHOOSER);
+        monthSelect.classList.add(CLASS_NAMES.CHOOSER_BLOCK);
         DICTIONARY.MONTHS_NAMES.forEach((monthName, monthIndex) => {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
@@ -106,7 +106,7 @@ export default class DateSlider extends Slider implements IMonthObserver {
 
     private generateYearChooser(): HTMLSelectElement {
         const yearSelect: HTMLSelectElement = document.createElement("select");
-        yearSelect.classList.add(CLASS_NAMES.CHOOSER);
+        yearSelect.classList.add(CLASS_NAMES.CHOOSER_BLOCK);
         this.getSelectableYears().forEach((year) => {
             yearSelect.options.add(this.getYearOption(year));
         });

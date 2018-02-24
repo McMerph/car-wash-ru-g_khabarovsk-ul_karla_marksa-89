@@ -23,8 +23,8 @@ export default abstract class DirectPicker<T> implements ILayout {
         if (index !== -1 && !this.isDisabled(value)) {
             this.picked = true;
             this.pickedValue = value;
-            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
-            this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.PICKED);
+            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
+            this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED);
         }
     }
 
@@ -32,7 +32,7 @@ export default abstract class DirectPicker<T> implements ILayout {
         this.disabledValues = values;
         if (this.picked && this.isDisabled(this.pickedValue)) {
             this.picked = false;
-            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.PICKED));
+            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
         }
         const disabledIndices = this.disabledValues
             .map((valueToDisable) => this.indexOf(valueToDisable))
@@ -66,14 +66,16 @@ export default abstract class DirectPicker<T> implements ILayout {
         button.tabIndex = 0;
         button.textContent = this.getRepresentation(value);
         button.onclick = () => this.pick(value);
-        button.classList.add(CLASS_NAMES.PICK_CONTROL.MAIN);
+        button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.NAME);
 
         return button;
     }
 
     private disableButtons(indices: number[]): void {
-        this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL.DISABLED));
-        indices.forEach((index) => this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL.DISABLED));
+        this.buttons.forEach((button) =>
+            button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.DISABLED));
+        indices.forEach((index) =>
+            this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.DISABLED));
     }
 
 }

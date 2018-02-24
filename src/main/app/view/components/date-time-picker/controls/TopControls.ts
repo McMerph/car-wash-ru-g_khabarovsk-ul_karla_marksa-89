@@ -7,7 +7,7 @@ export default class TopControls implements ILayout {
 
     private static getDateControls(dateSlider: DateSlider, timeSlider: TimeSlider): HTMLElement {
         const dateControls: HTMLDivElement = document.createElement("div");
-        dateControls.classList.add(CLASS_NAMES.DATE_PICKER.CONTROLS);
+        dateControls.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.ELEMENTS.CONTROLS);
         dateControls.appendChild(dateSlider.getPreviousControl());
         dateControls.appendChild(dateSlider.getMonthChooser());
         dateControls.appendChild(dateSlider.getYearChooser());
@@ -20,7 +20,7 @@ export default class TopControls implements ILayout {
 
     public constructor(dateSlider: DateSlider, timeSlider: TimeSlider) {
         this.layout = document.createElement("div");
-        this.layout.classList.add(CLASS_NAMES.CONTROLS.TOP);
+        this.layout.classList.add(CLASS_NAMES.CONTROLS.TOP_BLOCK);
         this.layout.appendChild(TopControls.getDateControls(dateSlider, timeSlider));
         this.layout.appendChild(timeSlider.getPreviousControl());
     }

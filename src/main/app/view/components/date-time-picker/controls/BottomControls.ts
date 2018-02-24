@@ -8,7 +8,7 @@ export default class BottomControls implements ILayout {
 
     public constructor(timeSlider: TimeSlider) {
         this.layout = document.createElement("div");
-        this.layout.classList.add(CLASS_NAMES.CONTROLS.BOTTOM);
+        this.layout.classList.add(CLASS_NAMES.CONTROLS.BOTTOM_BLOCK);
         this.layout.appendChild(timeSlider.getNextControl());
     }
 

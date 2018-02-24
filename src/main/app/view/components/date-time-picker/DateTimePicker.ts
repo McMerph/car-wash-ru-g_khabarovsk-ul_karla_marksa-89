@@ -39,7 +39,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER);
+        layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK);
         layout.dataset.after = DICTIONARY.DATE_TIME_PICKER_LEGEND;
         layout.appendChild(this.datePicker.getLayout());
         layout.appendChild(this.timePicker.getLayout());
