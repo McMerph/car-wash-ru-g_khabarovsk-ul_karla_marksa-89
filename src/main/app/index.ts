@@ -10,7 +10,6 @@ padStart.shim();
 
 function start() {
     const modal: Modal = new Modal();
-
     document.body.appendChild(modal.getLayout());
 
     const openButton: HTMLButtonElement = (document.querySelector(".profile__actions .check-in") as HTMLButtonElement);

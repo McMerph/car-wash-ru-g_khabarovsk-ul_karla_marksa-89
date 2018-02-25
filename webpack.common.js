@@ -11,7 +11,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-                template: './src/main/app/index.html'
+                template: './src/main/app/view/index.html'
             }
         ),
         new FaviconsWebpackPlugin('./src/main/resources/favicon.svg'),
