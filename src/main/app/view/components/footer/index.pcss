@@ -1,7 +1,7 @@
 @import '../../styles/root.pcss';
 
 .footer {
-  background-color: #363636;
+  background-color: var(--color9);
   margin: 0 -5px;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .footer__info {
-  color: #a8a8a8;
+  color: var(--color10);
   font: normal 300 18px/2 var(--proxima-nova-font-stack);
 }
 
@@ -38,7 +38,7 @@
 .footer__nav-a {
   @apply --underline-decoration;
 
-  color: #adadad;
+  color: var(--color11);
   margin: 0 5px;
 
   &::before {
@@ -46,14 +46,14 @@
   }
 
   &:hover {
-    color: #0056b3;
+    color: var(--hover-color);
   }
 }
 
 .footer__account-a {
   @apply --underline-decoration;
 
-  color: #efeab1;
+  color: var(--color12);
 
   &::before {
     bottom: 6px;
@@ -61,7 +61,7 @@
   }
 
   &:hover {
-    color: #0056b3;
+    color: var(--hover-color);
   }
 }
 

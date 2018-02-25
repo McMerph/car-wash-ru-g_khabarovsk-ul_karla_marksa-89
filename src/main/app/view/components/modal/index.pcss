@@ -14,17 +14,7 @@
   background: white;
   width: 98%;
   max-width: 600px;
-  color: #130f30;
-
-  &::backdrop {
-    background-color: rgba(0, 0, 0, 0.71);
-  }
-
-  /* for ie and edge */
-  & + .backdrop {
-    background-color: rgba(0, 0, 0, 0.71);
-  }
-
+  color: var(--color3);
   transform: translateY(20%);
   opacity: 0;
   transition: all 0.3s ease-out;
@@ -47,14 +37,14 @@
   @apply --reset-control;
 
   padding: 8px;
-  background: #da5178;
+  background: var(--red-color);
   position: absolute;
   right: 0;
   top: -64px;
 
   &::after {
     font-size: 42px;
-    color: #fff;
+    color: var(--white-color);
     content: "\e902";
   }
 }
@@ -69,7 +59,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.71);
+  background-color: var(--overlay-color);
   z-index: 1;
   transition: all 0.3s ease-out;
 }
@@ -83,7 +73,7 @@
     position: absolute;
     right: 18px;
     font-size: 42px;
-    color: #00aeef;
+    color: var(--picker-border-color);
     content: "\e900";
   }
 }
@@ -91,10 +81,10 @@
 .service-chooser__select {
   cursor: pointer;
   outline: none;
-  color: #303030;
+  color: var(--gray-color);
   font: normal 400 22px var(--proxima-nova-font-stack);
   appearance: none;
-  border: 2px solid #00aeef;
+  border: 2px solid var(--picker-border-color);
   border-radius: 3px;
   width: 100%;
   padding: 8px 0 8px 15px;
@@ -105,7 +95,7 @@
 
   &::-ms-value {
     background: none;
-    color: #303030;
+    color: var(--gray-color);
   }
 }
 
@@ -122,7 +112,7 @@
   @apply(--underline-decoration);
 
   display: block;
-  color: #fff;
+  color: var(--white-color);
   font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
 
   &::before {
@@ -146,7 +136,7 @@
 
   &::after {
     font: normal 400 18px var(--proxima-nova-font-stack);
-    color: #363636;
+    color: var(--color9);
     display: block;
     position: absolute;
     content: attr(data-after);

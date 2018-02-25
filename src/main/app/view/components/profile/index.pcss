@@ -5,8 +5,6 @@
 }
 
 .profile__summary {
-  @apply --shadow;
-
   border-radius: 3px 3px 0 0;
   background: var(--blue-color) url('../../../../resources/img/profile/splash.png') no-repeat top right;
   display: flex;
@@ -28,7 +26,7 @@
 
 .profile__property-name {
   width: 50%;
-  color: #e0edf5;
+  color: var(--color4);
   font: italic 300 18px/1.667 var(--open-sans-font-stack);
   padding-right: 26px;
   text-align: right;
@@ -36,7 +34,7 @@
 
 .profile__property-value {
   width: 50%;
-  color: #fff;
+  color: var(--white-color);
   font: normal 300 18px/1.667 var(--open-sans-font-stack);
   align-self: flex-end;
 }
@@ -44,7 +42,7 @@
 .profile__edit {
   @apply --underline-decoration;
 
-  color: #b4f4ff;
+  color: var(--color5);
   font: normal 300 18px/1.667 var(--open-sans-font-stack);
   margin: 69px 12px 41px 0;
 
@@ -62,10 +60,8 @@
 }
 
 .profile__actions {
-  @apply --shadow;
-
   border-radius: 0 0 3px 3px;
-  background-color: #304269;
+  background-color: var(--color6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -74,7 +70,7 @@
 .profile__request-call {
   @apply --underline-decoration;
 
-  color: #fed700;
+  color: var(--color7);
   font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
   border: 0;
   background: none;
@@ -83,7 +79,7 @@
   margin-left: 8px;
 
   &::before {
-    color: #ac9840;
+    color: var(--color8);
     bottom: 8px;
     border-bottom: 1px solid;
   }

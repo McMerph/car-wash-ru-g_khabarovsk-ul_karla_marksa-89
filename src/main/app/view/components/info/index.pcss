@@ -7,7 +7,7 @@
   background: url('../../../../resources/img/custom-border.svg?fill=var(--blue-color)') no-repeat top left;
   border-bottom: 12px solid var(--blue-color);
   font: normal 700 24px/1.2 var(--proxima-nova-font-stack);
-  color: #fff;
+  color: var(--white-color);
   text-transform: uppercase;
 }
 
@@ -17,8 +17,6 @@
 }
 
 .info__notes {
-  @apply --shadow;
-
   border-radius: 0 0 3px 3px;
   column-count: 2;
   column-gap: 42px;
@@ -27,11 +25,11 @@
 }
 
 .info__notes_theme_rules {
-  background: #fff url('../../../../resources/img/rules.jpg') no-repeat bottom right;
+  background: var(--white-color) url('../../../../resources/img/rules.jpg') no-repeat bottom right;
 }
 
 .info__notes_theme_actions {
-  background: #fff url('../../../../resources/img/actions.jpg') no-repeat bottom left;
+  background: var(--white-color) url('../../../../resources/img/actions.jpg') no-repeat bottom left;
 }
 
 .info__note {
@@ -39,12 +37,12 @@
 }
 
 .info__note-caption {
-  color: #ed145b;
+  color: var(--color13);
   font: normal 700 24px/1.2 var(--proxima-nova-font-stack);
 }
 
 .info__note-text {
-  color: #707070;
+  color: var(--color14);
   font: normal 300 14px/1.75 var(--open-sans-font-stack);
 }
 
