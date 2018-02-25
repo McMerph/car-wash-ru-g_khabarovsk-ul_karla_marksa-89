@@ -1,6 +1,6 @@
 import "eligrey-classlist-js-polyfill/classList.min.js";
 import * as padStart from "string.prototype.padstart";
-import "./StickyHoverFix.js";
+import "./view/StickyHoverFix";
 
 import "./view/styles";
 
