@@ -40,13 +40,13 @@ const CLASS_NAMES = Object.freeze({
     },
     NAVIGATION_BLOCK: {
         MODIFIERS: {
-            DISABLED: "picker__navigation_disabled",
-            TO_BOTTOM: "picker__navigation_to-bottom",
-            TO_LEFT: "picker__navigation_to-left",
-            TO_RIGHT: "picker__navigation_to-right",
-            TO_TOP: "picker__navigation_to-top",
+            DISABLED: "navigation_disabled",
+            TO_BOTTOM: "navigation_to-bottom",
+            TO_LEFT: "navigation_to-left",
+            TO_RIGHT: "navigation_to-right",
+            TO_TOP: "navigation_to-top",
         },
-        NAME: "picker__navigation",
+        NAME: "navigation",
     },
     OVERLAY_BLOCK: "overlay",
     PICK_CONTROL_BLOCK: {

@@ -1,6 +1,7 @@
 import * as Swiper from "swiper/dist/js/swiper.min.js";
 import CLASS_NAMES from "../../constants/class-names";
 import DICTIONARY from "../../constants/dictionary";
+import NavigationControl from "../NavigationControl";
 
 export default abstract class Slider {
 
@@ -76,27 +77,17 @@ export default abstract class Slider {
     }
 
     protected generatePreviousControl(): HTMLElement {
-        const previousButton: HTMLButtonElement = document.createElement("button");
-        previousButton.setAttribute("aria-label", DICTIONARY.BACK);
-        previousButton.classList.add(
-            CLASS_NAMES.NAVIGATION_BLOCK.NAME,
-            CLASS_NAMES.ICON_BLOCK,
-        );
-        previousButton.onclick = () => this.slider.slidePrev();
-
-        return previousButton;
+        return new NavigationControl({
+            ariaLabel: DICTIONARY.BACK,
+            onClick: () => this.slider.slidePrev(),
+        }).getLayout();
     }
 
     protected generateNextControl(): HTMLElement {
-        const nextButton: HTMLButtonElement = document.createElement("button");
-        nextButton.setAttribute("aria-label", DICTIONARY.NEXT);
-        nextButton.classList.add(
-            CLASS_NAMES.NAVIGATION_BLOCK.NAME,
-            CLASS_NAMES.ICON_BLOCK,
-        );
-        nextButton.onclick = () => this.slider.slideNext();
-
-        return nextButton;
+        return new NavigationControl({
+            ariaLabel: DICTIONARY.NEXT,
+            onClick: () => this.slider.slideNext(),
+        }).getLayout();
     }
 
 }

@@ -1,0 +1,46 @@
+@import '../../styles/root.pcss';
+
+.navigation {
+  @apply --reset-control;
+
+  &::after {
+    font-size: 24px;
+    color: var(--picker-border-color);
+  }
+}
+
+.navigation_disabled {
+  visibility: hidden;
+}
+
+.navigation_to-top {
+  margin-left: auto;
+
+  &::after {
+    content: "\e904";
+  }
+}
+
+.navigation_to-bottom {
+  margin-left: auto;
+
+  &::after {
+    content: "\e901";
+  }
+}
+
+.navigation_to-left {
+  margin-right: 10px;
+
+  &::after {
+    content: "\e902";
+  }
+}
+
+.navigation_to-right {
+  margin-left: 10px;
+
+  &::after {
+    content: "\e903";
+  }
+}
