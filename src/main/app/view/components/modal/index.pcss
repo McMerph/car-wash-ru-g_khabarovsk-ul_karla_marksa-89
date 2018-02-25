@@ -64,42 +64,6 @@
   transition: all 0.3s ease-out;
 }
 
-.service-chooser {
-  display: flex;
-  position: relative;
-
-  &::after {
-    pointer-events: none;
-    position: absolute;
-    right: 17px;
-    top: 10px;
-    font-size: 31px;
-    color: var(--picker-border-color);
-    content: "\e900";
-  }
-}
-
-.service-chooser__select {
-  cursor: pointer;
-  outline: none;
-  color: var(--gray-color);
-  font: normal 400 22px/1 var(--proxima-nova-font-stack);
-  appearance: none;
-  border: 2px solid var(--picker-border-color);
-  border-radius: 3px;
-  width: 100%;
-  padding: 9px 0 9px 15px;
-
-  &::-ms-expand {
-    display: none;
-  }
-
-  &::-ms-value {
-    background: none;
-    color: var(--gray-color);
-  }
-}
-
 .modal__footer {
   margin: 10px 0 0;
   display: flex;

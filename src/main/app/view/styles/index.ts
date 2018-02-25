@@ -9,6 +9,7 @@ import "../components/header/index.pcss";
 import "../components/info/index.pcss";
 import "../components/modal/index.pcss";
 import "../components/profile/index.pcss";
+import "../components/service-chooser/index.pcss";
 
 import "./fonts.css";
 import "./index.pcss";

@@ -11,6 +11,7 @@ import DateTimePicker from "../date-time-picker/DateTimePicker";
 import DateTimePickerState from "../date-time-picker/DateTimePickerState";
 import TimeSlider from "../date-time-picker/time-picker/TimeSlider";
 import ILayout from "../ILayout";
+import ServiceChooser from "../service-chooser";
 
 import "./index.pcss";
 
@@ -80,7 +81,7 @@ export default class Modal implements ILayout {
     private generateModalMain(dateTimePicker: DateTimePicker): HTMLElement {
         const modalMain: HTMLElement = document.createElement("div");
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
-        modalMain.appendChild(this.generateServiceChooser());
+        modalMain.appendChild(new ServiceChooser().getLayout());
         modalMain.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
         modalMain.appendChild(dateTimePicker.getLayout());
         modalMain.appendChild(new BottomControls(this.timeSlider).getLayout());
@@ -103,35 +104,6 @@ export default class Modal implements ILayout {
             dateTimePickerState,
             timeSlider: this.timeSlider,
         });
-    }
-
-    private generateServiceChooser(): HTMLElement {
-        // TODO Make multiple?
-        const selectService: HTMLSelectElement = document.createElement("select");
-        selectService.classList.add(CLASS_NAMES.SERVICE_CHOOSER_BLOCK.ELEMENTS.SELECT);
-        const placeholderOption: HTMLOptionElement = document.createElement("option");
-        placeholderOption.value = DICTIONARY.SERVICES.PLACEHOLDER;
-        placeholderOption.text = DICTIONARY.SERVICES.PLACEHOLDER;
-
-        placeholderOption.disabled = true;
-        placeholderOption.selected = true;
-
-        selectService.options.add(placeholderOption);
-        DICTIONARY.SERVICES.LIST.forEach((service) => {
-            const option: HTMLOptionElement = document.createElement("option");
-            option.value = service;
-            option.text = service;
-            selectService.options.add(option);
-        });
-
-        const wrapper: HTMLElement = document.createElement("div");
-        wrapper.classList.add(
-            CLASS_NAMES.SERVICE_CHOOSER_BLOCK.NAME,
-            CLASS_NAMES.ICON_BLOCK,
-        );
-        wrapper.appendChild(selectService);
-
-        return wrapper;
     }
 
     private generateFooter(dateTimePicker: DateTimePicker): HTMLElement {
