@@ -5,8 +5,6 @@ import DateTimePickerState from "../DateTimePickerState";
 import DirectPicker from "../DirectPicker";
 import TimeSlider from "./TimeSlider";
 
-import "./time-picker.pcss";
-
 // TODO Check current time. Re-render on change
 export default class TimePicker extends DirectPicker<Time> {
 

@@ -4,6 +4,9 @@ import "swiper/dist/css/swiper.min.css";
 import "./components.pcss";
 import "./layout.pcss";
 
+import "../components/date-time-picker/date-picker/index.pcss";
+import "../components/date-time-picker/index.pcss";
+import "../components/date-time-picker/time-picker/index.pcss";
 import "../components/footer/index.pcss";
 import "../components/header/index.pcss";
 import "../components/info/index.pcss";
