@@ -1,0 +1,49 @@
+body {
+  min-width: 310px;
+  padding: 0 5px 0 5px;
+}
+
+main {
+  padding: 27px 0 112px 0;
+}
+
+.dimensioned {
+  box-sizing: border-box;
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 1220px;
+  padding: 0 30px;
+}
+
+.flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: 0 -12px;
+}
+
+.profile {
+  padding: 0 12px;
+  flex: 1 1 395px;
+}
+
+.info {
+  padding: 0 12px;
+  flex: 2 1 741px;
+}
+
+@media (max-width: 510px) {
+  .dimensioned {
+    padding: 0;
+  }
+}
+
+@media (max-width: 1250px) {
+  .profile {
+    flex-basis: 310px;
+  }
+
+  .info {
+    flex-basis: 500px;
+  }
+}

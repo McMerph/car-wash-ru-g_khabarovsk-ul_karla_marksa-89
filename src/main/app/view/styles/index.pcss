@@ -2,24 +2,11 @@
 
 html {
   background-color: #f7f7f7;
-  font: normal 400 14px sans-serif;
   touch-action: manipulation;
 }
 
-body {
-  min-width: 310px;
-  padding: 0 5px 0 5px;
-}
-
-main {
-  padding: 27px 0 112px 0;
-}
-
 a {
-  color: #33adff;
-  font-size: 18px;
   cursor: pointer;
-  text-decoration: underline;
 
   &:hover {
     color: #0056b3;
@@ -28,77 +15,4 @@ a {
 
 button {
   cursor: pointer;
-}
-
-.dimensioned {
-  box-sizing: border-box;
-  margin: 0 auto;
-  overflow: hidden;
-  max-width: 1220px;
-  padding: 0 30px;
-}
-
-.flex-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  margin: 0 -12px;
-}
-
-.profile {
-  padding: 0 12px;
-  flex: 1 1 395px;
-}
-
-.info {
-  padding: 0 12px;
-  flex: 2 1 741px;
-}
-
-.icon {
-  &::after {
-    /* use !important to prevent issues with browser extensions that change fonts */
-    /* stylelint-disable-next-line font-family-no-missing-generic-family-keyword */
-    font-family: 'icomoon' !important;
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-.check-in {
-  @apply --soft-reset-button;
-
-  color: #fff;
-  font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
-  text-transform: uppercase;
-  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.42);
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.19), inset 0 1px 0 0 rgba(255, 255, 255, 0.004);
-  background: #ffd800 linear-gradient(to bottom, #ffd700 0%, #c89e00 100%);
-  border: 0;
-  border-radius: 30px;
-  margin: 43px 0 23px;
-  width: 81%;
-  height: 60px;
-  max-width: 320px;
-}
-
-@media (max-width: 510px) {
-  .dimensioned {
-    padding: 0;
-  }
-}
-
-@media (max-width: 1250px) {
-  .profile {
-    flex-basis: 310px;
-  }
-
-  .info {
-    flex-basis: 500px;
-  }
 }
