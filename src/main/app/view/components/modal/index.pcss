@@ -8,8 +8,8 @@
 }
 
 .modal__content {
+  position: relative;
   box-sizing: border-box;
-  padding: 0 38px 0 32px;
   border: 0;
   background: white;
   width: 98%;
@@ -43,6 +43,26 @@
   @apply --visually-hidden;
 }
 
+.modal__close {
+  @apply --reset-button;
+
+  padding: 8px;
+  background: #da5178;
+  position: absolute;
+  right: 0;
+  top: -64px;
+
+  &::after {
+    font-size: 42px;
+    color: #fff;
+    content: "\e902";
+  }
+}
+
+.modal__main {
+  padding: 110px 38px 0 32px;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -56,7 +76,6 @@
 
 .service-chooser {
   display: flex;
-  margin-top: 110px;
   position: relative;
 
   &::after {

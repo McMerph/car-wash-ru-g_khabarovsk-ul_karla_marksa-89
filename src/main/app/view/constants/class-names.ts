@@ -26,8 +26,10 @@ const CLASS_NAMES = Object.freeze({
     MODAL_BLOCK: {
         ELEMENTS: {
             CHECK_IN: "modal__check-in",
+            CLOSE: "modal__close",
             CONTENT: "modal__content",
             FOOTER: "modal__footer",
+            MAIN: "modal__main",
             TO_NEAREST: "modal__to-nearest",
         },
         MODIFIERS: {

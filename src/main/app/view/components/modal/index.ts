@@ -55,18 +55,37 @@ export default class Modal implements ILayout {
     }
 
     private generateModalContent(): HTMLElement {
+        const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
         const modalContent: HTMLElement = document.createElement("div");
         modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT);
-
-        const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
-
-        modalContent.appendChild(this.generateServiceChooser());
-        modalContent.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
-        modalContent.appendChild(dateTimePicker.getLayout());
-        modalContent.appendChild(new BottomControls(this.timeSlider).getLayout());
+        modalContent.appendChild(this.generateModalCloseButton());
+        modalContent.appendChild(this.generateModalMain(dateTimePicker));
         modalContent.appendChild(this.generateFooter(dateTimePicker));
 
         return modalContent;
+    }
+
+    private generateModalCloseButton(): HTMLButtonElement {
+        const modalClose: HTMLButtonElement = document.createElement("button");
+        modalClose.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CLOSE,
+            CLASS_NAMES.ICON_BLOCK,
+        );
+        modalClose.addEventListener("click", () => {
+            this.close();
+        });
+        return modalClose;
+    }
+
+    private generateModalMain(dateTimePicker: DateTimePicker): HTMLElement {
+        const modalMain: HTMLElement = document.createElement("div");
+        modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
+        modalMain.appendChild(this.generateServiceChooser());
+        modalMain.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
+        modalMain.appendChild(dateTimePicker.getLayout());
+        modalMain.appendChild(new BottomControls(this.timeSlider).getLayout());
+
+        return modalMain;
     }
 
     private generateDateTimePicker(): DateTimePicker {

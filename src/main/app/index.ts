@@ -12,7 +12,7 @@ import "./view/components/profile/index.pcss";
 import "./view/fonts.css";
 import "./view/index.pcss";
 
-import Modal from "./view/components/modal/Modal";
+import Modal from "./view/components/modal/index";
 
 padStart.shim();
 
