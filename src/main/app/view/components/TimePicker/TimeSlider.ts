@@ -1,5 +1,5 @@
-import CLASS_NAMES from "../../../constants/class-names";
-import SETTINGS from "../../../constants/settings";
+import CLASS_NAMES from "../../constants/ClassNames";
+import SETTINGS from "../../constants/Settings";
 import DateTimePickerState from "../DateTimePickerState";
 import Slider from "../Slider";
 

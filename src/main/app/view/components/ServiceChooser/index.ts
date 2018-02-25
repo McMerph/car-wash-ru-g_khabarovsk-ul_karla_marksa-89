@@ -1,5 +1,5 @@
-import CLASS_NAMES from "../../constants/class-names";
-import DICTIONARY from "../../constants/dictionary";
+import CLASS_NAMES from "../../constants/ClassNames";
+import DICTIONARY from "../../constants/Dictionary";
 import ILayout from "../ILayout";
 
 export default class ServiceChooser implements ILayout {

@@ -1,9 +1,9 @@
-import DateUtils from "../../../../model/utils/DateUtils";
-import CLASS_NAMES from "../../../constants/class-names";
-import ILayout from "../../ILayout";
+import DateUtils from "../../../model/utils/DateUtils";
+import CLASS_NAMES from "../../constants/ClassNames";
 import DateTimePickerState from "../DateTimePickerState";
-import IMonthObserver from "../observers/IMonthObserver";
-import DateOfMonthPicker from "./date-of-month-picker/DateOfMonthPicker";
+import ILayout from "../ILayout";
+import IMonthObserver from "../IMonthObserver";
+import DateOfMonthPicker from "./DateOfMonthPicker";
 import DateSlider from "./DateSlider";
 
 // TODO Check current time. Re-render on change

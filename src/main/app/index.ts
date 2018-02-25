@@ -4,7 +4,7 @@ import "./view/StickyHoverFix";
 
 import "./view/styles";
 
-import Modal from "./view/components/modal/index";
+import Modal from "./view/components/Modal/index";
 
 padStart.shim();
 

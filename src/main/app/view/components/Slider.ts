@@ -1,11 +1,11 @@
 import * as Swiper from "swiper/dist/js/swiper.min.js";
-import CLASS_NAMES from "../../constants/class-names";
-import DICTIONARY from "../../constants/dictionary";
-import NavigationControl from "../NavigationControl";
+import CLASS_NAMES from "../constants/ClassNames";
+import DICTIONARY from "../constants/Dictionary";
+import NavigationControl from "./NavigationControl";
 
 export default abstract class Slider {
 
-    protected static generateContainer(): HTMLElement {
+    private static generateContainer(): HTMLElement {
         const wrapper: HTMLDivElement = document.createElement("div");
         wrapper.classList.add(CLASS_NAMES.SWIPER.WRAPPER);
 
@@ -16,7 +16,7 @@ export default abstract class Slider {
         return container;
     }
 
-    protected static getSlide(child: Node): HTMLElement {
+    private static getSlide(child: Node): HTMLElement {
         const slide = document.createElement("div");
         slide.classList.add(CLASS_NAMES.SWIPER.SLIDE);
         slide.appendChild(child);

@@ -1,15 +1,15 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
-import CLASS_NAMES from "../../constants/class-names";
-import DICTIONARY from "../../constants/dictionary";
+import CLASS_NAMES from "../../constants/ClassNames";
+import DICTIONARY from "../../constants/Dictionary";
+import DatePicker from "../DatePicker";
+import DateSlider from "../DatePicker/DateSlider";
+import DateTimePickerState from "../DateTimePickerState";
+import IDateObserver from "../IDateObserver";
 import ILayout from "../ILayout";
-import DatePicker from "./date-picker/DatePicker";
-import DateSlider from "./date-picker/DateSlider";
-import DateTimePickerState from "./DateTimePickerState";
-import IDateObserver from "./observers/IDateObserver";
-import IMonthObserver from "./observers/IMonthObserver";
-import TimePicker from "./time-picker/TimePicker";
-import TimeSlider from "./time-picker/TimeSlider";
+import IMonthObserver from "../IMonthObserver";
+import TimePicker from "../TimePicker";
+import TimeSlider from "../TimePicker/TimeSlider";
 
 interface IDateTimePickerParameters {
 

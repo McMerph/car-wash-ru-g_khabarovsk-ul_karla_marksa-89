@@ -1,7 +1,7 @@
-import AvailabilityHandler from "../../../model/AvailabilityHandler";
-import Time from "../../../model/Time";
-import IDateObserver from "./observers/IDateObserver";
-import IMonthObserver from "./observers/IMonthObserver";
+import AvailabilityHandler from "../../model/AvailabilityHandler";
+import Time from "../../model/Time";
+import IDateObserver from "./IDateObserver";
+import IMonthObserver from "./IMonthObserver";
 
 export default class DateTimePickerState {
 

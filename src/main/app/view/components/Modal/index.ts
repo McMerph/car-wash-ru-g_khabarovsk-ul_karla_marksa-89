@@ -2,16 +2,16 @@ import IApi from "../../../model/api/IApi";
 import IAvailability from "../../../model/api/IAvailability";
 import MockApi from "../../../model/api/MockApi";
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
-import CLASS_NAMES from "../../constants/class-names";
-import DICTIONARY from "../../constants/dictionary";
-import BottomControls from "../date-time-picker/controls/BottomControls";
-import TopControls from "../date-time-picker/controls/TopControls";
-import DateSlider from "../date-time-picker/date-picker/DateSlider";
-import DateTimePicker from "../date-time-picker/DateTimePicker";
-import DateTimePickerState from "../date-time-picker/DateTimePickerState";
-import TimeSlider from "../date-time-picker/time-picker/TimeSlider";
+import CLASS_NAMES from "../../constants/ClassNames";
+import DICTIONARY from "../../constants/Dictionary";
+import DateSlider from "../DatePicker/DateSlider";
+import BottomControls from "../DateTimePicker/controls/BottomControls";
+import TopControls from "../DateTimePicker/controls/TopControls";
+import DateTimePicker from "../DateTimePicker/DateTimePicker";
+import DateTimePickerState from "../DateTimePickerState";
 import ILayout from "../ILayout";
-import ServiceChooser from "../service-chooser";
+import ServiceChooser from "../ServiceChooser";
+import TimeSlider from "../TimePicker/TimeSlider";
 
 import "./index.pcss";
 

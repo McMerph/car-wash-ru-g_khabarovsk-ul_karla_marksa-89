@@ -1,6 +1,6 @@
-import CLASS_NAMES from "../../../constants/class-names";
+import CLASS_NAMES from "../../../constants/ClassNames";
 import ILayout from "../../ILayout";
-import TimeSlider from "../time-picker/TimeSlider";
+import TimeSlider from "../../TimePicker/TimeSlider";
 
 export default class BottomControls implements ILayout {
 

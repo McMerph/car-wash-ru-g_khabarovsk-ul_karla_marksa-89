@@ -1,8 +1,8 @@
-import CLASS_NAMES from "../../../constants/class-names";
-import DICTIONARY from "../../../constants/dictionary";
-import SETTINGS from "../../../constants/settings";
+import CLASS_NAMES from "../../constants/ClassNames";
+import DICTIONARY from "../../constants/Dictionary";
+import SETTINGS from "../../constants/Settings";
 import DateTimePickerState from "../DateTimePickerState";
-import IMonthObserver from "../observers/IMonthObserver";
+import IMonthObserver from "../IMonthObserver";
 import Slider from "../Slider";
 
 // TODO Extend SliderUtils class?

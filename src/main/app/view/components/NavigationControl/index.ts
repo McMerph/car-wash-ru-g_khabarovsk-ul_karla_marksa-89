@@ -1,4 +1,4 @@
-import CLASS_NAMES from "../../constants/class-names";
+import CLASS_NAMES from "../../constants/ClassNames";
 import ILayout from "../ILayout";
 
 interface IParameters {
