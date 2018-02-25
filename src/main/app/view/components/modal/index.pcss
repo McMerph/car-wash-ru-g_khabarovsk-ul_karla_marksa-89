@@ -36,21 +36,21 @@
 .modal__close {
   @apply --reset-control;
 
-  padding: 8px;
+  padding: 7px 7px 6px 8px;
   background: var(--red-color);
   position: absolute;
   right: 0;
-  top: -64px;
+  top: -47px;
 
   &::after {
     font-size: 32px;
     color: var(--white-color);
-    content: "\e902";
+    content: "\e905";
   }
 }
 
 .modal__main {
-  padding: 110px 38px 0 32px;
+  padding: 59px 38px 0 32px;
 }
 
 .overlay {
@@ -71,10 +71,11 @@
   &::after {
     pointer-events: none;
     position: absolute;
-    right: 18px;
-    font-size: 20px;
+    right: 17px;
+    top: 10px;
+    font-size: 31px;
     color: var(--picker-border-color);
-    content: "\e901";
+    content: "\e900";
   }
 }
 
@@ -82,12 +83,12 @@
   cursor: pointer;
   outline: none;
   color: var(--gray-color);
-  font: normal 400 22px var(--proxima-nova-font-stack);
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
   appearance: none;
   border: 2px solid var(--picker-border-color);
   border-radius: 3px;
   width: 100%;
-  padding: 8px 0 8px 15px;
+  padding: 9px 0 9px 15px;
 
   &::-ms-expand {
     display: none;
@@ -135,7 +136,7 @@
   position: relative;
 
   &::after {
-    font: normal 400 18px var(--proxima-nova-font-stack);
+    font: normal 400 18px/1 var(--proxima-nova-font-stack);
     color: var(--color9);
     display: block;
     position: absolute;

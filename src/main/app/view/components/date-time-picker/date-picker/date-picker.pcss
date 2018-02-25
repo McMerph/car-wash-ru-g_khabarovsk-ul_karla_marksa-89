@@ -1,16 +1,23 @@
 @import '../../../styles/root.pcss';
 
 .picker__navigation_to-left {
-  transform: rotate(180deg);
   margin-right: 10px;
+
+  &::after {
+    content: "\e902";
+  }
 }
 
 .picker__navigation_to-right {
   margin-left: 10px;
+
+  &::after {
+    content: "\e903";
+  }
 }
 
 .pick-control_date.pick-control_date {
-  font: normal 400 22px var(--proxima-nova-font-stack);
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
 }
 
 .pick-control_today.pick-control_today {
@@ -34,7 +41,7 @@
   border: none;
   outline: 0;
   color: var(--gray-color);
-  font: normal 400 22px var(--proxima-nova-font-stack);
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
 
   &::-ms-expand {
     display: none;
@@ -88,7 +95,7 @@
   margin-bottom: 1px;
   box-shadow: 0 1px var(--picker-border-color);
   color: var(--gray-color);
-  font: normal 400 14px var(--proxima-nova-font-stack);
+  font: normal 400 14px/1 var(--proxima-nova-font-stack);
 }
 
 .date-picker__week {

@@ -1,13 +1,19 @@
 @import '../../../styles/root.pcss';
 
 .picker__navigation_to-top {
-  transform: rotate(270deg);
   margin-left: auto;
+
+  &::after {
+    content: "\e904";
+  }
 }
 
 .picker__navigation_to-bottom {
-  transform: rotate(90deg);
   margin-left: auto;
+
+  &::after {
+    content: "\e901";
+  }
 }
 
 .picker__navigation_disabled {
@@ -15,7 +21,7 @@
 }
 
 .pick-control_time.pick-control_time {
-  font: normal 400 20px var(--proxima-nova-font-stack);
+  font: normal 400 20px/1 var(--proxima-nova-font-stack);
   box-shadow: 0 0 0 1px var(--picker-border-color);
 }
 
@@ -37,6 +43,6 @@
   padding: 1px 0 4px;
   text-align: center;
   color: var(--gray-color);
-  font: normal 400 14px var(--proxima-nova-font-stack);
+  font: normal 400 14px/1 var(--proxima-nova-font-stack);
   box-shadow: inset 0 -1px var(--picker-border-color);
 }
