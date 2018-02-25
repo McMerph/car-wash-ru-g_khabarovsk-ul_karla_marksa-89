@@ -1,4 +1,5 @@
 const CLASS_NAMES = Object.freeze({
+    CHECK_IN_BLOCK: "check-in",
     CHOOSER_BLOCK: "picker-chooser",
     CONTROLS: {
         BOTTOM_BLOCK: "pickers-bottom-controls",
@@ -25,7 +26,6 @@ const CLASS_NAMES = Object.freeze({
     ICON_BLOCK: "icon",
     MODAL_BLOCK: {
         ELEMENTS: {
-            CHECK_IN: "modal__check-in",
             CLOSE: "modal__close",
             CONTENT: "modal__content",
             FOOTER: "modal__footer",

@@ -21,7 +21,7 @@ function start() {
 
     document.body.appendChild(modal.getLayout());
 
-    const openButton: HTMLButtonElement = (document.querySelector(".profile__check-in") as HTMLButtonElement);
+    const openButton: HTMLButtonElement = (document.querySelector(".profile__actions .check-in") as HTMLButtonElement);
     openButton.addEventListener("click", () => {
         modal.open();
     });

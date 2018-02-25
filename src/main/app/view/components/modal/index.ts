@@ -144,7 +144,7 @@ export default class Modal implements ILayout {
             dateTimePicker.pickNearest();
         });
         const checkInButton: HTMLButtonElement = document.createElement("button");
-        checkInButton.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CHECK_IN);
+        checkInButton.classList.add(CLASS_NAMES.CHECK_IN_BLOCK);
         checkInButton.appendChild(document.createTextNode(DICTIONARY.CHECK_IN));
         footer.appendChild(toNearestButton);
         footer.appendChild(checkInButton);
