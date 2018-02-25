@@ -15,27 +15,25 @@ main {
   padding: 0 30px;
 }
 
-.flex-wrapper {
+.content-wrapper {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   margin: 0 -12px;
 }
 
-.profile {
+.profile,
+.info {
   padding: 0 12px;
+}
+
+.profile {
+  margin-bottom: 45px;
   flex: 1 1 395px;
 }
 
 .info {
-  padding: 0 12px;
   flex: 2 1 741px;
-}
-
-@media (max-width: 510px) {
-  .dimensioned {
-    padding: 0;
-  }
 }
 
 @media (max-width: 1250px) {
@@ -45,5 +43,21 @@ main {
 
   .info {
     flex-basis: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  .info__notes {
+    column-count: 1;
+  }
+}
+
+@media (max-width: 510px) {
+  .dimensioned {
+    padding: 0;
+  }
+
+  .info__notes {
+    background-size: contain;
   }
 }
