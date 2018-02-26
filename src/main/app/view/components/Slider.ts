@@ -1,9 +1,10 @@
 import * as Swiper from "swiper/dist/js/swiper.min.js";
 import CLASS_NAMES from "../constants/ClassNames";
 import DICTIONARY from "../constants/Dictionary";
+import ILayout from "./ILayout";
 import NavigationControl from "./NavigationControl";
 
-export default abstract class Slider {
+export default abstract class Slider implements ILayout {
 
     private static generateContainer(): HTMLElement {
         const wrapper: HTMLDivElement = document.createElement("div");
@@ -36,6 +37,10 @@ export default abstract class Slider {
         this.nextControl = this.generateNextControl();
     }
 
+    public getLayout(): HTMLElement {
+        return this.sliderContainer;
+    }
+
     public removeAllSlides(): void {
         this.slider.removeAllSlides();
     }
@@ -62,10 +67,6 @@ export default abstract class Slider {
 
     public getSlider(): any {
         return this.slider;
-    }
-
-    public getSliderContainer(): HTMLElement {
-        return this.sliderContainer;
     }
 
     public getPreviousControl(): HTMLElement {

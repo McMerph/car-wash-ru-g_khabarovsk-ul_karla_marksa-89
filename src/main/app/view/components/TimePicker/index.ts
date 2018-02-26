@@ -27,7 +27,7 @@ export default class TimePicker extends DirectPicker<Time> {
         caption.textContent = DICTIONARY.TIME;
 
         layout.appendChild(caption);
-        layout.appendChild(this.slider.getSliderContainer());
+        layout.appendChild(this.slider.getLayout());
 
         return layout;
     }

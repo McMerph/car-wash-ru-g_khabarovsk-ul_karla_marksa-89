@@ -11,9 +11,9 @@ export default class DatePicker implements ILayout, IMonthObserver {
 
     private dateTimePickerState: DateTimePickerState;
 
-    private dateOfPreviousMonthPicker: DateOfMonthPicker;
+    private previousDateOfMonthPicker: DateOfMonthPicker;
     private dateOfMonthPicker: DateOfMonthPicker;
-    private dateOfNextMonthPicker: DateOfMonthPicker;
+    private nextDateOfMonthPicker: DateOfMonthPicker;
 
     private readonly slider: DateSlider;
 
@@ -21,35 +21,19 @@ export default class DatePicker implements ILayout, IMonthObserver {
         this.dateTimePickerState = dateTimePickerState;
         this.dateTimePickerState.addMonthObserver(this);
         this.slider = slider;
-        this.onMonthChange();
+        this.updateDateOfMonthPickers();
     }
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
         layout.classList.add(CLASS_NAMES.DATE_PICKER_BLOCK.NAME);
-        layout.appendChild(this.slider.getSliderContainer());
+        layout.appendChild(this.slider.getLayout());
 
         return layout;
     }
 
     public onMonthChange(): void {
-        // TODO Not working. Why?
-        // this.dateOfMonthPicker.removeDateObserver(this);
-        this.dateOfPreviousMonthPicker = new DateOfMonthPicker(
-            this.dateTimePickerState.getPreviousMonth(),
-            this.dateTimePickerState,
-        );
-        this.dateOfMonthPicker = new DateOfMonthPicker(
-            this.dateTimePickerState.getMonth(),
-            this.dateTimePickerState,
-        );
-        this.dateOfNextMonthPicker = new DateOfMonthPicker(
-            this.dateTimePickerState.getNextMonth(),
-            this.dateTimePickerState,
-        );
-
-        // TODO Update always animated?
-        this.renderSlider(false);
+        this.updateDateOfMonthPickers();
     }
 
     public pick(date: Date): void {
@@ -59,16 +43,35 @@ export default class DatePicker implements ILayout, IMonthObserver {
         this.dateOfMonthPicker.pick(date);
     }
 
-    private renderSlider(animated?: boolean): void {
+    private updateDateOfMonthPickers(): void {
+        // TODO Not working. Why?
+        // this.dateOfMonthPicker.removeDateObserver(this);
+        this.previousDateOfMonthPicker = new DateOfMonthPicker(
+            this.dateTimePickerState.getPreviousMonth(),
+            this.dateTimePickerState,
+        );
+        this.dateOfMonthPicker = new DateOfMonthPicker(
+            this.dateTimePickerState.getMonth(),
+            this.dateTimePickerState,
+        );
+        this.nextDateOfMonthPicker = new DateOfMonthPicker(
+            this.dateTimePickerState.getNextMonth(),
+            this.dateTimePickerState,
+        );
+
+        this.renderSlider();
+    }
+
+    private renderSlider(): void {
         this.slider.removeAllSlides();
 
-        this.slider.appendSlide(this.dateOfPreviousMonthPicker.getLayout());
+        this.slider.appendSlide(this.previousDateOfMonthPicker.getLayout());
         this.slider.appendSlide(this.dateOfMonthPicker.getLayout());
-        this.slider.appendSlide(this.dateOfNextMonthPicker.getLayout());
+        this.slider.appendSlide(this.nextDateOfMonthPicker.getLayout());
 
         this.slider.update();
 
-        this.slider.slideTo(1, animated ? undefined : 0, false);
+        this.slider.slideTo(1, 0, false);
     }
 
 }
