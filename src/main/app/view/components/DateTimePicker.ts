@@ -1,12 +1,12 @@
-import AvailabilityHandler from "../../../model/AvailabilityHandler";
-import Time from "../../../model/Time";
-import DatePicker from "../DatePicker";
-import DateSlider from "../DatePicker/DateSlider";
-import DateTimePickerState from "../DateTimePickerState";
-import IDateObserver from "../IDateObserver";
-import IMonthObserver from "../IMonthObserver";
-import TimePicker from "../TimePicker";
-import TimeSlider from "../TimePicker/TimeSlider";
+import AvailabilityHandler from "../../model/AvailabilityHandler";
+import Time from "../../model/Time";
+import DateSlider from "./DatePicker/DateSlider";
+import DatePicker from "./DatePicker/index";
+import DateTimePickerState from "./DateTimePickerState";
+import IDateObserver from "./IDateObserver";
+import IMonthObserver from "./IMonthObserver";
+import TimePicker from "./TimePicker/index";
+import TimeSlider from "./TimePicker/TimeSlider";
 
 interface IDateTimePickerParameters {
 

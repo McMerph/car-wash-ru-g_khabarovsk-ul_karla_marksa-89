@@ -5,15 +5,12 @@ import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import CLASS_NAMES from "../../constants/ClassNames";
 import DICTIONARY from "../../constants/Dictionary";
 import DateSlider from "../DatePicker/DateSlider";
-import BottomControls from "../DateTimePicker/controls/BottomControls";
-import TopControls from "../DateTimePicker/controls/TopControls";
-import DateTimePicker from "../DateTimePicker/DateTimePicker";
+import DateTimePicker from "../DateTimePicker";
 import DateTimePickerState from "../DateTimePickerState";
 import ILayout from "../ILayout";
+import MonthControls from "../MonthControls";
 import ServiceChooser from "../ServiceChooser";
 import TimeSlider from "../TimePicker/TimeSlider";
-
-import "./index.pcss";
 
 export default class Modal implements ILayout {
 
@@ -82,8 +79,24 @@ export default class Modal implements ILayout {
         const modalMain: HTMLElement = document.createElement("div");
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
         modalMain.appendChild(new ServiceChooser().getLayout());
-        modalMain.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
+        modalMain.appendChild(this.generateTopControls());
+        modalMain.appendChild(this.generateDateTimePickerMain(dateTimePicker));
+        modalMain.appendChild(this.generateBottomControls());
 
+        return modalMain;
+    }
+
+    private generateBottomControls() {
+        const bottomControls = document.createElement("div");
+        bottomControls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME);
+        const timeSliderNextControl = this.timeSlider.getNextControl();
+        timeSliderNextControl.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
+        bottomControls.appendChild(timeSliderNextControl);
+
+        return bottomControls;
+    }
+
+    private generateDateTimePickerMain(dateTimePicker: DateTimePicker): HTMLElement {
         const dateTimePickerMain: HTMLElement = document.createElement("div");
         dateTimePickerMain.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
         const datePickerLayout = dateTimePicker.getDatePicker().getLayout();
@@ -96,11 +109,21 @@ export default class Modal implements ILayout {
             CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME,
             CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.MODIFIERS.MAIN,
         );
-        modalMain.appendChild(dateTimePickerMain);
 
-        modalMain.appendChild(new BottomControls(this.timeSlider).getLayout());
+        return dateTimePickerMain;
+    }
 
-        return modalMain;
+    private generateTopControls(): HTMLElement {
+        const topControls: HTMLDivElement = document.createElement("div");
+        topControls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME);
+        const montControlsLayout: HTMLElement = new MonthControls(this.dateSlider).getLayout();
+        montControlsLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.LEFT);
+        topControls.appendChild(montControlsLayout);
+        const timeSliderPreviousControl: HTMLElement = this.timeSlider.getPreviousControl();
+        timeSliderPreviousControl.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
+        topControls.appendChild(timeSliderPreviousControl);
+
+        return topControls;
     }
 
     private generateDateTimePicker(): DateTimePicker {

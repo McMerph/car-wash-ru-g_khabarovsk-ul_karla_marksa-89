@@ -2,10 +2,6 @@
 const CLASS_NAMES = Object.freeze({
     ASCETIC_CHOOSER_BLOCK: "ascetic-chooser",
     CHECK_IN_BLOCK: "check-in",
-    CONTROLS: {
-        BOTTOM_BLOCK: "pickers-bottom-controls",
-        TOP_BLOCK: "pickers-top-controls",
-    },
     DATE_PICKER_BLOCK: {
         ELEMENTS: {
             CELL: {
