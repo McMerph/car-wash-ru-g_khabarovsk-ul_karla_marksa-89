@@ -1,0 +1,45 @@
+@import '../../styles/root.pcss';
+
+.pick-control {
+  @apply --reset-control;
+
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: var(--gray-color);
+}
+
+.pick-control_disabled {
+  pointer-events: none;
+  background: var(--red-color);
+}
+
+html:not(.can-touch) .pick-control:hover {
+  background: var(--blue-color);
+
+  &.pick-control_picked {
+    background: var(--pick-color);
+  }
+}
+
+.pick-control_today.pick-control_today {
+  color: var(--picker-border-color);
+}
+
+.pick-control_picked {
+  background: var(--pick-color);
+}
+
+.pick-control_time {
+  font: normal 400 20px/1 var(--proxima-nova-font-stack);
+  box-shadow: 0 0 0 1px var(--picker-border-color);
+}
+
+.pick-control_date {
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
+}
+
+.pick-control_past {
+  pointer-events: none;
+  background: var(--past-color);
+}

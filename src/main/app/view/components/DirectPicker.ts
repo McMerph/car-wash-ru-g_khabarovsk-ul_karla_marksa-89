@@ -1,5 +1,6 @@
 import CLASS_NAMES from "../constants/ClassNames";
 import ILayout from "./ILayout";
+import PickControl from "./PickControl";
 
 export default abstract class DirectPicker<T> implements ILayout {
 
@@ -23,7 +24,8 @@ export default abstract class DirectPicker<T> implements ILayout {
         if (index !== -1 && !this.isDisabled(value)) {
             this.picked = true;
             this.pickedValue = value;
-            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
+            this.buttons.forEach((button) =>
+                button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
             this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED);
         }
     }
@@ -32,7 +34,8 @@ export default abstract class DirectPicker<T> implements ILayout {
         this.disabledValues = values;
         if (this.picked && this.isDisabled(this.pickedValue)) {
             this.picked = false;
-            this.buttons.forEach((button) => button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
+            this.buttons.forEach((button) =>
+                button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
         }
         const disabledIndices = this.disabledValues
             .map((valueToDisable) => this.indexOf(valueToDisable))
@@ -62,13 +65,10 @@ export default abstract class DirectPicker<T> implements ILayout {
     }
 
     protected produceButton(value: T): HTMLButtonElement {
-        const button: HTMLButtonElement = document.createElement("button");
-        button.tabIndex = 0;
-        button.textContent = this.getRepresentation(value);
-        button.onclick = () => this.pick(value);
-        button.classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.NAME);
-
-        return button;
+        return new PickControl({
+            onClick: () => this.pick(value),
+            text: this.getRepresentation(value),
+        }).getLayout();
     }
 
     private disableButtons(indices: number[]): void {
