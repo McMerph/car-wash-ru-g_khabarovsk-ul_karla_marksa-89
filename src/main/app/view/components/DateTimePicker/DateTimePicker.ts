@@ -1,12 +1,9 @@
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
-import CLASS_NAMES from "../../constants/ClassNames";
-import DICTIONARY from "../../constants/Dictionary";
 import DatePicker from "../DatePicker";
 import DateSlider from "../DatePicker/DateSlider";
 import DateTimePickerState from "../DateTimePickerState";
 import IDateObserver from "../IDateObserver";
-import ILayout from "../ILayout";
 import IMonthObserver from "../IMonthObserver";
 import TimePicker from "../TimePicker";
 import TimeSlider from "../TimePicker/TimeSlider";
@@ -19,7 +16,8 @@ interface IDateTimePickerParameters {
 
 }
 
-export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
+// TODO Merge class with Modal component?
+export default class DateTimePicker implements IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
@@ -33,16 +31,6 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
         this.timePicker = new TimePicker(dateTimePickerState, timeSlider);
         this.datePicker = new DatePicker(dateTimePickerState, dateSlider);
-    }
-
-    public getLayout(): HTMLElement {
-        const layout: HTMLElement = document.createElement("div");
-        layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK);
-        layout.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
-        layout.appendChild(this.datePicker.getLayout());
-        layout.appendChild(this.timePicker.getLayout());
-
-        return layout;
     }
 
     public onMonthChange(): void {
@@ -69,6 +57,14 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
     public getPickedDateTime(): Date {
         return this.dateTimePickerState.getPicked();
+    }
+
+    public getDatePicker(): DatePicker {
+        return this.datePicker;
+    }
+
+    public getTimePicker(): TimePicker {
+        return this.timePicker;
     }
 
 }

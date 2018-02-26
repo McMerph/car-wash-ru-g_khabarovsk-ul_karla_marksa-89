@@ -22,14 +22,21 @@ const CLASS_NAMES = Object.freeze({
         },
         NAME: "date-picker",
     },
-    DATE_TIME_PICKER_BLOCK: "date-time-picker",
     ICON_BLOCK: "icon",
     MODAL_BLOCK: {
         ELEMENTS: {
             CLOSE: "modal__close",
             CONTENT: "modal__content",
             FOOTER: "modal__footer",
+            LEFT: "modal__left",
             MAIN: "modal__main",
+            PICKER: {
+                MODIFIERS: {
+                    MAIN: "modal__picker_main",
+                },
+                NAME: "modal__picker",
+            },
+            RIGHT: "modal__right",
             TO_NEAREST: "modal__to-nearest",
         },
         MODIFIERS: {

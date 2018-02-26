@@ -83,7 +83,21 @@ export default class Modal implements ILayout {
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
         modalMain.appendChild(new ServiceChooser().getLayout());
         modalMain.appendChild(new TopControls(this.dateSlider, this.timeSlider).getLayout());
-        modalMain.appendChild(dateTimePicker.getLayout());
+
+        const dateTimePickerMain: HTMLElement = document.createElement("div");
+        dateTimePickerMain.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
+        const datePickerLayout = dateTimePicker.getDatePicker().getLayout();
+        datePickerLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.LEFT);
+        const timePickerLayout = dateTimePicker.getTimePicker().getLayout();
+        timePickerLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
+        dateTimePickerMain.appendChild(datePickerLayout);
+        dateTimePickerMain.appendChild(timePickerLayout);
+        dateTimePickerMain.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME,
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.MODIFIERS.MAIN,
+        );
+        modalMain.appendChild(dateTimePickerMain);
+
         modalMain.appendChild(new BottomControls(this.timeSlider).getLayout());
 
         return modalMain;

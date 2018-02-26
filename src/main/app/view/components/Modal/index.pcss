@@ -93,11 +93,13 @@
   display: flex;
 }
 
-.date-time-picker {
+.modal__picker {
   display: flex;
+}
+
+.modal__picker_main {
   height: 50vh;
   max-height: 290px;
-  width: 100%;
   position: relative;
 
   &::after {
@@ -111,12 +113,12 @@
   }
 }
 
-.date-picker {
+.modal__left {
   flex: 0 0 82%;
   max-width: 430px;
 }
 
-.time-picker {
+.modal__right {
   flex: 0 0 14%;
   margin-left: auto;
   max-width: 72px;
