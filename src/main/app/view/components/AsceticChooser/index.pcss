@@ -1,0 +1,20 @@
+@import '../../styles/root.pcss';
+
+.ascetic-chooser {
+  background: none;
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  outline: 0;
+  color: var(--gray-color);
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &::-ms-value {
+    background: none;
+    color: var(--gray-color);
+  }
+}

@@ -11,7 +11,11 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(['dist']),
         new HtmlWebpackPlugin({
-                template: './src/main/app/view/index.html'
+                template: './src/main/app/view/index.html',
+                minify: {
+                    collapseInlineTagWhitespace: true,
+                    collapseWhitespace: true,
+                }
             }
         ),
         new FaviconsWebpackPlugin('./src/main/resources/favicon.svg'),

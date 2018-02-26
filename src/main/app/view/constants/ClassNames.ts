@@ -1,6 +1,7 @@
+// TODO Move to component's index.ts files?
 const CLASS_NAMES = Object.freeze({
+    ASCETIC_CHOOSER_BLOCK: "ascetic-chooser",
     CHECK_IN_BLOCK: "check-in",
-    CHOOSER_BLOCK: "picker-chooser",
     CONTROLS: {
         BOTTOM_BLOCK: "pickers-bottom-controls",
         TOP_BLOCK: "pickers-top-controls",

@@ -1,11 +1,11 @@
 import CLASS_NAMES from "../../constants/ClassNames";
 import DICTIONARY from "../../constants/Dictionary";
 import SETTINGS from "../../constants/Settings";
+import AsceticChooser from "../AsceticChooser";
 import DateTimePickerState from "../DateTimePickerState";
 import IMonthObserver from "../IMonthObserver";
 import Slider from "../Slider";
 
-// TODO Extend SliderUtils class?
 export default class DateSlider extends Slider implements IMonthObserver {
 
     private readonly dateTimePickerState: DateTimePickerState;
@@ -81,8 +81,7 @@ export default class DateSlider extends Slider implements IMonthObserver {
     }
 
     private generateMonthChooser(): HTMLSelectElement {
-        const monthSelect: HTMLSelectElement = document.createElement("select");
-        monthSelect.classList.add(CLASS_NAMES.CHOOSER_BLOCK);
+        const monthSelect: HTMLSelectElement = new AsceticChooser().getLayout();
         DICTIONARY.MONTHS_NAMES.forEach((monthName, monthIndex) => {
             monthSelect.options.add(this.getMonthOption(monthName, monthIndex));
         });
@@ -105,8 +104,7 @@ export default class DateSlider extends Slider implements IMonthObserver {
     }
 
     private generateYearChooser(): HTMLSelectElement {
-        const yearSelect: HTMLSelectElement = document.createElement("select");
-        yearSelect.classList.add(CLASS_NAMES.CHOOSER_BLOCK);
+        const yearSelect: HTMLSelectElement = new AsceticChooser().getLayout();
         this.getSelectableYears().forEach((year) => {
             yearSelect.options.add(this.getYearOption(year));
         });
