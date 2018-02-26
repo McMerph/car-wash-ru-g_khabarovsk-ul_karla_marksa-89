@@ -1,5 +1,22 @@
 @import '../../styles/root.pcss';
 
+.ascetic-chooser {
+  margin: 0 1px;
+}
+
+.navigation_to-top,
+.navigation_to-bottom {
+  margin-left: auto;
+}
+
+.navigation_to-left {
+  margin-right: 26px;
+}
+
+.navigation_to-right {
+  margin-left: 26px;
+}
+
 .date-time-picker {
   position: relative;
 
@@ -30,9 +47,10 @@
 }
 
 .date-time-picker__right {
-  flex: 0 0 14%;
+  box-sizing: border-box;
+  flex: 0 0 15%;
   margin-left: auto;
-  max-width: 72px;
+  max-width: 76px;
 }
 
 .date-time-picker__month-controls {
