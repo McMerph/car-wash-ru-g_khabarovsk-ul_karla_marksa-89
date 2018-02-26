@@ -2,6 +2,7 @@ import CLASS_NAMES from "../../constants/ClassNames";
 import DateSlider from "../DatePicker/DateSlider";
 import ILayout from "../ILayout";
 
+// TODO Merge with DateSlider class?
 export default class MonthControls implements ILayout {
 
     private readonly dateSlider: DateSlider;

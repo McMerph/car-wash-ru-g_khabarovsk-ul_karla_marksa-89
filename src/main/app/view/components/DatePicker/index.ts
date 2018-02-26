@@ -17,10 +17,10 @@ export default class DatePicker implements ILayout, IMonthObserver {
 
     private readonly slider: DateSlider;
 
-    public constructor(dateTimePickerState: DateTimePickerState, slider: DateSlider) {
+    public constructor(dateTimePickerState: DateTimePickerState) {
         this.dateTimePickerState = dateTimePickerState;
         this.dateTimePickerState.addMonthObserver(this);
-        this.slider = slider;
+        this.slider = new DateSlider(this.dateTimePickerState);
         this.updateDateOfMonthPickers();
     }
 
@@ -41,6 +41,14 @@ export default class DatePicker implements ILayout, IMonthObserver {
             this.dateTimePickerState.setMonth(date);
         }
         this.dateOfMonthPicker.pick(date);
+    }
+
+    public updateSlider(): void {
+        this.slider.update();
+    }
+
+    public getSlider(): DateSlider {
+        return this.slider;
     }
 
     private updateDateOfMonthPickers(): void {

@@ -11,10 +11,10 @@ export default class TimePicker extends DirectPicker<Time> {
     private readonly dateTimePickerState: DateTimePickerState;
     private readonly slider: TimeSlider;
 
-    public constructor(dateTimePickerState: DateTimePickerState, slider: TimeSlider) {
+    public constructor(dateTimePickerState: DateTimePickerState) {
         super(dateTimePickerState.getCheckInTimes());
         this.dateTimePickerState = dateTimePickerState;
-        this.slider = slider;
+        this.slider = new TimeSlider(this.dateTimePickerState);
     }
 
     public getLayout(): HTMLElement {
@@ -48,6 +48,18 @@ export default class TimePicker extends DirectPicker<Time> {
         }
 
         return disable;
+    }
+
+    public updateSlider(): void {
+        this.slider.update();
+    }
+
+    public getPreviousControl(): HTMLElement {
+        return this.slider.getPreviousControl();
+    }
+
+    public getNextControl(): HTMLElement {
+        return this.slider.getNextControl();
     }
 
     protected getRepresentation(time: Time): string {

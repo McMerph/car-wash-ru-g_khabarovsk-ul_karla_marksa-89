@@ -5,7 +5,6 @@ import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/ClassNames";
 import DICTIONARY from "../../constants/Dictionary";
-import DateSlider from "../DatePicker/DateSlider";
 import DatePicker from "../DatePicker/index";
 import DateTimePickerState from "../DateTimePickerState";
 import IDateObserver from "../IDateObserver";
@@ -13,16 +12,12 @@ import ILayout from "../ILayout";
 import IMonthObserver from "../IMonthObserver";
 import MonthControls from "../MonthControls/index";
 import TimePicker from "../TimePicker/index";
-import TimeSlider from "../TimePicker/TimeSlider";
 
 export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
     private readonly dateTimePickerState: DateTimePickerState;
-
-    private readonly timeSlider: TimeSlider;
-    private readonly dateSlider: DateSlider;
 
     public constructor() {
         // TODO Change to real API
@@ -31,14 +26,11 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
         const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
         this.dateTimePickerState = new DateTimePickerState(availabilityHandler);
 
-        this.timeSlider = new TimeSlider(this.dateTimePickerState);
-        this.dateSlider = new DateSlider(this.dateTimePickerState);
-
         this.dateTimePickerState.addMonthObserver(this);
         this.dateTimePickerState.addDateObserver(this);
 
-        this.timePicker = new TimePicker(this.dateTimePickerState, this.timeSlider);
-        this.datePicker = new DatePicker(this.dateTimePickerState, this.dateSlider);
+        this.timePicker = new TimePicker(this.dateTimePickerState);
+        this.datePicker = new DatePicker(this.dateTimePickerState);
     }
 
     public getLayout(): HTMLElement {
@@ -54,8 +46,8 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     }
 
     public updateSliders(): void {
-        this.timeSlider.update();
-        this.dateSlider.update();
+        this.datePicker.updateSlider();
+        this.timePicker.updateSlider();
     }
 
     public onMonthChange(): void {
@@ -87,10 +79,10 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     private generateTopControls(): HTMLElement {
         const topControls: HTMLDivElement = document.createElement("div");
         topControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
-        const montControlsLayout: HTMLElement = new MonthControls(this.dateSlider).getLayout();
+        const montControlsLayout: HTMLElement = new MonthControls(this.datePicker.getSlider()).getLayout();
         montControlsLayout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEFT);
         topControls.appendChild(montControlsLayout);
-        const timeSliderPreviousControl: HTMLElement = this.timeSlider.getPreviousControl();
+        const timeSliderPreviousControl: HTMLElement = this.timePicker.getPreviousControl();
         timeSliderPreviousControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
         topControls.appendChild(timeSliderPreviousControl);
 
@@ -116,7 +108,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     private generateBottomControls() {
         const bottomControls = document.createElement("div");
         bottomControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
-        const timeSliderNextControl = this.timeSlider.getNextControl();
+        const timeSliderNextControl = this.timePicker.getNextControl();
         timeSliderNextControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
         bottomControls.appendChild(timeSliderNextControl);
 
