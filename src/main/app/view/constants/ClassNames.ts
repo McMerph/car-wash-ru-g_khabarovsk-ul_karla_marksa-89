@@ -15,7 +15,6 @@ const CLASS_NAMES = Object.freeze({
                 },
                 NAME: "date-picker__cell",
             },
-            CONTROLS: "date-picker__controls",
             DATES: "date-picker__dates",
             MONTH: "date-picker__month",
             MONTH_HEADER: "date-picker__month-header",
@@ -39,6 +38,7 @@ const CLASS_NAMES = Object.freeze({
         },
         NAME: "modal",
     },
+    MONTH_CONTROLS_BLOCK: "month-controls",
     NAVIGATION_BLOCK: {
         MODIFIERS: {
             DISABLED: "navigation_disabled",
