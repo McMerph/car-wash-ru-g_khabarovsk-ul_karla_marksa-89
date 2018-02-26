@@ -1,6 +1,3 @@
-import IApi from "../../../model/api/IApi";
-import IAvailability from "../../../model/api/IAvailability";
-import MockApi from "../../../model/api/MockApi";
 import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import Time from "../../../model/Time";
 import CLASS_NAMES from "../../constants/ClassNames";
@@ -18,11 +15,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     private readonly datePicker: DatePicker;
     private readonly dateTimePickerState: DateTimePickerState;
 
-    public constructor() {
-        // TODO Change to real API
-        const api: IApi = new MockApi();
-        const availability: IAvailability = api.retrieveAvailability();
-        const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
+    public constructor(availabilityHandler: AvailabilityHandler) {
         this.dateTimePickerState = new DateTimePickerState(availabilityHandler);
 
         this.dateTimePickerState.addMonthObserver(this);

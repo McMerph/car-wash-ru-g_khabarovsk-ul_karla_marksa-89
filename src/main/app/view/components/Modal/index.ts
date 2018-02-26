@@ -1,3 +1,4 @@
+import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import CLASS_NAMES from "../../constants/ClassNames";
 import DICTIONARY from "../../constants/Dictionary";
 import DateTimePicker from "../DateTimePicker/index";
@@ -12,8 +13,8 @@ export default class Modal implements ILayout {
     private modalContent: HTMLElement;
     private readonly dateTimePicker: DateTimePicker;
 
-    public constructor() {
-        this.dateTimePicker = new DateTimePicker();
+    public constructor(availabilityHandler: AvailabilityHandler) {
+        this.dateTimePicker = new DateTimePicker(availabilityHandler);
 
         this.modalContent = this.generateModalContent();
         this.modal = this.generateModal();
