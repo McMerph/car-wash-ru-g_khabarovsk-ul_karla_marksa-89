@@ -47,6 +47,10 @@ export default class DatePicker implements ILayout, IMonthObserver {
         this.slider.update();
     }
 
+    public getMonthControls(): HTMLElement {
+        return this.slider.getMonthControls();
+    }
+
     public getSlider(): DateSlider {
         return this.slider;
     }

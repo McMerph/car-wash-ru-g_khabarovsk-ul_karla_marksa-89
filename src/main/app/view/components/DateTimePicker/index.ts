@@ -10,7 +10,6 @@ import DateTimePickerState from "../DateTimePickerState";
 import IDateObserver from "../IDateObserver";
 import ILayout from "../ILayout";
 import IMonthObserver from "../IMonthObserver";
-import MonthControls from "../MonthControls/index";
 import TimePicker from "../TimePicker/index";
 
 export default class DateTimePicker implements ILayout, IMonthObserver, IDateObserver {
@@ -79,9 +78,12 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     private generateTopControls(): HTMLElement {
         const topControls: HTMLDivElement = document.createElement("div");
         topControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
-        const montControlsLayout: HTMLElement = new MonthControls(this.datePicker.getSlider()).getLayout();
-        montControlsLayout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEFT);
-        topControls.appendChild(montControlsLayout);
+        const monthControls: HTMLElement = this.datePicker.getMonthControls();
+        monthControls.classList.add(
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.MONTH_CONTROLS,
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEFT,
+        );
+        topControls.appendChild(monthControls);
         const timeSliderPreviousControl: HTMLElement = this.timePicker.getPreviousControl();
         timeSliderPreviousControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
         topControls.appendChild(timeSliderPreviousControl);

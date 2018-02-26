@@ -6,6 +6,7 @@ import DateTimePickerState from "../DateTimePickerState";
 import IMonthObserver from "../IMonthObserver";
 import Slider from "../Slider";
 
+// TODO Move controls to other class?
 export default class DateSlider extends Slider implements IMonthObserver {
 
     private readonly dateTimePickerState: DateTimePickerState;
@@ -36,6 +37,16 @@ export default class DateSlider extends Slider implements IMonthObserver {
 
     public getYearChooser(): HTMLSelectElement {
         return this.yearChooser;
+    }
+
+    public getMonthControls(): HTMLElement {
+        const controls: HTMLDivElement = document.createElement("div");
+        controls.appendChild(this.getPreviousControl());
+        controls.appendChild(this.getMonthChooser());
+        controls.appendChild(this.getYearChooser());
+        controls.appendChild(this.getNextControl());
+
+        return controls;
     }
 
     protected generatePreviousControl(): HTMLElement {

@@ -11,7 +11,6 @@ import "../components/Footer/index.pcss";
 import "../components/Header/index.pcss";
 import "../components/Info/index.pcss";
 import "../components/Modal/index.pcss";
-import "../components/MonthControls/index.pcss";
 import "../components/NavigationControl/index.pcss";
 import "../components/PickControl/index.pcss";
 import "../components/Profile/index.pcss";
