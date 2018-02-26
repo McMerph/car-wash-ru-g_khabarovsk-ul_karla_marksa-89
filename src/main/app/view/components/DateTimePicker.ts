@@ -1,3 +1,6 @@
+import IApi from "../../model/api/IApi";
+import IAvailability from "../../model/api/IAvailability";
+import MockApi from "../../model/api/MockApi";
 import AvailabilityHandler from "../../model/AvailabilityHandler";
 import Time from "../../model/Time";
 import DateSlider from "./DatePicker/DateSlider";
@@ -8,28 +11,31 @@ import IMonthObserver from "./IMonthObserver";
 import TimePicker from "./TimePicker/index";
 import TimeSlider from "./TimePicker/TimeSlider";
 
-interface IDateTimePickerParameters {
-
-    timeSlider: TimeSlider;
-    dateSlider: DateSlider;
-    dateTimePickerState: DateTimePickerState;
-
-}
-
+// TODO implements ILayout
 export default class DateTimePicker implements IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;
     private readonly datePicker: DatePicker;
     private readonly dateTimePickerState: DateTimePickerState;
 
-    public constructor(parameters: IDateTimePickerParameters) {
-        const { timeSlider, dateSlider, dateTimePickerState } = parameters;
-        this.dateTimePickerState = dateTimePickerState;
-        dateTimePickerState.addMonthObserver(this);
-        dateTimePickerState.addDateObserver(this);
+    private readonly timeSlider: TimeSlider;
+    private readonly dateSlider: DateSlider;
 
-        this.timePicker = new TimePicker(dateTimePickerState, timeSlider);
-        this.datePicker = new DatePicker(dateTimePickerState, dateSlider);
+    public constructor() {
+        // TODO Change to real API
+        const api: IApi = new MockApi();
+        const availability: IAvailability = api.retrieveAvailability();
+        const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
+        this.dateTimePickerState = new DateTimePickerState(availabilityHandler);
+
+        this.timeSlider = new TimeSlider(this.dateTimePickerState);
+        this.dateSlider = new DateSlider(this.dateTimePickerState);
+
+        this.dateTimePickerState.addMonthObserver(this);
+        this.dateTimePickerState.addDateObserver(this);
+
+        this.timePicker = new TimePicker(this.dateTimePickerState, this.timeSlider);
+        this.datePicker = new DatePicker(this.dateTimePickerState, this.dateSlider);
     }
 
     public onMonthChange(): void {
@@ -64,6 +70,14 @@ export default class DateTimePicker implements IMonthObserver, IDateObserver {
 
     public getTimePicker(): TimePicker {
         return this.timePicker;
+    }
+
+    public getDateSlider(): DateSlider {
+        return this.dateSlider;
+    }
+
+    public getTimeSlider(): TimeSlider {
+        return this.timeSlider;
     }
 
 }

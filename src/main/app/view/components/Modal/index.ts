@@ -1,12 +1,7 @@
-import IApi from "../../../model/api/IApi";
-import IAvailability from "../../../model/api/IAvailability";
-import MockApi from "../../../model/api/MockApi";
-import AvailabilityHandler from "../../../model/AvailabilityHandler";
 import CLASS_NAMES from "../../constants/ClassNames";
 import DICTIONARY from "../../constants/Dictionary";
 import DateSlider from "../DatePicker/DateSlider";
 import DateTimePicker from "../DateTimePicker";
-import DateTimePickerState from "../DateTimePickerState";
 import ILayout from "../ILayout";
 import MonthControls from "../MonthControls";
 import ServiceChooser from "../ServiceChooser";
@@ -22,7 +17,10 @@ export default class Modal implements ILayout {
     private dateSlider: DateSlider;
 
     public constructor() {
-        this.modalContent = this.generateModalContent();
+        const dateTimePicker: DateTimePicker = new DateTimePicker();
+        this.timeSlider = dateTimePicker.getTimeSlider();
+        this.dateSlider = dateTimePicker.getDateSlider();
+        this.modalContent = this.generateModalContent(dateTimePicker);
         this.modal = this.generateModal();
 
         document.addEventListener("keydown", (event: KeyboardEvent) => {
@@ -68,8 +66,7 @@ export default class Modal implements ILayout {
         return modal;
     }
 
-    private generateModalContent(): HTMLElement {
-        const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
+    private generateModalContent(dateTimePicker: DateTimePicker): HTMLElement {
         const modalContent: HTMLElement = document.createElement("div");
         modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT.NAME);
         modalContent.appendChild(this.generateModalCloseButton());
@@ -140,23 +137,6 @@ export default class Modal implements ILayout {
         topControls.appendChild(timeSliderPreviousControl);
 
         return topControls;
-    }
-
-    private generateDateTimePicker(): DateTimePicker {
-        // TODO Change to real API
-        const api: IApi = new MockApi();
-        const availability: IAvailability = api.retrieveAvailability();
-        const availabilityHandler: AvailabilityHandler = new AvailabilityHandler(availability);
-        const dateTimePickerState: DateTimePickerState = new DateTimePickerState(availabilityHandler);
-
-        this.timeSlider = new TimeSlider(dateTimePickerState);
-        this.dateSlider = new DateSlider(dateTimePickerState);
-
-        return new DateTimePicker({
-            dateSlider: this.dateSlider,
-            dateTimePickerState,
-            timeSlider: this.timeSlider,
-        });
     }
 
     private generateFooter(dateTimePicker: DateTimePicker): HTMLElement {
