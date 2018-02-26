@@ -89,37 +89,6 @@
   }
 }
 
-.modal__picker {
-  display: flex;
-}
-
-.modal__picker_main {
-  height: 50vh;
-  max-height: 290px;
-  position: relative;
-
-  &::after {
-    font: normal 400 18px/1 var(--proxima-nova-font-stack);
-    color: var(--color9);
-    display: block;
-    position: absolute;
-    content: attr(data-legend);
-    bottom: -44px;
-    left: 0;
-  }
-}
-
-.modal__left {
-  flex: 0 0 82%;
-  max-width: 430px;
-}
-
-.modal__right {
-  flex: 0 0 14%;
-  margin-left: auto;
-  max-width: 72px;
-}
-
 @media (max-width: 320px) {
   .modal__content {
     padding-left: 4px;

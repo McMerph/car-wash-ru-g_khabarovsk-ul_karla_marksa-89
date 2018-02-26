@@ -6,6 +6,7 @@ import "./fonts.css";
 
 import "../components/AsceticChooser/index.pcss";
 import "../components/DatePicker/index.pcss";
+import "../components/DateTimePicker/index.pcss";
 import "../components/Footer/index.pcss";
 import "../components/Header/index.pcss";
 import "../components/Info/index.pcss";

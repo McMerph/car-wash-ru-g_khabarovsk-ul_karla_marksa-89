@@ -43,52 +43,14 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
+        layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.NAME);
+        layout.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
 
         layout.appendChild(this.generateTopControls());
         layout.appendChild(this.generateDateTimePickerMain());
         layout.appendChild(this.generateBottomControls());
 
         return layout;
-    }
-
-    private generateTopControls(): HTMLElement {
-        const topControls: HTMLDivElement = document.createElement("div");
-        topControls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME);
-        const montControlsLayout: HTMLElement = new MonthControls(this.dateSlider).getLayout();
-        montControlsLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.LEFT);
-        topControls.appendChild(montControlsLayout);
-        const timeSliderPreviousControl: HTMLElement = this.timeSlider.getPreviousControl();
-        timeSliderPreviousControl.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
-        topControls.appendChild(timeSliderPreviousControl);
-
-        return topControls;
-    }
-
-    private generateDateTimePickerMain(): HTMLElement {
-        const dateTimePickerMain: HTMLElement = document.createElement("div");
-        dateTimePickerMain.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
-        const datePickerLayout = this.datePicker.getLayout();
-        datePickerLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.LEFT);
-        const timePickerLayout = this.timePicker.getLayout();
-        timePickerLayout.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
-        dateTimePickerMain.appendChild(datePickerLayout);
-        dateTimePickerMain.appendChild(timePickerLayout);
-        dateTimePickerMain.classList.add(
-            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME,
-            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.MODIFIERS.MAIN,
-        );
-
-        return dateTimePickerMain;
-    }
-
-    private generateBottomControls() {
-        const bottomControls = document.createElement("div");
-        bottomControls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.PICKER.NAME);
-        const timeSliderNextControl = this.timeSlider.getNextControl();
-        timeSliderNextControl.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.RIGHT);
-        bottomControls.appendChild(timeSliderNextControl);
-
-        return bottomControls;
     }
 
     public updateSliders(): void {
@@ -122,20 +84,43 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
         return this.dateTimePickerState.getPicked();
     }
 
-    public getDatePicker(): DatePicker {
-        return this.datePicker;
+    private generateTopControls(): HTMLElement {
+        const topControls: HTMLDivElement = document.createElement("div");
+        topControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
+        const montControlsLayout: HTMLElement = new MonthControls(this.dateSlider).getLayout();
+        montControlsLayout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEFT);
+        topControls.appendChild(montControlsLayout);
+        const timeSliderPreviousControl: HTMLElement = this.timeSlider.getPreviousControl();
+        timeSliderPreviousControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
+        topControls.appendChild(timeSliderPreviousControl);
+
+        return topControls;
     }
 
-    public getTimePicker(): TimePicker {
-        return this.timePicker;
+    private generateDateTimePickerMain(): HTMLElement {
+        const dateTimePickerMain: HTMLElement = document.createElement("div");
+        dateTimePickerMain.classList.add(
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME,
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.MODIFIERS.MAIN,
+        );
+        const datePickerLayout = this.datePicker.getLayout();
+        datePickerLayout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEFT);
+        const timePickerLayout = this.timePicker.getLayout();
+        timePickerLayout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
+        dateTimePickerMain.appendChild(datePickerLayout);
+        dateTimePickerMain.appendChild(timePickerLayout);
+
+        return dateTimePickerMain;
     }
 
-    public getDateSlider(): DateSlider {
-        return this.dateSlider;
-    }
+    private generateBottomControls() {
+        const bottomControls = document.createElement("div");
+        bottomControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
+        const timeSliderNextControl = this.timeSlider.getNextControl();
+        timeSliderNextControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
+        bottomControls.appendChild(timeSliderNextControl);
 
-    public getTimeSlider(): TimeSlider {
-        return this.timeSlider;
+        return bottomControls;
     }
 
 }

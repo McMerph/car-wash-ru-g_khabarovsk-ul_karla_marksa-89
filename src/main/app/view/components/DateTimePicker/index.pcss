@@ -1,0 +1,35 @@
+@import '../../styles/root.pcss';
+
+.date-time-picker {
+  position: relative;
+
+  &::after {
+    font: normal 400 18px/1 var(--proxima-nova-font-stack);
+    color: var(--color9);
+    display: block;
+    position: absolute;
+    content: attr(data-legend);
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.date-time-picker__row {
+  display: flex;
+}
+
+.date-time-picker__row_main {
+  height: 50vh;
+  max-height: 290px;
+}
+
+.date-time-picker__left {
+  flex: 0 0 82%;
+  max-width: 430px;
+}
+
+.date-time-picker__right {
+  flex: 0 0 14%;
+  margin-left: auto;
+  max-width: 72px;
+}
