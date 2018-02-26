@@ -16,7 +16,6 @@ interface IDateTimePickerParameters {
 
 }
 
-// TODO Merge class with Modal component?
 export default class DateTimePicker implements IMonthObserver, IDateObserver {
 
     private readonly timePicker: TimePicker;

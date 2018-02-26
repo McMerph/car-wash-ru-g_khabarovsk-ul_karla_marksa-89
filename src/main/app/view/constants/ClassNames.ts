@@ -22,7 +22,12 @@ const CLASS_NAMES = Object.freeze({
     MODAL_BLOCK: {
         ELEMENTS: {
             CLOSE: "modal__close",
-            CONTENT: "modal__content",
+            CONTENT: {
+                MODIFIERS: {
+                    OPENED: "modal__content_opened",
+                },
+                NAME: "modal__content",
+            },
             FOOTER: "modal__footer",
             LEFT: "modal__left",
             MAIN: "modal__main",

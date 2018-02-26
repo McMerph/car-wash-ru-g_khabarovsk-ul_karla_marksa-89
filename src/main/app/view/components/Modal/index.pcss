@@ -7,6 +7,14 @@
   opacity: 0;
 }
 
+.modal_opened {
+  opacity: 1;
+}
+
+.modal_closed {
+  @apply --visually-hidden;
+}
+
 .modal__content {
   position: relative;
   box-sizing: border-box;
@@ -20,17 +28,9 @@
   transition: all 0.3s ease-out;
 }
 
-.modal_opened {
+.modal__content_opened {
+  transform: translateY(0);
   opacity: 1;
-
-  & .modal__content {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.modal_closed {
-  @apply --visually-hidden;
 }
 
 .modal__close {

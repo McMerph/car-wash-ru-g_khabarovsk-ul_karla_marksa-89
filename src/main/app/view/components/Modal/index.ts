@@ -16,22 +16,22 @@ export default class Modal implements ILayout {
 
     private static readonly ESCAPE_KEY_CODE: number = 27;
 
-    private readonly modal: HTMLElement;
+    private modal: HTMLElement;
+    private modalContent: HTMLElement;
     private timeSlider: TimeSlider;
     private dateSlider: DateSlider;
 
     public constructor() {
-        this.modal = document.createElement("div");
-        this.modal.classList.add(
-            CLASS_NAMES.MODAL_BLOCK.NAME,
-            CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED,
-            CLASS_NAMES.OVERLAY_BLOCK,
-        );
-        this.modal.tabIndex = -1;
-        this.modal.setAttribute("aria-hidden", "true");
+        this.modalContent = this.generateModalContent();
+        this.modal = this.generateModal();
 
-        this.modal.appendChild(this.generateModalContent());
-        this.handleModalCloseOnEsc();
+        document.addEventListener("keydown", (event: KeyboardEvent) => {
+            const keyCode = event.keyCode || event.which;
+            if (keyCode === Modal.ESCAPE_KEY_CODE) {
+                event.preventDefault();
+                this.close();
+            }
+        });
     }
 
     public getLayout(): HTMLElement {
@@ -44,18 +44,34 @@ export default class Modal implements ILayout {
         document.body.style.overflow = "hidden";
         this.modal.classList.add(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.OPENED);
         this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED);
+        this.modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT.MODIFIERS.OPENED);
     }
 
     public close() {
         document.body.style.overflow = "auto";
         this.modal.classList.add(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED);
         this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.OPENED);
+        this.modalContent.classList.remove(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT.MODIFIERS.OPENED);
+    }
+
+    private generateModal(): HTMLElement {
+        const modal: HTMLDivElement = document.createElement("div");
+        modal.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.NAME,
+            CLASS_NAMES.MODAL_BLOCK.MODIFIERS.CLOSED,
+            CLASS_NAMES.OVERLAY_BLOCK,
+        );
+        modal.tabIndex = -1;
+        modal.setAttribute("aria-hidden", "true");
+        modal.appendChild(this.modalContent);
+
+        return modal;
     }
 
     private generateModalContent(): HTMLElement {
         const dateTimePicker: DateTimePicker = this.generateDateTimePicker();
         const modalContent: HTMLElement = document.createElement("div");
-        modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT);
+        modalContent.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONTENT.NAME);
         modalContent.appendChild(this.generateModalCloseButton());
         modalContent.appendChild(this.generateModalMain(dateTimePicker));
         modalContent.appendChild(this.generateFooter(dateTimePicker));
@@ -159,16 +175,6 @@ export default class Modal implements ILayout {
         footer.appendChild(checkInButton);
 
         return footer;
-    }
-
-    private handleModalCloseOnEsc() {
-        document.addEventListener("keydown", (event: KeyboardEvent) => {
-            const keyCode = event.keyCode || event.which;
-            if (keyCode === Modal.ESCAPE_KEY_CODE) {
-                event.preventDefault();
-                this.close();
-            }
-        });
     }
 
 }
