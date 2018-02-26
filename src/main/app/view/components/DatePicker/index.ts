@@ -51,10 +51,6 @@ export default class DatePicker implements ILayout, IMonthObserver {
         return this.slider.getMonthControls();
     }
 
-    public getSlider(): DateSlider {
-        return this.slider;
-    }
-
     private updateDateOfMonthPickers(): void {
         // TODO Not working. Why?
         // this.dateOfMonthPicker.removeDateObserver(this);
