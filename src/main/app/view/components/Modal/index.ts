@@ -87,9 +87,17 @@ export default class Modal implements ILayout {
         const modalMain: HTMLElement = document.createElement("div");
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
         modalMain.appendChild(new ServiceChooser().getLayout());
+        modalMain.appendChild(this.generateToggleDateTimePickerControl());
         modalMain.appendChild(this.dateTimePicker.getLayout());
 
         return modalMain;
+    }
+
+    private generateToggleDateTimePickerControl(): HTMLElement {
+        const button: HTMLButtonElement = document.createElement("button");
+        button.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TOGGLE);
+        button.textContent = DICTIONARY.CHECK_IN_PLACEHOLDER;
+        return button;
     }
 
     private generateFooter(): HTMLElement {

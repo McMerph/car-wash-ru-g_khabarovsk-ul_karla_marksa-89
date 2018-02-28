@@ -95,8 +95,24 @@
   }
 }
 
+.modal__toggle-date-time-picker {
+  /* @apply --visually-hidden; */
+  @apply(--reset-control);
+
+  font: normal 400 22px/1 var(--proxima-nova-font-stack);
+  border: 2px solid var(--picker-border-color);
+  border-radius: 3px;
+  padding: 9px;
+  margin-bottom: 33px;
+  width: 100%;
+}
+
 @media (max-width: 530px), (max-height: 400px) {
-  .modal__close {
+  .date-time-picker {
+    @apply --visually-hidden;
+  }
+
+  /* .modal__close {
     padding: 2px;
     top: 0;
 
@@ -150,5 +166,5 @@
     &::before {
       content: none;
     }
-  }
+  } */
 }

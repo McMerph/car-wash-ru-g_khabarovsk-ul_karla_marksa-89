@@ -44,6 +44,7 @@ const CLASS_NAMES = Object.freeze({
             },
             FOOTER: "modal__footer",
             MAIN: "modal__main",
+            TOGGLE: "modal__toggle-date-time-picker",
             TO_NEAREST: "modal__to-nearest",
         },
         MODIFIERS: {
