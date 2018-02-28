@@ -13,6 +13,7 @@
   justify-content: center;
   align-items: center;
   opacity: 0;
+  padding-top: 24px;
 }
 
 .modal_opened {
@@ -95,28 +96,42 @@
 }
 
 .modal__toggle-date-time-picker {
-  /* @apply --visually-hidden; */
-  @apply(--reset-control);
-
-  font: normal 400 22px/1 var(--proxima-nova-font-stack);
-  border: 2px solid var(--color15);
-  border-radius: 3px;
-  padding: 9px 20px 9px 15px;
-  margin-bottom: 33px;
-  width: 100%;
-  display: flex;
-  color: var(--gray-color);
-
-  &::after {
-    content: "\e906";
-    margin-left: auto;
-    color: var(--color15);
-  }
+  display: none;
 }
 
 @media (max-width: 530px), (max-height: 400px) {
+  .modal__toggle-date-time-picker {
+    @apply(--reset-control);
+
+    font: normal 400 22px/1 var(--proxima-nova-font-stack);
+    border: 2px solid var(--color15);
+    border-radius: 3px;
+    padding: 9px 20px 9px 15px;
+    width: 100%;
+    display: flex;
+    color: var(--gray-color);
+
+    &::after {
+      content: "\e906";
+      margin-left: auto;
+      color: var(--color15);
+    }
+  }
+
   .date-time-picker {
     @apply --visually-hidden;
+  }
+
+  .modal__main {
+    padding: 12px;
+  }
+
+  .modal__footer {
+    padding: 12px 0;
+  }
+
+  .service-chooser {
+    margin-bottom: 12px;
   }
 
   /* .modal__close {
