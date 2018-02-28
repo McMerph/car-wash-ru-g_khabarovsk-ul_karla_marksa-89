@@ -1,7 +1,7 @@
 const DICTIONARY = Object.freeze({
     BACK: "Назад",
     CHECK_IN: "Записаться",
-    CHECK_IN_PLACEHOLDER: "Выберите дату и время",
+    CHECK_IN_PLACEHOLDER: "Выберите время",
     DATE_IS_NOT_IN_THIS_MONTH: "Данный день не из выбранного месяца",
     DATE_TIME_PICKER_LEGEND: "*Красным цветом отмечено занятое время",
     DAYS_NAMES: [

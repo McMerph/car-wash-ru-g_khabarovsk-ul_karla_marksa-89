@@ -95,7 +95,10 @@ export default class Modal implements ILayout {
 
     private generateToggleDateTimePickerControl(): HTMLElement {
         const button: HTMLButtonElement = document.createElement("button");
-        button.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TOGGLE);
+        button.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TOGGLE,
+            CLASS_NAMES.ICON_BLOCK,
+        );
         button.textContent = DICTIONARY.CHECK_IN_PLACEHOLDER;
         return button;
     }
