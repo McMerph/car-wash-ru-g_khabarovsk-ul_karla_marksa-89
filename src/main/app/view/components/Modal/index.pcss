@@ -99,7 +99,76 @@
   display: none;
 }
 
-@media (max-width: 530px), (max-height: 400px) {
+/* TODO Limit by height e.g.@media (max-width: 530px), (max-height: 400px) { */
+
+@media (max-width: 530px) {
+  .modal__main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .modal__footer {
+    padding: 12px 0;
+  }
+
+  /* .modal__close {
+    padding: 2px;
+    top: 0;
+
+    &::after {
+      font-size: 24px;
+    }
+  }
+
+  .modal__main {
+    padding: 2px;
+  }
+
+  .service-chooser.service-chooser {
+    margin-bottom: 2px;
+    width: 80%;
+
+    &::after {
+      top: 2px;
+      font-size: 24px;
+    }
+  }
+
+  .service-chooser__select.service-chooser__select {
+    padding: 2px 0 2px 15px;
+  }
+
+  .date-time-picker::after {
+    bottom: -8px;
+  }
+
+  .date-time-picker__row_main {
+    height: 150px;
+    margin: 2px 0;
+  }
+
+  .modal__footer {
+    padding: 4px 2px;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 6px;
+
+    & > * {
+      margin: 0 2px;
+    }
+  }
+
+  .modal__to-nearest {
+    margin-bottom: 0;
+    line-height: 1;
+
+    &::before {
+      content: none;
+    }
+  } */
+}
+
+@media (max-width: 100px) {
   .modal__toggle-date-time-picker {
     @apply(--reset-control);
 
