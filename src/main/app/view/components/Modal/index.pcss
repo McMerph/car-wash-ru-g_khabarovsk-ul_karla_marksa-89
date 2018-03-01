@@ -142,8 +142,6 @@
   }
 }
 
-/* 1st screen */
-
 @media (max-height: 420px) {
   .modal__to-second-screen {
     @apply(--reset-control);
@@ -163,28 +161,25 @@
     }
   }
 
-  .date-time-picker {
+  .date-time-picker,
+  .modal__to-nearest {
     display: none;
   }
 
   .modal_second-screen {
     padding: 0;
 
-    & .modal__close {
+    & .modal__close,
+    & .service-chooser,
+    & .modal__to-second-screen,
+    & .date-time-picker__aspect-ratio::after,
+    & .modal__footer {
       display: none;
     }
 
     & .modal__main {
       padding-top: 4px;
       padding-bottom: 4px;
-    }
-
-    & .service-chooser.service-chooser {
-      display: none;
-    }
-
-    & .modal__to-second-screen {
-      display: none;
     }
 
     & .date-time-picker {
@@ -197,10 +192,6 @@
 
     & .date-time-picker__aspect-ratio {
       height: 180px;
-
-      &::after {
-        display: none;
-      }
     }
 
     & .modal__date-time-controls {
@@ -254,10 +245,6 @@
         color: var(--red-color);
         content: "\e907";
       }
-    }
-
-    & .modal__footer {
-      display: none;
     }
   }
 }
