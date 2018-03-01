@@ -80,6 +80,7 @@ export default class Modal implements ILayout {
         modalClose.addEventListener("click", () => {
             this.close();
         });
+
         return modalClose;
     }
 
@@ -87,7 +88,7 @@ export default class Modal implements ILayout {
         const modalMain: HTMLElement = document.createElement("div");
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
         modalMain.appendChild(new ServiceChooser().getLayout());
-        modalMain.appendChild(this.generateToggleDateTimePickerControl());
+        modalMain.appendChild(this.generateToSecondScreenControl());
         modalMain.appendChild(this.dateTimePicker.getLayout());
         modalMain.appendChild(this.generateDateTimeControls());
 
@@ -96,7 +97,7 @@ export default class Modal implements ILayout {
 
     private generateDateTimeControls(): HTMLElement {
         const controls: HTMLElement = document.createElement("div");
-        controls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.DATE_TIME_CONTOLS);
+        controls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.DATE_TIME_CONTROLS);
         controls.appendChild(this.generateConfirmDateTimeControl());
         controls.appendChild(this.generateRejectDateTimeControl());
 
@@ -111,6 +112,10 @@ export default class Modal implements ILayout {
             CLASS_NAMES.ICON_BLOCK,
         );
         button.textContent = DICTIONARY.CONFIRM;
+        button.addEventListener("click", () => {
+            this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
+        });
+
         return button;
     }
 
@@ -121,22 +126,31 @@ export default class Modal implements ILayout {
             CLASS_NAMES.ICON_BLOCK,
         );
         button.textContent = DICTIONARY.REJECT;
+        button.addEventListener("click", () => {
+            this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
+        });
+
         return button;
     }
 
-    private generateToggleDateTimePickerControl(): HTMLElement {
-        const button: HTMLButtonElement = document.createElement("button");
-        button.classList.add(
-            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TOGGLE,
+    private generateToSecondScreenControl(): HTMLElement {
+        const toSecondScreenControl: HTMLButtonElement = document.createElement("button");
+        toSecondScreenControl.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TO_SECOND_SCREEN,
             CLASS_NAMES.ICON_BLOCK,
         );
-        button.textContent = DICTIONARY.CHECK_IN_PLACEHOLDER;
-        return button;
+        toSecondScreenControl.textContent = DICTIONARY.CHECK_IN_PLACEHOLDER;
+        toSecondScreenControl.addEventListener("click", () => {
+            this.modal.classList.add(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
+            this.dateTimePicker.updateSliders();
+        });
+
+        return toSecondScreenControl;
     }
 
     private generateFooter(): HTMLElement {
         const footer: HTMLElement = document.createElement("footer");
-        footer.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.FOOTER);
+        footer.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.FOOTER.NAME);
         const toNearestButton: HTMLButtonElement = document.createElement("button");
         toNearestButton.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.TO_NEAREST);
         toNearestButton.appendChild(document.createTextNode(DICTIONARY.NEAREST_AVAILABLE));

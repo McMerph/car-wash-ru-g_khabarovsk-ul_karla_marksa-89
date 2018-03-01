@@ -95,7 +95,7 @@
   }
 }
 
-.modal__toggle-date-time-picker,
+.modal__to-second-screen,
 .modal__date-time-controls {
   display: none;
 }
@@ -134,9 +134,8 @@
 
 /* 1st screen */
 
-/*
 @media (max-height: 420px) {
-  .modal__toggle-date-time-picker {
+  .modal__to-second-screen {
     @apply(--reset-control);
 
     font: normal 400 22px/1 var(--proxima-nova-font-stack);
@@ -158,83 +157,94 @@
     display: none;
   }
 }
-*/
 
 /* 2nd screen */
 
 @media (max-height: 420px) {
-  .modal {
+  .modal_second-screen {
     padding: 0;
-  }
 
-  .modal__close {
-    display: none;
-  }
-
-  .modal__main {
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .service-chooser.service-chooser {
-    display: none;
-  }
-
-  .date-time-picker::after {
-    bottom: 10px;
-  }
-
-  .date-time-picker__aspect-ratio {
-    max-height: 180px;
-  }
-
-  .modal__date-time-controls {
-    display: flex;
-    justify-content: center;
-    margin-top: 4px;
-  }
-
-  .modal__confirm-date-time,
-  .modal__reject-date-time {
-    @apply(--reset-control);
-
-    flex: 1;
-    font: normal 400 22px/1 var(--proxima-nova-font-stack);
-    border: 2px solid var(--color15);
-    border-radius: 3px;
-    padding: 9px 20px 9px 15px;
-    width: 100%;
-    display: flex;
-    color: var(--gray-color);
-
-    &::after {
-      margin-left: auto;
-      color: var(--color15);
+    & .modal__close {
+      display: none;
     }
-  }
 
-  .modal__confirm-date-time {
-    flex: 3;
-    margin-right: 4px;
-
-    &::after {
-      color: var(--color7);
-      content: "\e908";
+    & .modal__main {
+      padding-top: 4px;
+      padding-bottom: 4px;
     }
-  }
 
-  .modal__reject-date-time {
-    flex: 2;
-    margin-left: 4px;
-
-    &::after {
-      color: var(--red-color);
-      content: "\e907";
+    & .service-chooser.service-chooser {
+      display: none;
     }
-  }
 
-  .modal__footer {
-    display: none;
+    & .modal__to-second-screen {
+      display: none;
+    }
+
+    & .date-time-picker {
+      display: block;
+
+      &::after {
+        bottom: 10px;
+      }
+    }
+
+    & .date-time-picker__aspect-ratio {
+      height: 180px;
+
+      &::after {
+        display: none;
+      }
+    }
+
+    & .modal__date-time-controls {
+      display: flex;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    & .modal__confirm-date-time,
+    & .modal__reject-date-time {
+      @apply(--reset-control);
+
+      flex: 1;
+      font: normal 400 22px/1 var(--proxima-nova-font-stack);
+      border: 2px solid var(--color15);
+      border-radius: 3px;
+      padding: 9px 20px 9px 15px;
+      width: 100%;
+      display: flex;
+      color: var(--gray-color);
+
+      &::after {
+        margin-left: auto;
+        color: var(--color15);
+      }
+    }
+
+    & .modal__confirm-date-time {
+      flex: 3;
+      margin-right: 4px;
+
+      &::after {
+        color: var(--color7);
+        content: "\e908";
+      }
+    }
+
+    & .modal__reject-date-time {
+      flex: 2;
+      margin-left: 4px;
+
+      &::after {
+        color: var(--red-color);
+        content: "\e907";
+      }
+    }
+
+    & .modal__footer {
+      display: none;
+    }
   }
 }
 
