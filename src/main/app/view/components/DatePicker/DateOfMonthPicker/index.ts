@@ -45,9 +45,11 @@ export default class DateOfMonthPicker extends DirectPicker<Date> {
         return layout;
     }
 
-    public pick(dateOfMonth: Date): void {
-        super.pick(dateOfMonth);
+    public pick(dateOfMonth: Date): number {
+        const index: number = super.pick(dateOfMonth);
         this.dateTimePickerState.setDate(dateOfMonth);
+
+        return index;
     }
 
     protected getRepresentation(dateOfMonth: Date): string {

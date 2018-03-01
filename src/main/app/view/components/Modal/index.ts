@@ -11,6 +11,7 @@ export default class Modal implements ILayout {
 
     private modal: HTMLElement;
     private modalContent: HTMLElement;
+    private toSecondScreenControl: HTMLElement;
     private readonly dateTimePicker: DateTimePicker;
 
     public constructor(availabilityHandler: AvailabilityHandler) {
@@ -88,7 +89,8 @@ export default class Modal implements ILayout {
         const modalMain: HTMLElement = document.createElement("div");
         modalMain.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.MAIN);
         modalMain.appendChild(new ServiceChooser().getLayout());
-        modalMain.appendChild(this.generateToSecondScreenControl());
+        this.toSecondScreenControl = this.generateToSecondScreenControl();
+        modalMain.appendChild(this.toSecondScreenControl);
         modalMain.appendChild(this.dateTimePicker.getLayout());
         modalMain.appendChild(this.generateDateTimeControls());
 
@@ -114,7 +116,12 @@ export default class Modal implements ILayout {
         );
         button.dataset.text = DICTIONARY.CONFIRM;
         button.addEventListener("click", () => {
-            this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
+            if (this.dateTimePicker.isPicked()) {
+                const dateRepresentation: string = this.dateTimePicker.getPickedDateTime().toLocaleDateString("ru");
+                const timeRepresentation: string = this.dateTimePicker.getTime().getRepresentation();
+                this.toSecondScreenControl.textContent = `${dateRepresentation} ${timeRepresentation}`;
+                this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
+            }
         });
 
         return button;

@@ -18,8 +18,7 @@ export default abstract class DirectPicker<T> implements ILayout {
 
     public abstract getLayout(): HTMLElement;
 
-    // TODO Return index?
-    public pick(value: T): void {
+    public pick(value: T): number {
         const index: number = this.indexOf(value);
         if (index !== -1 && !this.isDisabled(value)) {
             this.picked = true;
@@ -28,6 +27,8 @@ export default abstract class DirectPicker<T> implements ILayout {
                 button.classList.remove(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED));
             this.buttons[index].classList.add(CLASS_NAMES.PICK_CONTROL_BLOCK.MODIFIERS.PICKED);
         }
+
+        return index;
     }
 
     public disable(values: T[]): boolean {
@@ -42,7 +43,7 @@ export default abstract class DirectPicker<T> implements ILayout {
             .filter((index) => index !== -1);
         this.disableButtons(disabledIndices);
 
-        return this.picked;
+        return !this.picked;
     }
 
     protected abstract getRepresentation(value: T): string;

@@ -32,22 +32,23 @@ export default class TimePicker extends DirectPicker<Time> {
         return layout;
     }
 
-    public pick(time: Time): void {
-        super.pick(time);
-        const index: number = this.indexOf(time);
+    public pick(time: Time): number {
+        const index: number = super.pick(time);
         if (index !== -1 && !this.isDisabled(time)) {
             this.dateTimePickerState.setTime(time);
             this.slider.slideTo(index);
         }
+
+        return index;
     }
 
     public disable(times: Time[]): boolean {
-        const disable: boolean = super.disable(times);
-        if (disable) {
+        const disabled: boolean = super.disable(times);
+        if (disabled) {
             this.dateTimePickerState.unSetTime();
         }
 
-        return disable;
+        return disabled;
     }
 
     public updateSlider(): void {

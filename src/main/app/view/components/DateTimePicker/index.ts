@@ -35,11 +35,6 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
         return layout;
     }
 
-    public updateSliders(): void {
-        this.datePicker.updateSlider();
-        this.timePicker.updateSlider();
-    }
-
     public onMonthChange(): void {
         this.timePicker.disable([]);
     }
@@ -54,8 +49,13 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     public pickNearest(): void {
         const availabilityHandler: AvailabilityHandler = this.dateTimePickerState.getAvailabilityHandler();
         const { dateOfMonth, time } = availabilityHandler.getNearest();
-        this.timePicker.pick(time);
         this.datePicker.pick(dateOfMonth);
+        this.timePicker.pick(time);
+    }
+
+    public updateSliders(): void {
+        this.datePicker.updateSlider();
+        this.timePicker.updateSlider();
     }
 
     public isPicked(): boolean {
@@ -64,6 +64,10 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
     public getPickedDateTime(): Date {
         return this.dateTimePickerState.getPicked();
+    }
+
+    public getTime(): Time {
+        return this.dateTimePickerState.getTime();
     }
 
     private generateTopControls(): HTMLElement {
