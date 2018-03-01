@@ -44,7 +44,7 @@ const CLASS_NAMES = Object.freeze({
                 },
                 NAME: "modal__content",
             },
-            DATE_TIME_CONTROLS: "modal__date-time-controls",
+            DATE_TIME_CONTROLS: "modal__second-screen-controls",
             FOOTER: {
                 NAME: "modal__footer",
             },
