@@ -213,14 +213,24 @@
     }
   }
 
-  .modal__confirm-date-time::after {
-    color: var(--color7);
-    content: "\e903";
+  .modal__confirm-date-time {
+    flex: 3;
+    margin-right: 4px;
+
+    &::after {
+      color: var(--color7);
+      content: "\e908";
+    }
   }
 
-  .modal__reject-date-time::after {
-    color: var(--red-color);
-    content: "\e902";
+  .modal__reject-date-time {
+    flex: 2;
+    margin-left: 4px;
+
+    &::after {
+      color: var(--red-color);
+      content: "\e907";
+    }
   }
 
   .modal__footer {
