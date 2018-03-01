@@ -31,7 +31,7 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
         layout.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
 
         layout.appendChild(this.generateTopControls());
-        layout.appendChild(this.generateDateTimePickerMain());
+        layout.appendChild(this.generateDateTimePickerAspectRatio());
         layout.appendChild(this.generateBottomControls());
 
         return layout;
@@ -82,6 +82,14 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
         topControls.appendChild(timeSliderPreviousControl);
 
         return topControls;
+    }
+
+    private generateDateTimePickerAspectRatio(): HTMLElement {
+        const dateTimePickerAspectRatio: HTMLElement = document.createElement("div");
+        dateTimePickerAspectRatio.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ASPECT_RATIO);
+        dateTimePickerAspectRatio.appendChild(this.generateDateTimePickerMain());
+
+        return dateTimePickerAspectRatio;
     }
 
     private generateDateTimePickerMain(): HTMLElement {

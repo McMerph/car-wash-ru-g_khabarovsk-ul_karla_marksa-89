@@ -20,6 +20,7 @@ const CLASS_NAMES = Object.freeze({
     },
     DATE_TIME_PICKER_BLOCK: {
         ELEMENTS: {
+            ASPECT_RATIO: "date-time-picker__aspect-ratio",
             LEFT: "date-time-picker__left",
             MONTH_CONTROLS: "date-time-picker__month-controls",
             RIGHT: "date-time-picker__right",
