@@ -81,7 +81,6 @@
   @apply(--reset-control);
   @apply(--underline-decoration);
 
-  display: block;
   color: var(--white-color);
   font: normal 400 22px/1.667 var(--proxima-nova-font-stack);
   margin-bottom: 13px;
@@ -115,6 +114,18 @@
   }
 }
 
+@media (max-width: 390px) {
+  .modal__confirm-date-time::before,
+  .modal__nearest-date-time::before {
+    display: none;
+  }
+
+  .modal_second-screen .modal__confirm-date-time.modal__confirm-date-time::after,
+  .modal_second-screen .modal__nearest-date-time.modal__nearest-date-time::after {
+    margin-left: 0;
+  }
+}
+
 @media (max-height: 750px) {
   .modal__main {
     padding-top: 12px;
@@ -130,11 +141,17 @@
   }
 
   .date-time-picker__aspect-ratio {
-    margin: 2px 0;
+    margin: 2px 0 5px;
   }
 }
 
-@media (max-height: 610px) {
+@media (max-width: 460px) and (max-height: 320px) {
+  .date-time-picker__legend {
+    margin-top: 10px;
+  }
+}
+
+@media (max-height: 620px) {
   .modal__to-second-screen {
     @apply(--reset-control);
 
@@ -169,13 +186,13 @@
       display: none;
     }
 
+    & .date-time-picker {
+      display: block;
+    }
+
     & .modal__main {
       padding-top: 4px;
       padding-bottom: 4px;
-    }
-
-    & .date-time-picker {
-      display: block;
     }
 
     & .date-time-picker__aspect-ratio {
@@ -197,8 +214,8 @@
       border: 2px solid var(--color15);
       border-radius: 3px;
       padding: 9px 20px 9px 15px;
-      width: 100%;
       display: flex;
+      justify-content: center;
       color: var(--gray-color);
 
       &::after {
@@ -206,9 +223,18 @@
       }
     }
 
-    & .modal__confirm-date-time {
-      flex: 4;
+    & .modal__confirm-date-time::before,
+    & .modal__nearest-date-time::before {
       margin-right: 4px;
+    }
+
+    & .modal__confirm-date-time {
+      flex: 1;
+      margin-right: 4px;
+
+      &::before {
+        content: attr(data-text);
+      }
 
       &::after {
         color: var(--color7);
@@ -217,7 +243,11 @@
     }
 
     & .modal__nearest-date-time {
-      flex: 3;
+      flex: 1;
+
+      &::before {
+        content: attr(data-text);
+      }
 
       &::after {
         color: var(--color15);

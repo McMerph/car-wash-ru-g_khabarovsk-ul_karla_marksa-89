@@ -112,7 +112,7 @@ export default class Modal implements ILayout {
             CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONFIRM,
             CLASS_NAMES.ICON_BLOCK,
         );
-        button.textContent = DICTIONARY.CONFIRM;
+        button.dataset.text = DICTIONARY.CONFIRM;
         button.addEventListener("click", () => {
             this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
         });
@@ -126,7 +126,7 @@ export default class Modal implements ILayout {
             CLASS_NAMES.MODAL_BLOCK.ELEMENTS.NEAREST,
             CLASS_NAMES.ICON_BLOCK,
         );
-        button.textContent = DICTIONARY.NEAREST_AVAILABLE_SHORT;
+        button.dataset.text = DICTIONARY.NEAREST_AVAILABLE_SHORT;
         button.addEventListener("click", () => {
             this.dateTimePicker.pickNearest();
         });
