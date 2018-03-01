@@ -22,10 +22,12 @@ const CLASS_NAMES = Object.freeze({
         ELEMENTS: {
             ASPECT_RATIO: "date-time-picker__aspect-ratio",
             LEFT: "date-time-picker__left",
+            LEGEND: "date-time-picker__legend",
             MONTH_CONTROLS: "date-time-picker__month-controls",
             RIGHT: "date-time-picker__right",
             ROW: {
                 MODIFIERS: {
+                    BOTTOM: "date-time-picker__row_bottom",
                     MAIN: "date-time-picker__row_main",
                 },
                 NAME: "date-time-picker__row",

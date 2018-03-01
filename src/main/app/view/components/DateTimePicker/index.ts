@@ -28,8 +28,6 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
     public getLayout(): HTMLElement {
         const layout: HTMLElement = document.createElement("div");
         layout.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.NAME);
-        layout.dataset.legend = DICTIONARY.DATE_TIME_PICKER_LEGEND;
-
         layout.appendChild(this.generateTopControls());
         layout.appendChild(this.generateDateTimePickerAspectRatio());
         layout.appendChild(this.generateBottomControls());
@@ -110,9 +108,16 @@ export default class DateTimePicker implements ILayout, IMonthObserver, IDateObs
 
     private generateBottomControls() {
         const bottomControls = document.createElement("div");
-        bottomControls.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME);
+        bottomControls.classList.add(
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.NAME,
+            CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.ROW.MODIFIERS.BOTTOM,
+        );
+        const legend: HTMLSpanElement = document.createElement("span");
+        legend.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.LEGEND);
+        legend.textContent = DICTIONARY.DATE_TIME_PICKER_LEGEND;
         const timeSliderNextControl = this.timePicker.getNextControl();
         timeSliderNextControl.classList.add(CLASS_NAMES.DATE_TIME_PICKER_BLOCK.ELEMENTS.RIGHT);
+        bottomControls.appendChild(legend);
         bottomControls.appendChild(timeSliderNextControl);
 
         return bottomControls;

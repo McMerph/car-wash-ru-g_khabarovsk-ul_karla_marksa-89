@@ -17,26 +17,22 @@
   margin-left: 26px;
 }
 
-.date-time-picker {
-  position: relative;
-
-  &::after {
-    font: normal 400 18px/1 var(--proxima-nova-font-stack);
-    color: var(--color9);
-    display: block;
-    position: absolute;
-    content: attr(data-legend);
-    bottom: -13px;
-    left: 0;
-  }
-}
-
 .date-time-picker__row {
   display: flex;
 }
 
+.date-time-picker__row_bottom {
+  align-items: flex-start;
+}
+
+.date-time-picker__legend {
+  font: normal 400 18px/1 var(--proxima-nova-font-stack);
+  color: var(--color9);
+  margin-top: 18px;
+}
+
 .date-time-picker__aspect-ratio {
-  margin: 11px 0;
+  margin: 11px 0 14px;
   position: relative;
 
   &::after {
