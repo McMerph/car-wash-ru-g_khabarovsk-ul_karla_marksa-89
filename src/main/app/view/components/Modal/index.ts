@@ -89,8 +89,39 @@ export default class Modal implements ILayout {
         modalMain.appendChild(new ServiceChooser().getLayout());
         modalMain.appendChild(this.generateToggleDateTimePickerControl());
         modalMain.appendChild(this.dateTimePicker.getLayout());
+        modalMain.appendChild(this.generateDateTimeControls());
 
         return modalMain;
+    }
+
+    private generateDateTimeControls(): HTMLElement {
+        const controls: HTMLElement = document.createElement("div");
+        controls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.DATE_TIME_CONTOLS);
+        controls.appendChild(this.generateConfirmDateTimeControl());
+        controls.appendChild(this.generateRejectDateTimeControl());
+
+        return controls;
+    }
+
+    // TODO DRY
+    private generateConfirmDateTimeControl(): HTMLElement {
+        const button: HTMLButtonElement = document.createElement("button");
+        button.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.CONFIRM,
+            CLASS_NAMES.ICON_BLOCK,
+        );
+        button.textContent = DICTIONARY.CONFIRM;
+        return button;
+    }
+
+    private generateRejectDateTimeControl(): HTMLElement {
+        const button: HTMLButtonElement = document.createElement("button");
+        button.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.REJECT,
+            CLASS_NAMES.ICON_BLOCK,
+        );
+        button.textContent = DICTIONARY.REJECT;
+        return button;
     }
 
     private generateToggleDateTimePickerControl(): HTMLElement {

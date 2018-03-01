@@ -37,15 +37,18 @@ const CLASS_NAMES = Object.freeze({
     MODAL_BLOCK: {
         ELEMENTS: {
             CLOSE: "modal__close",
+            CONFIRM: "modal__confirm-date-time",
             CONTENT: {
                 MODIFIERS: {
                     OPENED: "modal__content_opened",
                 },
                 NAME: "modal__content",
             },
+            DATE_TIME_CONTOLS: "modal__date-time-controls",
             FOOTER: "modal__footer",
             MAIN: "modal__main",
             TOGGLE: "modal__toggle-date-time-picker",
+            REJECT: "modal__reject-date-time",
             TO_NEAREST: "modal__to-nearest",
         },
         MODIFIERS: {
