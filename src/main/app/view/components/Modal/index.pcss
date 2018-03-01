@@ -100,6 +100,25 @@
   display: none;
 }
 
+@media (max-width: 530px) {
+  .modal__main {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .modal__footer {
+    padding: 12px 0;
+  }
+
+  .navigation_to-left {
+    margin-right: 12px;
+  }
+
+  .navigation_to-right {
+    margin-left: 12px;
+  }
+}
+
 @media (max-height: 620px) {
   .modal__main {
     padding-top: 12px;
@@ -147,11 +166,7 @@
   .date-time-picker {
     display: none;
   }
-}
 
-/* 2nd screen */
-
-@media (max-height: 420px) {
   .modal_second-screen {
     padding: 0;
 
@@ -195,11 +210,11 @@
     }
 
     & .modal__confirm-date-time,
+    & .modal__nearest-date-time,
     & .modal__reject-date-time {
       @apply(--reset-control);
 
-      flex: 1;
-      font: normal 400 22px/1 var(--proxima-nova-font-stack);
+      font: normal 400 20px/1 var(--proxima-nova-font-stack);
       border: 2px solid var(--color15);
       border-radius: 3px;
       padding: 9px 20px 9px 15px;
@@ -209,12 +224,11 @@
 
       &::after {
         margin-left: auto;
-        color: var(--color15);
       }
     }
 
     & .modal__confirm-date-time {
-      flex: 3;
+      flex: 4;
       margin-right: 4px;
 
       &::after {
@@ -223,8 +237,17 @@
       }
     }
 
+    & .modal__nearest-date-time {
+      flex: 3;
+
+      &::after {
+        color: var(--color15);
+        content: "\e909";
+      }
+    }
+
     & .modal__reject-date-time {
-      flex: 2;
+      flex: 0;
       margin-left: 4px;
 
       &::after {
@@ -236,24 +259,5 @@
     & .modal__footer {
       display: none;
     }
-  }
-}
-
-@media (max-width: 530px) {
-  .modal__main {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .modal__footer {
-    padding: 12px 0;
-  }
-
-  .navigation_to-left {
-    margin-right: 12px;
-  }
-
-  .navigation_to-right {
-    margin-left: 12px;
   }
 }

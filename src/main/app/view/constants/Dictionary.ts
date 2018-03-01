@@ -2,7 +2,7 @@ const DICTIONARY = Object.freeze({
     BACK: "Назад",
     CHECK_IN: "Записаться",
     CHECK_IN_PLACEHOLDER: "Выберите время",
-    CONFIRM: "Подтвердить",
+    CONFIRM: "Выбрать",
     DATE_IS_NOT_IN_THIS_MONTH: "Данный день не из выбранного месяца",
     DATE_TIME_PICKER_LEGEND: "*Красным цветом отмечено занятое время",
     DAYS_NAMES: [
@@ -29,8 +29,8 @@ const DICTIONARY = Object.freeze({
         "Декабрь",
     ],
     NEAREST_AVAILABLE: "Ближайшее свободное",
+    NEAREST_AVAILABLE_SHORT: "Ближайшее",
     NEXT: "Далее",
-    REJECT: "Отмена",
     SERVICES: {
         LIST: [
             "Бесконтактная мойка кузова Стандарт",

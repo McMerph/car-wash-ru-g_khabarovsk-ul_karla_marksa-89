@@ -99,6 +99,7 @@ export default class Modal implements ILayout {
         const controls: HTMLElement = document.createElement("div");
         controls.classList.add(CLASS_NAMES.MODAL_BLOCK.ELEMENTS.DATE_TIME_CONTROLS);
         controls.appendChild(this.generateConfirmDateTimeControl());
+        controls.appendChild(this.generateNearestDateTimeControl());
         controls.appendChild(this.generateRejectDateTimeControl());
 
         return controls;
@@ -119,13 +120,26 @@ export default class Modal implements ILayout {
         return button;
     }
 
+    private generateNearestDateTimeControl(): HTMLElement {
+        const button: HTMLButtonElement = document.createElement("button");
+        button.classList.add(
+            CLASS_NAMES.MODAL_BLOCK.ELEMENTS.NEAREST,
+            CLASS_NAMES.ICON_BLOCK,
+        );
+        button.textContent = DICTIONARY.NEAREST_AVAILABLE_SHORT;
+        button.addEventListener("click", () => {
+            this.dateTimePicker.pickNearest();
+        });
+
+        return button;
+    }
+
     private generateRejectDateTimeControl(): HTMLElement {
         const button: HTMLButtonElement = document.createElement("button");
         button.classList.add(
             CLASS_NAMES.MODAL_BLOCK.ELEMENTS.REJECT,
             CLASS_NAMES.ICON_BLOCK,
         );
-        button.textContent = DICTIONARY.REJECT;
         button.addEventListener("click", () => {
             this.modal.classList.remove(CLASS_NAMES.MODAL_BLOCK.MODIFIERS.SECOND_SCREEN);
         });

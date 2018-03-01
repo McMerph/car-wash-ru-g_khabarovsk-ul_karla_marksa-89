@@ -49,6 +49,7 @@ const CLASS_NAMES = Object.freeze({
                 NAME: "modal__footer",
             },
             MAIN: "modal__main",
+            NEAREST: "modal__nearest-date-time",
             REJECT: "modal__reject-date-time",
             TO_NEAREST: "modal__to-nearest",
             TO_SECOND_SCREEN: "modal__to-second-screen",
