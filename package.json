@@ -21,7 +21,7 @@
     "build": "webpack --config webpack.prod.js",
     "test": "jest",
     "lint:css": "stylelint \"src/**/*.*css\"",
-    "postinstall": "npm update && npm install git+https://github.com/McMerph/touch-slider.git#development"
+    "postinstall": "npm update && npm install git+https://github.com/McMerph/touch-slider.git"
   },
   "browserslist": [
     "last 2 Chrome versions",
@@ -47,7 +47,7 @@
     "normalize.css": "^8.0.0",
     "string.prototype.padstart": "^3.0.0",
     "swiper": "^4.1.5",
-    "touch-slider": "git+https://github.com/McMerph/touch-slider.git#development"
+    "touch-slider": "git+https://github.com/McMerph/touch-slider.git"
   },
   "devDependencies": {
     "@types/jest": "^22.1.2",
